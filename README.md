@@ -134,10 +134,10 @@ uv run pytest tests/test_language.py -k non_repeating
 
 ### Q6. Python gotchas
 
-These short examples expose behavior that can be surprising when translating
+These short examples expose behaviour that can be surprising when translating
 habits from other languages or when reading unfamiliar Python. Before running
 each snippet, write down its output and explain the mechanism. Then rewrite it
-so that the intended behavior is explicit.
+so that the intended behaviour is explicit.
 
 #### a. A mutable default argument
 
@@ -170,8 +170,10 @@ print(rows)
 
 #### d. Mutating a list while iterating
 
+The goal is to keep only the odd values.
+
 ```python
-values = [1, 2, 3, 4, 5, 6]
+values = [1, 2, 4, 6, 7]
 for value in values:
     if value % 2 == 0:
         values.remove(value)
@@ -215,7 +217,7 @@ uv run pytest tests/test_sudoku.py -q
 > **Prerequisites:** Python Fundamentals.
 >
 > **You’ll practice:** classes, instances, inheritance, method overriding,
-> inherited behavior, and readable object representations.
+> inherited behaviour, and readable object representations.
 
 ### Talking animals
 
@@ -304,7 +306,7 @@ Run the focused tests and read the implementation before refactoring. The
 regular-item, Aged Brie, Sulfuras, backstage-pass, quality-bound, and
 multiple-item tests characterize existing behaviour. The new requirement is
 that Conjured Mana Cake degrades twice as fast as an ordinary item, including
-the faster post-expiration rate. Add that behavior while preserving every
+the faster post-expiration rate. Add that behaviour while preserving every
 existing rule; use the tests to distinguish the boundary cases.
 
 Refactor in small steps, running the focussed tests after each change. Keep

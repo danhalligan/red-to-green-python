@@ -26,6 +26,10 @@ def test_exponentiate_accepts_iterables():
         ([3, 6, -2, -5, 7, 3], 21),
         ([-1, -2], 2),
         ([1, 2, 3, 0], 6),
+        ([1, -2, 3], -2),
+        ([-2, 3], -6),
+        ([-1, 2, -3, 4], -2),
+        ([0, -1], 0),
         ([5], None),
         ([], None),
     ],
@@ -36,6 +40,7 @@ def test_adjacent_elements_product(values, expected):
 
 def test_adjacent_elements_product_accepts_one_shot_iterators():
     assert adjacent_elements_product(iter([4, -3, -8])) == 24
+    assert adjacent_elements_product(iter([1, -2, 3])) == -2
 
 
 @pytest.mark.parametrize(

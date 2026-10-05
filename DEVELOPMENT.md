@@ -44,11 +44,12 @@ uv sync --group dev
 
 The learner branch deliberately contains incomplete exercise stubs. Use
 focused tests while working; unfinished exercises raise `NotImplementedError`
-or fail their behavioral assertions. The scaffold and packaged-data checks
+or fail their behavioural assertions. The scaffold and packaged-data checks
 are expected to pass:
 
 ```bash
 uv run pytest tests/test_scaffold.py tests/test_data.py
+uv run pytest tests/test_notebooks.py
 uv run pytest --collect-only
 ```
 
@@ -85,7 +86,8 @@ cells are left for you to complete.
 ## Continuous integration
 
 GitHub Actions checks supported Python versions, runs Ruff, confirms all tests
-collect, runs the passing scaffold and data checks, builds distributions, and
-verifies that installed wheel resources load. CI does not run all exercise
+collect, runs the passing scaffold and data checks, smoke-tests each notebook's
+setup code (everything before its first `TODO` comment), builds distributions,
+and verifies that installed wheel resources load. CI does not run all exercise
 tests as a required green check because the starter branch intentionally
 contains unfinished exercises.

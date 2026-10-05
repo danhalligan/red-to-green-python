@@ -43,6 +43,9 @@ jobs:
       - name: Run scaffold and packaged-data tests
         run: uv run pytest tests/test_scaffold.py tests/test_data.py
 
+      - name: Smoke-test notebook setup cells
+        run: uv run pytest tests/test_notebooks.py
+
       - name: Build distributions
         run: uv build
 
