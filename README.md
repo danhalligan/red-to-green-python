@@ -2,27 +2,30 @@
 
 ## Introduction
 
-This repository is a hands-on introduction to Python. Exercises live in
-`src/pyproblems/`, and pytest provides executable examples of their expected
-behaviour. Analysis and plotting exercises are collected in the Python
-notebooks under `analysis/`.
+Welcome! This is a hands-on collection of Python exercises, from small
+programming puzzles to data analysis and statistical modelling. Start with
+Python Fundamentals, then follow the sections in order or jump to a topic that
+interests you. The early exercises are bite-sized; later notebooks, the kata,
+and mixture-model work can each take several sessions.
 
-Open the repository in its dev container or install the complete local
-environment with:
+As a rough guide, allow 25 to 50 hours for a full pass, depending on your
+experience and how deeply you explore the investigations. Treat that as a
+guide, not a deadline. For an overview of the repository layout and development
+setup, see [DEVELOPMENT.md](DEVELOPMENT.md).
+
+The dev container is ready to use. For a local setup with the notebooks and
+scientific tools, install the complete environment with:
 
 ```bash
 uv sync --all-groups --extra science
 ```
 
-Run the focused fundamentals tests with `uv run pytest tests/test_language.py`.
-The exercise tests are expected to fail until you implement the starter
-functions. Read one failure at a time, make a small change, and rerun that
-focused command. The standard-library language exercises do not require the
-optional scientific-Python packages.
-
-Use [DEVELOPMENT.md](DEVELOPMENT.md) for environment and contribution
-workflows. Python exercise implementations intentionally begin as stubs, so
-focused exercise tests fail until you complete them.
+Most exercise functions start as stubs, so their tests will fail until you
+implement them. Pick an exercise, read its prompt, and run its focused test
+command; make one small change at a time and rerun the test. For your first
+check, try `uv run pytest tests/test_language.py`. The early language exercises
+use only the Python standard library; scientific exercises need the optional
+science packages installed above.
 
 ## Python Fundamentals
 
@@ -521,7 +524,7 @@ looking at the data and checking model assumptions.
 
 ## Statistical Modelling
 
-### Gaussian mixture
+### Gaussian-mixture
 
 > **Prerequisites:** scientific-Python statistics and numerical optimization.
 > **Dependencies:** the optional science extra.
