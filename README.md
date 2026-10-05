@@ -8,6 +8,17 @@ Python Fundamentals, then follow the sections in order or jump to a topic that
 interests you. The early exercises are bite-sized; later notebooks, the kata,
 and mixture-model work can each take several sessions.
 
+The purpose of this package is to help you learn Python, not simply to collect
+completed solutions. A coding agent could complete the exercises for you, but
+that would bypass the practice they are designed to provide. Writing code,
+investigating failures, and explaining your choices build an understanding of
+Python that remains useful in the age of agentic coding: you need that
+understanding to specify requirements, assess generated code, spot mistakes,
+and maintain the result. Agents can support your learning with hints,
+explanations, or reviews of your own attempts. Try each problem yourself first,
+and make sure you can explain and test any code you adopt; passing tests alone
+is not the learning goal.
+
 As a rough guide, allow 25 to 50 hours for a full pass, depending on your
 experience and how deeply you explore the investigations. Treat that as a
 guide, not a deadline. For an overview of the repository layout and development
@@ -37,7 +48,7 @@ science packages installed above.
 ### Q1. Exponentiation
 
 Write a function to take numbers $x$ and return $e^x$ as `exponentiate(values)`
-in `src/pyproblems/language.py`. Note, the the input can be any iterable, not
+in `src/pyproblems/language.py`. Note that the input can be any iterable, not
 just a list.
 
 Begin with a `for` loop and `list.append`. Once it works, try rewriting the
@@ -87,8 +98,8 @@ uv run pytest tests/test_language.py -k fizzbuzz
 ### Q4. Fibonacci sequence
 
 The Fibonacci sequence starts with $0, 1$; each later value is the sum of the
-two before it. we can implement this neatly using
-[generators](https://wiki.python.org/moin/Generators) in python. A generator
+two before it. We can implement this neatly using
+[generators](https://wiki.python.org/moin/Generators) in Python. A generator
 suspends at each `yield`, keeping its local state until the next value is
 requested. This gives callers a stream of values without constructing an
 infinite list, and each generator call should own its own state.
@@ -260,7 +271,7 @@ You can test your functions with
 uv run pytest tests/test_oop.py -q
 ```
 
-If this is implmented using object-orientation, you should notice that the
+If this is implemented using object-orientation, you should notice that the
 `wdtfs` function does not need to ask what type each animal is. It calls the
 same method on every object and lets the object's class return the lyric line
 appropriate for that animal. This is polymorphism through ordinary inheritance
@@ -335,9 +346,9 @@ to our system:
 
 - "Conjured" items degrade in quality twice as fast as normal items.
 
-Feel free to make any changes to the `update_quality` and `item` functions and
-add any new code including new functions as long as everything still works
-correctly.
+Refactor the internals and add helpers as needed, while preserving the mutable
+`Item` dataclass and the `update_quality(items)` interface. Keep all existing
+behaviour intact while adding the new requirement.
 
 ### 99 Bottles
 
@@ -444,7 +455,7 @@ $\mathcal{L}(\mu,\sigma\mid x)=\prod_i f(x_i\mid\mu,\sigma)$. This gives the
 
 Calculating this quantity can be difficult because products of small densities
 can underflow. As a result, it is more convenient to consider the log
-likelihood. For the purposes of finding the paramater combinations that maximise
+likelihood. For the purposes of finding the parameter combinations that maximise
 the likelihood (which we are about to come on to), considering the log
 likelihood instead is suitable because it always increases/decreases when the
 likelihood increases/decreases. Implement `normal_log_likelihood` as a sum of
@@ -482,7 +493,8 @@ uv run pytest tests/test_statistics.py -k summarize_xy
 ### 2. Categorical data: Steak, Tea, and Toast
 
 Included in this package is a simple dataset compiled from the results of a
-Facebook poll (in `src/assets/steak_toast_tea.csv`).
+Facebook poll (in
+[steak_toast_tea.csv](src/pyproblems/datasets/steak_toast_tea.csv)).
 
 ![Steak, toast, and tea poll response scales](assets/steak-toast-tea-poll.png)
 
@@ -560,7 +572,7 @@ between zero and one. Try several deterministic starting points, keep the best
 successful result, and report the component with the smaller mean first. Mixture
 fitting can have local optima, so do not rely on one arbitrary start.
 
-Run the tests with `uv run pytest -m advanced -q`.
+Run the tests with `uv run pytest tests/test_advanced_models.py -q`.
 
 ### Gaussian-mixture EM
 
@@ -638,9 +650,8 @@ including both endpoints, or `None` if no route exists. The number of moves is
 one less than the number of words in the returned route. The start and target
 must be lowercase words of the same length and both must appear in `words`.
 
-Breadth-first search is a natural fit for this problem. When implenting this, if
-you record each word's predecessor so you can reconstruct a shortest route once
-the target is found.
+Breadth-first search is a natural fit for this problem. Record each word's
+predecessor so you can reconstruct a shortest route once the target is found.
 
 For example, starting from `play`, we can find the following ladders:
 
@@ -707,7 +718,7 @@ uv run pytest tests/test_alignment.py -q
 ### Sudoku solver
 
 We are now going to build on our earlier Sudoku problem. We previously wrote a
-function to check a sudoky grid was valid, and now we will write a new function
+function to check a Sudoku grid was valid, and now we will write a new function
 to find a solution.
 
 One approach is a recursive backtracking algorithm. Try a valid digit in an
