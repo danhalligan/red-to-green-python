@@ -77,6 +77,6 @@ def zoo() -> list[Animal]:
     raise NotImplementedError
 
 
-def render_animal_song(animals: Iterable[Animal]) -> str:
+def wdtfs(animals: Iterable[Animal]) -> str:
     """Return song lyrics for animals, ending with the fixed fox refrain."""
     raise NotImplementedError

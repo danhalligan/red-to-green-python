@@ -14,7 +14,7 @@ from pyproblems.oop import (
     Frog,
     Mouse,
     Seal,
-    render_animal_song,
+    wdtfs,
     zoo,
 )
 
@@ -69,18 +69,18 @@ def test_zoo_creates_the_default_roster():
     ]
 
 
-def test_render_animal_song_matches_short_snapshot():
+def test_wdtfs_matches_short_snapshot():
     animals = [Bird(), Cat(), Mouse()]
     expected = (Path(__file__).parent / "fixtures" / "animal_song_short.txt").read_text(
         encoding="utf-8"
     )
 
-    assert render_animal_song(animals) == expected
+    assert wdtfs(animals) == expected
 
 
-def test_render_animal_song_matches_full_snapshot():
+def test_wdtfs_matches_full_snapshot():
     expected = (Path(__file__).parent / "fixtures" / "animal_song_full.txt").read_text(
         encoding="utf-8"
     )
 
-    assert render_animal_song(zoo()) == expected
+    assert wdtfs(zoo()) == expected

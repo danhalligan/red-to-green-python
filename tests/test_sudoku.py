@@ -1,16 +1,16 @@
 import pytest
 
 from pyproblems.data import load_sudoku_data
-from pyproblems.language import sudoku
+from pyproblems.language import sudoku_checker
 
 
 def test_sudoku_matches_all_packaged_puzzle_answers():
     for puzzle in load_sudoku_data():
-        assert sudoku(puzzle["grid"]) is puzzle["answer"]
+        assert sudoku_checker(puzzle["grid"]) is puzzle["answer"]
 
 
 def test_sudoku_accepts_an_empty_grid():
-    assert sudoku([[None] * 9 for _ in range(9)]) is True
+    assert sudoku_checker([[None] * 9 for _ in range(9)]) is True
 
 
 @pytest.mark.parametrize(
@@ -24,7 +24,7 @@ def test_sudoku_accepts_an_empty_grid():
 )
 def test_sudoku_rejects_malformed_grids(grid):
     with pytest.raises(ValueError):
-        sudoku(grid)
+        sudoku_checker(grid)
 
 
 def test_sudoku_rejects_a_duplicate_in_each_constraint_group():
@@ -35,6 +35,6 @@ def test_sudoku_rejects_a_duplicate_in_each_constraint_group():
     duplicate_box = [[None] * 9 for _ in range(9)]
     duplicate_box[0][0] = duplicate_box[2][2] = 4
 
-    assert sudoku(duplicate_row) is False
-    assert sudoku(duplicate_column) is False
-    assert sudoku(duplicate_box) is False
+    assert sudoku_checker(duplicate_row) is False
+    assert sudoku_checker(duplicate_column) is False
+    assert sudoku_checker(duplicate_box) is False

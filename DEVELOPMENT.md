@@ -26,6 +26,20 @@ To install only development tools without the scientific stack, use:
 uv sync --group dev
 ```
 
+## Project conventions
+
+- Treat `README.md` as the learner-facing source of truth. Keep each exercise
+  prompt and its focused test command together.
+- Keep starter implementations intentionally incomplete; do not commit
+  reference answers. Learner tests are expected to fail until the exercises
+  are implemented.
+- Keep the core package on the Python standard library. Scientific libraries
+  belong in the optional `science` extra.
+- Load packaged datasets through `importlib.resources` and verify they remain
+  available from built distributions.
+- Keep analysis and plotting tasks in `analysis/` notebooks. Commit notebooks
+  without execution outputs or completed answers.
+
 ## Checks
 
 The learner branch deliberately contains incomplete exercise stubs. Use
@@ -64,9 +78,9 @@ To work through the scientific analysis prompts, launch JupyterLab:
 uv run jupyter lab
 ```
 
-The `solutions.ipynb` notebook is an output-free learner workspace. Its setup
-cell imports the packaged data and optional scientific stack; analysis cells
-are left for you to complete.
+The notebooks under `analysis/` are output-free learner workspaces. Their setup
+cells import the relevant packaged data and optional scientific stack; analysis
+cells are left for you to complete.
 
 ## Continuous integration
 

@@ -3,8 +3,10 @@ from statistics import correlation, mean, stdev
 import pytest
 
 from pyproblems.data import (
+    load_faithful_data,
     load_steak_toast_tea,
     load_sudoku_data,
+    load_words,
     load_xy_data,
 )
 
@@ -73,3 +75,19 @@ def test_sudoku_grids_keep_shape_values_and_answers():
         assert all(len(row) == 9 for row in grid)
         assert all(value is None or 1 <= value <= 9 for row in grid for value in row)
         assert _grid_is_valid(grid) is puzzle["answer"]
+
+
+def test_faithful_data_has_documented_columns_and_rows():
+    observations = load_faithful_data()
+
+    assert len(observations) == 272
+    assert observations[0] == (3.6, 79.0)
+    assert all(len(row) == 2 for row in observations)
+
+
+def test_words_are_lowercase_and_include_word_ladder_examples():
+    words = load_words()
+
+    assert {"play", "game", "snap", "pool"}.issubset(words)
+    assert "PLAY" not in words
+    assert len(words) == 39_083
