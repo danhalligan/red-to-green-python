@@ -17,18 +17,6 @@ class NormalFit:
     log_likelihood: float
 
 
-@dataclass(frozen=True)
-class GaussianMixtureFit:
-    """Ordered maximum-likelihood estimates for a two-normal mixture."""
-
-    mean1: float
-    standard_deviation1: float
-    mean2: float
-    standard_deviation2: float
-    weight1: float
-    log_likelihood: float
-
-
 def standard_error(values: ArrayLike) -> float:
     """Estimate standard error using the sample standard deviation."""
     raise NotImplementedError
@@ -94,6 +82,6 @@ def gaussian_mixture_log_likelihood(
     raise NotImplementedError
 
 
-def fit_gaussian_mixture(observations: ArrayLike) -> GaussianMixtureFit:
+def fit_gaussian_mixture(observations: ArrayLike) -> dict[str, float]:
     """Fit a two-normal mixture from deterministic starts and order by mean."""
     raise NotImplementedError

@@ -5,7 +5,6 @@ import pytest
 from scipy.stats import norm
 
 from pyproblems.statistics import (
-    GaussianMixtureFit,
     fit_gaussian_mixture,
     gaussian_mixture_log_likelihood,
 )
@@ -67,12 +66,19 @@ def test_fit_gaussian_mixture_returns_stable_ordered_fit():
     fitted = fit_gaussian_mixture(observations)
     repeated = fit_gaussian_mixture(observations)
 
-    assert isinstance(fitted, GaussianMixtureFit)
-    assert fitted.mean1 <= fitted.mean2
-    assert fitted.standard_deviation1 > 0
-    assert fitted.standard_deviation2 > 0
-    assert 0 < fitted.weight1 < 1
-    assert fitted.log_likelihood > gaussian_mixture_log_likelihood(
+    assert set(fitted) == {
+        "mean1",
+        "standard_deviation1",
+        "mean2",
+        "standard_deviation2",
+        "weight1",
+        "log_likelihood",
+    }
+    assert fitted["mean1"] <= fitted["mean2"]
+    assert fitted["standard_deviation1"] > 0
+    assert fitted["standard_deviation2"] > 0
+    assert 0 < fitted["weight1"] < 1
+    assert fitted["log_likelihood"] > gaussian_mixture_log_likelihood(
         mean1=float(np.mean(observations)),
         standard_deviation1=float(np.std(observations)),
         mean2=float(np.mean(observations)),

@@ -236,6 +236,23 @@ Now implement `zoo()` to create one instance of each animal, and
 fox refrain and return as a string to generate the lyrics to
 [The Fox (What Does the Fox Say?)](https://www.youtube.com/watch?v=jofNR_WkoCE).
 
+> Dog goes "woof"
+> Cat goes "meow"
+> Bird goes "tweet"
+> Mouse goes "squeek"
+> Cow goes "moo"
+> Frog goes "croak"
+> Elephant goes "toot"
+> Duck goes "quack"
+> Fish goes "blub"
+> Seal goes "ow ow ow"
+> But there's one sound
+> That no one knows
+> What does the fox say?
+> "Ring-ding-ding-ding-dingeringeding!"
+
+You can test your functions with
+
 ```bash
 uv run pytest tests/test_oop.py -q
 ```
@@ -365,12 +382,13 @@ comparisons, and model visualizations; keep reusable calculations in
 
 The sample standard deviation describes variation among observations. The
 standard error estimates variation in the sample mean across repeated
-samples: $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$. Implement
-`standard_error` using the sample standard deviation. In the
-[statistical methods notebook](analysis/statistical_methods.ipynb), simulate
-500 independent samples for each $n$ from 2 through 100. Plot the mean of the
-estimated standard errors against $n$ and compare it with the theoretical
-$1 / \sqrt{n}$ curve; explain the sampling variation around that curve.
+samples: $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
+
+Implement `standard_error` using the sample standard deviation. In the
+[statistical methods notebook](analysis/statistical_methods.ipynb), simulate 500
+independent samples for each $n$ from 2 through 100. Plot the mean of the
+estimated standard errors against $n$ and compare it with the theoretical $1 /
+\sqrt{n}$ curve; explain the sampling variation around that curve.
 
 ### Q2. Linear models and ordinary least squares
 
@@ -401,13 +419,19 @@ less reliable.
 
 ### Q4. Bootstrap standard error
 
-A non-parametric bootstrap approximates repeated sampling by drawing a new
-sample of size $n$ *with replacement* from the observed values. Implement
-`bootstrap_standard_error` by computing the mean of each of 1,000 resamples
-and returning the standard deviation of those means. Accept a keyword-only
-`numpy.random.Generator` so the experiment is reproducible. Compare the
-result with the analytic standard error; their difference is Monte Carlo
-variation, not necessarily an implementation error.
+A standard error describes how much a statistic, such as the sample mean,
+would vary across repeated samples of the same size from a population. Since
+we usually have only one sample, the bootstrap uses its observed values as a
+stand-in for the population: repeatedly draw samples of size $n$ *with
+replacement*, and calculate the statistic for each one. The standard deviation
+of those bootstrap means estimates the standard error of the sample mean.
+
+Implement `bootstrap_standard_error` by computing the mean of each of 1,000
+resamples and returning the standard deviation of those means. Accept a
+keyword-only `numpy.random.Generator` so the experiment is reproducible.
+
+Compare the result with the analytic standard error; their difference is Monte
+Carlo variation, not necessarily an implementation error.
 
 ### Q5. Likelihood and normal maximum likelihood estimation
 
@@ -430,8 +454,7 @@ and the population standard deviation. In the
 [statistical methods notebook](analysis/statistical_methods.ipynb), investigate
 the bias of these estimates across repeated samples.
 
-Run the focused contracts with `uv run pytest tests/test_statistics.py -q`.
-The tests are expected to fail until the exercise functions are implemented.
+Run the tests with `uv run pytest tests/test_statistics.py -q`.
 
 ## Data Analysis
 
@@ -498,44 +521,43 @@ looking at the data and checking model assumptions.
 
 ## Statistical Modelling
 
-### Direct optimization of Gaussian mixtures
+### Gaussian mixture
 
 > **Prerequisites:** scientific-Python statistics and numerical optimization.
 > **Dependencies:** the optional science extra.
 
-Suppose observations come from one of two normal populations, but we do not
-know which population produced each observation. If the first population has
-weight $\pi$, the density for one observation is
+Suppose observations come from one of two Gaussian distributed populations, but
+we do not know which population produced each observation. If the first
+population has weight $\pi$, the density for one observation is
 
 $$
-f(x\mid\theta)=\pi\,\phi(x\mid\mu_1,\sigma_1)
- +(1-\pi)\,\phi(x\mid\mu_2,\sigma_2),
+f(x\mid\theta) = \pi \phi(x\mid\mu_1,\sigma_1)
+ + (1-\pi) \phi(x\mid\mu_2,\sigma_2),
 $$
 
-where $\phi$ is the normal density and
+where $\phi$ is the Gaussian density function and
 $\theta=(\mu_1,\sigma_1,\mu_2,\sigma_2,\pi)$. The likelihood is the product
-of these mixture densities across observations. Because the components are
-unlabelled, swapping their parameters describes the same model; several
-starting points are also needed because optimization can settle at different
-local optima.
+of these mixture densities across observations.
 
 In [statistics.py](src/pyproblems/statistics.py), implement
 `gaussian_mixture_log_likelihood` and `fit_gaussian_mixture`. The likelihood
 function takes named component means, positive standard deviations, a mixture
-weight strictly between zero and one, and the observations. For each
-observation, combine the weighted component densities in log space; avoid
-underflow with stable log-sum-exp arithmetic rather than multiplying tiny
-densities or taking `log(0)`.
+weight (strictly between zero and one), and the observations. For each
+observation, combine the weighted component densities in log space.
 
-The fitter returns a `GaussianMixtureFit` with named estimates for both means,
-standard deviations, the first component's weight, and the log-likelihood.
-Try several deterministic starting points, retain the best converged fit,
-check optimizer status, and report the component with the smaller mean first.
-Mixture fitting can have local optima, so do not rely on one arbitrary start.
+`fit_gaussian_mixture` should return a dictionary (with keys `mean1`,
+`standard_deviation1`, `mean2`, `standard_deviation2`, `weight1`, and
+`log_likelihood`). You can use `scipy.optimize.minimize` to maximize the
+log-likelihood by minimizing its negative.
 
-Run the advanced contracts with `uv run pytest -m advanced -q`. The tests use a
-fixed-seed sample and invariants rather than relying on global random state;
-they are expected to fail until the advanced functions are implemented.
+For unconstrained optimization,
+represent each standard deviation as the exponential of an unconstrained
+parameter, and represent `weight1` with the logistic transform so it stays
+between zero and one. Try several deterministic starting points, keep the best
+successful result, and report the component with the smaller mean first. Mixture
+fitting can have local optima, so do not rely on one arbitrary start.
+
+Run the tests with `uv run pytest -m advanced -q`.
 
 ### Gaussian-mixture EM
 
@@ -551,7 +573,7 @@ For a univariate two-component mixture, let $r_i$ be the probability that
 observation $x_i$ belongs to component one. The soft E-step computes
 
 $$
-r_i=\frac{\pi\,\phi(x_i\mid\mu_1,\sigma_1)}
+r_i = \frac{\pi\,\phi(x_i\mid\mu_1,\sigma_1)}
 {\pi\,\phi(x_i\mid\mu_1,\sigma_1)+(1-\pi)\,\phi(x_i\mid\mu_2,\sigma_2)}.
 $$
 
@@ -598,7 +620,7 @@ uv run pytest tests/test_mixture_models.py -m advanced -q
 
 ## Algorithms and Search
 
-### Word game
+### Word ladder
 
 A word ladder changes one letter at a time, and every word along the route must
 appear in the packaged word list (common English words, derived from
