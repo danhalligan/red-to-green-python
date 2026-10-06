@@ -45,7 +45,7 @@ def bootstrap_standard_error(
     values: ArrayLike,
     *,
     rng: np.random.Generator | None = None,
-    resamples: int = 1000,
+    resamples: int = 10000,
 ) -> float:
     """Estimate the standard error of the mean with bootstrap resampling."""
     raise NotImplementedError
@@ -55,13 +55,6 @@ def normal_log_likelihood(
     mean: float, standard_deviation: float, observations: ArrayLike
 ) -> float:
     """Calculate the normal log-likelihood without multiplying densities."""
-    raise NotImplementedError
-
-
-def normal_likelihood(
-    mean: float, standard_deviation: float, observations: ArrayLike
-) -> float:
-    """Calculate the joint density for independent normal observations."""
     raise NotImplementedError
 
 

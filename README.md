@@ -4,25 +4,31 @@
 
 Welcome! This is a hands-on collection of Python exercises, from small
 programming puzzles to data analysis and statistical modelling. Start with
-Python Fundamentals, then follow the sections in order or jump to a topic that
+Python Fundamentals, then choose one of the routes below or jump to a topic that
 interests you. The early exercises are bite-sized; later notebooks, the kata,
-and mixture-model work can each take several sessions.
+and mixture-model work can each take several sessions. If you complete all the
+exercises you'll have touched on python fundamentals such as list
+comprehensions, generators and object orientation, but also maximum likelihood,
+expectation-maximisation, recursion, test first development, refactoring,
+breadth-first search and even cellular automaton.
 
-The purpose of this package is to help you learn Python, not simply to collect
-completed solutions. A coding agent could complete the exercises for you, but
-that would bypass the practice they are designed to provide. Writing code,
-investigating failures, and explaining your choices build an understanding of
-Python that remains useful in the age of agentic coding: you need that
-understanding to specify requirements, assess generated code, spot mistakes,
-and maintain the result. Agents can support your learning with hints,
-explanations, or reviews of your own attempts. Try each problem yourself first,
-and make sure you can explain and test any code you adopt; passing tests alone
-is not the learning goal.
+The purpose of this package is partially to help you learn Python, but is also a
+collection of interesting and hopefully satisfying problems to solve. It is not
+simply about collecting completed solutions. A coding agent could complete the
+exercises for you, but that would bypass the practice and interest they are
+designed to provide. Writing code, investigating failures, and explaining your
+choices build an understanding of Python that remains useful in the age of
+agentic coding: you need that understanding to specify requirements, assess
+generated code, spot mistakes, and maintain the result. Agents can support your
+learning with hints, explanations, or reviews of your own attempts. Try each
+problem yourself first, and make sure you can explain and test any code you
+adopt; passing tests alone is not the learning goal.
 
 As a rough guide, allow 25 to 50 hours for a full pass, depending on your
 experience and how deeply you explore the investigations. Treat that as a
-guide, not a deadline. For an overview of the repository layout and development
-setup, see [DEVELOPMENT.md](DEVELOPMENT.md).
+provisional guide, not a deadline: you do not need to do everything, and each
+route below finishes at a sensible stopping point. For an overview of the
+repository layout and development setup, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 The dev container is ready to use. For a local setup with the notebooks and
 scientific tools, install the complete environment with:
@@ -37,6 +43,45 @@ command; make one small change at a time and rerun the test. For your first
 check, try `uv run pytest tests/test_language.py`. The early language exercises
 use only the Python standard library; scientific exercises need the optional
 science packages installed above.
+
+## Choosing a route
+
+Each route has its own test commands, and finishing one counts as completing a
+useful course. The exercises that follow are in the order of the sections below,
+not the order of the routes.
+
+**Route 1: Python core.** Learn the language and practise writing tested code.
+
+1. Python Fundamentals, Q1 to Q7:
+   `uv run pytest tests/test_language.py tests/test_sudoku.py -q`
+2. Object-oriented Python, from talking animals to the parrot:
+   `uv run pytest tests/test_oop.py -q`
+3. One kata from Refactoring and Test-First Development, either Gilded Rose
+   (`tests/test_gilded_rose.py`) or 99 Bottles (`tests/test_bottles.py`). The
+   other is optional.
+4. Word ladder: `uv run pytest tests/test_word_ladder.py -q`
+
+You have finished this route when the word ladder works.
+
+**Route 2: Scientific Python.** Work with real data. Do Route 1 first, then:
+
+1. Data Analysis Q1, Mysterious data.
+2. Scientific Python Q1, Q2 and Q4 (standard error, least squares and the
+   bootstrap): `uv run pytest tests/test_statistics.py -k "standard_error or ols"`
+3. Data Analysis Q2 (Steak, Tea, and Toast) and Q3 (Old Faithful regression).
+4. Optionally, Models of Life: Game of Life and Dawkins' weasel.
+
+You have finished this route when you can explain why a single straight line is
+not a good model for the Old Faithful data.
+
+**Route 3: Advanced extensions.** Choose what interests you. The algorithm
+projects (Sudoku solver, global sequence alignment) need only Route 1. The
+modelling projects (Scientific Python Q3 and Q5, and Statistical Modelling)
+need Route 2, and some comfort with probability densities, likelihood, logs,
+basic linear algebra and covariance matrices.
+
+You have finished this route when you have completed whichever extension you
+chose, for example the expectation-maximisation fit of the Old Faithful data.
 
 ## Python Fundamentals
 
@@ -71,7 +116,7 @@ so do not assume the answer is at least zero.
 Implement `adjacent_elements_product(values)` in `language.py`. Return `None`
 when fewer than two values are supplied. The input may be any iterable.
 
-If you didn't already, try now to implement this using `itertools.pairwise`
+If you didn't already, try to implement this using `itertools.pairwise`
 rather than indexing through positions.
 
 ```bash
@@ -121,10 +166,12 @@ uv run pytest tests/test_language.py -k fibonacci
 
 ### Q5. First non-repeating character
 
-Given a string, find the earliest character whose total count is exactly one.
+Given a string, find and return the first instance of a non-repeating character
+in it. If there is no such character, return `"_"`.
+
 For example, in `"abacabad"`, both `c` and `d` occur once, but `c` comes first;
-in `"abacabaabacaba"`, every character repeats. Return `_` when no character
-qualifies. The search is case-sensitive; spaces and punctuation count too.
+in `"abacabaabacaba"`, every character repeats. The search is case-sensitive;
+spaces and punctuation count too.
 
 Implement `first_non_repeating_character(text)`.
 
@@ -222,9 +269,10 @@ uv run pytest tests/test_sudoku.py -q
 ### Talking animals
 
 Create an `Animal` base class in `src/pyproblems/oop.py`. Its initializer
-should store an optional name. Its `speak()` method defines the interface and
-raises `NotImplementedError`; subclasses provide their own sound by overriding
-that method.
+should store an optional name on the instance, so that `animal.name` returns
+it (or `None` if none was given). Its `speak()` method defines the interface
+and raises `NotImplementedError`; subclasses provide their own sound by
+overriding that method.
 
 Implement an inherited `lyric()` method that calls `self.speak()`
 and formats a line such as `Dog goes "woof"`. Because this method calls the
@@ -237,19 +285,31 @@ Start with `Dog` and `Cat`, then add `Bird`, `Mouse`, `Cow`, `Frog`, `Elephant`,
 implement `speak()`. For example:
 
 ```python
-dog = Dog("Milo")
+dog = Dog("Woofy Goldberg")
 print(dog.speak())
 print(dog.lyric())
+print(dog.name)
 print(isinstance(dog, Animal))
 ```
 
-Implement `__str__()` so `str(Dog("Milo"))` produces a useful description.
+Implement `__str__()` so `str(Dog("Woofy Goldberg"))` produces
+`Dog named Woofy Goldberg`, and `str(Cat())` (no name) is just `Cat`. Notice
+what is shared and what is not: the sound and the class name belong to the
+class, so every `Dog` goes "woof", but the name belongs to each instance, so two
+`Dog` objects can have different names. `lyric()` uses the class name, not the
+instance name.
 
 ### What Does the Fox Say?
 
-Now implement `zoo()` to create one instance of each animal, and
-`wdtfs(animals)` to combine their `lyric()` lines with the fixed
-fox refrain and return as a string to generate the lyrics to
+Add a `Fox` class. Its `speak()` returns the refrain
+`"Ring-ding-ding-ding-dingeringeding!"`, but the fox's verse is more than a
+`goes` line, so `Fox` overrides `lyric()` to return the whole closing verse.
+
+Now implement `zoo()` to create one instance of each of the ten animals above
+(not the fox), each with a name of its own. Call the dog "Woofy Goldberg" and
+the cat "Chairman Meow", and invent equally good names for the rest. Then
+implement `wdtfs(animals)` to combine their `lyric()` lines with a
+`Fox`'s `lyric()` and return as a string to generate the lyrics to
 [The Fox (What Does the Fox Say?)](https://www.youtube.com/watch?v=jofNR_WkoCE).
 
 > Dog goes "woof"
@@ -279,6 +339,25 @@ same method on every object and lets the object's class return the lyric line
 appropriate for that animal. This is polymorphism through ordinary inheritance
 and method overriding.
 
+### A parrot that learns
+
+So far each subclass only returns a fixed string. Subclasses become more
+interesting when they have state. Add `Parrot(Bird)`, which repeats the last
+sound it heard:
+
+```python
+polly = Parrot("Polly")
+print(polly.speak())  # tweet
+polly.hear("hello")
+print(polly.speak())  # hello
+print(polly.lyric())  # Parrot goes "hello"
+```
+
+Before it hears anything, a `Parrot` should behave like any other `Bird`, so
+use `super()` rather than repeating `"tweet"`. You should not need to change
+`lyric()`: it calls `self.speak()`, so it works for the parrot unchanged. A
+lookup table of sounds could not do this.
+
 ## Refactoring and Test-First Development
 
 ### The Gilded Rose Kata
@@ -286,14 +365,16 @@ and method overriding.
 > **Prerequisites:** Python Fundamentals and Object-oriented Python.
 > **Check:** `uv run pytest tests/test_gilded_rose.py -q`
 
-Below you'll find instructions for a code kata. The job here is to
-implement a new request in existing code. Handily, tests already exist that
-fully test the functionality of the existing code, three of which fail
-(corresponding to the new request that is not yet implemented). You can trust
-that the tests are correct and capture every scenario (within reason): if the
-tests pass, your code is working.
+Below you'll find instructions for a code kata. The job here is to implement a
+new request in existing code. Handily, tests already exist that test the
+functionality of the existing code, three of which fail (corresponding to the
+new request that is not yet implemented). You can trust that the tests are
+correct and capture every scenario (within reason): if the tests pass, your code
+is working.
 
-Unfortunately for you, the current implementation of `update_quality` in [gilded_rose.py](src/pyproblems/gilded_rose.py) is deeply nested and difficult to modify so you will need to refactor it.
+Unfortunately for you, the current implementation of `update_quality` in
+[gilded_rose.py](src/pyproblems/gilded_rose.py) is deeply nested and difficult
+to modify so you will need to refactor it.
 
 The setting is an inn that updates each item's `sell_in` countdown and `quality`
 once per day. Ordinary goods lose quality faster after their sell-by date; Aged
@@ -304,53 +385,17 @@ left unchanged.
 
 Run the focused tests and read the implementation before refactoring. The
 regular-item, Aged Brie, Sulfuras, backstage-pass, quality-bound, and
-multiple-item tests characterize existing behaviour. The new requirement is
-that Conjured Mana Cake degrades twice as fast as an ordinary item, including
-the faster post-expiration rate. Add that behaviour while preserving every
-existing rule; use the tests to distinguish the boundary cases.
+multiple-item tests characterize existing behaviour. The new requirement is to
+implement a new item: "Conjured Mana Cake" that degrades twice as fast as an
+ordinary item, including the faster post-expiration rate. 
 
-Refactor in small steps, running the focussed tests after each change. Keep
-the public data model as a mutable `Item` dataclass and the
-`update_quality(items)` interface. You may choose helpers, subclasses, or
-another design; the tests check behaviour rather than a particular hierarchy.
+Refactor in small steps, running the focussed tests after each change. Refactor
+first to make it easy to add the new requirement. Keep the public data model as
+a mutable `Item` dataclass and the `update_quality(items)` interface. You may
+choose helpers, subclasses, or another design; the tests check behaviour rather
+than a particular hierarchy.
 
-#### Instructions
-
-Hi and welcome to team Gilded Rose! As you know, we are a small inn with a
-prime location in a prominent city ran by a friendly innkeeper named Allison.
-We also buy and sell only the finest goods. Unfortunately, our goods are
-constantly degrading in quality as they approach their sell by date. We have a
-system in place that updates our inventory for us. It was developed by a
-no-nonsense type named Leeroy, who has moved on to new adventures. Your task is
-to add the new feature to our system so that we can begin selling a new
-category of items. First an introduction to our system:
-
-- All items have a "sell_in" value which denotes the number of days we have
-  to sell the item.
-- All items have a "quality" value which denotes how valuable the item is.
-- At the end of each day our system lowers both values for every item.
-
-Pretty simple, right? Well this is where it gets interesting:
-
-- Once the sell by date has passed, quality degrades twice as fast.
-- The quality of an item is never negative.
-- "Aged Brie" actually increases in quality the older it gets.
-- The quality of an item is never more than 50.
-- "Sulfuras", being a legendary item, never has to be sold or decreases in
-  quality.
-- "Backstage passes", like aged brie, increases in quality as its sell_in
-  value approaches; quality increases by 2 when there are 10 days or less
-  and by 3 when there are 5 days or less but quality drops to 0 after the
-  concert.
-
-We have recently signed a supplier of "conjured" items. This requires an update
-to our system:
-
-- "Conjured" items degrade in quality twice as fast as normal items.
-
-Refactor the internals and add helpers as needed, while preserving the mutable
-`Item` dataclass and the `update_quality(items)` interface. Keep all existing
-behaviour intact while adding the new requirement.
+The original instructions for this kata are provided in the source code.
 
 ### 99 Bottles
 
@@ -389,22 +434,41 @@ raise `NotImplementedError`. Work through them in dependency order, starting
 with the questions below.
 
 These exercises move from sampling variation, through linear models and
-resampling, to likelihood-based estimation. Use the [statistical methods
-notebook](analysis/statistical_methods.ipynb) for simulations, numerical
-comparisons, and model visualizations; keep reusable calculations in
-`statistics.py`.
+resampling, to likelihood-based estimation. They use two notebooks: the
+[Old Faithful notebook](analysis/old_faithful.ipynb) applies the functions to a
+real dataset, and the [simulation studies notebook](analysis/simulation_studies.ipynb)
+uses simulated data with known parameters, so you can check what the methods do.
+Keep reusable calculations in `statistics.py`.
 
 ### Q1. Sampling variation and standard error
 
-The sample standard deviation describes variation among observations. The
-standard error estimates variation in the sample mean across repeated
-samples: $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
+The standard error (SE) of the sample mean $\bar{x}$ measures how much $\bar{x}$
+varies from one sample to the next. If the observations have true standard
+deviation $\sigma$, the SE is $\sigma/\sqrt{n}$. We rarely know $\sigma$, so we
+estimate the SE by replacing it with $s$, the standard deviation of the sample
+we actually have (using $n-1$ in the denominator):
+$\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
 
-Implement `standard_error` using the sample standard deviation. In the
-[statistical methods notebook](analysis/statistical_methods.ipynb), simulate 500
-independent samples for each $n$ from 2 through 100. Plot the mean of the
-estimated standard errors against $n$ and compare it with the theoretical $1 /
-\sqrt{n}$ curve; explain the sampling variation around that curve.
+Implement `standard_error` using $s$. In the
+[Old Faithful notebook](analysis/old_faithful.ipynb), use it to report the mean
+waiting time between eruptions with its standard error. Then, in the
+[simulation studies notebook](analysis/simulation_studies.ipynb), simulate 500
+independent samples of standard normal data ($\sigma=1$) for each $n$ from 2
+through 100. The true SE is then $1/\sqrt{n}$. Plot the mean of the estimated
+standard errors against $n$ and compare it with that curve; explain the
+sampling variation around it.
+
+Note that the two will not match exactly due to Jensen's inequality![^se-bias]
+
+[^se-bias]: Each estimate $s/\sqrt{n}$ is random because $s$ changes from sample
+    to sample, which is the sampling variation. However, there is also a small
+    systematic gap. The sample variance $s^2$ averages exactly $\sigma^2$ (it is
+    unbiased), but taking a square root bends the average downwards, so $s$
+    averages slightly less than $\sigma$ (this is an instance of [Jensen's
+    inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality)). The
+    effect is noticeable for small $n$: at $n=2$ the average estimate is about
+    0.564, not 0.707. Running more repetitions smooths the random variation but
+    does not remove this gap.
 
 ### Q2. Linear models and ordinary least squares
 
@@ -415,8 +479,10 @@ $X^\mathsf{T}X\hat{\beta}=X^\mathsf{T}y$.
 
 Implement `ols_coefficients` by solving this system with `numpy.linalg.solve`,
 not by explicitly computing an inverse. The function does not add an intercept:
-include a column of ones when one is wanted. Compare with `numpy.linalg.lstsq`
-in the [statistical methods notebook](analysis/statistical_methods.ipynb).
+include a column of ones when one is wanted. In the
+[simulation studies notebook](analysis/simulation_studies.ipynb), simulate
+outcomes from known coefficients and compare your estimates with the truth and
+with `numpy.linalg.lstsq`. You will use `ols_coefficients` on real data later.
 
 ### Q3. The binomial and normal distributions
 
@@ -425,13 +491,29 @@ $np(1-p)$. When both expected counts $np$ and $n(1-p)$ are sufficiently
 large, a normal distribution with that mean and variance can approximate
 the binomial. Start with $n=100$ and $p=0.5$.
 
-In the [statistical methods notebook](analysis/statistical_methods.ipynb), use
+In the [simulation studies notebook](analysis/simulation_studies.ipynb), use
 `scipy.stats` to plot the exact probability at each integer from 0 to 100
-alongside the continuous normal density. Since a density is not a point
-probability, also use a continuity correction. If
-$Y\sim\mathcal{N}(np,np(1-p))$, compare $P(X=k)$ with $P(k-0.5<Y<k+0.5)$.
-Investigate a value of $p$ nearer zero or one, where the approximation becomes
-less reliable.
+alongside the continuous normal density.
+
+A density is not a probability: a continuous variable has probability zero of
+equalling any single value, whereas $P(X=k)$ is a positive point mass. The
+*continuity correction* bridges the two by treating each integer $k$ as
+standing for the unit-width interval from $k-0.5$ to $k+0.5$. If
+$Y\sim\mathcal{N}(np,np(1-p))$, then
+
+$$
+P(X=k)\approx P(k-0.5<Y<k+0.5),
+\qquad
+P(X\le k)\approx P(Y<k+0.5).
+$$
+
+The second approximation is the one that matters when summing over many values.
+Without the $+0.5$, $P(Y<k)$ misses half of the bar at $k$ and is
+systematically too small. Compare the exact probabilities with both the
+corrected normal probabilities and the uncorrected ones, for example by plotting
+the errors, and check the effect on a cumulative probability such as
+$P(X\le 45)$. Investigate a value of $p$ nearer zero or one, where the
+approximation becomes less reliable.
 
 ### Q4. Bootstrap standard error
 
@@ -442,24 +524,36 @@ stand-in for the population: repeatedly draw samples of size $n$ *with
 replacement*, and calculate the statistic for each one. The standard deviation
 of those bootstrap means estimates the standard error of the sample mean.
 
-Implement `bootstrap_standard_error` by computing the mean of each of 1,000
+Implement `bootstrap_standard_error` by computing the mean of each of 10,000
 resamples and returning the standard deviation of those means. Accept a
 keyword-only `numpy.random.Generator` so the experiment is reproducible.
 
-Compare the result with the analytic standard error; their difference is Monte
-Carlo variation, not necessarily an implementation error.
+You should use the *sample* standard deviation (`ddof=1`) of the resample means;
+at 10,000 resamples the convention matters little though. Compare the result
+with the analytic standard error, which uses `ddof=1` on the original sample.
+For a fixed sample, the exact bootstrap standard error of the mean is
+$\mathrm{std}(x, \mathrm{ddof}=0)/\sqrt{n}$, so even infinitely many resamples
+differ from the analytic value by the factor $\sqrt{(n-1)/n}$. What remains is
+Monte Carlo error, which shrinks as the number of resamples grows. In the
+[Old Faithful notebook](analysis/old_faithful.ipynb), apply it to the waiting
+times, and try random subsamples of small and moderate size to see the two
+effects separately.
 
 ### Q5. Likelihood and normal maximum likelihood estimation
 
 For independent observations from a normal model, the joint likelihood is
-$\mathcal{L}(\mu,\sigma\mid x)=\prod_i f(x_i\mid\mu,\sigma)$. This gives the
-"density" for the observed data as a function of the parameters.
+$\mathcal{L}(\mu,\sigma\mid x)=\prod_i f(x_i\mid\mu,\sigma)$, where $f$ is the
+normal density. This gives the
+"probability density" for the observed data ($x$) as a function of the
+parameters ($\mu,\sigma$).
 
 Calculating this quantity can be difficult because products of small densities
 can underflow. As a result, it is more convenient to consider the log
-likelihood. For the purposes of finding the parameter combinations that maximise
+likelihood
+$\ell(\mu,\sigma\mid x)=\log\mathcal{L}(\mu,\sigma\mid x)=\sum_i \log f(x_i\mid\mu,\sigma)$.
+For the purposes of finding the parameter combinations that maximise
 the likelihood (which we are about to come on to), considering the log
-likelihood instead is suitable because it always increases/decreases when the
+likelihood is suitable because it always increases/decreases when the
 likelihood increases/decreases. Implement `normal_log_likelihood` as a sum of
 log densities.
 
@@ -467,14 +561,22 @@ Implement `fit_normal_mle` by numerical optimization, constrain the positive
 standard deviation (for example, optimize its logarithm), and check optimizer
 success. As a validation, compare with the analytical estimates: the sample mean
 and the population standard deviation. In the
-[statistical methods notebook](analysis/statistical_methods.ipynb), investigate
+[Old Faithful notebook](analysis/old_faithful.ipynb), fit a normal distribution
+to the waiting times and judge how well it describes them. In the
+[simulation studies notebook](analysis/simulation_studies.ipynb), investigate
 the bias of these estimates across repeated samples.
+
+Optimizers can fail, for example reporting "precision loss" on small samples or
+on data far from zero or with a tiny spread. Start from a sensible guess based
+on the data, check the optimizer's `success` and `message` instead of assuming
+it worked, and if it fails try a different starting point. Your fit should work
+across many seeded small samples and on shifted and rescaled data.
 
 Run the tests with `uv run pytest tests/test_statistics.py -q`.
 
 ## Data Analysis
 
-### 1. Mysterious data
+### Q1. Mysterious data
 
 Thirteen coordinate datasets are packaged under neutral names. In the
 [mysterious data notebook](analysis/mysterious_data.ipynb), implement
@@ -492,49 +594,72 @@ explain why you should inspect data before choosing a model.
 uv run pytest tests/test_statistics.py -k summarize_xy
 ```
 
-### 2. Categorical data: Steak, Tea, and Toast
+### Q2. Categorical data: Steak, Tea, and Toast
 
 Included in this package is a simple dataset compiled from the results of a
-Facebook poll (in
-[steak_toast_tea.csv](src/pyproblems/datasets/steak_toast_tea.csv)).
+Facebook poll.
 
 ![Steak, toast, and tea poll response scales](assets/steak-toast-tea-poll.png)
 
-Each row is one response
-and the three columns use the labels shown in the image:
+The data is available in `src/pyproblems/datasets/steak_toast_tea.csv`. Each row
+is one response and the three columns use the labels shown in the image:
 
 - `Steak`: intended values 1 (rarest) to 5 (most well done)
 - `Toast`: 1 (lightest) to 6 (most burnt)
 - `Tea`: `a` (darkest) to `f` (milkiest)
 
-These are ordered categories, not continuous measurements. The source also
-contains some missing responses and a steak value of `0` that is not among the
-displayed choices. Keep the raw data unchanged, make a cleaned copy, and
-explain any decision about those observations instead of silently discarding
-them.
+These are ordered categories. The source also contains some missing responses
+and several values outside the displayed scales. Audit every column to find them
+all. Keep the raw data unchanged, then make a cleaned copy, and explain any
+decision about these observations instead of silently discarding or altering
+them. More than one policy is defensible (for example, treat them as missing, or
+keep half-step values as extra ordered levels); say which you chose and why.
 
 Complete the first investigation in the
 [Steak, Tea, and Toast notebook](analysis/steak_tea_toast.ipynb): inspect
 row counts, column types, category levels, and missing counts; make ordered
 categoricals; calculate frequency and proportion tables; and visualize
-contingency tables for two pairs of questions. If you test for association,
-inspect expected cell counts before using a chi-squared approximation. Sparse
-tables may call for Fisher's exact test or a simulated reference distribution.
+contingency tables for two pairs of questions. State the denominator of every
+proportion, and whether you used all rows for each variable or only complete
+pairs; select complete rows explicitly before cross-tabulating.
 
-Finish with two findings and two limitations.
+You can now try to test for any statistical associations between the questions.
+If you get stuck, there is a hint.[^association-hint]
 
-### 3. Linear regression and diagnostics
+[^association-hint]: To test for association between a pair of questions, you
+    could use a Spearman rank correlation (`scipy.stats.spearmanr`), which gives
+    both a correlation and a p-value. A chi-squared test of independence would
+    ignore the ordering and, with tables as large as 5 by 6, spread its power
+    across many degrees of freedom. Because Spearman uses only ranks, any
+    increasing coding of the levels gives the same answer. Note that it detects
+    a consistent increasing or decreasing trend, not every possible kind of
+    association.
 
-For the final investigation in the
-[mysterious data notebook](analysis/mysterious_data.ipynb), return to the 13
-coordinate datasets. Fit a line to the first dataset, interpret its
-intercept, slope, and $R^2$, then compare
-confidence intervals for the mean response with prediction intervals for an
-individual observation. Plot the fit and inspect residuals and a normal Q-Q
-plot. Repeat the fit and plots for all 13 datasets. Finally, construct a
-design matrix with an intercept and compare statsmodels with
-`ols_coefficients`. A fitted line and a compact model summary do not replace
-looking at the data and checking model assumptions.
+    Testing every pair of columns means several p-values at once. Consider what
+    that does to the chance of at least one false positive, and how you would
+    adjust for it (for example, a Bonferroni correction) or at least report it.
+
+    As an extension, compare Spearman with Kendall's $\tau_b$
+    (`scipy.stats.kendalltau`) and with a permutation-test p-value
+    (`scipy.stats.permutation_test`), both of which deal with the many ties in
+    these data differently.
+
+### Q3. Linear regression: predicting the next Old Faithful eruption
+
+Visitors to Old Faithful geyser want to know how long they will wait for the
+next eruption. `load_faithful_data()` in [data.py](src/pyproblems/data.py)
+provides each eruption's duration and the waiting time until the following one,
+both in minutes. In the
+[Old Faithful notebook](analysis/old_faithful.ipynb), fit a
+straight line predicting the waiting time from the eruption duration, using
+`ols_coefficients` with an intercept column. Interpret the intercept and slope in
+minutes, calculate $R^2$, and predict the wait after a 2-minute and a 4-minute
+eruption. Plot the data with the fitted line, and plot the residuals against the
+fitted values.
+
+The line has a decent $R^2$, but is it a good model? Look at both plots and
+think about what the residuals are telling you. We will come back to this data
+in the mixture-modelling section.
 
 ## Statistical Modelling
 
@@ -542,6 +667,9 @@ looking at the data and checking model assumptions.
 
 > **Prerequisites:** scientific-Python statistics and numerical optimization.
 > **Dependencies:** the optional science extra.
+>
+> **Optional:** this direct-optimization exercise can be skipped. The
+> expectation-maximization section that follows does not depend on it.
 
 Suppose observations come from one of two Gaussian distributed populations, but
 we do not know which population produced each observation. If the first
@@ -567,24 +695,139 @@ observation, combine the weighted component densities in log space.
 `log_likelihood`). You can use `scipy.optimize.minimize` to maximize the
 log-likelihood by minimizing its negative.
 
-For unconstrained optimization,
-represent each standard deviation as the exponential of an unconstrained
-parameter, and represent `weight1` with the logistic transform so it stays
-between zero and one. Try several deterministic starting points, keep the best
-successful result, and report the component with the smaller mean first. Mixture
-fitting can have local optima, so do not rely on one arbitrary start.
+Optimizing a mixture is trickier than fitting a single normal, so there is a
+hint for the optimization, including a minimum standard deviation that the tests
+expect.[^mixture-hint]
+
+[^mixture-hint]: For unconstrained optimization, represent each standard
+    deviation as a floor plus the exponential of an unconstrained parameter, and
+    represent `weight1` with the logistic transform so it stays between zero and
+    one. Try several deterministic starting points, keep the best successful
+    result, and report the component with the smaller mean first. Mixture
+    fitting can have local optima, so do not rely on one arbitrary start. Derive
+    the starting points from the location and spread of the data, so shifted or
+    rescaled observations give correspondingly shifted or rescaled fits.
+
+    There is one catch: the likelihood has no true maximum. If you centre one
+    component on a single observation and shrink its standard deviation towards
+    zero, its density at that point grows without bound (a very narrow normal
+    curve is very tall), while the other component still explains the remaining
+    points. An optimiser can therefore chase this spike forever. To stop that,
+    keep each standard deviation at or above a floor of `1e-3` times the sample
+    standard deviation of the observations, so the fit is always finite. The
+    likelihood function itself should still accept any positive standard
+    deviation.
 
 Run the tests with `uv run pytest tests/test_advanced_models.py -q`.
 
 ### Gaussian-mixture EM
 
-The direct-optimization exercise above estimates mixture parameters by
-optimizing the likelihood. Expectation-Maximization (EM) uses a different
-view: imagine that every observation has an unobserved component label. If
-those labels were known, fitting each normal distribution would be
-straightforward. EM alternates between estimating the missing labels from the
-current parameters (the E-step) and re-estimating the parameters using those
-labels (the M-step).
+Recall from the likelihood question in Scientific Python that the ML estimates of
+a normal distribution can be found by differentiating the log-likelihood and
+solving: they are simply the sample mean and the *population* standard deviation,
+so no optimiser is needed. ML estimation is harder for a mixture when we do not
+know which distribution each observation came from. The direct-optimization
+exercise above maximised the log-likelihood, which sums over the possible
+distributions for each observation, with a general optimiser, but this becomes
+less and less practical as the number of parameters grows.
+
+#### The EM algorithm for Gaussian mixtures
+
+A much more efficient approach is
+[Expectation-Maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
+(EM), which treats this as a *missing data* problem. We pretend that the labels,
+which tell us which distribution each observation came from, are missing. This is
+useful because, with the labels, estimation becomes easy again: the ML estimates
+for each distribution are just its mean and population standard deviation, with
+no optimisation.
+
+The EM approach when the labels are missing is:
+
+1. Guess the parameter values.
+2. Use the parameter values to infer likely labels (the E-step).
+3. Use the labels to obtain ML estimates of the parameters of each distribution
+   in the mixture, and of the relative contribution of each (the M-step).
+4. Iterate steps 2 and 3 until convergence.
+
+Under iteration, EM typically converges to a local optimum, which we hope is the
+global optimum and therefore gives the ML estimates.
+
+#### E-step
+
+How do we infer the labels? We can simply assign each observation to the
+component it is most likely to have come from. Assigning labels this way is
+called "hard" EM, because the labels are categorical.
+
+The parameters of the mixture are held in a `GaussianMixtureParameters` object
+with fields `mean1`, `standard_deviation1`, `mean2`, `standard_deviation2` and
+`weight1`, where `weight1` is the probability that an observation comes from
+component one. Work in [mixture_models.py](src/pyproblems/mixture_models.py) and
+write `hard_expectation_step(observations, parameters)`. It returns a Boolean
+array, the same length as the observations, saying whether each observation is
+more likely to have come from component one, which means comparing the weighted
+densities $\pi\,\phi(x\mid\mu_1,\sigma_1)$ and
+$(1-\pi)\,\phi(x\mid\mu_2,\sigma_2)$. Break a tie in favour of component one.
+
+#### M-step
+
+Using these (imperfect) labels we can update our estimated parameters by maximum
+likelihood. Write `hard_maximization_step(observations, labels)`, which takes the
+observations and the Boolean labels and returns new `GaussianMixtureParameters`:
+the mean and population standard deviation of the observations in each group,
+and `weight1` as the fraction labelled as component one. Raise `ValueError`,
+rather than returning invalid parameters, if a group is empty or has zero
+variance.
+
+#### Iteration
+
+Write `expectation_maximization(observations, initial_parameters,
+expectation_step, maximization_step, log_likelihood, *, tolerance=1e-10,
+max_iterations=1000)`, which iterates the supplied E-step, M-step and
+log-likelihood functions until there is no further improvement in log-likelihood.
+It returns an `ExpectationMaximizationResult` with the fitted `parameters`, the
+`log_likelihood`, the number of `iterations` and whether it `converged`. You will
+also need `mixture_log_likelihood(observations, parameters)`: the sum over the
+observations of the log of the weighted sum of the two component densities.
+Compute it in log space (for example with `scipy.special.logsumexp`) so that a
+point far from both components still gives a finite value.
+
+The tests check these details:
+
+- One iteration is one E-step followed by one M-step. Stop when the absolute
+  change in log-likelihood between consecutive iterations is below `tolerance`,
+  or when `max_iterations` is reached.
+- Judge convergence only after an update, so `max_iterations=0` returns the
+  initial parameters and log-likelihood, unconverged.
+- Use the absolute change: hard EM optimises a different objective, so its
+  log-likelihood can fall from one iteration to the next, whereas soft EM never
+  decreases it (apart from rounding). A large decrease is not convergence.
+- The component labels can be swapped without changing the model, so return the
+  component with the lower mean first.
+
+Then write `fit_hard_gaussian_mixture(observations, initial_parameters)`, which
+calls `expectation_maximization` using the hard steps. Check that it gives a
+reasonable fit to some sample data, for example:
+
+```python
+rng = np.random.default_rng(42)
+x = np.concatenate((rng.normal(-3, 2, 100), rng.normal(3, 1, 200)))
+initial = GaussianMixtureParameters(0, 2, 1, 2, 0.3)
+fitted = fit_hard_gaussian_mixture(x, initial)
+```
+
+Plot a histogram of `x` with the fitted mixture density over the top. The data
+came from a normal with mean -3 and standard deviation 2 (weight 1/3) and one
+with mean 3 and standard deviation 1 (weight 2/3), so the fit should be close.
+
+#### Soft EM
+
+An alternative is to use the relative *probability* that an observation belongs
+to each component, which is termed a "soft" EM algorithm. It is a slight tweak to
+the approach above: instead of assigning each observation to its most probable
+component, we *weight* its contribution to our ML estimates by the probability
+that it came from that component. The more certain we are that an observation
+belongs to component one, the more it contributes to the estimates for
+component one.
 
 For a univariate two-component mixture, let $r_i$ be the probability that
 observation $x_i$ belongs to component one. The soft E-step computes
@@ -594,46 +837,68 @@ r_i = \frac{\pi\,\phi(x_i\mid\mu_1,\sigma_1)}
 {\pi\,\phi(x_i\mid\mu_1,\sigma_1)+(1-\pi)\,\phi(x_i\mid\mu_2,\sigma_2)}.
 $$
 
-The hard E-step instead assigns each observation to whichever weighted
-component density is larger. In the M-step, update each component's mean and
-population standard deviation from its hard labels or soft weights; update
-$\pi$ from the fraction or average responsibility assigned to component one.
-Hard EM makes a definite assignment, while soft EM preserves uncertainty.
-Both can converge to a local optimum, so the starting parameters matter.
-
 For soft weights, the component-one updates illustrate the calculation:
 $\mu_1=\sum_i r_i x_i/\sum_i r_i$ and
 $\sigma_1^2=\sum_i r_i(x_i-\mu_1)^2/\sum_i r_i$; component two uses weights
 $1-r_i$, and $\pi$ is the average of the $r_i$ values. These are population
 standard deviations, as required for maximum-likelihood estimation.
 
-Work in [mixture_models.py](src/pyproblems/mixture_models.py) to implement
-hard and soft expectation/maximization steps, the generic
-`expectation_maximization` loop, and univariate and multivariate fitting.
-Pass the E-step, M-step, and log-likelihood callables to the generic loop.
-Represent parameter sets with the supplied dataclasses. The log-likelihood
-must sum log mixture densities stably. Stop when the likelihood improvement
-is below the tolerance or the iteration limit is reached; report whether the
-fit converged. Handle an empty hard-assignment component and singular
-covariance matrices deliberately rather than allowing invalid parameters to
-silently propagate. Since the component labels can be swapped without
-changing the model, return the lower-mean component first.
+Write `soft_expectation_step(observations, parameters)`, which takes the same
+arguments as the hard step but returns a float array of the probabilities $r_i$,
+and `soft_maximization_step(observations, weights)`, which takes the observations
+and the weights $r_i$ and returns new `GaussianMixtureParameters`. The weighted
+mean is available as `numpy.average(..., weights=...)`, but you will need to
+write the weighted standard deviation yourself. Raise `ValueError` if a component
+ends up with no weight or zero variance. The E-step must stay finite for
+observations far from both components, so work in log space. Finally, write
+`fit_soft_gaussian_mixture(observations, initial_parameters)` in the same way as
+the hard fit, and check it on the same sample data.
 
-`load_faithful_data()` in [data.py](src/pyproblems/data.py) provides eruption
-duration and waiting-time values from the R `datasets` package, in that
-column order. The two measurements form clusters: shorter eruptions tend to
-be followed by shorter waits, while longer eruptions tend to precede longer
-waits. The bivariate model replaces each standard deviation with a covariance
-matrix so it can represent the relationship between the measurements.
-`fit_faithful_gaussian_mixture()` applies the multivariate model to this
-dataset. In the [statistical methods notebook](analysis/statistical_methods.ipynb),
-plot the starting contours and fitted clusters, and
-compare the result with the reference likelihood in the tests. EM is not
-guaranteed to find the global maximum from every starting point.
+#### Multivariate Gaussian EM
+
+Old Faithful is a geyser in Yellowstone National Park which erupts in a very
+predictable manner, with either short eruptions that occur relatively quickly
+after the previous eruption, or longer waits leading to bigger eruptions. This
+motivates modelling the data as a mixture of two bivariate normal distributions,
+where the variables are the eruption duration and the waiting time to the next
+eruption (both in minutes). `load_faithful_data()` in
+[data.py](src/pyproblems/data.py) provides them as (duration, waiting) pairs, and
+the [Old Faithful notebook](analysis/old_faithful.ipynb) describes the data in
+more detail.
+
+The parameters are held in a `MultivariateGaussianMixtureParameters` object. It
+has the same fields as before, except that each mean is a length-2 array
+(duration and waiting time) and each standard deviation is replaced by a 2 by 2
+covariance matrix (`covariance1` and `covariance2`). In
+[mixture_models.py](src/pyproblems/mixture_models.py), write multivariate
+counterparts of the soft-EM functions:
+`multivariate_gaussian_mixture_log_likelihood`,
+`multivariate_soft_expectation_step`, `multivariate_soft_maximization_step` and
+`fit_multivariate_gaussian_mixture`, all taking the observations as an $n$ by 2
+array. The log-likelihood needs a bivariate normal density
+(`scipy.stats.multivariate_normal` has a `logpdf`). The M-step uses weighted
+means and weighted population covariance matrices (`numpy.cov` accepts
+`aweights`, and `ddof=0` gives the population version) and raises `ValueError` if
+a covariance matrix is singular. The fit returns the component with the smaller
+first mean coordinate first. Finally, `fit_faithful_gaussian_mixture(initial_parameters)`
+fits the packaged Old Faithful data.
+
+Compare your fitted log-likelihood with the reference value in the tests (about
+-1130.27). The [Old Faithful notebook](analysis/old_faithful.ipynb) gives rough
+starting values and asks you to plot the fit. EM is not guaranteed to find the
+global maximum from every starting point.
+
+This is the same dataset as the earlier regression exercise: the clusters should
+help explain why a single straight line described it poorly. The notebook also
+suggests an extension that revisits the prediction using the clusters.
 
 ```bash
 uv run pytest tests/test_mixture_models.py -m advanced -q
 ```
+
+Hard EM is a stepping stone to soft EM. If you would rather skip it, run
+`uv run pytest tests/test_mixture_models.py -m advanced -k "not hard"`, which
+leaves out its tests (and one test that is shared with the soft M-step).
 
 ## Algorithms and Search
 
@@ -732,17 +997,15 @@ Use this outline:
 
 ```text
 solve(grid):
-  find an empty cell
-  if there is no empty cell:
-    return a copy of the completed grid
-  for each digit from 1 through 9:
-    if the digit is legal in this cell:
-      place the digit
-      solution = solve(grid)
-      if solution was found:
-        return solution
-      clear the cell to backtrack
-  return no solution
+  if there are no missing positions:
+    return success (the grid is solved)
+  pick the first missing position
+  for each valid choice for that position:
+    assign choice
+    if solve(grid) succeeds:
+      return success
+    unmake choice (backtrack)
+  return failure (no choice led to a solution)
 ```
 
 Reject a starting grid that already contains conflicting clues. Work on a copy
@@ -825,7 +1088,9 @@ Before simulating, work through the probability questions in the
   $(1-x)^n\approx e^{-nx}$ can simplify the calculation.
 3. Once 18 positions match, what must happen at each of the remaining ten
   positions for one offspring to match the entire target? What is the chance
-  that any of ten offspring does so?
+  that any of ten offspring does so? Beware that `1 - (1 - p) ** n` rounds to
+  zero when $p$ is tiny; `-np.expm1(n * np.log1p(-p))` keeps the small
+  positive value.
 4. Which assumptions make this a poor model of evolution in nature? Consider
   the known target, the simple mutation process, and selection based on one
   fixed score.

@@ -92,3 +92,82 @@ def test_fit_gaussian_mixture_returns_stable_ordered_fit():
 def test_fit_gaussian_mixture_rejects_constant_data():
     with pytest.raises(ValueError, match="vary"):
         fit_gaussian_mixture([2.0, 2.0, 2.0, 2.0])
+
+
+def test_gaussian_mixture_log_likelihood_is_finite_far_in_the_tail():
+    observations = np.array([-1000.0, 0.0, 1000.0])
+    expected = np.sum(
+        np.logaddexp(
+            np.log(0.3) + norm.logpdf(observations, loc=0, scale=1),
+            np.log(0.7) + norm.logpdf(observations, loc=5, scale=1),
+        )
+    )
+
+    actual = gaussian_mixture_log_likelihood(0, 1, 5, 1, 0.3, observations)
+
+    assert math.isfinite(actual)
+    assert actual == pytest.approx(expected)
+
+
+def test_gaussian_mixture_log_likelihood_is_unbounded_as_a_component_collapses():
+    observations = [0.0, 1.0, 2.0, 5.0]
+    scales = [1.0, 1e-3, 1e-6, 1e-12]
+    values = [
+        gaussian_mixture_log_likelihood(0, scale, 3, 2, 0.3, observations)
+        for scale in scales
+    ]
+
+    assert values == sorted(values)
+    assert values[-1] > values[0] + 20
+
+
+def fitted_standard_deviation_floor(observations):
+    return 1e-3 * float(np.std(observations))
+
+
+def test_fit_gaussian_mixture_floors_scales_when_a_component_can_collapse():
+    generator = np.random.default_rng(11)
+    observations = np.append(generator.normal(0.0, 1.0, 40), 8.0)
+    floor = fitted_standard_deviation_floor(observations)
+
+    fitted = fit_gaussian_mixture(observations)
+
+    assert math.isfinite(fitted["log_likelihood"])
+    assert fitted["standard_deviation1"] >= floor * (1 - 1e-9)
+    assert fitted["standard_deviation2"] >= floor * (1 - 1e-9)
+
+
+def test_fit_gaussian_mixture_returns_finite_values_for_nearly_constant_data():
+    observations = 5.0 + 1e-9 * np.arange(10)
+    floor = fitted_standard_deviation_floor(observations)
+
+    fitted = fit_gaussian_mixture(observations)
+
+    assert all(math.isfinite(value) for value in fitted.values())
+    assert fitted["standard_deviation1"] >= floor * (1 - 1e-9)
+    assert fitted["standard_deviation2"] >= floor * (1 - 1e-9)
+
+
+def test_fit_gaussian_mixture_follows_shifted_and_rescaled_data():
+    generator = np.random.default_rng(314159)
+    observations = np.concatenate(
+        (generator.normal(-3.0, 0.7, 160), generator.normal(4.0, 1.1, 240))
+    )
+    shift, scale = 1000.0, 50.0
+
+    original = fit_gaussian_mixture(observations)
+    transformed = fit_gaussian_mixture(shift + scale * observations)
+
+    assert transformed["mean1"] == pytest.approx(
+        shift + scale * original["mean1"], rel=1e-2
+    )
+    assert transformed["mean2"] == pytest.approx(
+        shift + scale * original["mean2"], rel=1e-2
+    )
+    assert transformed["standard_deviation1"] == pytest.approx(
+        scale * original["standard_deviation1"], rel=1e-2
+    )
+    assert transformed["standard_deviation2"] == pytest.approx(
+        scale * original["standard_deviation2"], rel=1e-2
+    )
+    assert transformed["weight1"] == pytest.approx(original["weight1"], abs=1e-2)

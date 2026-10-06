@@ -11,8 +11,10 @@ from pyproblems.oop import (
     Duck,
     Elephant,
     Fish,
+    Fox,
     Frog,
     Mouse,
+    Parrot,
     Seal,
     wdtfs,
     zoo,
@@ -35,11 +37,57 @@ from pyproblems.oop import (
     ],
 )
 def test_animal_subclasses_override_speak(animal_type, sound):
-    animal = animal_type("Milo")
+    animal = animal_type("Woofy Goldberg")
 
     assert isinstance(animal, Animal)
     assert animal.speak() == sound
     assert animal.lyric() == f'{animal_type.__name__} goes "{sound}"'
+
+
+def test_fox_speaks_the_refrain():
+    fox = Fox()
+
+    assert isinstance(fox, Animal)
+    assert fox.speak() == "Ring-ding-ding-ding-dingeringeding!"
+
+
+def test_fox_lyric_is_the_closing_verse():
+    assert Fox().lyric() == (
+        "But there's one sound\n"
+        "That no one knows\n"
+        "What does the fox say?\n"
+        '"Ring-ding-ding-ding-dingeringeding!"'
+    )
+
+
+def test_parrot_tweets_until_it_hears_something():
+    parrot = Parrot("Polly")
+
+    assert isinstance(parrot, Bird)
+    assert parrot.speak() == "tweet"
+    assert parrot.lyric() == 'Parrot goes "tweet"'
+
+
+def test_parrot_repeats_the_last_sound_it_heard():
+    parrot = Parrot()
+
+    parrot.hear("woof")
+    parrot.hear("hello")
+
+    assert parrot.speak() == "hello"
+    assert parrot.lyric() == 'Parrot goes "hello"'
+
+
+def test_parrots_remember_independently():
+    polly, percy = Parrot(), Parrot()
+
+    polly.hear("hello")
+
+    assert percy.speak() == "tweet"
+
+
+def test_parrot_keeps_name_handling_from_animal():
+    assert str(Parrot("Polly")) == "Parrot named Polly"
 
 
 def test_base_animal_requires_a_speak_implementation():
@@ -47,13 +95,37 @@ def test_base_animal_requires_a_speak_implementation():
         Animal().speak()
 
 
+def test_animal_stores_its_name_on_the_instance():
+    dog = Dog("Woofy Goldberg")
+
+    assert dog.name == "Woofy Goldberg"
+    assert Dog().name is None
+
+
+def test_instances_of_one_class_have_separate_names():
+    woofy, rex = Dog("Woofy Goldberg"), Dog("Rex")
+
+    assert woofy.name == "Woofy Goldberg"
+    assert rex.name == "Rex"
+    assert type(woofy) is type(rex)
+
+
 def test_animal_string_representation_uses_instance_name():
-    assert str(Dog("Milo")) == "Dog named Milo"
+    assert str(Dog("Woofy Goldberg")) == "Dog named Woofy Goldberg"
+    assert str(Cat("Chairman Meow")) == "Cat named Chairman Meow"
     assert str(Cat()) == "Cat"
+
+
+def test_lyric_uses_the_class_name_not_the_instance_name():
+    assert Cat("Chairman Meow").lyric() == 'Cat goes "meow"'
 
 
 def test_zoo_creates_the_default_roster():
     animals = zoo()
+
+    assert str(animals[0]) == "Dog named Woofy Goldberg"
+    assert str(animals[1]) == "Cat named Chairman Meow"
+    assert all(animal.name for animal in animals)
 
     assert [type(animal) for animal in animals] == [
         Dog,
@@ -84,3 +156,10 @@ def test_wdtfs_matches_full_snapshot():
     )
 
     assert wdtfs(zoo()) == expected
+
+
+def test_wdtfs_works_with_a_parrot_that_has_learned_something():
+    parrot = Parrot()
+    parrot.hear("hello")
+
+    assert wdtfs([parrot]).splitlines()[0] == 'Parrot goes "hello"'

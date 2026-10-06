@@ -7,7 +7,8 @@ class Animal:
     """Base class for animals in the song exercise."""
 
     def __init__(self, name: str | None = None) -> None:
-        self.name = name
+        """Store the animal's optional name as the instance attribute `name`."""
+        raise NotImplementedError
 
     def speak(self) -> str:
         """Return this animal's sound; subclasses provide the sound."""
@@ -72,11 +73,35 @@ class Seal(Animal):
         raise NotImplementedError
 
 
+class Fox(Animal):
+    def speak(self) -> str:
+        """Return the refrain: "Ring-ding-ding-ding-dingeringeding!"."""
+        raise NotImplementedError
+
+    def lyric(self) -> str:
+        """Return the whole fox verse, not just a "goes" line."""
+        raise NotImplementedError
+
+
+class Parrot(Bird):
+    """A bird that repeats the last sound it heard, else tweets."""
+
+    def __init__(self, name: str | None = None) -> None:
+        raise NotImplementedError
+
+    def hear(self, sound: str) -> None:
+        """Remember sound so that speak() repeats it."""
+        raise NotImplementedError
+
+    def speak(self) -> str:
+        raise NotImplementedError
+
+
 def zoo() -> list[Animal]:
-    """Create the standard group of animals for the song exercise."""
+    """Create the standard group of animals, each with a name of its own."""
     raise NotImplementedError
 
 
 def wdtfs(animals: Iterable[Animal]) -> str:
-    """Return song lyrics for animals, ending with the fixed fox refrain."""
+    """Return song lyrics for animals, ending with the verse from a Fox."""
     raise NotImplementedError

@@ -41,7 +41,7 @@ def science_stack(monkeypatch):
 
 
 def test_notebooks_are_present():
-    assert len(NOTEBOOKS) == 5
+    assert len(NOTEBOOKS) == 6
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
@@ -69,17 +69,9 @@ def test_mysterious_data_setup_loads_all_datasets(science_stack):
     assert len(namespace["coordinate_data"]) == 13
 
 
-def test_regression_prompt_lives_in_mysterious_data_notebook():
-    def prose(name: str) -> str:
-        notebook = json.loads((ANALYSIS_DIR / name).read_text(encoding="utf-8"))
-        return "".join(
-            "".join(cell["source"])
-            for cell in notebook["cells"]
-            if cell["cell_type"] == "markdown"
-        )
+def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
+    namespace = run_setup(ANALYSIS_DIR / "old_faithful.ipynb")
+    faithful = namespace["faithful"]
 
-    assert "linear model" in prose("mysterious_data.ipynb")
-    assert "linear model" not in prose("statistical_methods.ipynb")
-    assert "poll_responses" not in json.dumps(
-        json.loads((ANALYSIS_DIR / "statistical_methods.ipynb").read_text())
-    )
+    assert faithful.shape == (272, 2)
+    assert list(faithful.columns) == ["eruptions", "waiting"]
