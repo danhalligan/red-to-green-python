@@ -10,7 +10,7 @@ from pyproblems.game_of_life import (
 )
 
 
-def test_neighbor_counts_include_only_available_boundary_cells():
+def test_neighbour_counts_include_only_available_boundary_cells():
     board = np.array([[1, 1], [1, 0]])
 
     assert_array_equal(count_live_neighbors(board), [[2, 2], [2, 3]])

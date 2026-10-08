@@ -97,11 +97,6 @@ class Parrot(Bird):
         raise NotImplementedError
 
 
-def zoo() -> list[Animal]:
-    """Create the standard group of animals, each with a name of its own."""
-    raise NotImplementedError
-
-
 def wdtfs(animals: Iterable[Animal]) -> str:
     """Return song lyrics for animals, ending with the verse from a Fox."""
     raise NotImplementedError

@@ -6,7 +6,7 @@ learning experience are welcome.
 Keep exercises idiomatic for Python rather than reproducing APIs from another
 language. Starter implementations should make the learning task clear without
 including a completed answer. Tests should express behaviour with fixed inputs
-or stable invariants; mark optional numerical optimization tests `advanced`.
+or stable invariants; mark optional numerical optimisation tests `advanced`.
 
 Before opening a pull request, run:
 

@@ -6,6 +6,11 @@
         "tests"
     ],
     "notebook.notebookFileRoot": "${workspaceFolder}",
+    "notebook.markup.fontSize": 13,
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.wordWrapColumn": 80
+    },
     "[python]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "charliermarsh.ruff"

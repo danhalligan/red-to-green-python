@@ -17,8 +17,9 @@ from pyproblems.oop import (
     Parrot,
     Seal,
     wdtfs,
-    zoo,
 )
+
+FULL_CAST = [Dog, Cat, Bird, Mouse, Cow, Frog, Elephant, Duck, Fish, Seal]
 
 
 @pytest.mark.parametrize(
@@ -61,7 +62,7 @@ def test_fox_lyric_is_the_closing_verse():
 
 
 def test_parrot_tweets_until_it_hears_something():
-    parrot = Parrot("Polly")
+    parrot = Parrot("Polly Morphism")
 
     assert isinstance(parrot, Bird)
     assert parrot.speak() == "tweet"
@@ -87,7 +88,7 @@ def test_parrots_remember_independently():
 
 
 def test_parrot_keeps_name_handling_from_animal():
-    assert str(Parrot("Polly")) == "Parrot named Polly"
+    assert str(Parrot("Polly Morphism")) == "Parrot named Polly Morphism"
 
 
 def test_base_animal_requires_a_speak_implementation():
@@ -120,27 +121,6 @@ def test_lyric_uses_the_class_name_not_the_instance_name():
     assert Cat("Chairman Meow").lyric() == 'Cat goes "meow"'
 
 
-def test_zoo_creates_the_default_roster():
-    animals = zoo()
-
-    assert str(animals[0]) == "Dog named Woofy Goldberg"
-    assert str(animals[1]) == "Cat named Chairman Meow"
-    assert all(animal.name for animal in animals)
-
-    assert [type(animal) for animal in animals] == [
-        Dog,
-        Cat,
-        Bird,
-        Mouse,
-        Cow,
-        Frog,
-        Elephant,
-        Duck,
-        Fish,
-        Seal,
-    ]
-
-
 def test_wdtfs_matches_short_snapshot():
     animals = [Bird(), Cat(), Mouse()]
     expected = (Path(__file__).parent / "fixtures" / "animal_song_short.txt").read_text(
@@ -155,7 +135,7 @@ def test_wdtfs_matches_full_snapshot():
         encoding="utf-8"
     )
 
-    assert wdtfs(zoo()) == expected
+    assert wdtfs([animal_type() for animal_type in FULL_CAST]) == expected
 
 
 def test_wdtfs_works_with_a_parrot_that_has_learned_something():

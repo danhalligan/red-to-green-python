@@ -8,7 +8,7 @@ from numpy.typing import ArrayLike, NDArray
 
 
 def count_live_neighbors(board: ArrayLike) -> NDArray:
-    """Return the available live-neighbor count for every board cell."""
+    """Return the available live-neighbour count for every board cell."""
     raise NotImplementedError
 
 

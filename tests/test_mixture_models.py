@@ -3,7 +3,7 @@ import pytest
 
 from pyproblems.data import load_faithful_data
 from pyproblems.mixture_models import (
-    ExpectationMaximizationResult,
+    EMResult,
     GaussianMixtureParameters,
     MultivariateGaussianMixtureParameters,
     expectation_maximization,
@@ -14,7 +14,7 @@ from pyproblems.mixture_models import (
     hard_expectation_step,
     hard_maximization_step,
     mixture_log_likelihood,
-    multivariate_gaussian_mixture_log_likelihood,
+    multivariate_mixture_log_likelihood,
     multivariate_soft_expectation_step,
     multivariate_soft_maximization_step,
     soft_expectation_step,
@@ -61,7 +61,7 @@ def test_soft_em_returns_a_converged_fit_with_finite_likelihood():
 
     fitted = fit_soft_gaussian_mixture(observations, initial)
 
-    assert isinstance(fitted, ExpectationMaximizationResult)
+    assert isinstance(fitted, EMResult)
     assert fitted.converged
     assert fitted.iterations > 0
     assert np.isfinite(fitted.log_likelihood)
@@ -110,16 +110,14 @@ def test_multivariate_likelihood_and_fit_accept_two_dimensional_data():
         np.array([-2.5, -1.5]), identity, np.array([2.5, 1.5]), identity, 0.5
     )
 
-    assert np.isfinite(
-        multivariate_gaussian_mixture_log_likelihood(observations, initial)
-    )
+    assert np.isfinite(multivariate_mixture_log_likelihood(observations, initial))
     fitted = fit_multivariate_gaussian_mixture(observations, initial)
     probabilities = multivariate_soft_expectation_step(observations, initial)
     updated = multivariate_soft_maximization_step(observations, probabilities)
     assert fitted.converged
     assert updated.mean1.shape == (2,)
     assert probabilities.shape == (len(observations),)
-    assert fitted.log_likelihood > multivariate_gaussian_mixture_log_likelihood(
+    assert fitted.log_likelihood > multivariate_mixture_log_likelihood(
         observations,
         MultivariateGaussianMixtureParameters(
             observations.mean(axis=0),
@@ -212,9 +210,7 @@ def test_e_steps_stay_finite_far_from_both_components():
     assert multivariate_soft_expectation_step(points, multivariate) == pytest.approx(
         [1.0, 0.0]
     )
-    assert np.isfinite(
-        multivariate_gaussian_mixture_log_likelihood(points, multivariate)
-    )
+    assert np.isfinite(multivariate_mixture_log_likelihood(points, multivariate))
     assert np.isfinite(mixture_log_likelihood([-1000.0, 1000.0], parameters))
 
 
