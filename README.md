@@ -1,28 +1,35 @@
-# Python Problems
+# Red to Green: Python problems from FizzBuzz to mixture models
 
 ## Introduction
 
-Welcome! This is a hands-on collection of Python exercises, from small
-programming puzzles to data analysis and statistical modelling. Start with
-Python Fundamentals, then choose one of the routes below or jump to a topic that
-interests you. The early exercises are bite-sized; later notebooks, the kata,
-and mixture-model work can each take several sessions. If you complete all the
-exercises you'll have touched on Python fundamentals such as list
-comprehensions, generators and object orientation, but also maximum likelihood,
-expectation-maximisation, recursion, test first development, refactoring,
-breadth-first search and even cellular automaton.
+Welcome! This is a hands-on collection of Python exercises that begin *red* and
+end *green*. Most functions start as stubs whose tests fail, and your job is to
+turn them green by implementing them one small step at a time. The problems run
+from FizzBuzz-sized programming puzzles to data analysis and statistical
+modelling. If you complete all the exercises you'll have touched on Python
+fundamentals such as list comprehensions, generators and object orientation, but
+also maximum likelihood, expectation-maximisation, recursion, test first
+development, refactoring, breadth-first search and even cellular automaton.
 
-The purpose of this package is partially to help you learn Python, but is also a
-collection of interesting and hopefully satisfying problems to solve. It is not
-simply about collecting completed solutions. A coding agent could complete the
-exercises for you, but that would bypass the practice and interest they are
-designed to provide. Writing code, investigating failures, and explaining your
-choices build an understanding of Python that remains useful in the age of
-agentic coding: you need that understanding to specify requirements, assess
-generated code, spot mistakes, and maintain the result. Agents can support your
-learning with hints, explanations, or reviews of your own attempts. Try each
-problem yourself first, and make sure you can explain and test any code you
-adopt; passing tests alone is not the learning goal.
+Start with Python Fundamentals, then choose one of the routes below or jump to a
+topic that interests you. The early exercises are bite-sized; later notebooks,
+the kata, and mixture-model work can each take several sessions.
+
+Look out for these markers: 💡 a hint (usually in a footnote), 😱 a
+particularly challenging section, and 🚀 an optional extension.
+
+> [!IMPORTANT]
+> The purpose of this package is partially to help you learn Python, but is also a
+> collection of interesting and hopefully satisfying problems to solve. It is not
+> simply about collecting completed solutions. A coding agent could complete the
+> exercises for you, but that would bypass the practice and interest they are
+> designed to provide. Writing code, investigating failures, and explaining your
+> choices build an understanding of Python that remains useful in the age of
+> agentic coding: you need that understanding to specify requirements, assess
+> generated code, spot mistakes, and maintain the result. Agents can support your
+> learning with hints, explanations, or reviews of your own attempts. Try each
+> problem yourself first, and make sure you can explain and test any code you
+> adopt; passing tests alone is not the learning goal.
 
 As a rough guide, allow 25 to 50 hours for a full pass, depending on your
 experience and how deeply you explore the investigations. Treat that as a
@@ -37,12 +44,14 @@ scientific tools, install the complete environment with:
 uv sync --all-groups --extra science
 ```
 
-Most exercise functions start as stubs, so their tests will fail until you
+Most exercise functions start as stubs, so their tests are red until you
 implement them. Pick an exercise, read its prompt, and run its focused test
-command; make one small change at a time and rerun the test. For your first
-check, try `uv run pytest tests/test_language.py`. The early language exercises
-use only the Python standard library; scientific exercises need the optional
-science packages installed above.
+command; make one small change at a time and rerun the test until it turns
+green. Notebook analyses have no pass or fail, so they are checked by your own
+plots and explanations. For your first check, try
+`uv run pytest tests/test_language.py`. The early language exercises use only
+the Python standard library; scientific exercises need the optional science
+packages installed above.
 
 ## Choosing a route
 
@@ -111,7 +120,7 @@ For example, for the list `[3, 6, -2, -5, 7, 3]` you should return `21`, since
 
 Implement `adjacent_elements_product(values)` in `language.py`.
 
-Hint: `itertools.pairwise` could be useful here.
+💡 **Hint:** `itertools.pairwise` could be useful here.
 
 ```bash
 uv run pytest tests/test_language.py -k adjacent
@@ -412,7 +421,7 @@ all at once. Start with one verse, then a range of verses, then the complete
 song. Keep formatting decisions at the boundary where they belong: `verse`
 creates one stanza, while `verses` and `bottles` compose those stanzas.
 
-**Extension: write your own tests.** So far the tests have been written for you.
+**Extension 🚀: write your own tests.** So far the tests have been written for you.
 In this extension you write them to add a new requirement. You should write
 tests that would actually catch a wrong implementation. No tests are supplied
 for it, so yours are the check.
@@ -493,7 +502,7 @@ Then, in the [simulation studies notebook](analysis/simulation_studies.ipynb),
 simulate 500 independent samples of standard normal data ($\sigma=1$) for each
 $n$ from 2 through 100. The true SE is then $1/\sqrt{n}$. Plot the mean of the
 estimated standard errors against $n$ and compare it with true SE
-($1/\sqrt{n}$); explain the sampling variation and bias you see. Hint in the
+($1/\sqrt{n}$); explain the sampling variation and bias you see. 💡 Hint in the
 footnote [^se-bias].
 
 [^se-bias]: Each estimate $s/\sqrt{n}$ is random because $s$ changes from sample
@@ -598,7 +607,7 @@ the median has no such formula. There are caveats: the bootstrap assumes
 independent observations that represent the population, and it can perform
 poorly for very small samples or for extreme statistics such as the maximum. 
 
-As an extension, adapt the same resampling loop to estimate the standard error
+**Extension 🚀:** adapt the same resampling loop to estimate the standard error
 of the median waiting time and compare it with that of the mean.
 
 ### Q5. Likelihood and normal maximum likelihood estimation
@@ -634,7 +643,7 @@ combination of parameter values that maximises the value of
 `normal_log_likelihood` numerically. Constrain the positive standard deviation
 (for example, optimise its logarithm), and check optimiser success. Your fit
 should work across many seeded small samples and on shifted and rescaled data.
-Optimisers can fail, so there is a hint.[^optimiser-hint]
+Optimisers can fail, so there is a 💡 hint.[^optimiser-hint]
 
 [^optimiser-hint]: Optimisers can fail, for example reporting "precision loss"
     on small samples or on data far from zero or with a tiny spread. Start from
@@ -647,7 +656,7 @@ population standard deviation. In the [Old Faithful
 notebook](analysis/old_faithful.ipynb), fit a normal distribution to the waiting
 times and judge how well it describes them. In the [simulation studies
 notebook](analysis/simulation_studies.ipynb), investigate the bias of these
-estimates across repeated samples (hint in the footnote).[^mle-bias]
+estimates across repeated samples (💡 hint in the footnote).[^mle-bias]
 
 [^mle-bias]: Compare the average of each estimate with the true value as $n$
     changes. The MLE of $\mu$ is the sample mean, which is unbiased. The MLE of
@@ -661,13 +670,14 @@ estimates across repeated samples (hint in the footnote).[^mle-bias]
     shrink as $n$ grows, so the MLE is still a sensible estimator; the bias is
     largest for small samples.
 
-For the normal model the optimiser is not strictly needed. Differentiating the
-log-likelihood with respect to $\mu$ and $\sigma$, setting the derivatives to
-zero and solving shows analytically that the ML estimates are the sample mean,
-$\hat\mu=\bar{x}$, and the *population* standard deviation (divisor $n$),
-$\hat\sigma=\sqrt{\tfrac{1}{n}\sum_i(x_i-\bar{x})^2}$. Numerical optimisation
-earns its keep for models, such as the mixtures later on, where no such closed
-form exists.
+> [!NOTE]
+> For the normal model the optimiser is not strictly needed. Differentiating the
+> log-likelihood with respect to $\mu$ and $\sigma$, setting the derivatives to
+> zero and solving shows analytically that the ML estimates are the sample mean,
+> $\hat\mu=\bar{x}$, and the *population* standard deviation (divisor $n$),
+> $\hat\sigma=\sqrt{\tfrac{1}{n}\sum_i(x_i-\bar{x})^2}$. Numerical optimisation
+> earns its keep for models, such as the mixtures later on, where no such closed
+> form exists.
 
 ## Data Analysis
 
@@ -737,7 +747,7 @@ proportion, and whether you used all rows for each variable or only complete
 pairs; select complete rows explicitly before cross-tabulating.
 
 You can now try to test for any statistical associations between the questions.
-Here's a hint if you're stuck [^association-hint]
+Here's a 💡 hint if you're stuck [^association-hint]
 
 [^association-hint]: To test for association between a pair of questions, you
     could use a Spearman rank correlation (`scipy.stats.spearmanr`), which gives
@@ -772,7 +782,7 @@ in the mixture-modelling section.
 
 ## Statistical Modelling
 
-### Gaussian-mixture
+### Gaussian-mixture 😱
 
 > **Prerequisites:** Scientific Python Q5 (likelihood and numerical maximum
 > likelihood).
@@ -806,7 +816,7 @@ weight (strictly between zero and one), and the observations.
 
 Use `scipy.optimize.minimize` to numerically maximise the log-likelihood across
 all model parameters. Note that optimising a mixture is trickier than fitting a
-single normal, so there is a hint for the optimisation, including setting a
+single normal, so there is a 💡 hint for the optimisation, including setting a
 minimum standard deviation that the tests expect.[^mixture-hint]
 
 [^mixture-hint]: For unconstrained optimisation, represent each standard
@@ -828,7 +838,7 @@ minimum standard deviation that the tests expect.[^mixture-hint]
     likelihood function itself should still accept any positive standard
     deviation.
 
-### Gaussian-mixture EM
+### Gaussian-mixture EM 😱
 
 > **Prerequisites:** Scientific Python Q5 (likelihood and maximum likelihood),
 > and the optional scientific stack.
@@ -1058,17 +1068,20 @@ Time your function as the sequences get longer, then think about the 10 and 11
 base example above. How long do you think it would take for two 1,000 base
 sequences?
 
-#### Dynamic programming & Needleman-Wunsch
+#### Dynamic programming & Needleman-Wunsch 😱
 
 Brute force repeats a great deal of work, because many alignments share the same
-beginnings. *Dynamic programming* removes the repetition. Despite the name, it
-is not about changing data or code that adapts as it runs, and "programming"
-here means planning (as in "linear programming"), not writing code. It is a
-technique for solving a big problem by solving smaller, overlapping subproblems
-once each and storing the answers in a table so they can be reused rather than
-recomputed. Here the subproblems are the best alignments of the beginnings
-(prefixes) of the two sequences, and the table is filled in from short prefixes
-up to the full sequences.
+beginnings. *Dynamic programming* removes the repetition. It is a technique for
+solving a big problem by solving smaller, overlapping subproblems once each and
+storing the answers in a table so they can be reused rather than recomputed.
+Here the subproblems are the best alignments of the beginnings (prefixes) of the
+two sequences, and the table is filled in from short prefixes up to the full
+sequences.
+
+> [!NOTE]
+> Despite the name, dynamic programming is not about changing data or code that
+> adapts as it runs, and "programming" here means planning (as in "linear
+> programming"), not writing code.
 
 The Needleman-Wunsch algorithm is a dynamic-programming method for *global*
 alignment: it aligns both sequences from beginning to end, inserting gaps

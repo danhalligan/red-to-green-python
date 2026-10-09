@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pyproblems"
 version = "0.1.0"
-description = "Python programming and statistics exercises"
+description = "Python exercises from FizzBuzz to mixture models: turn failing tests from red to green"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
