@@ -9,7 +9,7 @@ from FizzBuzz-sized programming puzzles to data analysis and statistical
 modelling. If you complete all the exercises you'll have touched on Python
 fundamentals such as list comprehensions, generators and object orientation, but
 also maximum likelihood, expectation-maximisation, recursion, test first
-development, refactoring, breadth-first search and even cellular automaton.
+development, refactoring, graph search and even cellular automaton.
 
 Start with Python Fundamentals, then choose one of the routes below or jump to a
 topic that interests you. The early exercises are bite-sized; later notebooks,
@@ -266,7 +266,7 @@ uv run pytest tests/test_sudoku.py -q
 >
 > **Check:** `uv run pytest tests/test_oop.py -q`
 
-### Noisy animals
+### Noisy animals 📣
 
 Create an `Animal` base class in `src/pyproblems/oop.py`. Its initialiser
 should store an optional name on the instance, so that `animal.name` returns
@@ -306,7 +306,7 @@ class, so every `Dog` goes "woof", but the name belongs to each instance, so two
 `Dog` objects can have different names. `lyric()` uses the class name, not the
 instance name.
 
-### What Does the Fox Say?
+### What Does the Fox Say? 🦊
 
 Add a `Fox` class. Its `speak()` should return
 `"Ring-ding-ding-ding-dingeringeding!"`. The fox's verse is more than a
@@ -333,7 +333,7 @@ animal is. It calls the same method on every object and lets the object's class
 return the lyric line appropriate for that animal. This is polymorphism through
 ordinary inheritance and method overriding.
 
-### A parrot that learns
+### A parrot that learns 🦜
 
 So far each subclass only returns a fixed string. Subclasses become more
 interesting when they have state. Add `Parrot(Bird)`, which repeats the last
@@ -354,7 +354,7 @@ lookup table of sounds could not do this.
 
 ## Refactoring and Test-First Development
 
-### The Gilded Rose Kata
+### The Gilded Rose Kata 🌹
 
 > **Prerequisites:** Python Fundamentals and Object-oriented Python.
 >
@@ -454,7 +454,7 @@ Take one down and pass it around, 5 bottles of beer on the wall.
    and confirm that at least one test fails each time. A test that cannot fail
    tells you nothing.
 
-## Scientific Python
+## Scientific Python 🔬
 
 > **Prerequisites:** Python Fundamentals and Object-oriented Python, and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
@@ -693,7 +693,7 @@ estimates across repeated samples (💡 hint in the footnote).[^mle-bias]
 > checks the functions; the notebook analyses are checked by your own plots and
 > explanations.
 
-### Q1. Mysterious data
+### Q1. Mysterious data 🤔
 
 Thirteen coordinate datasets are packaged under neutral names. In the
 [mysterious data notebook](analysis/mysterious_data.ipynb), implement
@@ -981,12 +981,12 @@ suggests an extension that revisits the prediction using the clusters.
 
 ## Algorithms and Search
 
-### Word ladder
+### Word ladder 🪜
 
 > **Prerequisites:** Python Fundamentals.
 >
-> **You’ll practise:** sets and strings, breadth-first search, and
-> reconstructing a path from predecessors.
+> **You’ll practise:** sets and strings, searching a network of words, and
+> reconstructing a path.
 >
 > **Check:** `uv run pytest tests/test_word_ladder.py -q`
 
@@ -1001,9 +1001,13 @@ lowercase word set. Implement `word_ladder(start, target, words)` in
 [word_ladder.py](src/pyproblems/word_ladder.py) to return a shortest route, or
 `None` if no route exists. The docstring gives the input requirements. The
 number of moves is one less than the number of words in the returned route.
+Stuck on the approach? There is a 💡 hint.[^ladder-hint]
 
-Breadth-first search is a natural fit for this problem. Record each word's
-predecessor so you can reconstruct a shortest route once the target is found.
+[^ladder-hint]: Think of the words as a network in which two words are linked if
+    they differ by one letter. Breadth-first search explores outward one move at
+    a time, so the first time it reaches the target it has found a shortest
+    route. Record each word's predecessor as you go, so you can reconstruct that
+    route once the target is found.
 
 For example, starting from `play`, we can find the following ladders:
 
@@ -1016,7 +1020,21 @@ For example, starting from `play`, we can find the following ladders:
 How many moves does it take to get from `play` to `game`? Give one valid
 shortest route.
 
-### Global sequence alignment
+**Extension 🚀:** Some pairs of four-letter words are much harder to connect than
+others. Implement `longest_shortest_ladder(words, length=4)`, which finds the two
+words of that length whose *shortest* ladder needs the most moves and returns one
+such route. Which two words are they, and how many moves apart are they?
+💡 Hint: you already have code that finds shortest routes from a start word; how
+many times would you need to run it?[^longest-ladder] The extension's tests are the ones that match
+`-k longest`; use `-k "not longest"` to skip them.
+
+[^longest-ladder]: Be careful to answer this question and not a harder one. Asking
+    for the longest ladder that never repeats a word, rather than the longest
+    *shortest* ladder, is the longest simple path problem, which has no known
+    efficient solution, so a brute-force search for it is hopeless on a
+    dictionary this size.
+
+### Global sequence alignment 🧬
 
 > **Prerequisites:** Python Fundamentals.
 >
@@ -1113,7 +1131,7 @@ docstrings give the details. Check them against your brute-force version on
 short sequences. The longer DNA fixture checks that the same algorithm scales
 beyond the small worked example.
 
-### Sudoku solver
+### Sudoku solver 🔢
 
 > **Prerequisites:** Python Fundamentals, in particular the Sudoku checker
 > (Q7).
@@ -1154,14 +1172,14 @@ give the argument conventions and edge cases. Test a completed grid, an
 unsolvable grid, and a puzzle with multiple valid solutions, as well as the
 supplied puzzles.
 
-## Models of Life
+## Models of Life 🌿
 
 These two small simulations explore how systems change over time. Game of Life
 is deterministic: the board and rules determine each next generation. Dawkins'
 weasel is stochastic: random mutation and selection mean repeated runs can
 differ. Both are simplified models and are interesting in unique ways.
 
-### Conway's Game of Life
+### Conway's Game of Life 🔫
 
 > **Prerequisites:** Python Fundamentals and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
@@ -1197,7 +1215,7 @@ inside a larger empty board, iterate many generations, and animate the frames.
 The supplied patterns are starting
 conditions, not additional implementation tasks.
 
-### Dawkins' weasel
+### Dawkins' weasel 🦦
 
 > **Prerequisites:** Python Fundamentals and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
@@ -1244,7 +1262,7 @@ to investigate time to target and how the mutation rate affects convergence
 for a population of 100. Compare several
 seeded runs rather than treating one random run as a universal answer.
 
-## Further Reading
+## Further Reading 📚
 
 - [The Python Tutorial](https://docs.python.org/3/tutorial/)
 - [Python Standard Library](https://docs.python.org/3/library/)
