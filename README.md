@@ -236,7 +236,7 @@ Sudoku asks you to fill a 9 by 9 grid so each row, column, and 3 by 3 box
 contains the digits 1 through 9 exactly once. A partially filled grid is
 *valid* when none of its supplied digits conflicts with those rules.
 
-Implement `sudoku_checker(grid)` in [language.py](src/pyproblems/language.py).
+Implement `sudoku_checker(grid)` in [sudoku.py](src/pyproblems/sudoku.py).
 The input is a list of nine rows containing integers 1 through 9 or `None` for
 blanks.
 
@@ -485,8 +485,9 @@ Implement `standard_error` using $s$ in
 [statistics.py](src/pyproblems/statistics.py).  
 
 Old Faithful is a geyser in Yellowstone National Park. Data on eruption waiting
-times is a commonly used dataset for statistics. In the 
-[Old Faithful notebook](analysis/old_faithful.ipynb), report the mean waiting time between eruptions with its standard error. 
+times is a commonly used dataset for statistics. In the [Old Faithful
+notebook](analysis/old_faithful.ipynb), report the mean waiting time between
+eruptions with its standard error. 
 
 Then, in the [simulation studies notebook](analysis/simulation_studies.ipynb),
 simulate 500 independent samples of standard normal data ($\sigma=1$) for each
@@ -551,7 +552,8 @@ approximation becomes less reliable.
 ### Q4. Bootstrap standard error
 
 In Q1 we noted that the standard error (of the mean) is the standard deviation
-of the sample mean across repeated samples. We estimated this from a single sample using the sample standard deviation. 
+of the sample mean across repeated samples. We estimated this from a single
+sample using the sample standard deviation. 
 
 An alternative, is a bootstrap approach. The idea here is to mimic repeated
 samples from a population using the *observed values* as a stand-in for the
@@ -563,12 +565,15 @@ Implement `bootstrap_standard_error` by computing the mean of each of 10,000
 resamples and returning the standard deviation of those means [^bs-sd]. Accept a
 keyword-only `numpy.random.Generator` so the experiment is reproducible.
 
-[^bs-sd]: You should use the *sample* standard deviation (`ddof=1`) of the resample means (at 10,000 resamples the convention matters little though). 
+[^bs-sd]: You should use the *sample* standard deviation (`ddof=1`) of the
+    resample means (at 10,000 resamples the convention matters little though). 
 
 Your bootstrap estimate will not match $s/\sqrt{n}$ exactly, for two reasons.
 The first is Monte Carlo error: we use a finite number of resamples, so the
 estimate shrinks towards its limiting value as the number of resamples grows.
-The second is a systematic difference: the limiting value is $\mathrm{std}(x, \mathrm{ddof}=0)/\sqrt{n}$, which differs from the analytic estimate by the factor $\sqrt{(n-1)/n}$.[^bs-exact]
+The second is a systematic difference: the limiting value is $\mathrm{std}(x,
+\mathrm{ddof}=0)/\sqrt{n}$, which differs from the analytic estimate by the
+factor $\sqrt{(n-1)/n}$.[^bs-exact]
 
 [^bs-exact]: "Exact" here means the value you would get by averaging over every
     possible resample, so there is no Monte Carlo error. Resampling with
@@ -613,7 +618,8 @@ now fixed, because we have observed them, and we ask how the density changes as
 we vary the parameters:
 $\mathcal{L}(\mu,\sigma\mid x)=\prod_i f(x_i\mid\mu,\sigma)$. Parameter values
 under which the observed data are more probable have a higher likelihood, and
-are better supported by the data. *Maximum likelihood estimation* chooses the parameter values that maximise it.
+are better supported by the data. *Maximum likelihood estimation* chooses the
+parameter values that maximise it.
 
 Calculating this quantity can be difficult because products of small densities
 can underflow. As a result, it is more convenient to consider the log likelihood
@@ -626,7 +632,15 @@ densities.
 Implement `fit_normal_mle` by *numerical optimisation*. In other words, find the
 combination of parameter values that maximises the value of
 `normal_log_likelihood` numerically. Constrain the positive standard deviation
-(for example, optimise its logarithm), and check optimiser success.
+(for example, optimise its logarithm), and check optimiser success. Your fit
+should work across many seeded small samples and on shifted and rescaled data.
+Optimisers can fail, so there is a hint.[^optimiser-hint]
+
+[^optimiser-hint]: Optimisers can fail, for example reporting "precision loss"
+    on small samples or on data far from zero or with a tiny spread. Start from
+    a sensible guess based on the data, check the optimiser's `success` and
+    `message` instead of assuming it worked, and if it fails try a different
+    starting point.
 
 As a validation, compare with the analytical estimates: the sample mean and the
 population standard deviation. In the [Old Faithful
@@ -646,12 +660,6 @@ estimates across repeated samples (hint in the footnote).[^mle-bias]
     inequality), so $\hat\sigma$ is biased low for TWO reasons! Both effects
     shrink as $n$ grows, so the MLE is still a sensible estimator; the bias is
     largest for small samples.
-
-Optimisers can fail, for example reporting "precision loss" on small samples or
-on data far from zero or with a tiny spread. Start from a sensible guess based
-on the data, check the optimiser's `success` and `message` instead of assuming
-it worked, and if it fails try a different starting point. Your fit should work
-across many seeded small samples and on shifted and rescaled data.
 
 For the normal model the optimiser is not strictly needed. Differentiating the
 log-likelihood with respect to $\mu$ and $\sigma$, setting the derivatives to
@@ -712,8 +720,13 @@ These are ordered categories. The source also contains some missing responses
 and several values outside the displayed scales. Audit every column to find them
 all. Keep the raw data unchanged, then make a cleaned copy, and explain any
 decision about these observations instead of silently discarding or altering
-them. More than one policy is defensible (for example, treat them as missing, or
-keep half-step values as extra ordered levels); say which you chose and why.
+them. Several policies are defensible;[^cleaning-policy] pick one but consider
+the implications.
+
+[^cleaning-policy]: For example, treat them as missing, or keep half-step
+    values as extra ordered levels. Either choice changes the denominators and
+    the contingency tables, so make it explicit. The decision might depend
+    on what analyses you plan to do.
 
 Complete the first investigation in the
 [Steak, Tea, and Toast notebook](analysis/steak_tea_toast.ipynb): inspect
@@ -877,10 +890,12 @@ the fraction of observations in component one. Write
 Write `expectation_maximization`, which iterates a supplied E-step and M-step
 until the log-likelihood stops changing, and `mixture_log_likelihood`, which
 calculates the log-likelihood of a mixture as in the previous section. Stop on
-the *absolute* change in log-likelihood: hard EM optimises a different
-objective, so its log-likelihood can fall from one iteration to the next, whereas
-soft EM never decreases it (apart from rounding). The docstrings give the exact
-signatures, stopping rule and return values, and the tests check them.
+the *absolute* change in log-likelihood.[^abs-change] The docstrings give the
+exact signatures, stopping rule and return values, and the tests check them.
+
+[^abs-change]: Hard EM optimises a different objective, so its log-likelihood
+    can fall from one iteration to the next, whereas soft EM never decreases it
+    (apart from rounding). A large decrease is therefore not convergence.
 
 Then write `fit_hard_gaussian_mixture`, which calls `expectation_maximization`
 using the hard steps. Check that it gives a reasonable fit to some sample data,
@@ -973,10 +988,9 @@ final word (or one such route if there are multiple).
 
 Use `load_words()` from [data.py](src/pyproblems/data.py) to load the
 lowercase word set. Implement `word_ladder(start, target, words)` in
-[word_ladder.py](src/pyproblems/word_ladder.py) to return a shortest route,
-including both endpoints, or `None` if no route exists. The number of moves is
-one less than the number of words in the returned route. The start and target
-must be lowercase words of the same length and both must appear in `words`.
+[word_ladder.py](src/pyproblems/word_ladder.py) to return a shortest route, or
+`None` if no route exists. The docstring gives the input requirements. The
+number of moves is one less than the number of words in the returned route.
 
 Breadth-first search is a natural fit for this problem. Record each word's
 predecessor so you can reconstruct a shortest route once the target is found.
@@ -996,27 +1010,23 @@ shortest route.
 
 > **Prerequisites:** Python Fundamentals.
 >
-> **You’ll practise:** dynamic programming, two-dimensional tables, and
-> tracing back through a table to recover a solution.
+> **You’ll practise:** generators and recursion, brute-force search, dynamic
+> programming, two-dimensional tables, and tracing back through a table to
+> recover a solution.
 >
-> **Check:** `uv run pytest tests/test_alignment.py -q`
+> **Check:** `uv run pytest tests/test_alignment.py -q`. For the brute-force
+> part only, add `-k "score_alignment or all_alignments or brute_force_finds"`.
 
-The Needleman-Wunsch algorithm is a dynamic-programming method for *global*
-alignment: it aligns both sequences from beginning to end, inserting gaps
-where useful. This models the idea that the sequences share an overall extent,
-even if insertions or deletions have shifted later characters. It is used in
-bioinformatics to compare DNA, RNA, or protein sequences.
+#### Naive brute force
 
-Despite the name, *dynamic programming* is not about changing data or code that
-adapts as it runs, and "programming" here means planning (as in "linear
-programming"), not writing code. It is a technique for solving a big problem by
-solving smaller, overlapping subproblems once each and storing the answers in a
-table so they can be reused rather than recomputed. Here the subproblems are the
-best alignments of the beginnings (prefixes) of the two sequences, and the table
-is filled in from short prefixes up to the full sequences.
+We're going to explore how to find an optimal "global" alignment (one that
+aligns both sequences from beginning to end) of two DNA
+sequences. Throughout this exercise, a matching pair scores +1, a mismatch
+scores -1, and a character aligned with a gap scores -1. Our optimal alignment
+is then defined as the arrangement of the two sequences with the highest score.
+Our job is to find this.
 
-For this exercise, a matching pair scores +1, a mismatch scores -1, and a
-character aligned with a gap scores -1. For example:
+For example:
 
 ```
 ATAGTC-AC-AT
@@ -1024,7 +1034,49 @@ AAA-TCGACAAA
 ```
 
 The score is the sum across columns: equal characters contribute +1 and every
-other column contributes -1. Use a dynamic-programming table whose entry
+other column contributes -1.
+
+The simplest way to find the best alignment is to try them all. In
+[alignment.py](src/pyproblems/alignment.py), implement
+`score_alignment(aligned_first, aligned_second)`, which scores a pair of
+already-aligned strings, and `all_alignments(first, second)`, which yields every
+possible alignment of two sequences.[^enumerate-hint] The best score is then the
+maximum over all alignments.
+
+[^enumerate-hint]: Think about the first character of each sequence. Either the
+    first character of `first` is aligned with a gap, or the first character of
+    `second` is aligned with a gap, or the two are aligned with each other.
+    Whichever you choose, what remains is a smaller alignment problem, so a
+    recursive generator is a natural fit. A column that is a gap in both rows is
+    never allowed.
+
+How far does this get you? Unfortunately, the number of possible alignments
+grows **very** quickly: for two sequences of length $n = 3$ there are 63;
+for $n = 7$ this grows to 48,639 and there are over eight million at $n=10$!
+
+Time your function as the sequences get longer, then think about the 10 and 11
+base example above. How long do you think it would take for two 1,000 base
+sequences?
+
+#### Dynamic programming & Needleman-Wunsch
+
+Brute force repeats a great deal of work, because many alignments share the same
+beginnings. *Dynamic programming* removes the repetition. Despite the name, it
+is not about changing data or code that adapts as it runs, and "programming"
+here means planning (as in "linear programming"), not writing code. It is a
+technique for solving a big problem by solving smaller, overlapping subproblems
+once each and storing the answers in a table so they can be reused rather than
+recomputed. Here the subproblems are the best alignments of the beginnings
+(prefixes) of the two sequences, and the table is filled in from short prefixes
+up to the full sequences.
+
+The Needleman-Wunsch algorithm is a dynamic-programming method for *global*
+alignment: it aligns both sequences from beginning to end, inserting gaps
+where useful. This models the idea that the sequences share an overall extent,
+even if insertions or deletions have shifted later characters. It is used in
+bioinformatics to compare DNA, RNA, or protein sequences.
+
+Use a dynamic-programming table whose entry
 $D_{i,j}$ is the best score for aligning the first $i$ characters of the first
 sequence with the first $j$ characters of the second.
 Initialise the first row and column with the cost of aligning that many
@@ -1041,15 +1093,12 @@ D_{i,j-1}-1,
 s(a_i,b_j)=\begin{cases}+1 & a_i=b_j,\\-1 & a_i\ne b_j.\end{cases}
 $$
 
-Implement
-`needleman_wunsch_score(first, second)` and
-`needleman_wunsch_alignment(first, second)`. Use dynamic programming with a
-score of +1 for a match and -1 for a mismatch or gap. The score function needs
-only the best score in the final cell. The alignment function traces back
-through the table to recover one optimal pair of strings. Ties can produce
-different but equally valid alignments; removing gaps must recover the original
-inputs. The longer DNA fixture checks that the same algorithm scales beyond
-the small worked example.
+Implement `needleman_wunsch_score(first, second)`, which needs only the best
+score in the final cell, and `needleman_wunsch_alignment(first, second)`, which
+traces back through the table to recover one optimal pair of strings. The
+docstrings give the details. Check them against your brute-force version on
+short sequences. The longer DNA fixture checks that the same algorithm scales
+beyond the small worked example.
 
 ### Sudoku solver
 
@@ -1085,17 +1134,12 @@ solve(grid):
   return failure (no choice led to a solution)
 ```
 
-Reject a starting grid that already contains conflicting clues. Work on a copy
-of the input so the original grid is unchanged.
-
-Build on `sudoku_checker` in [language.py](src/pyproblems/language.py) by
+Build on `sudoku_checker` in [sudoku.py](src/pyproblems/sudoku.py) by
 implementing `is_valid_placement(grid, row, column, value)` and
-`sudoku_solver(grid)` in [sudoku.py](src/pyproblems/sudoku.py). Coordinates
-are zero-based and blank cells are `None`. Return one solved grid, or `None` if
-the clues are inconsistent or no solution exists. Do not mutate the input;
-raise `ValueError` for a malformed grid. Test a completed grid, an unsolvable
-grid, and a puzzle with multiple valid solutions, as well as the supplied
-puzzles.
+`sudoku_solver(grid)` in the same file. The docstrings
+give the argument conventions and edge cases. Test a completed grid, an
+unsolvable grid, and a puzzle with multiple valid solutions, as well as the
+supplied puzzles.
 
 ## Models of Life
 
@@ -1122,13 +1166,12 @@ that move across the board.
 For each cell, inspect its eight neighbouring positions. A live cell survives
 with two or three live neighbours; a dead cell becomes live with exactly three;
 all other cells are dead in the next generation. This exercise uses finite,
-bounded arrays rather than wrapping edges: a corner has only three available
-neighbours, and cells outside the board are not counted. A step returns a new
-board of the same dimensions.
+bounded arrays rather than wrapping edges, so cells outside the board are not
+counted.
 
 In [game_of_life.py](src/pyproblems/game_of_life.py), implement
-`count_live_neighbors` and `step_game_of_life` with NumPy arrays. Boards are
-bounded as described above. The glider, lightweight/middleweight/heavyweight
+`count_live_neighbors` and `step_game_of_life` with NumPy arrays; the docstrings
+give the details. The glider, lightweight/middleweight/heavyweight
 spaceships, and Gosper glider gun are provided as readable rows in
 [game_of_life_shapes.yaml](src/pyproblems/datasets/game_of_life_shapes.yaml);
 `load_shape(name)` and `render_board` are already implemented. Rows use `O`

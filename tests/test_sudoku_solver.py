@@ -3,8 +3,7 @@ from copy import deepcopy
 import pytest
 
 from pyproblems.data import load_sudoku_data
-from pyproblems.language import sudoku_checker
-from pyproblems.sudoku import is_valid_placement, sudoku_solver
+from pyproblems.sudoku import is_valid_placement, sudoku_checker, sudoku_solver
 
 SOLUTION = [
     [5, 3, 4, 6, 7, 8, 9, 1, 2],

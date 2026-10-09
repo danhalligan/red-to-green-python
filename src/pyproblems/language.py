@@ -26,8 +26,3 @@ def fibonacci() -> Iterator[int]:
 def first_non_repeating_character(text: str) -> str:
     """Return the first unique character, or underscore if none exists."""
     raise NotImplementedError
-
-
-def sudoku_checker(grid: list[list[int | None]]) -> bool:
-    """Return whether a 9 by 9 Sudoku grid has no repeated given values."""
-    raise NotImplementedError

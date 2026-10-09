@@ -8,12 +8,22 @@ from numpy.typing import ArrayLike, NDArray
 
 
 def count_live_neighbors(board: ArrayLike) -> NDArray:
-    """Return the available live-neighbour count for every board cell."""
+    """Return the available live-neighbour count for every board cell.
+
+    `board` is a 2D array of zeroes and ones. Boards are bounded, not
+    wrapping: cells outside the board are not counted, so a corner cell has only
+    three possible neighbours. Return an array of the same shape.
+    """
     raise NotImplementedError
 
 
 def step_game_of_life(board: ArrayLike) -> NDArray:
-    """Return a new board after one bounded Conway's Game of Life step."""
+    """Return a new board after one bounded Conway's Game of Life step.
+
+    A live cell survives with two or three live neighbours; a dead cell becomes
+    live with exactly three; every other cell is dead in the next generation.
+    Return a new board of the same dimensions rather than modifying `board`.
+    """
     raise NotImplementedError
 
 

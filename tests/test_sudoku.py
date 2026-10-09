@@ -1,7 +1,7 @@
 import pytest
 
 from pyproblems.data import load_sudoku_data
-from pyproblems.language import sudoku_checker
+from pyproblems.sudoku import sudoku_checker
 
 
 def test_sudoku_matches_all_packaged_puzzle_answers():
