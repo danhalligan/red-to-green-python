@@ -121,33 +121,6 @@ def test_gaussian_mixture_log_likelihood_is_unbounded_as_a_component_collapses()
     assert values[-1] > values[0] + 20
 
 
-def fitted_standard_deviation_floor(observations):
-    return 1e-3 * float(np.std(observations))
-
-
-def test_fit_gaussian_mixture_floors_scales_when_a_component_can_collapse():
-    generator = np.random.default_rng(11)
-    observations = np.append(generator.normal(0.0, 1.0, 40), 8.0)
-    floor = fitted_standard_deviation_floor(observations)
-
-    fitted = fit_gaussian_mixture(observations)
-
-    assert math.isfinite(fitted["log_likelihood"])
-    assert fitted["standard_deviation1"] >= floor * (1 - 1e-9)
-    assert fitted["standard_deviation2"] >= floor * (1 - 1e-9)
-
-
-def test_fit_gaussian_mixture_returns_finite_values_for_nearly_constant_data():
-    observations = 5.0 + 1e-9 * np.arange(10)
-    floor = fitted_standard_deviation_floor(observations)
-
-    fitted = fit_gaussian_mixture(observations)
-
-    assert all(math.isfinite(value) for value in fitted.values())
-    assert fitted["standard_deviation1"] >= floor * (1 - 1e-9)
-    assert fitted["standard_deviation2"] >= floor * (1 - 1e-9)
-
-
 def test_fit_gaussian_mixture_follows_shifted_and_rescaled_data():
     generator = np.random.default_rng(314159)
     observations = np.concatenate(

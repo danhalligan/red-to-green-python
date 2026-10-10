@@ -818,7 +818,7 @@ weight (strictly between zero and one), and the observations.
 Use `scipy.optimize.minimize` to numerically maximise the log-likelihood across
 all model parameters. Note that optimising a mixture is trickier than fitting a
 single normal, so there is a 💡 hint for the optimisation, including setting a
-minimum standard deviation that the tests expect.[^mixture-hint]
+minimum standard deviation.[^mixture-hint]
 
 [^mixture-hint]: For unconstrained optimisation, represent each standard
     deviation as a floor plus the exponential of an unconstrained parameter, and
