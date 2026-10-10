@@ -144,7 +144,7 @@ uv run pytest tests/test_language.py -k fizzbuzz
 
 ### Q4. Fibonacci sequence
 
-The Fibonacci sequence starts as $0, 1, 1, 2, 3, 5$. After the starting values
+The Fibonacci sequence starts as 0, 1, 1, 2, 3, 5. After the starting values
 0 and 1, each new value is the sum of the two before it.
 
 Implement `fibonacci()` as a generator that yields the Fibonacci sequence
@@ -165,10 +165,10 @@ uv run pytest tests/test_language.py -k fibonacci
 ### Q5. First non-repeating character
 
 Given a string, find and return the first instance of a non-repeating character
-in it. If there is no such character, return `"_"`.
+in it. If there is no such character, return `_`.
 
-For example, in `"abacabad"`, both `c` and `d` occur once, but `c` comes first;
-in `"abacabaabacaba"`, every character repeats. The search is case-sensitive;
+For example, in `abacabad`, both `c` and `d` occur once, but `c` comes first;
+in `abacabaabacaba`, every character repeats. The search is case-sensitive;
 spaces and punctuation count too.
 
 Implement `first_non_repeating_character(text)`.
@@ -502,8 +502,9 @@ Then, in the [simulation studies notebook](analysis/simulation_studies.ipynb),
 simulate 500 independent samples of standard normal data ($\sigma=1$) for each
 $n$ from 2 through 100. The true SE is then $1/\sqrt{n}$. Plot the mean of the
 estimated standard errors against $n$ and compare it with true SE
-($1/\sqrt{n}$); explain the sampling variation and bias you see. 💡 Hint in the
-footnote [^se-bias].
+($1/\sqrt{n}$); explain the sampling variation and bias you see.
+
+💡 Hint in the footnote [^se-bias].
 
 [^se-bias]: Each estimate $s/\sqrt{n}$ is random because $s$ changes from sample
     to sample, which is the sampling variation. However, there is also a small
@@ -747,7 +748,8 @@ proportion, and whether you used all rows for each variable or only complete
 pairs; select complete rows explicitly before cross-tabulating.
 
 You can now try to test for any statistical associations between the questions.
-Here's a 💡 hint if you're stuck [^association-hint]
+
+💡 Hint if you're stuck [^association-hint]
 
 [^association-hint]: To test for association between a pair of questions, you
     could use a Spearman rank correlation (`scipy.stats.spearmanr`), which gives
@@ -800,8 +802,7 @@ we do not know which population produced each observation. If the first
 population has weight $\pi$, the density for one observation is
 
 $$
-f(x\mid\theta) = \pi \phi(x\mid\mu_1,\sigma_1)
- + (1-\pi) \phi(x\mid\mu_2,\sigma_2),
+f(x\mid\theta) = \pi \phi(x\mid\mu_1,\sigma_1) + (1-\pi) \phi(x\mid\mu_2,\sigma_2),
 $$
 
 where $\phi$ is the Gaussian density function and
@@ -1121,7 +1122,10 @@ D_{i-1,j}-1,\\
 D_{i,j-1}-1,
 \end{cases}
 \qquad
-s(a_i,b_j)=\begin{cases}+1 & a_i=b_j,\\-1 & a_i\ne b_j.\end{cases}
+s(a_i,b_j)=\begin{cases}
++1 & a_i=b_j,\\ 
+-1 & a_i\ne b_j.
+\end{cases}
 $$
 
 Implement `needleman_wunsch_score(first, second)`, which needs only the best
