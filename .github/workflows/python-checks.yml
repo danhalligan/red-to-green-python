@@ -11,6 +11,9 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    env:
+      # Stop `uv run` recreating the environment with the version in .python-version.
+      UV_PYTHON: ${{ matrix.python-version }}
     strategy:
       fail-fast: false
       matrix:
@@ -30,7 +33,7 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install project and check dependencies
-        run: uv sync --all-groups --extra science --frozen --python ${{ matrix.python-version }}
+        run: uv sync --all-groups --extra science --frozen
 
       - name: Lint and check formatting
         run: |
