@@ -40,37 +40,37 @@ class Bird(Animal):
 
 class Mouse(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "squeek"
 
 
 class Cow(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "moo"
 
 
 class Frog(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "croak"
 
 
 class Elephant(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "toot"
 
 
 class Duck(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "quack"
 
 
 class Fish(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "blub"
 
 
 class Seal(Animal):
     def speak(self) -> str:
-        raise NotImplementedError
+        return "ow ow ow"
 
 
 class Fox(Animal):

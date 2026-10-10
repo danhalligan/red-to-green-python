@@ -135,9 +135,6 @@ integers, replacing multiples of three with `Fizz`, multiples of five with
 Implement `fizzbuzz(n)` to return strings from 1 through `n`, inclusive. For
 example, `fizzbuzz(5)` should return `['1', '2', 'Fizz', '4', 'Buzz']`.
 
-You will need to raise `TypeError` for non-integer inputs and `ValueError` for a
-negative integer to get all tests to pass.
-
 ```bash
 uv run pytest tests/test_language.py -k fizzbuzz
 ```
@@ -181,8 +178,13 @@ uv run pytest tests/test_language.py -k non_repeating
 
 These short examples expose behaviour that can be surprising when translating
 habits from other languages or when reading unfamiliar Python. Before running
-each snippet, write down its output and explain the mechanism. Then rewrite it
-so that the intended behaviour is explicit.
+each snippet, write down its output and explain the mechanism. Then write a
+correct version as a function in `language.py`, where the tests check that the
+intended behaviour holds.
+
+```bash
+uv run pytest tests/test_language.py -k gotcha
+```
 
 #### a. A mutable default argument
 
@@ -196,6 +198,10 @@ print(add_tag("first"))
 print(add_tag("second"))
 ```
 
+Implement `add_tag(tag, tags=None)`, which appends `tag` to `tags` and returns
+the list. When no list is given it should start a new one, so separate calls
+never share state.
+
 #### b. Equality and identity
 
 ```python
@@ -205,6 +211,10 @@ print(first == second)
 print(first is second)
 ```
 
+Implement `copy_grid(grid)`, which returns a grid that is *equal* to a list of
+lists but is not the same object, and shares none of its inner lists with the
+original, so changing the copy never changes the original.
+
 #### c. Aliasing through list multiplication
 
 ```python
@@ -212,6 +222,9 @@ rows = [[]] * 3
 rows[0].append("changed")
 print(rows)
 ```
+
+Implement `make_grid(rows, columns, fill=0)`, which returns a list of `rows`
+independent lists, each holding `columns` copies of `fill`.
 
 #### d. Mutating a list while iterating
 
@@ -225,11 +238,17 @@ for value in values:
 print(values)
 ```
 
+Implement `keep_odd(values)`, which returns a *new* list of the odd values and
+leaves its input unchanged.
+
 #### e. Floating-point representation
 
 ```python
 print(0.1 + 0.2 == 0.3)
 ```
+
+Implement `approximately_equal(first, second)`, which treats numbers that differ
+only by floating-point rounding as equal. 💡 `math.isclose` is worth a look.
 
 #### f. An exhausted iterator
 
@@ -238,6 +257,9 @@ numbers = iter([1, 2, 3])
 print(list(numbers))
 print(list(numbers))
 ```
+
+Implement `average(values)`, which returns the mean of any iterable of numbers,
+including a one-shot iterator or generator that can only be read once.
 
 ### Q7. Sudoku checker
 
@@ -280,9 +302,10 @@ overridden method, the same inherited code works for every subclass. This is
 polymorphism: the renderer asks each object to perform the same operation
 without branching on its concrete type.
 
-Start with `Dog` and `Cat`, then add `Bird`, `Mouse`, `Cow`, `Frog`, `Elephant`,
-`Duck`, `Fish`, and `Seal`. Each class should inherit from `Animal` and
-implement `speak()`. For example:
+Implement `Dog`, `Cat` and `Bird`. The seven other animals (`Mouse`, `Cow`,
+`Frog`, `Elephant`, `Duck`, `Fish` and `Seal`) are already written, so you can
+see what a finished subclass looks like. Each class inherits from `Animal` and
+implements `speak()`. For example:
 
 ```python
 dog = Dog("Woofy Goldberg")
@@ -297,7 +320,7 @@ print(", ".join(x.name for x in animals))
 
 The sound each animal makes is listed in the tests: read
 `test_animal_subclasses_override_speak` in [test_oop.py](tests/test_oop.py) to
-see what each `speak()` should return.
+see what `speak()` should return for `Dog`, `Cat` and `Bird`.
 
 Implement `__str__()` so `str(Dog("Woofy Goldberg"))` produces
 `Dog named Woofy Goldberg`, and `str(Cat())` (no name) is just `Cat`. Notice
@@ -679,6 +702,37 @@ estimates across repeated samples (💡 hint in the footnote).[^mle-bias]
 > $\hat\sigma=\sqrt{\tfrac{1}{n}\sum_i(x_i-\bar{x})^2}$. Numerical optimisation
 > earns its keep for models, such as the mixtures later on, where no such closed
 > form exists.
+
+### Q6. Confidence intervals and coverage 🚀
+
+A standard error becomes most useful as an interval. Two common intervals for
+a mean are the normal interval, $\bar{x} \pm 1.96\,\widehat{\mathrm{SE}}$,
+and the *percentile bootstrap* interval, which runs from the 2.5th to the 97.5th
+percentile of the resample means from Q4. A 95% interval is meant to contain the
+true mean in about 95% of repeated samples. That is a claim about the procedure,
+and a simulation can test it, because there we know the truth.
+
+This question has no new function to write. In the [simulation studies
+notebook](analysis/simulation_studies.ipynb), use `standard_error` and your own
+resampling loop. Draw samples of size 5, 10, 30 and 100 from a normal population
+and from a skewed one (an exponential distribution), with the true mean known.
+For each sample calculate three intervals: the normal interval above, the same
+interval using the $t$ critical value instead of 1.96, and the percentile
+bootstrap interval. Record the proportion of intervals that contain the truth
+(the *coverage*) and plot coverage against $n$ for each method, with its Monte
+Carlo uncertainty.
+
+Which intervals fall short of 95%, when, and why? What does the skewed
+population change? 💡 Hint in the footnote.[^coverage-hint]
+
+[^coverage-hint]: With $n=5$ the estimated $s$ is very uncertain and is often too
+    small, which makes 1.96 too optimistic. The $t$ distribution corrects for
+    this when the data are normal, using `scipy.stats.t.ppf(0.975, n - 1)`. The
+    percentile bootstrap resamples only from the data you have, so it inherits
+    the same problem for small samples. With skewed data, the sample mean is
+    itself skewed at small $n$, and no interval of this symmetric kind has
+    exactly 95% coverage until $n$ is larger. The Monte Carlo uncertainty of a
+    coverage estimate from $B$ repetitions is about $\sqrt{p(1-p)/B}$.
 
 ## Data Analysis
 
@@ -1175,6 +1229,27 @@ implementing `is_valid_placement(grid, row, column, value)` and
 give the argument conventions and edge cases. Test a completed grid, an
 unsolvable grid, and a puzzle with multiple valid solutions, as well as the
 supplied puzzles.
+
+**Extension 🚀: does the order of the search matter?** Your solver fills the
+*first* blank cell. A search that does the same work in a different order can
+be far faster or slower, and you can measure it. This extension has no
+tests; your own counts are the check.
+
+1. Count how many times your recursive function is called while solving each
+   packaged puzzle from `load_sudoku_data()` whose `answer` is `True` (one has
+   no solution and is quickly shown to be a dead end). Stop a run after a fixed
+   limit (say 50,000 calls) and record that it did not finish.
+2. Change the search to fill the blank cell with the *fewest* valid digits
+   instead of the first blank. If some blank has no valid digit, you can give
+   up on that branch immediately.
+3. Compare the counts, puzzle by puzzle. Which puzzles benefit most, and why
+   does choosing the most constrained cell help? 💡 A cell with exactly one
+   valid digit is a forced move, so no guessing is needed there.[^sudoku-order]
+
+[^sudoku-order]: The number of recursive calls, not the running time, is the
+    fairest measure here, because choosing the best cell costs extra work per
+    call. Expect a few puzzles to need tens of thousands of calls in the
+    first-blank order but under a hundred with the most-constrained rule.
 
 ## Models of Life 🌿
 
