@@ -1185,9 +1185,57 @@ $$
 Implement `needleman_wunsch_score(first, second)`, which needs only the best
 score in the final cell, and `needleman_wunsch_alignment(first, second)`, which
 traces back through the table to recover one optimal pair of strings. The
-docstrings give the details. Check them against your brute-force version on
-short sequences. The longer DNA fixture checks that the same algorithm scales
-beyond the small worked example.
+starter code shares a helper, `_alignment_table`, between these functions. It
+allocates the table, initialises its boundaries, and supplies the traversal
+loops. Your first task is to replace its scoring TODO. Think of each candidate
+as "the best score for a smaller problem, plus the score for one new column".
+
+Here is the structure in pseudocode; the scoring decisions are yours to fill in:
+
+```text
+create D with (length(first) + 1) rows and (length(second) + 1) columns
+set D[0, 0] to zero
+initialise the first column and first row with cumulative gap costs
+for each row i from 1 to length(first):
+  for each column j from 1 to length(second):
+    consider ending with both characters, or with a gap in either sequence
+    TODO: calculate the three candidate scores using already-filled cells
+    TODO: store the best candidate in D[i, j]
+return D
+```
+
+The extra row and column matter: `D[0, j]` aligns an empty first sequence with
+`j` characters of the second. Table indices count characters, while Python
+string indices start at zero, so the characters at cell `(i, j)` are
+`first[i - 1]` and `second[j - 1]`. A diagonal move adds both characters, an
+upward move adds a character from `first` against a gap, and a leftward move
+adds a gap against a character from `second`. Row-by-row traversal ensures all
+three neighbours have already been filled. Try drawing the table for `"A"`
+and `"AA"` before tackling longer inputs.
+
+Once the score tests pass, complete the traceback TODO:
+
+```text
+start at the bottom-right cell with two empty character lists
+while either sequence still has characters left:
+  if on the top row or left column, only a gap move is possible
+  otherwise:
+    TODO: choose a move whose neighbour score plus column score
+        equals the current cell's score
+    append that move's character/gap pair to the lists
+    move to that neighbour
+reverse both lists and join each into a string
+```
+
+Do not simply choose the neighbour with the largest stored score: the score
+of the new alignment column matters too. If several moves explain the current
+score, choose any one. Stop at the top-left cell, not as soon as one sequence
+runs out; the remaining characters must be aligned with gaps. The skeleton
+handles these boundary moves and reverses the output for you.
+
+The docstrings give the details. Check both functions against your brute-force
+version on short sequences. The longer DNA fixture checks that the same
+algorithm scales beyond the small worked example.
 
 ### Sudoku solver 🔢
 

@@ -26,15 +26,46 @@ def all_alignments(first: str, second: str) -> Iterator[tuple[str, str]]:
     raise NotImplementedError
 
 
+def _alignment_table(first: str, second: str) -> list[list[int]]:
+    """Build the score table shared by both Needleman-Wunsch exercises.
+
+    Row i represents first[:i]; column j represents second[:j]. The extra
+    row and column represent empty prefixes. Their scores are just gap costs.
+    Work left to right, top to bottom so each cell's neighbours are ready.
+
+    Complete the inner loop: consider the diagonal, above, and left cells,
+    add the score of each possible final alignment column, then store the
+    best candidate in table[row][column]. Sequence indices are one less than
+    table indices: compare first[row - 1] with second[column - 1].
+    """
+    table = [[0] * (len(second) + 1) for _ in range(len(first) + 1)]
+
+    for row in range(1, len(first) + 1):
+        table[row][0] = -row
+    for column in range(1, len(second) + 1):
+        table[0][column] = -column
+
+    for row in range(1, len(first) + 1):
+        for column in range(1, len(second) + 1):
+            raise NotImplementedError(
+                "TODO: score each move and store the best score "
+                f"in table[{row}][{column}]"
+            )
+
+    return table
+
+
 def needleman_wunsch_score(first: str, second: str) -> int:
     """Return the optimal global alignment score using +1/-1 scoring.
 
     A match scores +1; a mismatch or a character aligned with a gap scores -1.
     Fill a dynamic-programming table `D[i][j]` holding the best score for
     aligning the first i characters of `first` with the first j of `second`.
-    The answer is the final cell.
+    The answer is the final cell. Complete the scoring TODO in
+    `_alignment_table`; this function then needs no further changes.
     """
-    raise NotImplementedError
+    table = _alignment_table(first, second)
+    return table[-1][-1]
 
 
 def needleman_wunsch_alignment(first: str, second: str) -> tuple[str, str]:
@@ -44,5 +75,33 @@ def needleman_wunsch_alignment(first: str, second: str) -> tuple[str, str]:
     final cell to recover the aligned strings. Both returned strings have equal
     length, and removing the hyphens must recover the original inputs. Ties can
     give different but equally optimal alignments; any one is acceptable.
+
+    Complete `_alignment_table` first, then the traceback TODO below. A move
+    must explain the current score: neighbour score plus column score equals
+    the current cell. Diagonal consumes both characters; up consumes only
+    `first` (gap in `second`); left consumes only `second` (gap in `first`).
+    Append the chosen column and decrease the corresponding indices. You are
+    building the alignment backwards, so reverse both lists at the end.
     """
-    raise NotImplementedError
+    table = _alignment_table(first, second)
+    row, column = len(first), len(second)
+    aligned_first: list[str] = []
+    aligned_second: list[str] = []
+
+    while row > 0 or column > 0:
+        if row == 0:
+            aligned_first.append("-")
+            aligned_second.append(second[column - 1])
+            column -= 1
+        elif column == 0:
+            aligned_first.append(first[row - 1])
+            aligned_second.append("-")
+            row -= 1
+        else:
+            raise NotImplementedError(
+                f"TODO: choose a move explaining score {table[row][column]} "
+                f"at table[{row}][{column}], "
+                "append its alignment column, and update row and/or column"
+            )
+
+    return "".join(reversed(aligned_first)), "".join(reversed(aligned_second))
