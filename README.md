@@ -643,13 +643,14 @@ $\mu$ and standard deviation $\sigma$.
 
 For any chosen values of $\mu$ and $\sigma$, we can calculate the probability
 density of an observation $x_i$ *conditional on those parameter values*, written
-$f(x_i\mid\mu,\sigma)$. Because the observations are independent, the density of
-the whole data set $x$ is the product of these terms.
+$\phi(x_i\mid\mu,\sigma)$, where $\phi$ denotes the Gaussian (normal) density
+function. Because the observations are independent, the density of the whole
+data set $x$ is the product of these terms.
 
 The *likelihood* is that same quantity viewed the other way round. The data are
 now fixed, because we have observed them, and we ask how the density changes as
 we vary the parameters:
-$\mathcal{L}(\mu,\sigma\mid x)=\prod_i f(x_i\mid\mu,\sigma)$. Parameter values
+$\mathcal{L}(\mu,\sigma\mid x)=\prod_i \phi(x_i\mid\mu,\sigma)$. Parameter values
 under which the observed data are more probable have a higher likelihood, and
 are better supported by the data. *Maximum likelihood estimation* chooses the
 parameter values that maximise it.
@@ -657,7 +658,7 @@ parameter values that maximise it.
 Calculating this quantity can be difficult because products of small densities
 can underflow. As a result, it is more convenient to consider the log likelihood
 $\ell(\mu,\sigma\mid x)=\log\mathcal{L}(\mu,\sigma\mid x)=\sum_i \log
-f(x_i\mid\mu,\sigma)$. Maximising the log-likelihood will also maximise the
+\phi(x_i\mid\mu,\sigma)$. Maximising the log-likelihood will also maximise the
 likelihood (as the log function is monotonic) and we don't have the issue of
 handling very small values. Implement `normal_log_likelihood` as a sum of log
 densities.
