@@ -1,0 +1,32 @@
+import signal
+from contextlib import contextmanager
+
+import pytest
+
+
+@pytest.fixture
+def time_limit():
+    """Return a context manager that fails the test instead of letting it hang."""
+
+    @contextmanager
+    def limit(seconds):
+        if not hasattr(signal, "SIGALRM"):  # No SIGALRM on Windows: run unguarded.
+            yield
+            return
+
+        def on_alarm(signum, frame):
+            pytest.fail(
+                f"Took longer than {seconds} s. Is the work growing exponentially? "
+                "Try caching results or building the answer up from the bottom.",
+                pytrace=False,
+            )
+
+        previous = signal.signal(signal.SIGALRM, on_alarm)
+        signal.setitimer(signal.ITIMER_REAL, seconds)
+        try:
+            yield
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+            signal.signal(signal.SIGALRM, previous)
+
+    return limit

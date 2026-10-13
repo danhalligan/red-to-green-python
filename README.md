@@ -79,7 +79,8 @@ not the order of the routes.
 4. Optionally, Models of Life: Game of Life and Dawkins' weasel.
 
 **Route 3: Advanced extensions.** Choose what interests you. The algorithm
-projects (Sudoku solver, global sequence alignment) need only Route 1. The
+projects (Try, try again, Sudoku solver, global sequence alignment) need only
+Route 1. The
 modelling projects (Scientific Python Q3 and Q5, and Statistical Modelling)
 need Route 2, and some comfort with probability densities, likelihood, logs,
 basic linear algebra and covariance matrices.
@@ -1089,6 +1090,80 @@ many times would you need to run it?[^longest-ladder] The extension's tests are 
     *shortest* ladder, is the longest simple path problem, which has no known
     efficient solution, so a brute-force search for it is hopeless on a
     dictionary this size.
+
+### ...Try, try again 🏉
+
+> **Prerequisites:** Python Fundamentals, in particular the Fibonacci generator
+> (Q4).
+>
+> **You’ll practise:** recursion, why naive recursion can be exponentially slow,
+> memoisation, and building an answer up from the bottom.
+>
+> **Check:** `uv run pytest tests/test_rugby.py -q`
+
+In rugby union a team scores in four ways:
+
+| Event | Points |
+| --- | --- |
+| Penalty kick | 3 |
+| Drop goal | 3 |
+| Try | 5 |
+| Conversion | 2 |
+
+A conversion is a kick taken straight after a try, so it can only ever happen
+immediately after one, and each try earns at most one. We will follow a single
+team and ignore penalty tries (which are awarded as 7 points).
+
+A team's scoring is the *ordered* list of events in the order they happened.
+How many different lists leave a team on exactly `points` points? Order
+matters, so a try followed by a penalty is different from a penalty followed by
+a try. A penalty and a drop goal are different events even though both are
+worth 3 points.
+
+For example:
+
+- 0 points: one list, the empty one, since nothing has happened yet.
+- 3 points: two lists, a penalty or a drop goal.
+- 5 points: one list, a try.
+- 6 points: four lists, any two of the three-point events in either order.
+- 7 points: one list, a try then its conversion.
+
+Implement `count_scoring_sequences(points)` in
+[rugby.py](src/pyproblems/rugby.py). Check the examples above by hand before
+you write any code, then find a rule that builds the count for a score out of
+counts for smaller scores. This is the same shape of idea as Fibonacci, where
+each value comes from earlier ones. Your counts are too big? There is a 💡
+hint.[^try-hint]
+
+[^try-hint]: Before counting, decide what one "move" in your recursion is. Look
+    again at the table: does a conversion ever happen on its own?
+
+Then investigate how your approach scales:
+
+1. If you wrote a plain recursive function, count how many times it is called
+   for 20, 30 and 40 points. How fast does that grow, and why? The tests give
+   up after five seconds and say so, rather than hanging.
+2. Make it fast in two different ways: remember each answer once you have
+   computed it (`functools.cache` is one option), and work upwards from zero
+   filling in a list. Compare the two approaches. Both should handle
+   `count_scoring_sequences(100)` instantly, but what happens to each at 5,000
+   points? Python limits how deeply functions may call themselves.
+
+**Extension 🚀: does the order matter?** A reporter might not care in what
+order the points arrived, only how many penalties, drop goals, tries and
+conversions there were. Implement `count_scoring_combinations(points)`, which
+counts these tallies. Penalties and drop goals are still counted separately,
+and a tally cannot have more conversions than tries. Six points gives
+four sequences but only three tallies. Find the two tallies for eight points,
+and explain why there are four sequences for the same score. 💡 The code is
+very close to the one you already have.[^try-combinations] The extension's tests
+are the ones that match `-k combinations`; use `-k "not combinations"` to skip
+them.
+
+[^try-combinations]: A bottom-up table can count either. With the outer loop over
+    scores and the inner loop over events, every ordering is counted. With the
+    outer loop over events and the inner loop over scores, each event type is
+    added in a fixed order, so every combination is counted once.
 
 ### Global sequence alignment 🧬
 
