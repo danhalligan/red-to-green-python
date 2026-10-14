@@ -80,10 +80,9 @@ not the order of the routes.
 
 **Route 3: Advanced extensions.** Choose what interests you. The algorithm
 projects (Try, try again, Sudoku solver, global sequence alignment) need only
-Route 1. The
-modelling projects (Scientific Python Q3 and Q5, and Statistical Modelling)
-need Route 2, and some comfort with probability densities, likelihood, logs,
-basic linear algebra and covariance matrices.
+Route 1. The modelling projects (Scientific Python Q3 and Q5, and Statistical
+Modelling) need Route 2, and some comfort with probability densities,
+likelihood, logs, basic linear algebra and covariance matrices.
 
 ## Python Fundamentals
 
@@ -1093,15 +1092,18 @@ many times would you need to run it?[^longest-ladder] The extension's tests are 
 
 ### ...Try, try again 🏉
 
-> **Prerequisites:** Python Fundamentals, in particular the Fibonacci generator
-> (Q4).
+> **Prerequisites:** Python Fundamentals.
 >
 > **You’ll practise:** recursion, why naive recursion can be exponentially slow,
 > memoisation, and building an answer up from the bottom.
 >
 > **Check:** `uv run pytest tests/test_rugby.py -q`
 
-In rugby union a team scores in four ways:
+The problem here is to find the number of possible *ordered* sequences of events
+that could have given rise to a single team's `points` score in a game of rugby
+union.
+
+In rugby union a team can score in four different ways:
 
 | Event | Points |
 | --- | --- |
@@ -1110,44 +1112,93 @@ In rugby union a team scores in four ways:
 | Try | 5 |
 | Conversion | 2 |
 
-A conversion is a kick taken straight after a try, so it can only ever happen
-immediately after one, and each try earns at most one. We will follow a single
-team and ignore penalty tries (which are awarded as 7 points).
-
-A team's scoring is the *ordered* list of events in the order they happened.
-How many different lists leave a team on exactly `points` points? Order
-matters, so a try followed by a penalty is different from a penalty followed by
-a try. A penalty and a drop goal are different events even though both are
-worth 3 points.
+However, a conversion can only ever be taken straight after a try, and for this
+problem we will ignore penalty tries (which are awarded as 7 points). Note that,
+although they share the same points, penalties and drop goals are separate
+events. We are also interested in order, so a try followed by a penalty is
+different from a penalty followed by a try.
 
 For example:
 
-- 0 points: one list, the empty one, since nothing has happened yet.
-- 3 points: two lists, a penalty or a drop goal.
-- 5 points: one list, a try.
-- 6 points: four lists, any two of the three-point events in either order.
-- 7 points: one list, a try then its conversion.
+- 0 points: one sequence, the empty one, since nothing has happened yet.
+- 3 points: two sequences, a penalty or a drop goal.
+- 5 points: one sequence, a try.
+- 6 points: four sequences, any two of the three-point events in either order.
+- 7 points: one sequence, a try then its conversion.
 
 Implement `count_scoring_sequences(points)` in
-[rugby.py](src/pyproblems/rugby.py). Check the examples above by hand before
-you write any code, then find a rule that builds the count for a score out of
-counts for smaller scores. This is the same shape of idea as Fibonacci, where
-each value comes from earlier ones. Your counts are too big? There is a 💡
-hint.[^try-hint]
+[rugby.py](src/pyproblems/rugby.py); it should raise a `ValueError` for a
+negative score. Check the examples above by hand before you write any code.
+There are three stages; the tests check the final function, so it is up to you
+how you build it.
 
-[^try-hint]: Before counting, decide what one "move" in your recursion is. Look
-    again at the table: does a conversion ever happen on its own?
+#### Stage 1: recursion
 
-Then investigate how your approach scales:
+The number of sequences for a score can be built from the numbers for smaller
+scores, the same shape of idea as Fibonacci. Start with a recursive function:
 
-1. If you wrote a plain recursive function, count how many times it is called
-   for 20, 30 and 40 points. How fast does that grow, and why? The tests give
-   up after five seconds and say so, rather than hanging.
-2. Make it fast in two different ways: remember each answer once you have
-   computed it (`functools.cache` is one option), and work upwards from zero
-   filling in a list. Compare the two approaches. Both should handle
-   `count_scoring_sequences(100)` instantly, but what happens to each at 5,000
-   points? Python limits how deeply functions may call themselves.
+```text
+count(points):
+    if points is a base case:
+        return the answer directly
+    otherwise:
+        return a combination of count(...) for some smaller scores
+```
+
+Which scores are base cases, which smaller scores do you need, and how should
+they be combined? The examples above are a good guide. Wrong counts? Stuck on
+the shape? There are 💡 hints.[^try-hint][^fib-hint]
+When it works, every test for `count_scoring_sequences` except the large-score
+one should be green:
+`uv run pytest tests/test_rugby.py -k "scoring_sequences and not large"`.
+
+[^try-hint]: Decide what one "move" in your recursion is. Look again at the
+    table: does a conversion ever happen on its own?
+
+[^fib-hint]: Recursive Fibonacci has the same shape: base cases, then a
+    combination of answers for smaller inputs.
+
+    ```python
+    def fib(n):
+        if n < 2:
+            return n
+        return fib(n - 1) + fib(n - 2)
+    ```
+
+    For rugby, ask which earlier scores the *last* move could have come from.
+
+#### Stage 2: caching
+
+Time your function for 20, 30 and 40 points (`time.perf_counter`, or `%timeit`
+in a notebook), or count how many times it calls itself. How does the cost grow,
+and why? Fibonacci has the same problem: `fib(n - 1)` and `fib(n - 2)` both end
+up recomputing the same smaller values. The large-score test gives up after five
+seconds and says so, rather than hanging.
+
+The fix is *caching* (also called memoisation): remember each answer the first
+time it is computed, so it is never computed twice. Python's `functools.cache`
+decorator does this when placed above a function definition. Add it, time the
+same scores again, and check that the large-score test now passes. Then try
+5,000 points. What happens, and why? 💡 Python limits how deeply functions can
+call themselves.
+
+#### Stage 3: bottom-up tabulation
+
+Caching works from the answer down to the base cases. The alternative is to
+start from the base case and work up, filling in a table (a list) so that every
+entry only needs entries that already exist. Fibonacci that way:
+
+```text
+table = [0, 1]
+for n from 2 up to the target:
+    add table[n - 1] + table[n - 2] to the end of the table
+return the last entry of the table
+```
+
+Do the same for rugby scores: what goes in the first entry, and what does each
+later entry need? Give each version its own name so you can compare them at
+100 and 5,000 points. Which would you rather use, and why? Keep whichever you
+prefer as `count_scoring_sequences`.
 
 **Extension 🚀: does the order matter?** A reporter might not care in what
 order the points arrived, only how many penalties, drop goals, tries and
@@ -1156,7 +1207,7 @@ counts these tallies. Penalties and drop goals are still counted separately,
 and a tally cannot have more conversions than tries. Six points gives
 four sequences but only three tallies. Find the two tallies for eight points,
 and explain why there are four sequences for the same score. 💡 The code is
-very close to the one you already have.[^try-combinations] The extension's tests
+very close to your bottom-up version.[^try-combinations] The extension's tests
 are the ones that match `-k combinations`; use `-k "not combinations"` to skip
 them.
 
