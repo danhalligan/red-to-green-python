@@ -17,7 +17,7 @@ def time_limit():
         def on_alarm(signum, frame):
             pytest.fail(
                 f"Took longer than {seconds} s. Is the work growing exponentially? "
-                "Try caching results or building the answer up from the bottom.",
+                "Is your code repeating work it has already done?",
                 pytrace=False,
             )
 

@@ -1164,16 +1164,23 @@ many times would you need to run it?[^longest-ladder] The extension's tests are 
 
 > **Prerequisites:** Python Fundamentals.
 >
-> **You’ll practise:** recursion, why naive recursion can be exponentially slow,
-> memoisation, and building an answer up from the bottom.
+> **You’ll practise:** breaking a problem into smaller ones, spotting repeated
+> work, caching, and building an answer up from the bottom.
 >
 > **Check:** `uv run pytest tests/test_rugby.py -q`
 
-The problem here is to find the number of possible *ordered* sequences of events
-that could have given rise to a single team's `points` score in a game of rugby
-union.
+A rugby match has finished, but the scoring record has been lost. All we have is
+the final score. The commentator insists there must be dozens of ways the points
+could have been scored. The referee isn't so sure. Your job is to reconstruct
+what might have happened.
 
-In rugby union a team can score in four different ways:
+| Scotland | England |
+| ---: | ---: |
+| 8 | 0 |
+
+Scotland scored eight points 🎉. How many different sequences of scoring
+events could have produced that result? In rugby union a team can score in four
+different ways:
 
 | Event | Points |
 | --- | --- |
@@ -1182,93 +1189,106 @@ In rugby union a team can score in four different ways:
 | Try | 5 |
 | Conversion | 2 |
 
-However, a conversion can only ever be taken straight after a try, and for this
-problem we will ignore penalty tries (which are awarded as 7 points). Note that,
-although they share the same points, penalties and drop goals are separate
-events. We are also interested in order, so a try followed by a penalty is
-different from a penalty followed by a try.
+A conversion can only ever be taken straight after a try, and we will ignore
+penalty tries (which are awarded as 7 points). Although they share the same
+points, penalties and drop goals are separate events. The order matters, so a
+try followed by a penalty is different from a penalty followed by a try.
 
-For example:
+For eight points there are four sequences: a penalty then a try, a drop goal
+then a try, a try then a penalty, or a try then a drop goal. A few more:
 
 - 0 points: one sequence, the empty one, since nothing has happened yet.
 - 3 points: two sequences, a penalty or a drop goal.
 - 5 points: one sequence, a try.
 - 6 points: four sequences, any two of the three-point events in either order.
 - 7 points: one sequence, a try then its conversion.
+- 1, 2 and 4 points: no sequences at all.
+
+#### Stage 1: Reconstruct the match
 
 Implement `count_scoring_sequences(points)` in
 [rugby.py](src/pyproblems/rugby.py); it should raise a `ValueError` for a
-negative score. Check the examples above by hand before you write any code.
-There are three stages; the tests check the final function, so it is up to you
-how you build it.
+negative score. Work out 10 points by hand before you write any code, then check
+it against your function. How you do it is up to you: any approach that gets the
+right counts will do. Stuck? There are 💡 hints.[^try-hint][^try-hint2]
 
-#### Stage 1: recursion
-
-The number of sequences for a score can be built from the numbers for smaller
-scores, the same shape of idea as Fibonacci. Start with a recursive function:
-
-```text
-count(points):
-    if points is a base case:
-        return the answer directly
-    otherwise:
-        return a combination of count(...) for some smaller scores
+```bash
+uv run pytest tests/test_rugby.py -k "scoring_sequences and not carried_away and not season"
 ```
 
-Which scores are base cases, which smaller scores do you need, and how should
-they be combined? The examples above are a good guide. Wrong counts? Stuck on
-the shape? There are 💡 hints.[^try-hint][^fib-hint]
-When it works, every test for `count_scoring_sequences` except the large-score
-one should be green:
-`uv run pytest tests/test_rugby.py -k "scoring_sequences and not large"`.
+[^try-hint]: Does the answer for a score of 5 help you with 7? What about 8?
+    Think about what the *last* scoring event could have been, and what the
+    score was before it. Could you perhaps call the score calculating function
+    to get the result for a smaller score to help calculate the current score?
 
-[^try-hint]: Decide what one "move" in your recursion is. Look again at the
-    table: does a conversion ever happen on its own?
+[^try-hint2]: Conversions are special types of event and might need special
+    consideration because a conversion can only ever follow a try. Can you
+    reframe the question slightly to make it easy to implement conversions?
 
-[^fib-hint]: Recursive Fibonacci has the same shape: base cases, then a
-    combination of answers for smaller inputs.
+#### Stage 2: The commentator gets carried away
 
-    ```python
-    def fib(n):
-        if n < 2:
-            return n
-        return fib(n - 1) + fib(n - 2)
+The commentator is sure Scotland won, but is so delirious they're not sure of
+the score any more. Did they score 30 points? Or was it 50? Maybe it was 100! Try
+these in your function. If it works for small scores but struggles with larger
+ones, think about why. Is it repeating calculations that it has already
+performed? Try drawing out which smaller scores your function needs for 12
+points, or count how many times it is called for 20, 30 and 40 points. How does
+the cost grow? The `carried_away` test gives up after five seconds and says so,
+rather than hanging. 💡 There is a hint towards a fix.[^try-cache]
+
+```bash
+uv run pytest tests/test_rugby.py -k carried_away
+```
+
+[^try-cache]: *Caching* (also called memoisation) remembers each answer the
+    first time it is computed, so that it is never computed twice. Python
+    has a "decorator" that can help if you need it: `functools.cache`.
+
+How fast do you think these sequences of scores grow? **What's the smallest
+final score that can be reached in more than one million different sequences?**
+Implement `smallest_score_with_more_sequences_than(count)`, which returns the
+smallest score reachable in more than `count` sequences, and use it to answer
+the question. Write down your answer: the tests check your function with other
+thresholds, including a trillion, which is hopeless unless you stop repeating
+work.
+
+```bash
+uv run pytest tests/test_rugby.py -k smallest
+```
+
+#### Stage 3: The entire season
+
+A whole season of rugby adds up to many points. Your function should now cope
+with a score of 20,000. If you used a cached recursion, you may run into
+Python's limit on how deeply functions can call themselves. Can you calculate
+the answers in an order that avoids deep recursion altogether? 💡 There is a
+hint.[^try-table] The answer has nearly 3,000 digits, but thankfully Python
+integers do not overflow!
+
+```bash
+uv run pytest tests/test_rugby.py -k season
+```
+
+[^try-table]: Caching works from the answer down to the base cases. The
+    alternative is to start from the base case and work up, filling in a table
+    (a list) so that every entry only needs entries that already exist.
+    Fibonacci that way:
+
+    ```text
+    table = [0, 1]
+    for n from 2 up to the target:
+        add table[n - 1] + table[n - 2] to the end of the table
+    return the last entry of the table
     ```
 
-    For rugby, ask which earlier scores the *last* move could have come from.
+    For rugby, what goes in the first entry, and what does each later entry
+    need? Notice too that a cached function that is only ever called for
+    1, 2, 3, ... in turn never recurses deeply: it is secretly working from the
+    bottom up.
 
-#### Stage 2: caching
-
-Time your function for 20, 30 and 40 points (`time.perf_counter`, or `%timeit`
-in a notebook), or count how many times it calls itself. How does the cost grow,
-and why? Fibonacci has the same problem: `fib(n - 1)` and `fib(n - 2)` both end
-up recomputing the same smaller values. The large-score test gives up after five
-seconds and says so, rather than hanging.
-
-The fix is *caching* (also called memoisation): remember each answer the first
-time it is computed, so it is never computed twice. Python's `functools.cache`
-decorator does this when placed above a function definition. Add it, time the
-same scores again, and check that the large-score test now passes. Then try
-5,000 points. What happens, and why? 💡 Python limits how deeply functions can
-call themselves.
-
-#### Stage 3: bottom-up tabulation
-
-Caching works from the answer down to the base cases. The alternative is to
-start from the base case and work up, filling in a table (a list) so that every
-entry only needs entries that already exist. Fibonacci that way:
-
-```text
-table = [0, 1]
-for n from 2 up to the target:
-    add table[n - 1] + table[n - 2] to the end of the table
-return the last entry of the table
-```
-
-Do the same for rugby scores: what goes in the first entry, and what does each
-later entry need? Give each version its own name so you can compare them at
-100 and 5,000 points. Which would you rather use, and why? Keep whichever you
-prefer as `count_scoring_sequences`.
+If you wrote more than one version, compare them at 100 and 20,000 points. Which
+would you rather use, and why? Keep whichever you prefer as
+`count_scoring_sequences`.
 
 **Extension 🚀: does the order matter?** A reporter might not care in what
 order the points arrived, only how many penalties, drop goals, tries and
@@ -1276,15 +1296,30 @@ conversions there were. Implement `count_scoring_combinations(points)`, which
 counts these tallies. Penalties and drop goals are still counted separately,
 and a tally cannot have more conversions than tries. Six points gives
 four sequences but only three tallies. Find the two tallies for eight points,
-and explain why there are four sequences for the same score. 💡 The code is
-very close to your bottom-up version.[^try-combinations] The extension's tests
-are the ones that match `-k combinations`; use `-k "not combinations"` to skip
-them.
+and explain why there are four sequences for the same score. Compare the
+number of sequences with the number of tallies for 6, 8, 9, 10 and 12 points:
+why can you not get one from the other by dividing by a fixed number? 💡 The
+code is very close to your bottom-up version.[^try-combinations] The extension's
+tests are the ones that match `-k combinations`; use `-k "not combinations"` to
+skip them.
 
 [^try-combinations]: A bottom-up table can count either. With the outer loop over
     scores and the inner loop over events, every ordering is counted. With the
     outer loop over events and the inner loop over scores, each event type is
     added in a fixed order, so every combination is counted once.
+
+**Investigation 🚀: how fast do the counts grow?** The ratio of consecutive
+Fibonacci numbers tends to the golden ratio, about 1.618. Check this with your
+`fibonacci()`. Then look at your scoring counts from about 50 points on: what
+does `count(n) / count(n - 1)` tend to, and what is `count(n) / count(n - 10)`?
+(Compare it with the growth you saw in Stage 2.) Now try the number of tallies
+from the extension. What does all this tell you about how fast each count grows,
+and about why order makes the problem so much harder? 💡 The golden ratio
+solves $x^2 = x + 1$.[^try-growth]
+
+[^try-growth]: Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
+    $f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
+    $x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
 
 ### Global sequence alignment 🧬
 

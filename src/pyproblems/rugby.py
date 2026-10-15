@@ -14,6 +14,15 @@ def count_scoring_sequences(points: int) -> int:
     raise NotImplementedError
 
 
+def smallest_score_with_more_sequences_than(count: int) -> int:
+    """Return the smallest score reachable by more than `count` sequences.
+
+    Sequences are counted as in `count_scoring_sequences`. For example, 3 is
+    the smallest score with more than one sequence (a penalty or a drop goal).
+    """
+    raise NotImplementedError
+
+
 def count_scoring_combinations(points: int) -> int:
     """Return how many different tallies of events total `points`, ignoring order.
 

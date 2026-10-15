@@ -3,6 +3,7 @@ import pytest
 from pyproblems.rugby import (
     count_scoring_combinations,
     count_scoring_sequences,
+    smallest_score_with_more_sequences_than,
 )
 
 # (name, points, can only follow a try)
@@ -43,17 +44,17 @@ def tallies_by_the_rules(points):
 @pytest.mark.parametrize(
     ("points", "expected"),
     [
+        (3, 2),
+        (5, 1),
+        (7, 1),
+        (8, 4),
+        (10, 5),
         (0, 1),
         (1, 0),
         (2, 0),
-        (3, 2),
         (4, 0),
-        (5, 1),
         (6, 4),
-        (7, 1),
-        (8, 4),
         (9, 8),
-        (10, 5),
         (11, 12),
         (12, 18),
         (20, 241),
@@ -69,14 +70,52 @@ def test_count_scoring_sequences_matches_a_search_that_follows_the_rules(points)
     assert count_scoring_sequences(points) == sequences_by_the_rules(points)
 
 
-def test_count_scoring_sequences_handles_a_large_score(time_limit):
+def test_count_scoring_sequences_when_the_commentator_gets_carried_away(time_limit):
     with time_limit(5):
+        assert count_scoring_sequences(50) == 6156717
         assert count_scoring_sequences(100) == 141759302436945
+
+
+def test_count_scoring_sequences_for_the_entire_season(time_limit):
+    try:
+        with time_limit(10):
+            count = count_scoring_sequences(20_000)
+    except RecursionError:
+        pytest.fail(
+            "Recursion went too deep. Can you work out the answers in an order "
+            "that avoids deep recursion?",
+            pytrace=False,
+        )
+    # Compare the size and last digits: str() of a huge int hits Python's limit.
+    assert count.bit_length() == 9781
+    assert count % 10**12 == 886499301161
 
 
 def test_count_scoring_sequences_rejects_negative_scores():
     with pytest.raises(ValueError):
         count_scoring_sequences(-1)
+
+
+@pytest.mark.parametrize(
+    ("count", "score"),
+    [(0, 0), (1, 3), (4, 9), (10, 11), (100, 18), (1000, 25)],
+)
+def test_smallest_score_with_more_sequences_than_small_thresholds(count, score):
+    assert smallest_score_with_more_sequences_than(count) == score
+
+
+@pytest.mark.parametrize("count", [0, 1, 4, 10, 100, 1000])
+def test_smallest_score_with_more_sequences_than_agrees_with_the_counts(count):
+    score = smallest_score_with_more_sequences_than(count)
+
+    assert count_scoring_sequences(score) > count
+    assert all(count_scoring_sequences(s) <= count for s in range(score))
+
+
+def test_smallest_score_with_more_sequences_than_a_trillion(time_limit):
+    with time_limit(5):
+        assert smallest_score_with_more_sequences_than(10**9) == 66
+        assert smallest_score_with_more_sequences_than(10**12) == 86
 
 
 @pytest.mark.parametrize(
