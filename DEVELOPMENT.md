@@ -28,8 +28,9 @@ uv sync --group dev
 
 ## Project conventions
 
-- Treat `README.md` as the learner-facing source of truth. Keep each exercise
-  prompt and its focused test command together.
+- Treat `README.md` and the pages in `problems/` as the learner-facing source
+  of truth: the README introduces the course and indexes the problems, and each
+  topic page keeps its exercise prompts and focused test commands together.
 - Keep starter implementations intentionally incomplete; do not commit
   reference answers. Learner tests are expected to fail until the exercises
   are implemented.
@@ -53,7 +54,8 @@ uv run pytest tests/test_notebooks.py
 uv run pytest --collect-only
 ```
 
-Run a single exercise or topic with its focused command from `README.md`. The
+Run a single exercise or topic with its focused command from its page in
+`problems/`. The
 optional mixture-model contracts use the `advanced` marker:
 
 ```bash
