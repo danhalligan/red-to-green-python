@@ -1,17 +1,26 @@
 # Object-oriented Python
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
 
 > **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
 >
 > **You’ll practise:** classes, instances, inheritance, method overriding,
 > polymorphism, exceptions, mutable instance state, and duck typing.
 >
-> **Check:** `uv run pytest tests/test_oop.py -q`
+> **Check:** `uv run pytest tests/test_oop.py -q`, or the command at the end of
+> each exercise below.
+
+**In this topic:** [Noisy animals](#noisy-animals-) ·
+[What Does the Fox Say?](#what-does-the-fox-say-) ·
+[A parrot that learns](#a-parrot-that-learns-) ·
+[The robot joins the band](#the-robot-joins-the-band-)
+
+Work through the exercises in order: each builds on the code you wrote in the
+last. All of the code goes in [oop.py](../src/pyproblems/oop.py).
 
 ## Noisy animals 📣
 
-Create an `Animal` base class in `src/pyproblems/oop.py`. Its initialiser
+Create an `Animal` base class in `oop.py`. Its initialiser
 should store an optional name on the instance, so that `animal.name` returns
 it (or `None` if none was given). Its `speak()` method defines the interface
 and raises `NotImplementedError`; subclasses provide their own sound by
@@ -47,7 +56,17 @@ simple lookups that is a perfectly good design. Classes start to pay off when
 objects gain state and behaviour of their own, as the rest of this section
 shows.
 
+The tests for the later exercises fail until you reach them, so check this
+exercise on its own with:
+
+```bash
+uv run pytest tests/test_oop.py -k "not (lyric or fox or sing or wdtfs or parrot or robot or cover)" -q
+```
+
 ## What Does the Fox Say? 🦊
+
+*Builds on [Noisy animals](#noisy-animals-): you need `Animal` and its
+subclasses.*
 
 Generating song lyrics is not an animal's job, so write it as a separate
 function. Implement `lyric(animal)`, which returns a line such as
@@ -81,7 +100,14 @@ You should now have the lyrics to
 The complete expected song is in
 [animal_song_full.txt](../tests/fixtures/animal_song_full.txt).
 
+```bash
+uv run pytest tests/test_oop.py -k "(lyric or fox or sing or wdtfs) and not (parrot or robot or cover)" -q
+```
+
 ## A parrot that learns 🦜
+
+*Builds on [What Does the Fox Say?](#what-does-the-fox-say-): you need `lyric`,
+`sing` and `Fox`.*
 
 So far each subclass only returns a fixed string. Subclasses become more
 interesting when they have state. Add `Parrot(Bird)`, which repeats the last
@@ -108,7 +134,15 @@ Finally, give the parrot the last word. Have a parrot hear a guess for the fox
 and call `sing([..., Fox(), polly], guess)`: the song now ends with the parrot
 repeating the answer.
 
+```bash
+uv run pytest tests/test_oop.py -k "parrot and not (robot or cover)" -q
+```
+
 ## The robot joins the band 🤖
+
+*Builds on the earlier exercises: you need `lyric`, `sing` and `Fox` from
+[What Does the Fox Say?](#what-does-the-fox-say-), and `Parrot` from
+[A parrot that learns](#a-parrot-that-learns-).*
 
 A `Robot` can speak, but a robot is not an animal, so it should **not** inherit
 from `Animal`. Inheritance should model a real relationship, not just share a
@@ -122,6 +156,10 @@ method name. Write a `Robot(name)` class with:
 
 Each robot keeps its own program and its own position in it. A robot that has
 not been programmed just says `"Beep boop"`.
+
+```bash
+uv run pytest tests/test_oop.py -k "robot and not cover" -q
+```
 
 Now the surprise. `lyric()` and `sing()` were written before `Robot` existed,
 yet they work for it, because they only ever call `speak()`. Program a robot
@@ -165,3 +203,16 @@ What does the fox say?
 
 The same robot object appears on every line yet says something different each
 time, because it remembers where it is in its program. `sing` needed no changes.
+
+```bash
+uv run pytest tests/test_oop.py -k cover -q
+```
+
+## Where next?
+
+- **Refactoring a larger OO codebase:** the
+  [Gilded Rose kata](refactoring-and-test-first.md#the-gilded-rose-kata-) asks you
+  to restructure and extend existing classes. It is on the Python core route.
+- **Another way to practise:** [99 Bottles](refactoring-and-test-first.md#99-bottles)
+  is the other kata on that route, and needs only Python Fundamentals.
+- Return to the [routes](../README.md#choosing-a-route) to choose your next topic.

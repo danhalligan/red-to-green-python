@@ -1,14 +1,23 @@
 # Scientific Python 🔬
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and [Object-oriented Python](object-oriented-python.md), and the
-> optional scientific stack (`uv sync --all-groups --extra science`).
+> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and
+> [Object-oriented Python](object-oriented-python.md), and the optional
+> scientific stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** NumPy and SciPy, sampling variation and standard errors,
 > least squares, the bootstrap, and likelihood-based estimation.
 >
 > **Check:** `uv run pytest tests/test_statistics.py -q`
+
+**In this topic:**
+[Q1 Standard error](#q1-sampling-variation-and-standard-error) ·
+[Q2 Least squares](#q2-linear-models-and-ordinary-least-squares) ·
+[Q3 Binomial and normal](#q3-the-binomial-and-normal-distributions) ·
+[Q4 Bootstrap](#q4-bootstrap-standard-error) ·
+[Q5 Likelihood](#q5-likelihood-and-normal-maximum-likelihood-estimation) ·
+[Q6 Coverage 🚀](#q6-confidence-intervals-and-coverage-)
 
 These exercises move from sampling variation, through linear models and
 resampling, to likelihood-based estimation.
@@ -37,12 +46,12 @@ it with $s$, the standard deviation of the sample we actually have (using $n-1$
 in the denominator): $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
 
 Implement `standard_error` using $s$ in
-[statistics.py](../src/pyproblems/statistics.py).  
+[statistics.py](../src/pyproblems/statistics.py).
 
 Old Faithful is a geyser in Yellowstone National Park. Data on eruption waiting
 times is a commonly used dataset for statistics. In the [Old Faithful
 notebook](../analysis/old_faithful.ipynb), report the mean waiting time between
-eruptions with its standard error. 
+eruptions with its standard error.
 
 Then, in the [simulation studies notebook](../analysis/simulation_studies.ipynb),
 simulate 500 independent samples of standard normal data ($\sigma=1$) for each
@@ -71,12 +80,13 @@ vector $y$, the normal equations are $X^\mathsf{T}X\hat{\beta}=X^\mathsf{T}y$.
 Implement `ols_coefficients` in [statistics.py](../src/pyproblems/statistics.py) by
 solving this system with `numpy.linalg.solve`, not by explicitly computing an
 inverse. The function does not add an intercept: include a column of ones when
-one is wanted. 
+one is wanted.
 
 In the [simulation studies notebook](../analysis/simulation_studies.ipynb),
 simulate outcomes from known coefficients and compare your estimates with the
 truth and with `numpy.linalg.lstsq`. You will use `ols_coefficients` on real
-data later.
+data later, in
+[Data Analysis Q3: predicting the next Old Faithful eruption](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption).
 
 ## Q3. The binomial and normal distributions
 
@@ -89,18 +99,18 @@ In the [simulation studies notebook](../analysis/simulation_studies.ipynb), use
 `scipy.stats` to plot the exact probability at each integer from 0 to 100
 alongside the continuous normal density.
 
-Note you should consider the continuity correction [^continuity-correction] 
+Note you should consider the continuity correction [^continuity-correction]
 when calculating the normal probabilities.
 
 [^continuity-correction]: A density is not a probability (a continuous variable
     has probability zero of equalling any single value), whereas $P(X=k)$ is a
     positive point mass. The *continuity correction* bridges the two by treating
     each integer $k$ as standing for the unit-width interval from $k-0.5$ to
-    $k+0.5$. If $Y\sim\mathcal{N}(np,np(1-p))$, then 
+    $k+0.5$. If $Y\sim\mathcal{N}(np,np(1-p))$, then
     $$P(X\le k)\approx P(Y<k+0.5)$$.
     Without the $+0.5$, $P(Y<k)$ misses half of the bar at $k$ and is
     systematically too small.
-    
+
 Compare the exact probabilities with the normal probabilities, for example by
 plotting the errors. Investigate a value of $p$ nearer zero or one, where the
 approximation becomes less reliable.
@@ -109,7 +119,7 @@ approximation becomes less reliable.
 
 In Q1 we noted that the standard error (of the mean) is the standard deviation
 of the sample mean across repeated samples. We estimated this from a single
-sample using the sample standard deviation. 
+sample using the sample standard deviation.
 
 An alternative, is a bootstrap approach. The idea here is to mimic repeated
 samples from a population using the *observed values* as a stand-in for the
@@ -122,7 +132,7 @@ resamples and returning the standard deviation of those means [^bs-sd]. Accept a
 keyword-only `numpy.random.Generator` so the experiment is reproducible.
 
 [^bs-sd]: You should use the *sample* standard deviation (`ddof=1`) of the
-    resample means (at 10,000 resamples the convention matters little though). 
+    resample means (at 10,000 resamples the convention matters little though).
 
 Your bootstrap estimate will not match $s/\sqrt{n}$ exactly, for two reasons.
 The first is Monte Carlo error: we use a finite number of resamples, so the
@@ -152,7 +162,7 @@ statistic computed over the resamples estimates that statistic's standard error,
 which is useful when no simple formula like $s/\sqrt{n}$ exists. For example,
 the median has no such formula. There are caveats: the bootstrap assumes
 independent observations that represent the population, and it can perform
-poorly for very small samples or for extreme statistics such as the maximum. 
+poorly for very small samples or for extreme statistics such as the maximum.
 
 **Extension 🚀:** adapt the same resampling loop to estimate the standard error
 of the median waiting time and compare it with that of the mean.
@@ -162,7 +172,7 @@ of the median waiting time and compare it with that of the mean.
 Statistical models assume that data were generated by a process with unknown
 parameters. In this question, we are going to work with a set of observations
 that we assume are drawn independently from a normal distribution with mean
-$\mu$ and standard deviation $\sigma$. 
+$\mu$ and standard deviation $\sigma$.
 
 For any chosen values of $\mu$ and $\sigma$, we can calculate the probability
 density of an observation $x_i$ *conditional on those parameter values*, written
@@ -227,6 +237,11 @@ estimates across repeated samples (💡 hint in the footnote).[^mle-bias]
 > earns its keep for models, such as the mixtures later on, where no such closed
 > form exists.
 
+**Where this leads:** fitting a mixture of two normal distributions has no closed
+form, so you will maximise a likelihood like this one numerically in
+[Gaussian-mixture](statistical-modelling.md#gaussian-mixture-) and then with
+[expectation-maximisation](statistical-modelling.md#gaussian-mixture-em-).
+
 ## Q6. Confidence intervals and coverage 🚀
 
 A standard error becomes most useful as an interval. Two common intervals for
@@ -257,3 +272,14 @@ population change? 💡 Hint in the footnote.[^coverage-hint]
     itself skewed at small $n$, and no interval of this symmetric kind has
     exactly 95% coverage until $n$ is larger. The Monte Carlo uncertainty of a
     coverage estimate from $B$ repetitions is about $\sqrt{p(1-p)/B}$.
+
+## Where next?
+
+- **Apply your least squares:** [Data Analysis Q3](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption)
+  fits a regression to the Old Faithful data. Route 2 also visits
+  [Mysterious data](data-analysis.md#q1-mysterious-data-) and
+  [Steak, Tea, and Toast](data-analysis.md#q2-categorical-data-steak-tea-and-toast).
+- **Models with no closed form:** [Statistical Modelling](statistical-modelling.md)
+  builds on Q5, likelihood and numerical maximum likelihood.
+- **Simulations:** [Models of Life](models-of-life.md).
+- Return to the [routes](../README.md#choosing-a-route).

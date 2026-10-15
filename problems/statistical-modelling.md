@@ -1,11 +1,18 @@
 # Statistical Modelling
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
+
+**In this topic:** [Gaussian-mixture](#gaussian-mixture-) (optional) ·
+[Gaussian-mixture EM](#gaussian-mixture-em-): [E-step](#e-step),
+[M-step](#m-step), [Iteration](#iteration), [Soft EM](#soft-em) and
+[Multivariate Gaussian EM](#multivariate-gaussian-em)
 
 ## Gaussian-mixture 😱
 
-> **Prerequisites:** [Scientific Python](scientific-python.md) Q5 (likelihood and numerical maximum
-> likelihood).
+> **Prerequisites:**
+> [Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+> (likelihood and numerical maximum likelihood), and the optional scientific
+> stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** the mixture likelihood, constrained numerical
 > optimisation, and working in log space.
@@ -25,7 +32,7 @@ $$
 
 where $\phi$ is the Gaussian density function and
 $\theta=(\mu_1,\sigma_1,\mu_2,\sigma_2,\pi)$. The likelihood is the product
-of these mixture densities across observations and the log-likelihood is the 
+of these mixture densities across observations and the log-likelihood is the
 sum of the log mixture densities across observations.
 
 In [statistics.py](../src/pyproblems/statistics.py), implement
@@ -59,15 +66,24 @@ minimum standard deviation.[^mixture-hint]
 
 ## Gaussian-mixture EM 😱
 
-> **Prerequisites:** [Scientific Python](scientific-python.md) Q5 (likelihood and maximum likelihood),
-> and the optional scientific stack.
+> **Prerequisites:**
+> [Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+> (likelihood and maximum likelihood), and the optional scientific stack
+> (`uv sync --all-groups --extra science`).
+>
+> **Recommended first:**
+> [Data Analysis Q3](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption),
+> because the final part revisits its Old Faithful data. The
+> [Gaussian-mixture](#gaussian-mixture-) exercise above is not required.
 >
 > **You’ll practise:** expectation-maximisation, hard and soft assignment,
 > weighted estimates, and fitting a bivariate mixture to real data.
 >
 > **Check:** `uv run pytest tests/test_mixture_models.py -m advanced -q`
 
-Recall from the likelihood question in [Scientific Python](scientific-python.md) that the ML estimates
+Recall from the likelihood question in
+[Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+that the ML estimates
 of a normal distribution are simply the sample mean and the *population*
 standard deviation.  However, when we do not know which distribution each
 observation came from, we can't easily use this analytical result. Although the
@@ -78,7 +94,7 @@ distributions!
 A much more efficient approach is
 [Expectation-Maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
 (EM), which treats this as a *missing data* problem. We introduce a set of
-unknown labels which tell us which distribution each observation came from. 
+unknown labels which tell us which distribution each observation came from.
 This is useful because, with the labels, estimation becomes easy again:
 the ML estimates for each distribution are just its mean and population standard
 deviation, with no optimisation.
@@ -194,6 +210,16 @@ Compare your fitted log-likelihood with the reference value in the tests (about
 starting values and asks you to plot the fit. EM is not guaranteed to find the
 global maximum from every starting point.
 
-This is the same dataset as the earlier regression exercise: the clusters should
+This is the same dataset as the earlier
+[regression exercise](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption):
+the clusters should
 help explain why a single straight line described it poorly. The notebook also
 suggests an extension that revisits the prediction using the clusters.
+
+## Where next?
+
+- **Simulation:** [Models of Life](models-of-life.md) explores systems that
+  change over time.
+- **Algorithms:** [Algorithms and Search](algorithms-and-search.md) needs only
+  Python Fundamentals.
+- Return to the [routes](../README.md#choosing-a-route).

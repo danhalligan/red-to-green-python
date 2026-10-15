@@ -1,10 +1,11 @@
 # Data Analysis
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the optional scientific stack
-> (`uv sync --all-groups --extra science`). Q3 uses `ols_coefficients` from
-> [Scientific Python](scientific-python.md) Q2.
+> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
+> optional scientific stack (`uv sync --all-groups --extra science`). Q3 also
+> needs `ols_coefficients` from
+> [Scientific Python Q2](scientific-python.md#q2-linear-models-and-ordinary-least-squares).
 >
 > **You’ll practise:** exploring and plotting data, cleaning and summarising
 > ordered categories, testing for association, and fitting and criticising a
@@ -14,13 +15,17 @@
 > checks the functions; the notebook analyses are checked by your own plots and
 > explanations.
 
+**In this topic:** [Q1 Mysterious data](#q1-mysterious-data-) ·
+[Q2 Steak, Tea, and Toast](#q2-categorical-data-steak-tea-and-toast) ·
+[Q3 Old Faithful regression](#q3-linear-regression-predicting-the-next-old-faithful-eruption)
+
 ## Q1. Mysterious data 🤔
 
 Thirteen coordinate datasets are packaged under neutral names. In the
 [mysterious data notebook](../analysis/mysterious_data.ipynb), implement
 `summarize_xy` and `summarize_xy_datasets` in
 [statistics.py](../src/pyproblems/statistics.py), then compare their means,
-sample standard deviations, and Pearson correlations. 
+sample standard deviations, and Pearson correlations.
 
 Based only on those summaries, note which datasets seem interchangeable and
 record your prediction.
@@ -32,6 +37,12 @@ data before choosing a model.
 ```bash
 uv run pytest tests/test_statistics.py -k summarize_xy
 ```
+
+**Next on Route 2:** [Scientific Python Q1](scientific-python.md#q1-sampling-variation-and-standard-error),
+[Q2](scientific-python.md#q2-linear-models-and-ordinary-least-squares) and
+[Q4](scientific-python.md#q4-bootstrap-standard-error), before returning to
+[Q2](#q2-categorical-data-steak-tea-and-toast) and
+[Q3](#q3-linear-regression-predicting-the-next-old-faithful-eruption) here.
 
 ## Q2. Categorical data: Steak, Tea, and Toast
 
@@ -89,7 +100,7 @@ You can now try to test for any statistical associations between the questions.
 Visitors to Old Faithful geyser want to know how long they will wait for the
 next eruption. `load_faithful_data()` in [data.py](../src/pyproblems/data.py)
 provides each eruption's duration and the waiting time until the following one,
-both in minutes. 
+both in minutes.
 
 In the [Old Faithful notebook](../analysis/old_faithful.ipynb), fit a straight line
 predicting the waiting time from the eruption duration, using `ols_coefficients`
@@ -100,4 +111,18 @@ values.
 
 The line has a decent $R^2$, but is it a good model? Look at both plots and
 think about what the residuals are telling you. We will come back to this data
-in the mixture-modelling section.
+in the
+[multivariate Gaussian EM](statistical-modelling.md#multivariate-gaussian-em)
+exercise, where a mixture of two clusters explains why a single straight line
+describes it poorly.
+
+## Where next?
+
+- **Explain the poor fit:** [Statistical Modelling](statistical-modelling.md)
+  fits mixtures to this same Old Faithful data. It is optional and challenging
+  (😱), and needs
+  [Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation).
+- **If you skipped them:** [Scientific Python](scientific-python.md) covers
+  standard errors, the bootstrap and likelihood, which this topic uses.
+- **Simulation:** [Models of Life](models-of-life.md).
+- Return to the [routes](../README.md#choosing-a-route).

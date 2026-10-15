@@ -1,16 +1,19 @@
 # Models of Life 🌿
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
 
 These two small simulations explore how systems change over time. Game of Life
 is deterministic: the board and rules determine each next generation. Dawkins'
 weasel is stochastic: random mutation and selection mean repeated runs can
 differ. Both are simplified models and are interesting in unique ways.
 
+**In this topic:** [Conway's Game of Life](#conways-game-of-life-) ·
+[Dawkins' weasel](#dawkins-weasel-). The two exercises are independent.
+
 ## Conway's Game of Life 🔫
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the optional scientific stack
-> (`uv sync --all-groups --extra science`).
+> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
+> optional scientific stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** NumPy arrays and slicing, neighbourhood calculations,
 > and simulating a cellular automaton.
@@ -45,8 +48,8 @@ conditions, not additional implementation tasks.
 
 ## Dawkins' weasel 🦦
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the optional scientific stack
-> (`uv sync --all-groups --extra science`).
+> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
+> optional scientific stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** random number generators, stochastic simulation, and
 > probability reasoning.
@@ -89,3 +92,12 @@ best score. Use the [weasel simulation notebook](../analysis/weasel_simulation.i
 to investigate time to target and how the mutation rate affects convergence
 for a population of 100. Compare several
 seeded runs rather than treating one random run as a universal answer.
+
+## Where next?
+
+- **Analyse real data:** [Data Analysis](data-analysis.md) and
+  [Scientific Python](scientific-python.md) use the same scientific stack.
+- **Fit models to data:** [Statistical Modelling](statistical-modelling.md)
+  is the most advanced topic.
+- **Algorithms:** [Algorithms and Search](algorithms-and-search.md).
+- Return to the [routes](../README.md#choosing-a-route).

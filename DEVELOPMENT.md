@@ -31,6 +31,9 @@ uv sync --group dev
 - Treat `README.md` and the pages in `problems/` as the learner-facing source
   of truth: the README introduces the course and indexes the problems, and each
   topic page keeps its exercise prompts and focused test commands together.
+  Exercises large enough to stand alone, such as those in
+  `problems/algorithms/`, have their own page. Link to a specific exercise
+  heading rather than only a topic page.
 - Keep starter implementations intentionally incomplete; do not commit
   reference answers. Learner tests are expected to fail until the exercises
   are implemented.
@@ -52,7 +55,13 @@ are expected to pass:
 uv run pytest tests/test_scaffold.py tests/test_data.py
 uv run pytest tests/test_notebooks.py
 uv run pytest --collect-only
+uv run pytest tests/test_docs.py
 ```
+
+`tests/test_docs.py` checks that every relative link, heading anchor and
+footnote in the Markdown docs resolves. Heading anchors follow GitHub's rules,
+so a heading with an emoji ends in a hyphen (`#noisy-animals-`); update links
+if you rename a heading. External links are not checked.
 
 Run a single exercise or topic with its focused command from its page in
 `problems/`. The
@@ -88,7 +97,8 @@ cells are left for you to complete.
 ## Continuous integration
 
 GitHub Actions checks supported Python versions, runs Ruff, confirms all tests
-collect, runs the passing scaffold and data checks, smoke-tests each notebook's
+collect, runs the passing scaffold and data checks, checks the documentation
+links, smoke-tests each notebook's
 setup code (everything before its first `TODO` comment), builds distributions,
 and verifies that installed wheel resources load. CI does not run all exercise
 tests as a required green check because the starter branch intentionally

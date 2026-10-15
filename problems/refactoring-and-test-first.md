@@ -1,10 +1,18 @@
 # Refactoring and Test-First Development
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
+
+**In this topic:** [The Gilded Rose Kata](#the-gilded-rose-kata-) ·
+[99 Bottles](#99-bottles). You only need to do one of them, but both are good
+practice.
 
 ## The Gilded Rose Kata 🌹
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and [Object-oriented Python](object-oriented-python.md).
+> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
+>
+> **Recommended first:** [Object-oriented Python](object-oriented-python.md), so
+> that classes, inheritance and polymorphism are familiar. You will be working
+> with a larger object-oriented codebase.
 >
 > **You’ll practise:** refactoring existing code safely, using tests as a
 > specification, and adding a feature to code you did not write.
@@ -101,3 +109,13 @@ Take one down and pass it around, 5 bottles of beer on the wall.
    treating 5 as a six-pack or by changing only the first half of the verse,
    and confirm that at least one test fails each time. A test that cannot fail
    tells you nothing.
+
+## Where next?
+
+- **Search algorithms:** [Word ladder](algorithms/word-ladder.md) finishes the
+  Python core route.
+- **Real data:** after the core route, the
+  [Scientific Python route](../README.md#choosing-a-route) starts with
+  [Mysterious data](data-analysis.md#q1-mysterious-data-).
+- **The other kata**, if you did only one: [Gilded Rose](#the-gilded-rose-kata-)
+  or [99 Bottles](#99-bottles).

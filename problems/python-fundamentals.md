@@ -1,6 +1,6 @@
 # Python Fundamentals
 
-[← All problems](../README.md)
+[← All problems](../README.md#index-of-problems)
 
 > **Prerequisites:** none.
 >
@@ -10,11 +10,17 @@
 > **Check:** `uv run pytest tests/test_language.py tests/test_sudoku.py -q`, or
 > each question's own command below.
 
+**In this topic:** [Q1 Exponentiation](#q1-exponentiation) ·
+[Q2 Adjacent products](#q2-adjacent-products) · [Q3 FizzBuzz](#q3-fizzbuzz) ·
+[Q4 Fibonacci](#q4-fibonacci-sequence) ·
+[Q5 First non-repeating character](#q5-first-non-repeating-character) ·
+[Q6 Python gotchas](#q6-python-gotchas) · [Q7 Sudoku checker](#q7-sudoku-checker)
+
 ## Q1. Exponentiation
 
 Write a function to take numbers $x$ and return $e^x$ as `exponentiate(values)`
-in `src/pyproblems/language.py`. Note that the input can be any iterable, not
-just a list.
+in [language.py](../src/pyproblems/language.py). Note that the input can be any
+iterable, not just a list.
 
 Begin with a `for` loop and `list.append`. Once it works, try rewriting the
 function as a list comprehension. Compare the two versions for readability.
@@ -22,7 +28,7 @@ function as a list comprehension. Compare the two versions for readability.
 Check this exercise with:
 
 ```bash
-uv run pytest tests/test_language.py -k exponentiate
+uv run pytest tests/test_language.py -k exponentiate -q
 ```
 
 ## Q2. Adjacent products
@@ -74,6 +80,10 @@ list(islice(fibonacci(), 8))
 ```bash
 uv run pytest tests/test_language.py -k fibonacci
 ```
+
+**Where this leads:** a value defined by the values before it is a *recurrence
+relationship*. You will use the same idea to count rugby scores in
+[...Try, try again](algorithms/rugby.md).
 
 ## Q5. First non-repeating character
 
@@ -194,3 +204,18 @@ constraint group.
 ```bash
 uv run pytest tests/test_sudoku.py -q
 ```
+
+**Where this leads:** the [Sudoku solver](algorithms/sudoku-solver.md) reuses
+your `sudoku_checker` to decide which digits can go in each cell of a
+backtracking search.
+
+## Where next?
+
+- **Classes and polymorphism:** [Object-oriented Python](object-oriented-python.md)
+  is the next step on the Python core route.
+- **Search:** the [Sudoku solver](algorithms/sudoku-solver.md) reuses your Sudoku
+  checker inside a backtracking search.
+- **Recurrence relationships:** [...Try, try again](algorithms/rugby.md) builds on
+  Q4, Fibonacci.
+- **Testing and refactoring:** [Refactoring and Test-First Development](refactoring-and-test-first.md).
+- Or return to the [routes](../README.md#choosing-a-route).
