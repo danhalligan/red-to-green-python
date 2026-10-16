@@ -98,7 +98,7 @@ this one easier or richer, and the one real dependency is marked **needs**.
 | [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | ⭐⭐ | Algorithms | Is this grid a valid Sudoku? | |
 | [Talking animals](problems/object-oriented-python.md) | ⭐⭐ | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
 | [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | ⭐⭐⭐ | Coding | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
-| [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | ⭐ | Coding | Sing the song one test at a time, then write tests of your own | |
+| [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | ⭐⭐ | Coding | Sing the song one test at a time, then write tests of your own | |
 | [Word ladder](problems/algorithms/word-ladder.md) | ⭐⭐ | Algorithms | Turn `play` into `game` one letter at a time | |
 | [...Try, try again](problems/algorithms/rugby.md) | ⭐⭐ | Algorithms | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
 | [Sudoku solver](problems/algorithms/sudoku-solver.md) | ⭐⭐⭐ | Algorithms | Backtrack your way to a solution. **Needs** the [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | |
