@@ -20,17 +20,18 @@ differ. Both are simplified models and are interesting in unique ways.
 >
 > **Check:** `uv run pytest tests/test_game_of_life.py -q`
 
-Can you build a machine that makes more machines? Conway's Game of Life is a
-cellular automaton: a grid of live and dead cells changes in discrete
-generations according to local rules. The rules fit in a paragraph. What they
-produce does not. Your job is to write the engine; the reward is watching what
-it does.
+Conway's Game of Life is a cellular automaton: a grid of live and dead cells
+changes in discrete generations according to local rules. The rules fit in a
+paragraph. What they produce does not. Your job is to write the engine; the
+reward is watching what it does.
 
-For each cell, inspect its eight neighbouring positions. A live cell survives
-with two or three live neighbours; a dead cell becomes live with exactly three;
-all other cells are dead in the next generation. This exercise uses finite,
-bounded arrays rather than wrapping edges, so cells outside the board are not
-counted.
+For each cell, inspect its eight neighbouring positions. Follow these rules:
+1. A live cell survives with two or three live neighbours
+2. A dead cell becomes live with exactly three;
+3. All other cells are dead in the next generation. 
+
+This exercise uses finite, bounded arrays rather than wrapping edges, so cells
+outside the board are not counted.
 
 In [game_of_life.py](../src/pyproblems/game_of_life.py), implement
 `count_live_neighbors` and `step_game_of_life` with NumPy arrays; the docstrings
@@ -43,9 +44,9 @@ one on a board, `render_board` to print it, and `animate_boards` to watch it
 move, so you can focus on the algorithm.
 
 When the tests pass, open the [Game of Life notebook](../analysis/game_of_life.ipynb).
-Start with the glider, then try the pattern the notebook calls the machine that
-makes more machines. The last test, which counts how a 36-cell pattern grows
-over time, is the check that you have built it.
+Start with the glider, then try the "Gosper Glider Gun". The last test, which
+counts how a 36-cell pattern grows over time, is the check that you have built
+it.
 
 ## Dawkins' weasel 🦦
 
