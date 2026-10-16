@@ -2,7 +2,7 @@
 
 [← All problems](../../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](../python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **You’ll practise:** sets and strings, searching a network of words, and
 > reconstructing a path.

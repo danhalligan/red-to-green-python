@@ -9,10 +9,12 @@
 
 ## Gaussian-mixture 😱
 
-> **Prerequisites:**
+> **Before you start:** the optional scientific stack
+> (`uv sync --all-groups --extra science`).
+>
+> **Recommended first:**
 > [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
-> (likelihood and numerical maximum likelihood), and the optional scientific
-> stack (`uv sync --all-groups --extra science`).
+> (likelihood and numerical maximum likelihood), which this builds on.
 >
 > **You’ll practise:** the mixture likelihood, constrained numerical
 > optimisation, and working in log space.
@@ -66,12 +68,12 @@ minimum standard deviation.[^mixture-hint]
 
 ## Gaussian-mixture EM 😱
 
-> **Prerequisites:**
-> [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
-> (likelihood and maximum likelihood), and the optional scientific stack
+> **Before you start:** the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >
 > **Recommended first:**
+> [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
+> (likelihood and maximum likelihood), and
 > [Data Analysis Q3](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption),
 > because the final part revisits its Old Faithful data. The
 > [Gaussian-mixture](#gaussian-mixture-) exercise above is not required.

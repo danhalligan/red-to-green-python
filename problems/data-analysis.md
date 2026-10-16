@@ -2,7 +2,7 @@
 
 [← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
+> **Before you start:** basic Python and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** exploring and plotting data, cleaning and summarising

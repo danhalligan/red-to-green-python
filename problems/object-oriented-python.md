@@ -2,7 +2,7 @@
 
 [← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **You’ll practise:** classes, instances, inheritance, method overriding,
 > polymorphism, exceptions, mutable instance state, and duck typing.

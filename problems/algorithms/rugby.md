@@ -2,7 +2,7 @@
 
 [← All problems](../../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](../python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **Recommended first:** [Fibonacci](../python-fundamentals.md#q4-fibonacci-sequence)
 > (Python Fundamentals Q4), which introduces recurrence relationships.

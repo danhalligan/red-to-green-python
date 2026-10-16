@@ -2,9 +2,9 @@
 
 [← All problems](../../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](../python-fundamentals.md), in
-> particular the [Sudoku checker](../python-fundamentals.md#q7-sudoku-checker)
-> (Q7), because your solver builds on `sudoku_checker` in the same file.
+> **Needs:** the [Sudoku checker](../python-fundamentals.md#q7-sudoku-checker)
+> (Python Fundamentals Q7), because your solver builds on `sudoku_checker` in the
+> same file.
 >
 > **You’ll practise:** recursion, backtracking, and working on a copy instead
 > of mutating the input.
