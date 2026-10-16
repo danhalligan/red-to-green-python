@@ -10,7 +10,7 @@
 ## Gaussian-mixture 😱
 
 > **Prerequisites:**
-> [Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+> [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
 > (likelihood and numerical maximum likelihood), and the optional scientific
 > stack (`uv sync --all-groups --extra science`).
 >
@@ -67,7 +67,7 @@ minimum standard deviation.[^mixture-hint]
 ## Gaussian-mixture EM 😱
 
 > **Prerequisites:**
-> [Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+> [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
 > (likelihood and maximum likelihood), and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >
@@ -82,7 +82,7 @@ minimum standard deviation.[^mixture-hint]
 > **Check:** `uv run pytest tests/test_mixture_models.py -m advanced -q`
 
 Recall from the likelihood question in
-[Scientific Python Q5](scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation)
+[Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters)
 that the ML estimates
 of a normal distribution are simply the sample mean and the *population*
 standard deviation.  However, when we do not know which distribution each
@@ -186,13 +186,14 @@ The docstrings give the details.
 
 ### Multivariate Gaussian EM
 
-The eruptions at the Old Faithful geyser are actually very predictable, with
-either short eruptions that occur relatively quickly after the previous
-eruption, or longer waits leading to bigger eruptions. This motivates modelling
-the data as a mixture of two bivariate normal distributions, where the variables
-are the eruption duration and the waiting time to the next eruption (both in
-minutes). `load_faithful_data()` in [data.py](../src/pyproblems/data.py) provides
-them as (duration, waiting) pairs, and the [Old Faithful
+Back to Old Faithful. Plot every eruption's duration against the waiting time
+that followed it, and look again at the residuals from your
+[regression](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption).
+Do the points look like one cloud, or something else? Suppose they come from a
+mixture of two bivariate normal distributions, where the variables are the
+eruption duration and the waiting time to the next eruption (both in minutes).
+`load_faithful_data()` in [data.py](../src/pyproblems/data.py) provides them as
+(duration, waiting) pairs, and the [Old Faithful
 notebook](../analysis/old_faithful.ipynb) describes the data in more detail.
 
 Each standard deviation is now replaced by a covariance matrix, held in a
@@ -211,10 +212,10 @@ starting values and asks you to plot the fit. EM is not guaranteed to find the
 global maximum from every starting point.
 
 This is the same dataset as the earlier
-[regression exercise](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption):
-the clusters should
-help explain why a single straight line described it poorly. The notebook also
-suggests an extension that revisits the prediction using the clusters.
+[regression exercise](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption).
+What do your fitted clusters say about that straight line, and about what it
+was missing? The notebook also suggests an extension that revisits the
+prediction using the clusters.
 
 ## Where next?
 

@@ -43,6 +43,12 @@ uv sync --group dev
   available from built distributions.
 - Keep analysis and plotting tasks in `analysis/` notebooks. Commit notebooks
   without execution outputs or completed answers.
+- Open an investigation with the question, not the answer. Give help as
+  collapsible hints (`<details>` with a `<summary>`), in up to three levels:
+  a nudge, a strategy, then implementation guidance without complete Python.
+  Put the explanation of a surprising result in a collapsible
+  **What did you discover?** section after the investigation, and keep
+  results out of headings, intros and hints that are visible beforehand.
 
 ## Checks
 

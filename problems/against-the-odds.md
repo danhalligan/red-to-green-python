@@ -15,7 +15,6 @@ The investigations use plots, so they live in the
 science packages (`uv sync --all-groups --extra science`).
 
 **In this topic:** [The office party](#the-office-party-) ·
-[The hustler's dice](#the-hustlers-dice-) ·
 [Waiting for heads](#waiting-for-heads-) · [The 100 prisoners](#the-100-prisoners-).
 They are roughly in order of difficulty, but each can be done on its own.
 
@@ -82,78 +81,6 @@ at your answer with the number of days. What does that suggest? In the
 100, 1,000, 10,000 and 100,000, find the group size for even odds each time, and
 plot it against the number of days. What is the pattern, and does it fit the
 pairs argument?
-
-## The hustler's dice 🎲
-
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
->
-> **You’ll practise:** `itertools.product`, exact arithmetic with
-> `fractions.Fraction`, `max` with a `key` function, pairing neighbours with
-> `zip`, and searching with `itertools.permutations`.
->
-> **Check:** `uv run pytest tests/test_dice.py -q`, or the focused command at
-> each stage.
-
-A hustler in a bar sets three odd-looking dice on the table. They are
-`HUSTLER_DICE` in [dice.py](../src/pyproblems/dice.py), as tuples of faces, and
-every face is equally likely. "Pick whichever die you like," he says. "I'll take
-one of the other two. We roll once, and the higher number wins. I'll even let you
-choose first."
-
-Before writing any code, work out the average roll of each die. What does that
-suggest about the game? Would you take the bet?
-
-**Stage 1: exact odds.** Implement `win_probability(die, other)`, the exact
-chance that `die` rolls strictly higher than `other`. Return a `Fraction`: it
-stores $5/9$ exactly, whereas the float `0.5555...` cannot be, so comparing
-probabilities never misleads you. 💡 There is a hint.[^dice-product] Work out
-the chance of winning for every ordered pair of the hustler's dice.
-
-```bash
-uv run pytest tests/test_dice.py -k "win_probability or hustler"
-```
-
-[^dice-product]: `itertools.product(die, other)` produces every pair of faces.
-    Count the pairs where you win and divide by the total number of pairs.
-
-**Stage 2: who should choose first?** Implement `champion(dice)`, the die that
-beats every other die (or `None`), and `best_reply(dice, chosen)`, the die you
-should take once your opponent has taken `dice[chosen]`.[^dice-max] Think about
-what "beats" means. If Ann is taller than Bo, and Bo is taller than Cy, what do
-you know about Ann and Cy? Does the same hold for the dice? Look at what
-`best_reply` suggests for each first choice, and decide who the hustler's offer
-really favours.
-
-```bash
-uv run pytest tests/test_dice.py -k "best_reply or champion"
-```
-
-[^dice-max]: `max` accepts a `key` function, so you can ask for the item with the
-    largest value of any calculation: `max(candidates, key=lambda i: ...)`.
-
-**Extension 🚀: build your own.** The hustler's dice use the numbers 1 to 9
-exactly once between them. Implement `find_cycle_of_dice(faces, dice_count=3)`,
-which shares the faces equally between the dice so that the first beats the
-second, the second beats the third, and so on, with the last beating the first.
-It returns any such dice, or `None` if there are none. How many ways are there to
-deal nine faces, and is your search fast enough? Can it stop early? 💡 There is a
-hint.[^dice-cycle] Then try other faces and other numbers of dice. When does a
-set exist, and when is it impossible, and why?
-
-```bash
-uv run pytest tests/test_dice.py -k find_cycle
-```
-
-[^dice-cycle]: `itertools.permutations(faces)` gives every ordering of the faces;
-    slice each into equal-sized dice. `zip(dice, dice[1:] + dice[:1])` pairs each
-    die with the next one, wrapping round from the last to the first.
-
-**Investigation 🚀: roll twice.** In the
-[notebook](../analysis/against_the_odds.ipynb), roll each pair of dice thousands
-of times with a seeded generator to confirm your exact odds. Then change the
-game: each player rolls their die twice and adds the results. You can build that
-die with `itertools.product` too. Which die would you pick now? Is it the one you
-would have picked before? Is that plausible?
 
 ## Waiting for heads 🪙
 
@@ -226,8 +153,8 @@ whichever pattern shows up first wins. Does choosing second help? Use
 `flips_until` on the *same* list of flips for both patterns, built from
 `list(islice(coin_flips(rng), 200))`, to see who wins. In the
 [notebook](../analysis/against_the_odds.ipynb), play all 56 ordered pairs of
-patterns many times. Is there a best pattern to choose first? Does that remind
-you of the hustler's dice?
+patterns many times. Is there a best pattern to choose first? What does that say
+about the idea that one pattern is simply "better" than another?
 
 ## The 100 prisoners 🔐
 

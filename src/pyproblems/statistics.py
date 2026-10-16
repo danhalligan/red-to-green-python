@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-from numpy.typing import ArrayLike, NDArray
+from numpy.typing import ArrayLike
 
 
 @dataclass(frozen=True)
@@ -19,13 +19,6 @@ class NormalFit:
 
 def standard_error(values: ArrayLike) -> float:
     """Estimate standard error using the sample standard deviation."""
-    raise NotImplementedError
-
-
-def ols_coefficients(
-    design_matrix: ArrayLike, outcomes: ArrayLike
-) -> NDArray[np.float64]:
-    """Estimate OLS coefficients by solving the normal equations."""
     raise NotImplementedError
 
 

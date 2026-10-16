@@ -40,15 +40,27 @@ The simplest way to find the best alignment is to try them all. In
 [alignment.py](../../src/pyproblems/alignment.py), implement
 `score_alignment(aligned_first, aligned_second)`, which scores a pair of
 already-aligned strings, and `all_alignments(first, second)`, which yields every
-possible alignment of two sequences.[^enumerate-hint] The best score is then the
-maximum over all alignments.
+possible alignment of two sequences. The best score is then the
+maximum over all alignments. Stuck? There are 💡 hints.
 
-[^enumerate-hint]: Think about the first character of each sequence. Either the
-    first character of `first` is aligned with a gap, or the first character of
-    `second` is aligned with a gap, or the two are aligned with each other.
-    Whichever you choose, what remains is a smaller alignment problem, so a
-    recursive generator is a natural fit. A column that is a gap in both rows is
-    never allowed.
+<details>
+<summary>💡 Hint 1: a nudge</summary>
+
+Think about the first character of each sequence. What are the ways they can be
+lined up against each other, or against a gap?
+
+</details>
+
+<details>
+<summary>💡 Hint 2: a strategy</summary>
+
+Either the first character of `first` is aligned with a gap, or the first
+character of `second` is aligned with a gap, or the two are aligned with each
+other. Whichever you choose, what remains is a smaller alignment problem, so a
+recursive generator is a natural fit. A column that is a gap in both rows is
+never allowed.
+
+</details>
 
 How far does this get you? Unfortunately, the number of possible alignments
 grows **very** quickly: for two sequences of length $n = 3$ there are 63;
@@ -134,7 +146,34 @@ adds a gap against a character from `second`. Row-by-row traversal ensures all
 three neighbours have already been filled. Try drawing the table for `"A"`
 and `"AA"` before tackling longer inputs.
 
-Once the score tests pass, complete the traceback TODO:
+Once the score tests pass, complete the traceback TODO. After the table is
+filled, `needleman_wunsch_alignment` must recover one optimal pair of strings by
+tracing back through it. The skeleton handles the boundary moves and reverses
+the output for you. Stuck? There are 💡 hints.
+
+<details>
+<summary>💡 Hint 1: a nudge</summary>
+
+Every cell's value came from one of three neighbours, plus the score of one new
+column. Standing at the bottom-right cell, which move produced the value you
+are looking at?
+
+</details>
+
+<details>
+<summary>💡 Hint 2: a strategy</summary>
+
+Walk backwards from the bottom-right cell to the top-left, at each cell choosing
+a move whose neighbour score plus column score equals the current cell's score.
+Do not simply choose the neighbour with the largest stored score: the score of
+the new alignment column matters too. If several moves explain the current
+score, choose any one. Stop at the top-left cell, not as soon as one sequence
+runs out; the remaining characters must be aligned with gaps.
+
+</details>
+
+<details>
+<summary>💡 Hint 3: an outline</summary>
 
 ```text
 start at the bottom-right cell with two empty character lists
@@ -148,11 +187,7 @@ while either sequence still has characters left:
 reverse both lists and join each into a string
 ```
 
-Do not simply choose the neighbour with the largest stored score: the score
-of the new alignment column matters too. If several moves explain the current
-score, choose any one. Stop at the top-left cell, not as soon as one sequence
-runs out; the remaining characters must be aligned with gaps. The skeleton
-handles these boundary moves and reverses the output for you.
+</details>
 
 The docstrings give the details. Check both functions against your brute-force
 version on short sequences. The longer DNA fixture checks that the same

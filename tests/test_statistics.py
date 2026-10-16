@@ -11,7 +11,6 @@ from pyproblems.statistics import (
     bootstrap_standard_error,
     fit_normal_mle,
     normal_log_likelihood,
-    ols_coefficients,
     standard_error,
     summarize_xy,
     summarize_xy_datasets,
@@ -26,32 +25,6 @@ def test_standard_error_uses_sample_standard_deviation():
 def test_standard_error_requires_two_observations(values):
     with pytest.raises(ValueError, match="at least 2"):
         standard_error(values)
-
-
-def test_ols_coefficients_matches_known_linear_relationship():
-    predictors = np.array([0.0, 1.0, 2.0, 3.0])
-    design = np.column_stack((np.ones(predictors.size), predictors))
-    outcomes = 1.0 + 2.0 * predictors
-
-    assert ols_coefficients(design, outcomes) == pytest.approx([1.0, 2.0])
-    assert ols_coefficients(design, outcomes[:, None]) == pytest.approx([1.0, 2.0])
-    assert ols_coefficients(design, outcomes) == pytest.approx(
-        np.linalg.lstsq(design, outcomes, rcond=None)[0]
-    )
-
-
-@pytest.mark.parametrize(
-    ("design", "outcomes"),
-    [
-        (np.ones(4), np.ones(4)),
-        (np.ones((4, 2)), np.ones(4)),
-        (np.ones((4, 1)), np.ones(3)),
-        (np.ones((4, 1)), np.ones((4, 2))),
-    ],
-)
-def test_ols_coefficients_rejects_invalid_shapes_and_rank(design, outcomes):
-    with pytest.raises(ValueError):
-        ols_coefficients(design, outcomes)
 
 
 def test_summarize_xy_returns_named_statistics():
