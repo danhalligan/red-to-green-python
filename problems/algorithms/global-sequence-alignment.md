@@ -2,7 +2,7 @@
 
 [← All problems](../../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](../python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **Recommended first:** [...Try, try again](rugby.md), which introduces
 > dynamic programming in one dimension.

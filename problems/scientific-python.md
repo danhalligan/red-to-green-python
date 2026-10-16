@@ -2,9 +2,8 @@
 
 [← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and
-> [Object-oriented Python](object-oriented-python.md), and the optional
-> scientific stack (`uv sync --all-groups --extra science`).
+> **Before you start:** basic Python and NumPy, and the optional scientific stack
+> (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** NumPy and SciPy, simulation, the bootstrap, and
 > likelihood-based estimation.

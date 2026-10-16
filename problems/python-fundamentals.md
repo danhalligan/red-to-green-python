@@ -2,7 +2,10 @@
 
 [← All problems](../README.md#index-of-problems)
 
-> **Prerequisites:** none.
+> **Before you start:** nothing. These are quick warm-ups: short problems that
+> are good practice in their own right. Do any of them, in any order, and skip
+> the ones you already know. Q7 is a little bigger, and the
+> [Sudoku solver](algorithms/sudoku-solver.md) builds on it.
 >
 > **You’ll practise:** functions, sequences, comprehensions, iteration,
 > dictionaries, generators, exceptions, and readable tests.

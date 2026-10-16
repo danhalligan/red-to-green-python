@@ -29,8 +29,10 @@ uv sync --group dev
 ## Project conventions
 
 - Treat `README.md` and the pages in `problems/` as the learner-facing source
-  of truth: the README introduces the course and indexes the problems, and each
-  topic page keeps its exercise prompts and focused test commands together.
+  of truth. The README introduces the collection and catalogues the problems
+  (size, style and hook, with optional "try first" suggestions; only list a real
+  dependency as **Needs**). Each topic page keeps its exercise prompts and
+  focused test commands together.
   Exercises large enough to stand alone, such as those in
   `problems/algorithms/`, have their own page. Link to a specific exercise
   heading rather than only a topic page.

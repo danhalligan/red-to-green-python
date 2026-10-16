@@ -20,3 +20,11 @@
   (`ols_coefficients`, with the Old Faithful regression now using any library
   straight-line fit) and put the Dawkins' weasel simulation before its optional
   probability questions.
+* Make the README a pick-and-mix catalogue (size, style, hook and optional
+  "try first" suggestions) with the learning routes kept as optional
+  recommendations; frame the simple exercises as quick warm-ups and 99 Bottles as
+  an optional test-first kata, and replace course-style prerequisites with
+  "before you start" notes. Rework Gilded Rose around inheriting awkward legacy
+  code, make the Gosper glider gun the payoff of Game of Life (with provided
+  `place_shape` and `animate_boards` helpers), and add an evolution-versus-guessing
+  comparison to the weasel.

@@ -20,7 +20,7 @@ They are roughly in order of difficulty, but each can be done on its own.
 
 ## The office party 🎂
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **You’ll practise:** sets, passing a seeded random generator as an argument,
 > arithmetic with huge integers, and searching with `next` and
@@ -84,7 +84,7 @@ pairs argument?
 
 ## Waiting for heads 🪙
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **Recommended first:** [Fibonacci](python-fundamentals.md#q4-fibonacci-sequence)
 > (Python Fundamentals Q4), for endless generators, and
@@ -158,7 +158,7 @@ about the idea that one pattern is simply "better" than another?
 
 ## The 100 prisoners 🔐
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md).
+> **Before you start:** basic Python.
 >
 > **Recommended first:** [The office party](#the-office-party-), for
 > simulating with a seeded generator.

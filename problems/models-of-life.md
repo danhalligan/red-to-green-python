@@ -12,8 +12,8 @@ differ. Both are simplified models and are interesting in unique ways.
 
 ## Conway's Game of Life 🔫
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
-> optional scientific stack (`uv sync --all-groups --extra science`).
+> **Before you start:** basic Python and NumPy, and the optional scientific stack
+> (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** NumPy arrays and slicing, neighbourhood calculations,
 > and simulating a cellular automaton.
@@ -21,44 +21,48 @@ differ. Both are simplified models and are interesting in unique ways.
 > **Check:** `uv run pytest tests/test_game_of_life.py -q`
 
 Conway's Game of Life is a cellular automaton: a grid of live and dead cells
-changes in discrete generations according to local rules. Despite the simple
-rules, repeated updates can produce still lifes, oscillators, and patterns
-that move across the board.
+changes in discrete generations according to local rules. The rules fit in a
+paragraph. What they produce does not. Your job is to write the engine; the
+reward is watching what it does.
 
-For each cell, inspect its eight neighbouring positions. A live cell survives
-with two or three live neighbours; a dead cell becomes live with exactly three;
-all other cells are dead in the next generation. This exercise uses finite,
-bounded arrays rather than wrapping edges, so cells outside the board are not
-counted.
+For each cell, inspect its eight neighbouring positions. Follow these rules:
+1. A live cell survives with two or three live neighbours
+2. A dead cell becomes live with exactly three;
+3. All other cells are dead in the next generation. 
+
+This exercise uses finite, bounded arrays rather than wrapping edges, so cells
+outside the board are not counted.
 
 In [game_of_life.py](../src/pyproblems/game_of_life.py), implement
 `count_live_neighbors` and `step_game_of_life` with NumPy arrays; the docstrings
-give the details. The glider, lightweight/middleweight/heavyweight
-spaceships, and Gosper glider gun are provided as readable rows in
-[game_of_life_shapes.yaml](../src/pyproblems/datasets/game_of_life_shapes.yaml);
-`load_shape(name)` and `render_board` are already implemented. Rows use `O`
-for live cells and `.` for empty cells. Focus on the
-neighbour-count and generation-update algorithms. Consider shifted array slices
-or padding to vectorise the local counts without accidentally wrapping edges.
+give the details. Consider shifted array slices or padding to vectorise the local
+counts without accidentally wrapping edges. Everything else is provided:
+readable patterns in
+[game_of_life_shapes.yaml](../src/pyproblems/datasets/game_of_life_shapes.yaml)
+(`O` for live cells, `.` for empty ones), `load_shape` and `place_shape` to put
+one on a board, `render_board` to print it, and `animate_boards` to watch it
+move, so you can focus on the algorithm.
 
-In the [Game of Life notebook](../analysis/game_of_life.ipynb), place a pattern
-inside a larger empty board, iterate many generations, and animate the frames.
-The supplied patterns are starting
-conditions, not additional implementation tasks.
+When the tests pass, open the [Game of Life notebook](../analysis/game_of_life.ipynb).
+Start with the glider, then try the "Gosper Glider Gun". The last test, which
+counts how a 36-cell pattern grows over time, is the check that you have built
+it.
 
 ## Dawkins' weasel 🦦
 
-> **Prerequisites:** [Python Fundamentals](python-fundamentals.md) and the
-> optional scientific stack (`uv sync --all-groups --extra science`).
+> **Before you start:** basic Python and NumPy, and the optional scientific stack
+> (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** random number generators, stochastic simulation, and
 > investigating a model by experiment.
 >
 > **Check:** `uv run pytest tests/test_evolution.py -m advanced -q`
 
-Could random mutation plus selection write a sentence? In *The Blind Watchmaker*,
-Richard Dawkins used a simple computer model to show how cumulative selection
-can build something that looks designed. The target here is the 28-character
+Start with 28 random characters. Copy them with the odd typo, keep the best copy,
+and repeat. Can a sentence evolve out of gibberish? In *The Blind Watchmaker*,
+Richard Dawkins used a simple computer model like this to show how cumulative
+selection can build something that looks designed. The target here is the
+28-character
 phrase `METHINKS IT IS LIKE A WEASEL`; each position is chosen from the 26
 uppercase letters and a space. Start with a uniformly random phrase. Make a
 population of ten copies by independently leaving each character unchanged with
@@ -78,9 +82,23 @@ investigate. How many generations does it take to reach the target? Compare
 several seeded runs rather than treating one random run as a universal answer,
 and ask why they differ. Then try a population of 100, and several mutation
 rates. What happens if the mutation rate is very low, or very high? Which is
-best, and why? Finally, how good a model of evolution in nature is this? Consider
-the known target, the simple mutation process, and selection based on one fixed
-score.
+best, and why?
+
+**Comparison 🚀: evolution versus guessing.** Give a baseline the same budget.
+If an evolving run scored `population_size * generations` phrases, generate that
+many completely independent random phrases and keep the best score so far. Predict
+the outcome first, then plot both best-score-so-far curves against the number of
+phrases scored. Which gets closer to the target, and by how much?
+
+> [!NOTE]
+> The weasel is a deliberately simplified model. It has a fixed target that
+> real evolution never has, a score that rewards each correct letter separately,
+> and no recombination or changing environment. It shows that selection that
+> *keeps* partial progress is far more powerful than chance alone; it does not
+> show that evolution is aiming at anything.
+
+How good a model of evolution in nature is this? Consider the known target, the
+simple mutation process, and selection based on one fixed score.
 
 **Extension 🚀: why does cumulative selection work?** Explain what you saw with
 probability, in the notebook's optional final section:
@@ -92,8 +110,8 @@ probability, in the notebook's optional final section:
 3. Once 18 positions match, what must happen at each of the remaining ten
    positions for one offspring to match the entire target? What is the chance
    that any of ten offspring does so?
-4. How does all this compare with guessing whole phrases independently at
-   random?
+4. Use your answers to explain the gap you saw in the comparison with
+   independent random guessing.
 
 <details>
 <summary>💡 Hint: a useful trick for question 2</summary>
