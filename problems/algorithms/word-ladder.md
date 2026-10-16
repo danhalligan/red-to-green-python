@@ -20,13 +20,33 @@ lowercase word set. Implement `word_ladder(start, target, words)` in
 [word_ladder.py](../../src/pyproblems/word_ladder.py) to return a shortest route, or
 `None` if no route exists. The docstring gives the input requirements. The
 number of moves is one less than the number of words in the returned route.
-Stuck on the approach? There is a 💡 hint.[^ladder-hint]
+Stuck on the approach? There are three 💡 hints, each giving a little more away.
 
-[^ladder-hint]: Think of the words as a network in which two words are linked if
-    they differ by one letter. Breadth-first search explores outward one move at
-    a time, so the first time it reaches the target it has found a shortest
-    route. Record each word's predecessor as you go, so you can reconstruct that
-    route once the target is found.
+<details>
+<summary>💡 Hint 1: a nudge</summary>
+
+Forget the spelling for a moment and think of every word as a place. Which places
+can you get to from `play` in a single move? And from those in two?
+
+</details>
+
+<details>
+<summary>💡 Hint 2: a strategy</summary>
+
+Two words are linked if they differ by one letter, so the words form a network.
+Breadth-first search explores that network outward one move at a time, so the
+first time it reaches the target it has found a shortest route.
+
+</details>
+
+<details>
+<summary>💡 Hint 3: recovering the route</summary>
+
+A search that only says "reached" gives you the length of the route, not the
+route itself. Record each word's predecessor (the word you came from) as you go,
+so you can walk back from the target to the start once the target is found.
+
+</details>
 
 For example, starting from `play`, we can find the following ladders:
 

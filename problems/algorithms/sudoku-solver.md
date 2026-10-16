@@ -14,14 +14,40 @@
 We are now going to build on our earlier Sudoku problem. We previously wrote a
 function to check a Sudoku grid was valid
 (the [Sudoku checker](../python-fundamentals.md#q7-sudoku-checker)), and now we
-will write a new function to find a solution.
+will write a new function to find a solution: given a puzzle with some cells
+blank, fill in all of them, or report that no solution exists. Some puzzles have
+more than one solution, and you only need to find one.
+
+Build on `sudoku_checker` in [sudoku.py](../../src/pyproblems/sudoku.py) by
+implementing `is_valid_placement(grid, row, column, value)` and
+`sudoku_solver(grid)` in the same file. The docstrings
+give the argument conventions and edge cases. Test a completed grid, an
+unsolvable grid, and a puzzle with multiple valid solutions, as well as the
+supplied puzzles.
+
+Stuck? There are three 💡 hints, each giving a little more away.
+
+<details>
+<summary>💡 Hint 1: a nudge</summary>
+
+How do you solve a Sudoku by hand when no cell is forced? You pick a digit, carry
+on, and sometimes discover later that it was a mistake. What do you do then, and
+what does your program need to remember in order to do the same?
+
+</details>
+
+<details>
+<summary>💡 Hint 2: a strategy</summary>
 
 One approach is a recursive backtracking algorithm. Try a valid digit in an
 empty cell, then continue from the resulting partial grid. If that choice leads
 to a dead end, undo it and try the next digit. Stop when you find one complete
 solution; there is no need to enumerate every possible completion.
 
-Use this outline:
+</details>
+
+<details>
+<summary>💡 Hint 3: an outline</summary>
 
 ```text
 solve(grid):
@@ -36,12 +62,7 @@ solve(grid):
   return failure (no choice led to a solution)
 ```
 
-Build on `sudoku_checker` in [sudoku.py](../../src/pyproblems/sudoku.py) by
-implementing `is_valid_placement(grid, row, column, value)` and
-`sudoku_solver(grid)` in the same file. The docstrings
-give the argument conventions and edge cases. Test a completed grid, an
-unsolvable grid, and a puzzle with multiple valid solutions, as well as the
-supplied puzzles.
+</details>
 
 **Extension 🚀: does the order of the search matter?** Your solver fills the
 *first* blank cell. A search that does the same work in a different order can
@@ -57,12 +78,17 @@ tests; your own counts are the check.
    up on that branch immediately.
 3. Compare the counts, puzzle by puzzle. Which puzzles benefit most, and why
    does choosing the most constrained cell help? 💡 A cell with exactly one
-   valid digit is a forced move, so no guessing is needed there.[^sudoku-order]
+   valid digit is a forced move, so no guessing is needed there.
 
-[^sudoku-order]: The number of recursive calls, not the running time, is the
-    fairest measure here, because choosing the best cell costs extra work per
-    call. Expect a few puzzles to need tens of thousands of calls in the
-    first-blank order but under a hundred with the most-constrained rule.
+<details>
+<summary>What did you discover?</summary>
+
+The number of recursive calls, not the running time, is the fairest measure here,
+because choosing the best cell costs extra work per call. Expect a few puzzles to
+need tens of thousands of calls in the first-blank order but under a hundred with
+the most-constrained rule.
+
+</details>
 
 ## Where next?
 
