@@ -7,9 +7,10 @@ end *green*. Most functions start as stubs whose tests fail, and your job is to
 turn them green by implementing them one small step at a time. The problems run
 from FizzBuzz-sized programming puzzles to data analysis and statistical
 modelling. If you complete all the exercises you'll have touched on Python
-fundamentals such as list comprehensions, generators and object orientation, but
-also maximum likelihood, expectation-maximisation, recursion, test first
-development, refactoring, graph search and even cellular automaton.
+fundamentals such as list comprehensions, generators, recursion and object
+orientation, but also maximum likelihood, expectation-maximisation, test first
+development, refactoring, graph search, probability puzzles that defy intuition
+and even cellular automaton.
 
 > [!TIP]
 > **New here?** Follow [Start here](#start-here) below to install the tools and
@@ -92,6 +93,7 @@ useful but not required. Each topic page links onwards to related exercises.
 | [Data Analysis](problems/data-analysis.md) | [Q1 Mysterious data](problems/data-analysis.md#q1-mysterious-data-), [Q2 Steak, Tea and Toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast), [Q3 Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | [Python Fundamentals](problems/python-fundamentals.md), science packages. Q3 also needs [Scientific Python Q2](problems/scientific-python.md#q2-linear-models-and-ordinary-least-squares) |
 | [Statistical Modelling](problems/statistical-modelling.md) | [Gaussian-mixture](problems/statistical-modelling.md#gaussian-mixture-) (optional), [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-) 😱 | [Scientific Python Q5](problems/scientific-python.md#q5-likelihood-and-normal-maximum-likelihood-estimation). Recommended first for EM: [Data Analysis Q3](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) |
 | [Algorithms and Search](problems/algorithms-and-search.md) | [Word ladder](problems/algorithms/word-ladder.md), [...Try, try again](problems/algorithms/rugby.md), [Global sequence alignment](problems/algorithms/global-sequence-alignment.md), [Sudoku solver](problems/algorithms/sudoku-solver.md) | [Python Fundamentals](problems/python-fundamentals.md). The Sudoku solver needs [Sudoku checker (Q7)](problems/python-fundamentals.md#q7-sudoku-checker). Recommended first: [Fibonacci (Q4)](problems/python-fundamentals.md#q4-fibonacci-sequence) for rugby, and rugby for alignment |
+| [Against the Odds 🎲](problems/against-the-odds.md) | [The office party](problems/against-the-odds.md#the-office-party-), [The hustler's dice](problems/against-the-odds.md#the-hustlers-dice-), [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-), [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | [Python Fundamentals](problems/python-fundamentals.md). Recommended first: [Fibonacci (Q4)](problems/python-fundamentals.md#q4-fibonacci-sequence) for the coin patterns, and [The office party](problems/against-the-odds.md#the-office-party-) for the prisoners. The investigations use the science packages |
 | [Models of Life 🌿](problems/models-of-life.md) | [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-), [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | [Python Fundamentals](problems/python-fundamentals.md), science packages |
 
 ## Choosing a route
@@ -148,6 +150,12 @@ next.
   [...Try, try again](problems/algorithms/rugby.md),
   [Sudoku solver](problems/algorithms/sudoku-solver.md) and
   [global sequence alignment](problems/algorithms/global-sequence-alignment.md).
+- The probability puzzles in [Against the Odds](problems/against-the-odds.md)
+  also need only Route 1, and are a good way to practise simulation:
+  [the office party](problems/against-the-odds.md#the-office-party-),
+  [the hustler's dice](problems/against-the-odds.md#the-hustlers-dice-),
+  [waiting for heads](problems/against-the-odds.md#waiting-for-heads-) and
+  [the 100 prisoners](problems/against-the-odds.md#the-100-prisoners-).
 - The modelling projects need Route 2, and some comfort with probability
   densities, likelihood, logs, basic linear algebra and covariance matrices:
   [Scientific Python Q3](problems/scientific-python.md#q3-the-binomial-and-normal-distributions),
@@ -172,3 +180,8 @@ next.
 - [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 - [Expectation-Maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
 - [Dawkins' weasel program](https://en.wikipedia.org/wiki/Weasel_program)
+- [Birthday problem](https://en.wikipedia.org/wiki/Birthday_problem) and
+  [Nontransitive dice](https://en.wikipedia.org/wiki/Nontransitive_dice)
+- [Penney's game](https://en.wikipedia.org/wiki/Penney%27s_game) and the
+  [100 prisoners problem](https://en.wikipedia.org/wiki/100_prisoners_problem),
+  which give away the solutions to the puzzles in Against the Odds

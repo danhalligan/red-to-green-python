@@ -41,7 +41,7 @@ def science_stack(monkeypatch):
 
 
 def test_notebooks_are_present():
-    assert len(NOTEBOOKS) == 6
+    assert len(NOTEBOOKS) == 7
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
