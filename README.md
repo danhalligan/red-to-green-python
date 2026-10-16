@@ -86,7 +86,7 @@ Then try a first exercise, for example the quick warm-up
 ## Index of problems
 
 Browse by what looks interesting. **Size** is a rough guide to how hot a problem
-is: 🙂 is mild and quick, 😐 takes some thought, 😬 is a substantial
+is: 🙂 is mild and quick, 🤔 takes some thought, 😰 is a substantial
 challenge and 🤯 is a project.
 Nothing has to be done in order. **Try first** only suggests a problem that makes
 this one easier or richer, and the one real dependency is marked **needs**.
@@ -95,29 +95,29 @@ this one easier or richer, and the one real dependency is marked **needs**.
 | --- | --- | --- | --- | --- |
 | [Python warm-ups](problems/python-fundamentals.md) | 🙂 | Warm-up | Quick ones: [exponentiation](problems/python-fundamentals.md#q1-exponentiation), [adjacent products](problems/python-fundamentals.md#q2-adjacent-products), [FizzBuzz](problems/python-fundamentals.md#q3-fizzbuzz), [Fibonacci generators](problems/python-fundamentals.md#q4-fibonacci-sequence) and the [first non-repeating character](problems/python-fundamentals.md#q5-first-non-repeating-character) | |
 | [Python gotchas](problems/python-fundamentals.md#q6-python-gotchas) | 🙂 | Language puzzle | Predict what surprising snippets print, then fix them | |
-| [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | 😐 | Algorithm | Is this grid a valid Sudoku? | |
-| [Talking animals](problems/object-oriented-python.md) | 😐 | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
-| [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | 😬 | Refactoring | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
+| [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | 🤔 | Algorithm | Is this grid a valid Sudoku? | |
+| [Talking animals](problems/object-oriented-python.md) | 🤔 | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
+| [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | 😰 | Refactoring | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
 | [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | 🙂 | Test-first kata (optional) | Sing the song one test at a time, then write tests of your own | |
-| [Word ladder](problems/algorithms/word-ladder.md) | 😐 | Algorithm | Turn `play` into `game` one letter at a time | |
-| [...Try, try again](problems/algorithms/rugby.md) | 😐 | Algorithm | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [Sudoku solver](problems/algorithms/sudoku-solver.md) | 😬 | Algorithm | Backtrack your way to a solution. **Needs** the [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | |
+| [Word ladder](problems/algorithms/word-ladder.md) | 🤔 | Algorithm | Turn `play` into `game` one letter at a time | |
+| [...Try, try again](problems/algorithms/rugby.md) | 🤔 | Algorithm | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
+| [Sudoku solver](problems/algorithms/sudoku-solver.md) | 😰 | Algorithm | Backtrack your way to a solution. **Needs** the [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | |
 | [Global sequence alignment](problems/algorithms/global-sequence-alignment.md) | 🤯| Algorithm | Align two DNA sequences, and find out why trying every alignment cannot work | [...Try, try again](problems/algorithms/rugby.md) |
 | [Mysterious data](problems/data-analysis.md#q1-mysterious-data-) | 🙂 | Data investigation | Thirteen mystery datasets: which of them are the same? | |
-| [Steak, tea and toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast) | 😐 | Data investigation | Do people who burn their toast also like well-done steak? | |
-| [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | 😐 | Data investigation | When will the geyser erupt next, and is your model any good? | |
-| [How uncertain is an average?](problems/scientific-python.md#q1-how-uncertain-is-an-average) | 😐 | Scientific investigation | Does the textbook standard-error formula tell the truth? | |
+| [Steak, tea and toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast) | 🤔 | Data investigation | Do people who burn their toast also like well-done steak? | |
+| [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | 🤔 | Data investigation | When will the geyser erupt next, and is your model any good? | |
+| [How uncertain is an average?](problems/scientific-python.md#q1-how-uncertain-is-an-average) | 🤔 | Scientific investigation | Does the textbook standard-error formula tell the truth? | |
 | [When does the normal approximation fail?](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail) | 🙂 | Scientific investigation | Find where a famous shortcut breaks | |
-| [Two methods, two answers](problems/scientific-python.md#q3-two-methods-two-answers) | 😐 | Scientific investigation | Two estimates of the same uncertainty disagree. Why? | |
-| [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) | 😬 | Statistical modelling | Work out the process behind the data by maximum likelihood | |
-| [Can you trust a 95% interval?](problems/scientific-python.md#q5-can-you-trust-a-95-interval-) | 😬 | Scientific investigation | Test the claim, and find when it fails | |
+| [Two methods, two answers](problems/scientific-python.md#q3-two-methods-two-answers) | 🤔 | Scientific investigation | Two estimates of the same uncertainty disagree. Why? | |
+| [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) | 😰 | Statistical modelling | Work out the process behind the data by maximum likelihood | |
+| [Can you trust a 95% interval?](problems/scientific-python.md#q5-can-you-trust-a-95-interval-) | 😰 | Scientific investigation | Test the claim, and find when it fails | |
 | [Gaussian mixture](problems/statistical-modelling.md#gaussian-mixture-) | 🤯| Statistical modelling | Fit two hidden populations at once (optional) | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) |
 | [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-) | 🤯| Statistical modelling | Expectation-maximisation, from hard labels to the Old Faithful geyser | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters), [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) |
 | [The office party](problems/against-the-odds.md#the-office-party-) | 🙂 | Probability puzzle | How many people before a shared birthday is more likely than not? | |
-| [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-) | 😐 | Probability puzzle | Why is waiting for `HH` different from waiting for `HT`? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | 😬 | Probability puzzle | A hopeless-looking last chance at freedom | [The office party](problems/against-the-odds.md#the-office-party-) |
-| [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-) | 😐 | Simulation | Can you build a machine that makes more machines? | |
-| [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | 😐 | Simulation | Can a sentence evolve out of gibberish? | |
+| [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-) | 🤔 | Probability puzzle | Why is waiting for `HH` different from waiting for `HT`? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
+| [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | 😰 | Probability puzzle | A hopeless-looking last chance at freedom | [The office party](problems/against-the-odds.md#the-office-party-) |
+| [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-) | 🤔 | Simulation | Can you build a machine that makes more machines? | |
+| [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | 🤔 | Simulation | Can a sentence evolve out of gibberish? | |
 
 Each topic also has an overview page: [Python Fundamentals](problems/python-fundamentals.md),
 [Object-oriented Python](problems/object-oriented-python.md),
