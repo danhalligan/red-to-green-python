@@ -85,39 +85,41 @@ Then try a first exercise, for example the quick warm-up
 
 ## Index of problems
 
-Browse by what looks interesting. **Size** is a rough guide: S is small and
-quick, M takes some thought, L is a substantial challenge and XL is a project.
+Browse by what looks interesting. **Size** is a rough guide, and the more beaten
+up the Doom guy, the bigger the problem: :suspect: is small and quick,
+:hurtrealbad: takes some thought, :feelsgood: is a substantial challenge and
+:goberserk: is a project.
 Nothing has to be done in order. **Try first** only suggests a problem that makes
 this one easier or richer, and the one real dependency is marked **needs**.
 🔬 marks problems that use the science packages.
 
 | Problem | Size | Style | The hook | Try first |
 | --- | --- | --- | --- | --- |
-| [Python warm-ups](problems/python-fundamentals.md) | S | Warm-up | Quick ones: [exponentiation](problems/python-fundamentals.md#q1-exponentiation), [adjacent products](problems/python-fundamentals.md#q2-adjacent-products), [FizzBuzz](problems/python-fundamentals.md#q3-fizzbuzz), [Fibonacci generators](problems/python-fundamentals.md#q4-fibonacci-sequence) and the [first non-repeating character](problems/python-fundamentals.md#q5-first-non-repeating-character) | |
-| [Python gotchas](problems/python-fundamentals.md#q6-python-gotchas) | S | Language puzzle | Predict what surprising snippets print, then fix them | |
-| [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | M | Algorithm | Is this grid a valid Sudoku? | |
-| [Talking animals](problems/object-oriented-python.md) | M | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
-| [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | L | Refactoring | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
-| [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | S | Test-first kata (optional) | Sing the song one test at a time, then write tests of your own | |
-| [Word ladder](problems/algorithms/word-ladder.md) | M | Algorithm | Turn `play` into `game` one letter at a time | |
-| [...Try, try again](problems/algorithms/rugby.md) | M | Algorithm | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [Sudoku solver](problems/algorithms/sudoku-solver.md) | L | Algorithm | Backtrack your way to a solution. **Needs** the [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | |
-| [Global sequence alignment](problems/algorithms/global-sequence-alignment.md) | XL | Algorithm | Align two DNA sequences, and find out why trying every alignment cannot work | [...Try, try again](problems/algorithms/rugby.md) |
-| [Mysterious data](problems/data-analysis.md#q1-mysterious-data-) | S | Data investigation 🔬 | Thirteen mystery datasets: which of them are the same? | |
-| [Steak, tea and toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast) | M | Data investigation 🔬 | Do people who burn their toast also like well-done steak? | |
-| [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | M | Data investigation 🔬 | When will the geyser erupt next, and is your model any good? | |
-| [How uncertain is an average?](problems/scientific-python.md#q1-how-uncertain-is-an-average) | M | Scientific investigation 🔬 | Does the textbook standard-error formula tell the truth? | |
-| [When does the normal approximation fail?](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail) | S | Scientific investigation 🔬 | Find where a famous shortcut breaks | |
-| [Two methods, two answers](problems/scientific-python.md#q3-two-methods-two-answers) | M | Scientific investigation 🔬 | Two estimates of the same uncertainty disagree. Why? | |
-| [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) | L | Statistical modelling 🔬 | Work out the process behind the data by maximum likelihood | |
-| [Can you trust a 95% interval?](problems/scientific-python.md#q5-can-you-trust-a-95-interval-) | L | Scientific investigation 🔬 | Test the claim, and find when it fails | |
-| [Gaussian mixture](problems/statistical-modelling.md#gaussian-mixture-) 😱 | XL | Statistical modelling 🔬 | Fit two hidden populations at once (optional) | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) |
-| [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-) 😱 | XL | Statistical modelling 🔬 | Expectation-maximisation, from hard labels to the Old Faithful geyser | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters), [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) |
-| [The office party](problems/against-the-odds.md#the-office-party-) | S | Probability puzzle | How many people before a shared birthday is more likely than not? | |
-| [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-) | M | Probability puzzle | Why is waiting for `HH` different from waiting for `HT`? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | L | Probability puzzle | A hopeless-looking last chance at freedom | [The office party](problems/against-the-odds.md#the-office-party-) |
-| [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-) | M | Simulation 🔬 | Can you build a machine that makes more machines? | |
-| [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | M | Simulation 🔬 | Can a sentence evolve out of gibberish? | |
+| [Python warm-ups](problems/python-fundamentals.md) | :suspect: | Warm-up | Quick ones: [exponentiation](problems/python-fundamentals.md#q1-exponentiation), [adjacent products](problems/python-fundamentals.md#q2-adjacent-products), [FizzBuzz](problems/python-fundamentals.md#q3-fizzbuzz), [Fibonacci generators](problems/python-fundamentals.md#q4-fibonacci-sequence) and the [first non-repeating character](problems/python-fundamentals.md#q5-first-non-repeating-character) | |
+| [Python gotchas](problems/python-fundamentals.md#q6-python-gotchas) | :suspect: | Language puzzle | Predict what surprising snippets print, then fix them | |
+| [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | :hurtrealbad: | Algorithm | Is this grid a valid Sudoku? | |
+| [Talking animals](problems/object-oriented-python.md) | :hurtrealbad: | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
+| [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | :feelsgood: | Refactoring | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
+| [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | :suspect: | Test-first kata (optional) | Sing the song one test at a time, then write tests of your own | |
+| [Word ladder](problems/algorithms/word-ladder.md) | :hurtrealbad: | Algorithm | Turn `play` into `game` one letter at a time | |
+| [...Try, try again](problems/algorithms/rugby.md) | :hurtrealbad: | Algorithm | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
+| [Sudoku solver](problems/algorithms/sudoku-solver.md) | :feelsgood: | Algorithm | Backtrack your way to a solution. **Needs** the [Sudoku checker](problems/python-fundamentals.md#q7-sudoku-checker) | |
+| [Global sequence alignment](problems/algorithms/global-sequence-alignment.md) | :goberserk: | Algorithm | Align two DNA sequences, and find out why trying every alignment cannot work | [...Try, try again](problems/algorithms/rugby.md) |
+| [Mysterious data](problems/data-analysis.md#q1-mysterious-data-) | :suspect: | Data investigation | Thirteen mystery datasets: which of them are the same? | |
+| [Steak, tea and toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast) | :hurtrealbad: | Data investigation | Do people who burn their toast also like well-done steak? | |
+| [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | :hurtrealbad: | Data investigation | When will the geyser erupt next, and is your model any good? | |
+| [How uncertain is an average?](problems/scientific-python.md#q1-how-uncertain-is-an-average) | :hurtrealbad: | Scientific investigation | Does the textbook standard-error formula tell the truth? | |
+| [When does the normal approximation fail?](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail) | :suspect: | Scientific investigation | Find where a famous shortcut breaks | |
+| [Two methods, two answers](problems/scientific-python.md#q3-two-methods-two-answers) | :hurtrealbad: | Scientific investigation | Two estimates of the same uncertainty disagree. Why? | |
+| [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) | :feelsgood: | Statistical modelling | Work out the process behind the data by maximum likelihood | |
+| [Can you trust a 95% interval?](problems/scientific-python.md#q5-can-you-trust-a-95-interval-) | :feelsgood: | Scientific investigation | Test the claim, and find when it fails | |
+| [Gaussian mixture](problems/statistical-modelling.md#gaussian-mixture-) | :goberserk: | Statistical modelling | Fit two hidden populations at once (optional) | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) |
+| [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-) | :goberserk: | Statistical modelling | Expectation-maximisation, from hard labels to the Old Faithful geyser | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters), [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) |
+| [The office party](problems/against-the-odds.md#the-office-party-) | :suspect: | Probability puzzle | How many people before a shared birthday is more likely than not? | |
+| [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-) | :hurtrealbad: | Probability puzzle | Why is waiting for `HH` different from waiting for `HT`? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
+| [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | :feelsgood: | Probability puzzle | A hopeless-looking last chance at freedom | [The office party](problems/against-the-odds.md#the-office-party-) |
+| [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-) | :hurtrealbad: | Simulation | Can you build a machine that makes more machines? | |
+| [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | :hurtrealbad: | Simulation | Can a sentence evolve out of gibberish? | |
 
 Each topic also has an overview page: [Python Fundamentals](problems/python-fundamentals.md),
 [Object-oriented Python](problems/object-oriented-python.md),
@@ -131,12 +133,12 @@ Each topic also has an overview page: [Python Fundamentals](problems/python-fund
 
 ## Choosing a route
 
-If you would rather follow a path than browse, these routes are optional
-recommendations. None is required, you can mix and match, and each finishes at a
-sensible stopping point. Each route has its own test commands, and each page
-suggests where to go next.
+The index above lists the topics; the routes below pick a path through them.
+Each route has its own test commands, and finishing one counts as completing a
+useful course. You can branch between routes, and each page suggests where to go
+next.
 
-**Route 1: Python core.** Practise the language and writing tested code.
+**Route 1: Python core.** Learn the language and practise writing tested code.
 
 1. [Python Fundamentals](problems/python-fundamentals.md):
    [Q1](problems/python-fundamentals.md#q1-exponentiation),
@@ -145,31 +147,25 @@ suggests where to go next.
    [Q4](problems/python-fundamentals.md#q4-fibonacci-sequence),
    [Q5](problems/python-fundamentals.md#q5-first-non-repeating-character),
    [Q6](problems/python-fundamentals.md#q6-python-gotchas) and
-   [Q7](problems/python-fundamentals.md#q7-sudoku-checker):
-   `uv run pytest tests/test_language.py tests/test_sudoku.py -q`
+   [Q7](problems/python-fundamentals.md#q7-sudoku-checker)
 2. [Object-oriented Python](problems/object-oriented-python.md), from
    [noisy animals](problems/object-oriented-python.md#noisy-animals-) through
    [the fox](problems/object-oriented-python.md#what-does-the-fox-say-) and
    [the parrot](problems/object-oriented-python.md#a-parrot-that-learns-) to
-   [the robot](problems/object-oriented-python.md#the-robot-joins-the-band-):
-   `uv run pytest tests/test_oop.py -q`
+   [the robot](problems/object-oriented-python.md#the-robot-joins-the-band-)
 3. One kata from
    [Refactoring and Test-First Development](problems/refactoring-and-test-first.md),
    either [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-)
-   (`tests/test_gilded_rose.py`) or
-   [99 Bottles](problems/refactoring-and-test-first.md#99-bottles)
-   (`tests/test_bottles.py`). The other is optional.
-4. [Word ladder](problems/algorithms/word-ladder.md):
-   `uv run pytest tests/test_word_ladder.py -q`
+   or
+   [99 Bottles](problems/refactoring-and-test-first.md#99-bottles). The other is optional.
+4. [Word ladder](problems/algorithms/word-ladder.md).
 
-**Route 2: Scientific Python.** Work with real data. A natural next step after
-Route 1, though basic Python is all it needs:
+**Route 2: Scientific Python.** Work with real data. Do Route 1 first, then:
 
 1. [Data Analysis Q1, Mysterious data](problems/data-analysis.md#q1-mysterious-data-).
 2. [Scientific Python Q1](problems/scientific-python.md#q1-how-uncertain-is-an-average)
    and [Q3](problems/scientific-python.md#q3-two-methods-two-answers) (standard
-   error and the bootstrap):
-   `uv run pytest tests/test_statistics.py -k standard_error`
+   error and the bootstrap)
 3. [Data Analysis Q2, Steak, Tea, and Toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast)
    and
    [Q3, Old Faithful regression](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption).
@@ -179,19 +175,17 @@ Route 1, though basic Python is all it needs:
 
 **Route 3: Advanced extensions.** Choose what interests you.
 
-- The algorithm projects need little beyond basic Python (the Sudoku solver
-  needs the Sudoku checker):
+- The algorithm projects need only Route 1:
   [...Try, try again](problems/algorithms/rugby.md),
   [Sudoku solver](problems/algorithms/sudoku-solver.md) and
   [global sequence alignment](problems/algorithms/global-sequence-alignment.md).
 - The probability puzzles in [Against the Odds](problems/against-the-odds.md)
-  also need only basic Python, and are a good way to practise simulation:
+  also need only Route 1, and are a good way to practise simulation:
   [the office party](problems/against-the-odds.md#the-office-party-),
   [waiting for heads](problems/against-the-odds.md#waiting-for-heads-) and
   [the 100 prisoners](problems/against-the-odds.md#the-100-prisoners-).
-- The modelling projects suit anyone comfortable with probability densities,
-  likelihood, logs, basic linear algebra and covariance matrices, and are easier
-  after Route 2:
+- The modelling projects need Route 2, and some comfort with probability
+  densities, likelihood, logs, basic linear algebra and covariance matrices:
   [Scientific Python Q2](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail),
   [Scientific Python Q4](problems/scientific-python.md#q4-recovering-the-parameters),
   [Gaussian-mixture](problems/statistical-modelling.md#gaussian-mixture-) and
