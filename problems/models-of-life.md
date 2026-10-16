@@ -100,4 +100,6 @@ seeded runs rather than treating one random run as a universal answer.
 - **Fit models to data:** [Statistical Modelling](statistical-modelling.md)
   is the most advanced topic.
 - **Algorithms:** [Algorithms and Search](algorithms-and-search.md).
+- **More simulation:** [Against the Odds](against-the-odds.md) uses simulation to
+  test your intuition about probability.
 - Return to the [routes](../README.md#choosing-a-route).

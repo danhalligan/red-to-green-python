@@ -10,3 +10,6 @@
 * Add "...Try, try again", a rugby union scoring exercise on recursion,
   memoisation, and bottom-up counting, with a test time limit that reports
   exponential growth instead of hanging.
+* Add "Against the Odds", four counterintuitive probability puzzles (the
+  birthday problem, non-transitive dice, waiting times for coin patterns and the
+  100 prisoners problem) with starter code, tests and an investigation notebook.
