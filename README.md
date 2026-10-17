@@ -1,5 +1,8 @@
 # Red to Green: Python problems from FizzBuzz to mixture models
 
+[Get started](#getting-started) · [Choose a problem](#index-of-problems) ·
+[Notebooks](#working-with-notebooks) · [Further reading](#further-reading-)
+
 ## Introduction
 
 Welcome! This is a collection of Python puzzles that begin *red* and end
@@ -13,18 +16,31 @@ development, refactoring, graph search, maximum likelihood,
 expectation-maximisation, probabilities that defy intuition and even a cellular
 automaton.
 
-> [!IMPORTANT]
-> The purpose of this package is partially to help you learn Python, but is also
-> a collection of interesting and hopefully satisfying problems to solve. It is
-> not simply about collecting completed solutions. A coding agent could complete
-> the exercises for you, but that would miss the point entirely. Writing code,
-> investigating failures, and explaining your choices build an understanding of
-> Python, statistics and algorithms that remain useful in the age of agentic
-> coding. You'll need this understanding to specify requirements, assess
-> generated code, spot mistakes, and maintain the result. Consider using agents
-> to support your learning with hints, explanations, or reviews of your own
-> attempts. Try each problem yourself first, and make sure you can explain and
-> test any code you adopt; passing tests alone is not the learning goal.
+> [!TIP]
+> Try each problem yourself first. Use coding agents for hints, explanations
+> and reviews of your attempts.
+
+<details>
+<summary>Using coding agents while learning</summary>
+
+The purpose of this package is partially to help you learn Python, but is also
+a collection of interesting and hopefully satisfying problems to solve. It is
+not simply about collecting completed solutions. A coding agent could complete
+the exercises for you, but that would miss the point entirely. Writing code,
+investigating failures, and explaining your choices build an understanding of
+Python, statistics and algorithms that remain useful in the age of agentic
+coding. You'll need this understanding to specify requirements, assess
+generated code, spot mistakes, and maintain the result. Consider using agents
+to support your learning with hints, explanations, or reviews of your own
+attempts. Try each problem yourself first, and make sure you can explain and
+test any code you adopt; passing tests alone is not the learning goal.
+
+[AGENTS.md](AGENTS.md) gives compatible coding agents learning-first guidance:
+offer hints before solutions and ask before editing your exercise code.
+Support varies by tool; if yours does not load it automatically, ask it to
+read the guide first.
+
+</details>
 
 When working through the problems, look out for these markers:
 
