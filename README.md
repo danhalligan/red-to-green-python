@@ -4,56 +4,55 @@
 
 Welcome! This is a collection of Python puzzles that begin *red* and end
 *green*. Most functions start as stubs whose tests fail, and your job is to turn
-them green. It is **not a course**: browse the [catalogue](#index-of-problems),
-pick something that looks fun, struggle with it productively, use the hints when
-you need them, and learn Python by solving it. The problems run from
-FizzBuzz-sized warm-ups to data analysis, simulation, algorithms and statistical
-modelling, and along the way you will meet list comprehensions, generators,
-recursion, object orientation, test-first development, refactoring, graph
-search, maximum likelihood, expectation-maximisation, probabilities that
-defy intuition and even a cellular automaton.
+them green ✅.
 
-> [!TIP]
-> **Not sure where to begin?** Pick any problem from the
-> [catalogue](#index-of-problems), or follow [Start here](#start-here) to
-> install the tools and run your first failing test.
-
-Look out for these markers: 💡 a hint (in a footnote or a collapsible section,
-sometimes in three levels that give away a little more each time), 😱 a
-particularly challenging section, and 🚀 an optional extension. Some
-investigations end with a collapsible **What did you discover?** section: read
-it after you have formed your own view.
+Problems run from FizzBuzz-sized warm-ups to data analysis, simulation,
+algorithms and statistical modelling, and along the way you will meet list
+comprehensions, generators, recursion, object orientation, test-first
+development, refactoring, graph search, maximum likelihood,
+expectation-maximisation, probabilities that defy intuition and even a cellular
+automaton.
 
 > [!IMPORTANT]
-> The purpose of this package is partially to help you learn Python, but is also a
-> collection of interesting and hopefully satisfying problems to solve. It is not
-> simply about collecting completed solutions. A coding agent could complete the
-> exercises for you, but that would bypass the practice and interest they are
-> designed to provide. Writing code, investigating failures, and explaining your
-> choices build an understanding of Python that remains useful in the age of
-> agentic coding: you need that understanding to specify requirements, assess
-> generated code, spot mistakes, and maintain the result. Agents can support your
-> learning with hints, explanations, or reviews of your own attempts. Try each
-> problem yourself first, and make sure you can explain and test any code you
-> adopt; passing tests alone is not the learning goal.
+> The purpose of this package is partially to help you learn Python, but is also
+> a collection of interesting and hopefully satisfying problems to solve. It is
+> not simply about collecting completed solutions. A coding agent could complete
+> the exercises for you, but that would miss the point entirely. Writing code,
+> investigating failures, and explaining your choices build an understanding of
+> Python, statistics and algorithms that remain useful in the age of agentic
+> coding. You'll need this understanding to specify requirements, assess
+> generated code, spot mistakes, and maintain the result. Consider using agents
+> to support your learning with hints, explanations, or reviews of your own
+> attempts. Try each problem yourself first, and make sure you can explain and
+> test any code you adopt; passing tests alone is not the learning goal.
+
+When working through the problems, look out for these markers:
+
+- 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
+  that give away a little more each time)
+- 😱 a tricky section
+- 🚀 an optional extension.
+
+Some investigations also end with a collapsible **What did you discover?**
+section: read it after you have formed your own view.
 
 You do not need to do everything, or to do things in order. Problems range from
-a few minutes to several sessions (the size in the catalogue is a rough guide),
-and the optional [routes](#choosing-a-route) below are only suggestions. For an
-overview of the repository layout and development setup, see
+a few minutes to several sessions.
+
+For an overview of the repository layout and development setup, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 
-## Start here
+## Getting started
 
-The dev container is ready to use. For a local setup with the notebooks and
-scientific tools, install the complete environment with:
+The dev container is ready to use, but not required. For a local setup with the
+notebooks and scientific tools, install the complete environment with:
 
 ```bash
 uv sync --all-groups --extra science
 ```
 
 Then try a first exercise, for example the quick warm-up
-[Q1: Exponentiation](problems/python-fundamentals.md#q1-exponentiation):
+[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
 
 1. Read the prompt, then run its test. It is **expected to fail** at first:
 
@@ -63,129 +62,136 @@ Then try a first exercise, for example the quick warm-up
 
 2. Implement `exponentiate` in `src/pyproblems/language.py`.
 3. Rerun the same command until it passes: that is red to green.
-4. Then pick anything else from the [catalogue](#index-of-problems), or follow a
-   [route](#choosing-a-route).
+4. Keep going with the Python language problems, or pick any other!
 
 ## How to complete an exercise
 
-- Each topic has its own page, linked from the [catalogue](#index-of-problems),
-  which opens with anything you need beforehand and the test command that checks
-  it.
+- Each problem page, linked from the [index](#index-of-problems), opens with
+  anything you need beforehand and the test command that checks it. Some pages
+  group several related exercises.
 - Use the focused test command for the exercise you are working on. Most
   exercises begin as stubs, so their tests are red until you implement them.
   Topic-level commands run every exercise in a topic and are more useful after
   you have completed several.
-- Make one small change at a time and rerun the test.
+- Aim to make one small change at a time and rerun the test.
 - Look for 💡 hints only when you are stuck, opening one level at a time, and
   try the 🚀 extensions if you want more.
-- Notebook analyses (in `analysis/`) have no pass or fail, so they are checked by
-  your own plots and explanations.
+- Notebook analyses (in `analysis/`) have no pass or fail, so they are checked
+  by your own plots and explanations.
 - The early language exercises use only the Python standard library; scientific
   exercises need the optional science packages installed above.
 
 ## Index of problems
 
-Browse by what looks interesting. **Size** is a rough guide to how hot a problem
-is: ⭐ is mild and quick, ⭐⭐ takes some thought, ⭐⭐⭐ is a substantial
-challenge and ⭐⭐⭐⭐ is a project.
-Nothing has to be done in order. **Try first** only suggests a problem that makes
-this one easier or richer.
+Pick a topic that interests you. Each link opens a file under `problems/`;
+related exercises in the same file stay together here too. Pythonic Python pages
+are under `problems/pythonic-python/`, and algorithms under `problems/algorithms/`.
 
-| Problem | Size | Style | The hook | Try first |
-| --- | --- | --- | --- | --- |
-| [Python warm-ups](problems/python-fundamentals.md) | ⭐ | Warm-up | Quick ones: [exponentiation](problems/python-fundamentals.md#q1-exponentiation), [adjacent products](problems/python-fundamentals.md#q2-adjacent-products), [FizzBuzz](problems/python-fundamentals.md#q3-fizzbuzz), [Fibonacci generators](problems/python-fundamentals.md#q4-fibonacci-sequence) and the [first non-repeating character](problems/python-fundamentals.md#q5-first-non-repeating-character) | |
-| [Python gotchas](problems/python-fundamentals.md#q6-python-gotchas) | ⭐ | Coding | Predict what surprising snippets print, then fix them | |
-| [Talking animals](problems/object-oriented-python.md) | ⭐⭐ | Object-oriented | [Noisy animals](problems/object-oriented-python.md#noisy-animals-), a [fox nobody can hear](problems/object-oriented-python.md#what-does-the-fox-say-), [a parrot that learns](problems/object-oriented-python.md#a-parrot-that-learns-) and [a robot](problems/object-oriented-python.md#the-robot-joins-the-band-) | |
-| [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-) | ⭐⭐⭐ | Coding | Tame an inherited tangle of nested conditions without breaking it | [Talking animals](problems/object-oriented-python.md) |
-| [99 Bottles](problems/refactoring-and-test-first.md#99-bottles) | ⭐⭐ | Coding | Sing the song one test at a time, then write tests of your own | |
-| [Word ladder](problems/algorithms/word-ladder.md) | ⭐⭐ | Algorithms | Turn `play` into `game` one letter at a time | |
-| [...Try, try again](problems/algorithms/rugby.md) | ⭐⭐ | Algorithms | How many ways could a rugby score have happened? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [Sudoku solver](problems/algorithms/sudoku-solver.md) | ⭐⭐⭐ | Algorithms | Warm up with a Sudoku checker, then backtrack your way to a solution | |
-| [Global sequence alignment](problems/algorithms/global-sequence-alignment.md) | ⭐⭐⭐⭐| Algorithms | Align two DNA sequences, and find out why trying every alignment cannot work | [...Try, try again](problems/algorithms/rugby.md) |
-| [Mysterious data](problems/data-analysis.md#q1-mysterious-data-) | ⭐ | Analysis | Thirteen mystery datasets: which of them are the same? | |
-| [Steak, tea and toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast) | ⭐⭐ | Analysis | Do people who burn their toast also like well-done steak? | |
-| [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) | ⭐⭐ | Analysis | When will the geyser erupt next, and is your model any good? | |
-| [How uncertain is an average?](problems/scientific-python.md#q1-how-uncertain-is-an-average) | ⭐⭐ | Scientific | Does the textbook standard-error formula tell the truth? | |
-| [When does the normal approximation fail?](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail) | ⭐ | Scientific | Find where a famous shortcut breaks | |
-| [Two methods, two answers](problems/scientific-python.md#q3-two-methods-two-answers) | ⭐⭐ | Scientific | Two estimates of the same uncertainty disagree. Why? | |
-| [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) | ⭐⭐⭐ | Modelling | Work out the process behind the data by maximum likelihood | |
-| [Can you trust a 95% interval?](problems/scientific-python.md#q5-can-you-trust-a-95-interval-) | ⭐⭐⭐ | Scientific | Test the claim, and find when it fails | |
-| [Gaussian mixture](problems/statistical-modelling.md#gaussian-mixture-) | ⭐⭐⭐⭐| Modelling | Fit two hidden populations at once (optional) | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters) |
-| [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-) | ⭐⭐⭐⭐| Modelling | Expectation-maximisation, from hard labels to the Old Faithful geyser | [Recovering the parameters](problems/scientific-python.md#q4-recovering-the-parameters), [Predicting Old Faithful](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption) |
-| [The office party](problems/against-the-odds.md#the-office-party-) | ⭐ | Probability | How many people before a shared birthday is more likely than not? | |
-| [Waiting for heads](problems/against-the-odds.md#waiting-for-heads-) | ⭐⭐ | Probability | Why is waiting for `HH` different from waiting for `HT`? | [Fibonacci](problems/python-fundamentals.md#q4-fibonacci-sequence) |
-| [The 100 prisoners](problems/against-the-odds.md#the-100-prisoners-) | ⭐⭐⭐ | Probability | A hopeless-looking last chance at freedom | [The office party](problems/against-the-odds.md#the-office-party-) |
-| [Conway's Game of Life](problems/models-of-life.md#conways-game-of-life-) | ⭐⭐ | Simulation | Can you build a machine that makes more machines? | |
-| [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-) | ⭐⭐ | Simulation | Can a sentence evolve out of gibberish? | |
+Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
+🌶️🌶️🌶️ challenging. A page may start gently and build up.
 
-Each topic also has an overview page: [Python Fundamentals](problems/python-fundamentals.md),
-[Object-oriented Python](problems/object-oriented-python.md),
-[Refactoring and Test-First Development](problems/refactoring-and-test-first.md),
-[Algorithms and Search](problems/algorithms-and-search.md),
-[Data Analysis](problems/data-analysis.md),
-[Scientific Python](problems/scientific-python.md),
-[Modelling](problems/statistical-modelling.md),
-[Against the Odds](problems/against-the-odds.md) and
-[Models of Life](problems/models-of-life.md).
+If you are new to Python, start with the fundamentals. Otherwise, dip in
+wherever you like; the notes below flag useful background, not a required order.
 
-## Choosing a route
+### Pythonic Python
 
-The index above lists the topics; the routes below pick a path through them.
-Each route has its own test commands, and finishing one counts as completing a
-useful course. You can branch between routes, and each page suggests where to go
-next.
+Practise writing clear Python, organising it with classes, and improving it
+through tests and refactoring.
 
-**Route 1: Python core.** Learn the language and practise writing tested code.
+- [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) 🌶️:
+  short language exercises covering exponentiation, adjacent products, FizzBuzz,
+  Fibonacci generators, the first non-repeating character, and Python gotchas.
+- [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
+  build a cast of talking animals, from noisy animals and a silent fox to a
+  parrot that learns and a robot. Practise classes, inheritance and polymorphism.
+- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️🌶️:
+  tame an inherited codebase without breaking its existing behaviour.
+  Familiarity with classes helps.
+- [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
+  build 99 Bottles one test at a time, then write tests of your own.
 
-1. [Python Fundamentals](problems/python-fundamentals.md):
-   [Q1](problems/python-fundamentals.md#q1-exponentiation),
-   [Q2](problems/python-fundamentals.md#q2-adjacent-products),
-   [Q3](problems/python-fundamentals.md#q3-fizzbuzz),
-   [Q4](problems/python-fundamentals.md#q4-fibonacci-sequence),
-   [Q5](problems/python-fundamentals.md#q5-first-non-repeating-character) and
-   [Q6](problems/python-fundamentals.md#q6-python-gotchas)
-2. [Object-oriented Python](problems/object-oriented-python.md), from
-   [noisy animals](problems/object-oriented-python.md#noisy-animals-) through
-   [the fox](problems/object-oriented-python.md#what-does-the-fox-say-) and
-   [the parrot](problems/object-oriented-python.md#a-parrot-that-learns-) to
-   [the robot](problems/object-oriented-python.md#the-robot-joins-the-band-)
-3. One kata from
-   [Refactoring and Test-First Development](problems/refactoring-and-test-first.md),
-   either [Gilded Rose](problems/refactoring-and-test-first.md#the-gilded-rose-kata-)
-   or
-   [99 Bottles](problems/refactoring-and-test-first.md#99-bottles). The other is optional.
-4. [Word ladder](problems/algorithms/word-ladder.md).
+### Algorithms and Search
 
-**Route 2: Scientific Python.** Work with real data. Do Route 1 first, then:
+Four self-contained exercises, each with its own page, starter code and tests.
+You can start with any of them, but some build on earlier ideas, as shown below.
 
-1. [Data Analysis Q1, Mysterious data](problems/data-analysis.md#q1-mysterious-data-).
-2. [Scientific Python Q1](problems/scientific-python.md#q1-how-uncertain-is-an-average)
-   and [Q3](problems/scientific-python.md#q3-two-methods-two-answers) (standard
-   error and the bootstrap)
-3. [Data Analysis Q2, Steak, Tea, and Toast](problems/data-analysis.md#q2-categorical-data-steak-tea-and-toast)
-   and
-   [Q3, Old Faithful regression](problems/data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption).
-4. Optionally, [Models of Life](problems/models-of-life.md):
-   [Game of Life](problems/models-of-life.md#conways-game-of-life-) and
-   [Dawkins' weasel](problems/models-of-life.md#dawkins-weasel-).
+- [Word ladder](problems/algorithms/word-ladder.md) 🌶️🌶️:
+  turn `play` into `game` one letter at a time.
+- [...Try, try again](problems/algorithms/rugby.md) 🌶️🌶️:
+  count the ways a rugby score could have happened, from recursion to dynamic
+  programming. The Fibonacci exercise is useful background.
+- [Sudoku solver](problems/algorithms/sudoku-solver.md) 🌶️🌶️🌶️:
+  warm up with a checker, then backtrack your way to a solution.
+- [Global sequence alignment](problems/algorithms/sequence-alignment.md)
+  🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
+  The rugby problem introduces the dynamic programming ideas used here.
 
-**Route 3: Advanced extensions.** Choose what interests you.
+### Data Analysis
 
-- The algorithm projects need only Route 1:
-  [...Try, try again](problems/algorithms/rugby.md),
-  [Sudoku solver](problems/algorithms/sudoku-solver.md) and
-  [global sequence alignment](problems/algorithms/global-sequence-alignment.md).
-- The Probabilitys in [Against the Odds](problems/against-the-odds.md)
-  also need only Route 1, and are a good way to practise simulation:
-  [the office party](problems/against-the-odds.md#the-office-party-),
-  [waiting for heads](problems/against-the-odds.md#waiting-for-heads-) and
-  [the 100 prisoners](problems/against-the-odds.md#the-100-prisoners-).
-- The modelling projects need Route 2, and some comfort with probability
-  densities, likelihood, logs, basic linear algebra and covariance matrices:
-  [Scientific Python Q2](problems/scientific-python.md#q2-when-does-the-normal-approximation-fail),
-  [Scientific Python Q4](problems/scientific-python.md#q4-recovering-the-parameters),
-  [Gaussian-mixture](problems/statistical-modelling.md#gaussian-mixture-) and
-  [Gaussian-mixture EM](problems/statistical-modelling.md#gaussian-mixture-em-).
+Explore data, look for relationships, and question what summaries hide.
+These notebook-based exercises use the optional scientific stack.
+
+- [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
+  thirteen datasets with matching summaries. What do their plots reveal?
+- [Steak, Tea, and Toast](problems/data-analysis/steak-tea-and-toast.md) 🌶️🌶️:
+  clean messy survey responses and investigate associations between preferences.
+- [Predicting Old Faithful](problems/data-analysis/predicting-old-faithful.md) 🌶️🌶️:
+  predict the next eruption with regression, then ask what the line misses.
+
+### Uncertainty and Simulation
+
+Use repeated experiments to find out how much you can trust an estimate.
+Basic NumPy, probability and statistics help; the bootstrap and confidence
+interval exercises build on standard error.
+
+- [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
+  🌶️🌶️: estimate standard error and test its behaviour across repeated samples.
+- [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
+  🌶️🌶️: compare bootstrap and analytic estimates of the same uncertainty.
+- [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
+  🌶️🌶️🌶️: measure how often confidence intervals keep their promise.
+- [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
+  🌶️: find when a continuous approximation to a discrete distribution breaks down.
+
+### Statistical Modelling
+
+Choose a model, estimate its parameters, and examine what it misses.
+Start with likelihood for a single normal distribution; the mixture exercises
+build on it, with covariance matrices needed for multivariate EM.
+
+- [Recovering the parameters](problems/statistical-modelling/recovering-the-parameters.md)
+  🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
+- [Fitting a Gaussian mixture](problems/statistical-modelling/gaussian-mixture.md)
+  🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
+- [Expectation-maximisation](problems/statistical-modelling/expectation-maximisation.md)
+  🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
+
+The [Old Faithful notebook](analysis/old_faithful.ipynb) is shared across these
+topics: the same data supports questions about uncertainty, prediction and
+model choice. Each exercise links to its relevant section.
+
+### Against the Odds
+
+Probability puzzles where your gut is confidently wrong. Predict, simulate,
+calculate and explain, using only the Python standard library; the investigations
+share a notebook and use the science packages for plots.
+
+- [The office party](problems/against-the-odds/office-party.md) 🌶️:
+  how many people before a shared birthday is more likely than not?
+- [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
+  why is waiting for `HH` different from waiting for `HT`?
+- [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
+  find a strategy for a hopeless-looking last chance at freedom.
+
+### Models of Life
+
+Explore how simple rules produce complex behaviour: deterministic cellular
+automata and stochastic evolution. Both exercises use NumPy.
+
+- [Conway's Game of Life](problems/models-of-life/game-of-life.md) 🌶️🌶️:
+  build a cellular automaton and watch patterns grow and move.
+- [Dawkins' weasel](problems/models-of-life/weasel.md) 🌶️🌶️:
+  can a sentence evolve out of gibberish through mutation and selection?
 
 ## Further Reading 📚
 

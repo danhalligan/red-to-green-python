@@ -1,7 +1,5 @@
 # Global sequence alignment 🧬
 
-[← All problems](../../README.md#index-of-problems)
-
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [...Try, try again](rugby.md), which introduces
@@ -192,12 +190,3 @@ reverse both lists and join each into a string
 The docstrings give the details. Check both functions against your brute-force
 version on short sequences. The longer DNA fixture checks that the same
 algorithm scales beyond the small worked example.
-
-## Where next?
-
-- **More search:** the [Sudoku solver](sudoku-solver.md) uses backtracking, and
-  [Word ladder](word-ladder.md) searches a network of words.
-- **Optimisation of another kind:** [Statistical Modelling](../statistical-modelling.md)
-  fits models to data, and needs
-  [Scientific Python](../scientific-python.md).
-- Back to [Algorithms and Search](../algorithms-and-search.md).

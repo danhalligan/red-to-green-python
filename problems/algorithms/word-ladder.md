@@ -1,7 +1,5 @@
 # Word ladder 🪜
 
-[← All problems](../../README.md#index-of-problems)
-
 > **Before you start:** basic Python.
 >
 > **You’ll practise:** sets and strings, searching a network of words, and
@@ -72,14 +70,3 @@ many times would you need to run it?[^longest-ladder] The extension's tests are 
     *shortest* ladder, is the longest simple path problem, which has no known
     efficient solution, so a brute-force search for it is hopeless on a
     dictionary this size.
-
-## Where next?
-
-- **Other searches:** the [Sudoku solver](sudoku-solver.md) uses backtracking
-  rather than breadth-first search.
-- **Counting and caching:** [...Try, try again](rugby.md) introduces dynamic
-  programming.
-- **Real data:** after the Python core route, the
-  [Scientific Python route](../../README.md#choosing-a-route) starts with
-  [Mysterious data](../data-analysis.md#q1-mysterious-data-).
-- Back to [Algorithms and Search](../algorithms-and-search.md).

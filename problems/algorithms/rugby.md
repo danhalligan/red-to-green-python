@@ -1,10 +1,8 @@
 # ...Try, try again 🏉
 
-[← All problems](../../README.md#index-of-problems)
-
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [Fibonacci](../python-fundamentals.md#q4-fibonacci-sequence)
+> **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
 > (Python Fundamentals Q4), which introduces recurrence relationships.
 >
 > **You’ll practise:** breaking a problem into smaller ones, spotting repeated
@@ -223,7 +221,7 @@ event type is added in a fixed order, so every combination is counted once.
 
 **Investigation 🚀: how fast do the counts grow?** The ratio of consecutive
 Fibonacci numbers tends to the golden ratio, about 1.618. Check this with your
-[`fibonacci()`](../python-fundamentals.md#q4-fibonacci-sequence). Then look at
+[`fibonacci()`](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence). Then look at
 your scoring counts from about 50 points on: what
 does `count(n) / count(n - 1)` tend to, and what is `count(n) / count(n - 10)`?
 (Compare it with the growth you saw in Stage 2.) Now try the number of tallies
@@ -234,15 +232,3 @@ solves $x^2 = x + 1$.[^try-growth]
 [^try-growth]: Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
     $f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
     $x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
-
-## Where next?
-
-You have used a one-dimensional dynamic programming table to *count* the possible
-solutions. In
-[Global sequence alignment](global-sequence-alignment.md#dynamic-programming--needleman-wunsch-),
-you will extend the same idea to two dimensions and use it to find an *optimal*
-solution.
-
-- **Other searches:** [Word ladder](word-ladder.md) and the
-  [Sudoku solver](sudoku-solver.md).
-- Back to [Algorithms and Search](../algorithms-and-search.md).
