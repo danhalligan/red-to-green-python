@@ -221,22 +221,47 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 ## Further Reading 📚
 
-- [The Python Tutorial](https://docs.python.org/3/tutorial/)
-- [Python Standard Library](https://docs.python.org/3/library/)
-- [pytest documentation](https://docs.pytest.org/)
-- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html)
+Use these when you need background or want to go beyond an exercise; none is
+required reading before you start.
+
+### Python and testing
+
+- [The Python Tutorial](https://docs.python.org/3/tutorial/) explains core
+  language features, including generators and classes. Use it alongside the
+  Pythonic Python exercises when a concept is unfamiliar.
+- [Python Standard Library](https://docs.python.org/3/library/) is the reference
+  for built-in tools. Look up `itertools`, `collections` and `random` for the
+  language exercises and probability simulations.
+- [pytest documentation](https://docs.pytest.org/) explains assertions,
+  parametrisation and fixtures. Use it to understand the supplied tests and
+  write your own, especially in the test-first exercise.
+- [99 Bottles of OOP](https://www.sandimetz.com/99bottles/) develops an approach
+  to test-driven design and incremental refactoring. It is the book behind the
+  99 Bottles exercise, for readers who want to explore those design choices.
+
+### Working with scientific data
+
+- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html) introduces
+  arrays, axes and broadcasting: useful foundations for the simulations,
+  cellular automaton and mixture models.
 - [pandas getting started](https://pandas.pydata.org/docs/getting_started/)
-- [SciPy statistics](https://docs.scipy.org/doc/scipy/tutorial/stats.html)
-- [statsmodels User Guide](https://www.statsmodels.org/stable/user-guide.html)
-- [Refactoring](https://en.wikipedia.org/wiki/Code_refactoring)
-- [Test-driven development](https://en.wikipedia.org/wiki/Test-driven_development)
-- [99 Bottles of OOP](https://www.sandimetz.com/99bottles/)
-- [Needleman-Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm)
-- [Sudoku solving algorithms](https://en.wikipedia.org/wiki/Sudoku_solving_algorithms)
-- [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
-- [Expectation-Maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
-- [Dawkins' weasel program](https://en.wikipedia.org/wiki/Weasel_program)
-- [Birthday problem](https://en.wikipedia.org/wiki/Birthday_problem)
-- [Penney's game](https://en.wikipedia.org/wiki/Penney%27s_game) and the
-  [100 prisoners problem](https://en.wikipedia.org/wiki/100_prisoners_problem),
-  which give away the solutions to the puzzles in Against the Odds
+  covers selecting, cleaning, grouping and plotting tabular data. These are the
+  main tools used in the data-analysis notebooks.
+- [SciPy statistics tutorial](https://docs.scipy.org/doc/scipy/tutorial/stats.html)
+  explains probability distributions, sampling and distribution functions.
+  Consult it for the uncertainty investigations and likelihood calculations.
+- [SciPy optimisation tutorial](https://docs.scipy.org/doc/scipy/tutorial/optimize.html)
+  explains numerical minimisation and constraints. It provides background for
+  fitting normal and mixture models by maximising their log-likelihoods.
+
+### Prediction and model fitting
+
+- [scikit-learn getting started](https://scikit-learn.org/stable/getting_started.html)
+  introduces fitting, prediction, preprocessing and pipelines. It is a useful
+  companion to the Titanic exercise's unfamiliar library calls.
+- [scikit-learn cross-validation guide](https://scikit-learn.org/stable/modules/cross_validation.html)
+  explains validation strategies and their relationship to a separate test set.
+  Read it to understand or extend the Titanic evaluation workflow.
+- [Expectation-maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
+  gives the broader latent-variable interpretation of EM. Read it after the
+  mixture exercise to connect its alternating steps to the general method.
