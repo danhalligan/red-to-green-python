@@ -1,5 +1,12 @@
 # pyproblems 0.1.0
 
+* Replace the standalone Old Faithful regression with a staged Titanic
+  classification investigation: majority baseline, fold-local preprocessing,
+  logistic regression, a random-forest comparison, and one held-out evaluation.
+  Provide preprocessing and guided notebook skeletons, keeping the focus on
+  exploration, features and evaluation. Package all 1,309 labelled titanic3
+  passengers without outcome-revealing fields, add scikit-learn to the science extra, and keep the
+  Old Faithful regression diagnostic inside the EM application.
 * Establish a Python-first programming and statistics exercise package.
 * Add core language, inheritance, refactoring, test-first, scientific-Python,
   Sudoku, and optional Gaussian-mixture exercises.

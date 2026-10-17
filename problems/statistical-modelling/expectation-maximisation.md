@@ -5,9 +5,8 @@
 >
 > **Recommended first:**
 > [Recovering the parameters](recovering-the-parameters.md)
-> (likelihood and maximum likelihood), and
-> [Predicting Old Faithful](../data-analysis/predicting-old-faithful.md),
-> because the final part revisits its Old Faithful data. The
+> (likelihood and maximum likelihood). The final part introduces Old Faithful
+> with a short regression diagnostic before fitting a mixture. The
 > [Fitting a Gaussian mixture](gaussian-mixture.md) exercise is not required.
 >
 > **You’ll practise:** expectation-maximisation, hard and soft assignment,
@@ -120,9 +119,14 @@ The docstrings give the details.
 
 ## Multivariate Gaussian EM
 
-Back to Old Faithful. Plot every eruption's duration against the waiting time
-that followed it, and look again at the residuals from your
-[regression](../data-analysis/predicting-old-faithful.md).
+Start with a diagnostic in the
+[Old Faithful notebook](../../analysis/old_faithful.ipynb#Waiting-time-prediction).
+Plot every eruption's duration against the waiting time that followed it.
+Fit a straight line with `numpy.polyfit` or `scipy.stats.linregress`, interpret
+its slope and intercept in minutes, and plot residuals against fitted values.
+Calculate $R^2$: does a respectable value mean the model captures the structure?
+This is a short model check, not an evaluation of out-of-sample prediction.
+
 Do the points look like one cloud, or something else? Suppose they come from a
 mixture of two bivariate normal distributions, where the variables are the
 eruption duration and the waiting time to the next eruption (both in minutes).
@@ -145,8 +149,6 @@ Compare your fitted log-likelihood with the reference value in the tests (about
 starting values and asks you to plot the fit. EM is not guaranteed to find the
 global maximum from every starting point.
 
-This is the same dataset as the earlier
-[regression exercise](../data-analysis/predicting-old-faithful.md).
-What do your fitted clusters say about that straight line, and about what it
+What do your fitted clusters say about the straight line, and about what it
 was missing? The notebook also suggests an extension that revisits the
 prediction using the clusters.
