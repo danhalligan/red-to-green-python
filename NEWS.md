@@ -1,5 +1,8 @@
 # pyproblems 0.1.0
 
+* Add two optional extensions to Dawkins' weasel: a mutation-only genetic
+  algorithm with tournament selection and elitism, then one-point crossover.
+  Return the weasel's result as a dictionary rather than a dataclass.
 * Replace the standalone Old Faithful regression with a staged Titanic
   classification investigation: majority baseline, fold-local preprocessing,
   logistic regression, a random-forest comparison, and one held-out evaluation.

@@ -4,7 +4,6 @@ import pytest
 from pyproblems.evolution import (
     WEASEL_ALPHABET,
     WEASEL_TARGET,
-    EvolutionResult,
     evolve_weasel,
     matching_characters,
     mutate_message,
@@ -51,10 +50,10 @@ def test_simulation_stops_at_the_generation_limit_when_nothing_can_change():
         max_generations=7,
     )
 
-    assert result.generations == 7
-    assert len(result.match_history) == 8
-    assert len(set(result.match_history)) == 1
-    assert result.candidate != WEASEL_TARGET
+    assert result["generations"] == 7
+    assert len(result["match_history"]) == 8
+    assert len(set(result["match_history"])) == 1
+    assert result["candidate"] != WEASEL_TARGET
 
 
 def test_simulation_reaches_a_custom_target_before_the_limit():
@@ -66,10 +65,10 @@ def test_simulation_reaches_a_custom_target_before_the_limit():
         max_generations=20_000,
     )
 
-    assert result.candidate == "HELLO"
-    assert result.match_history[-1] == len("HELLO")
-    assert result.generations < 20_000
-    assert len(result.match_history) == result.generations + 1
+    assert result["candidate"] == "HELLO"
+    assert result["match_history"][-1] == len("HELLO")
+    assert result["generations"] < 20_000
+    assert len(result["match_history"]) == result["generations"] + 1
 
 
 def test_final_candidate_agrees_with_the_match_history():
@@ -83,10 +82,12 @@ def test_final_candidate_agrees_with_the_match_history():
         max_generations=50,
     )
 
-    assert len(result.candidate) == len(target)
-    assert set(result.candidate) <= set(WEASEL_ALPHABET)
-    assert result.match_history[-1] == matching_characters(result.candidate, target)
-    assert all(0 <= score <= len(target) for score in result.match_history)
+    assert len(result["candidate"]) == len(target)
+    assert set(result["candidate"]) <= set(WEASEL_ALPHABET)
+    assert result["match_history"][-1] == matching_characters(
+        result["candidate"], target
+    )
+    assert all(0 <= score <= len(target) for score in result["match_history"])
 
 
 def test_simulation_is_reproducible_with_an_injected_generator():
@@ -103,13 +104,18 @@ def test_simulation_is_reproducible_with_an_injected_generator():
         max_generations=500,
     )
 
-    assert isinstance(first, EvolutionResult)
+    assert isinstance(first, dict)
+    assert set(first) == {"candidate", "generations", "match_history"}
+    assert isinstance(first["candidate"], str)
+    assert isinstance(first["generations"], int)
+    assert isinstance(first["match_history"], tuple)
+    assert all(isinstance(score, int) for score in first["match_history"])
     assert first == second
-    assert len(first.match_history) == first.generations + 1
+    assert len(first["match_history"]) == first["generations"] + 1
     assert all(
         earlier <= later
         for earlier, later in zip(
-            first.match_history, first.match_history[1:], strict=False
+            first["match_history"], first["match_history"][1:], strict=False
         )
     )
 

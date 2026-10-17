@@ -241,7 +241,8 @@ automata and stochastic evolution. Both exercises use NumPy.
 - [Conway's Game of Life](problems/models-of-life/game-of-life.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
 - [Dawkins' weasel](problems/models-of-life/weasel.md) 🌶️🌶️:
-  can a sentence evolve out of gibberish through mutation and selection?
+  can a sentence evolve out of gibberish through mutation and selection? Optional
+  extensions add a tournament-selection genetic algorithm, then recombination.
 
 ## Further Reading 📚
 

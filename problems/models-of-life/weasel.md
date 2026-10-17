@@ -79,3 +79,70 @@ Beware that `1 - (1 - p) ** n` rounds to zero when $p$ is tiny;
 `-np.expm1(n * np.log1p(-p))` keeps the small positive value.
 
 </details>
+
+**Extension 🚀: survival of the fittest?** The weasel breeds every generation from
+one winner. Real populations keep many individuals, some less fit than others, and
+a genetic algorithm (GA) does something similar. Implement `fittest`,
+`tournament_select` and `evolve_population`, which runs a mutation-only GA on a
+population of 100:
+
+- **Tournament selection** picks a parent by sampling a few individuals at random
+  (three by default) and taking the fittest of them. The best individuals are
+  chosen often, but weaker ones sometimes win a tournament too.
+- **Elitism** copies the single fittest individual into the next generation
+  unchanged, so the best score can never fall.
+
+Each generation keeps the elite, then fills the rest of the population with
+mutated copies of tournament winners, using your `mutate_message` and
+`matching_characters`. Start from 100 identical copies of one random phrase,
+drawn first from the generator just as the weasel draws its starting phrase, so a
+given seed can start every method from the same phrase.
+
+> **Check:** `uv run pytest tests/test_evolution_tournament.py -m advanced -q`
+
+Does allowing less-fit individuals to reproduce help or hinder progress towards the
+target? Use the notebook to compare `evolve_population` with `evolve_weasel` over
+20 to 30 seeds, counting generations to the target and any runs that fail to get
+there within a generation limit. Predict the result first. A fair comparison asks
+how many phrases each method scores, and gives the weasel the same number of copies
+and the same mutation rate as the GA, not just its defaults.
+
+<details>
+<summary>💡 Hint 1: a nudge</summary>
+
+Write `fittest` and `tournament_select` first and test them alone. Then think about
+how many offspring the elite leaves room for.
+
+</details>
+
+<details>
+<summary>💡 Hint 2: a strategy</summary>
+
+The loop looks like `evolve_weasel`, but the parent now varies per offspring
+and the population (not just a best score) carries from one generation to the next.
+
+</details>
+
+**Extension 🚀: the weasels discover sex.** So far each offspring has one parent.
+**One-point crossover** gives it two: pick a cut position strictly inside the
+phrase, then join the first part of one parent to the rest of the other. Implement
+`one_point_crossover` and switch it on with `crossover=True` in
+`evolve_population`. For each offspring, choose two parents independently by
+tournament selection, cross them over, and then mutate the child as before. Keep
+the elite. Use crossover for every offspring.
+
+> **Check:** `uv run pytest tests/test_evolution_crossover.py -m advanced -q`
+
+Does recombination help the population evolve the target phrase more quickly? Can
+two imperfect phrases combine to produce something better than either parent? Compare
+`crossover=False` with `crossover=True` in the notebook, holding everything else
+constant, then try other mutation rates. Report your results as experimental
+findings: they depend on the settings and need not favour any one strategy.
+
+<details>
+<summary>💡 Hint: seeing recombination at work</summary>
+
+Try crossing `"AAAABBBB"` with `"BBBBAAAA"` and scoring the children against
+`"AAAAAAAA"`.
+
+</details>
