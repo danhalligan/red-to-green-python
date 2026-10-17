@@ -1,7 +1,9 @@
 # Red to Green: Python problems from FizzBuzz to mixture models
 
-[Get started](#getting-started) · [Choose a problem](#index-of-problems) ·
-[Notebooks](#working-with-notebooks) · [Further reading](#further-reading-)
+[Get started](#getting-started-) ·
+[How to](#how-to-work-through-the-problems-) ·
+[Choose a problem](#the-problems) ·
+[Notebooks](#working-with-notebooks-) · [Further reading](#further-reading-)
 
 ## Introduction
 
@@ -15,6 +17,68 @@ comprehensions, generators, recursion, object orientation, test-first
 development, refactoring, graph search, maximum likelihood,
 expectation-maximisation, probabilities that defy intuition and even a cellular
 automaton.
+
+## Getting started 🚦
+
+The dev container is ready to use, but not required. For a local setup with the
+notebooks and scientific tools, install the complete environment with:
+
+```bash
+uv sync --all-groups --extra science
+```
+
+Then try a first exercise, for example the quick warm-up
+[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
+
+1. Read the prompt, then run its test. It is **expected to fail** at first:
+
+   ```bash
+   uv run pytest tests/test_language.py -k exponentiate -q
+   ```
+
+2. Implement `exponentiate` in `src/pyproblems/language.py`.
+3. Rerun the same command until it passes: that is red to green.
+4. Keep going with the Python language problems, or pick any other!
+
+For an overview of the repository layout and development setup, see
+[DEVELOPMENT.md](DEVELOPMENT.md).
+
+## How to work through the problems 🧭
+
+You do not need to do everything, or to do things in order. Problems range from
+a few minutes to several sessions.
+
+### The basic workflow
+
+- Each problem page, linked from the [index](#the-problems), opens with
+  anything you need beforehand and the test command that checks it. Some pages
+  group several related exercises.
+- Use the focused test command for the exercise you are working on. Most
+  exercises begin as stubs, so their tests are red until you implement them.
+  Topic-level commands run every exercise in a topic and are more useful after
+  you have completed several.
+- Aim to make one small change at a time and rerun the test.
+- The early language exercises use only the Python standard library; scientific
+  exercises need the optional science packages installed above.
+
+### Hints, difficulty and extensions 💡
+
+Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
+🌶️🌶️🌶️ challenging. A page may start gently and build up.
+
+When working through the problems, look out for these markers:
+
+- 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
+  that give away a little more each time)
+- 😱 a tricky section
+- 🚀 an optional extension.
+
+Look for hints only when you are stuck, opening one level at a time, and try
+the extensions if you want more. Click a collapsible section's heading to open
+it. Some investigations also end with a collapsible **What did you discover?**
+section: read it after you have formed your own view.
+
+### Using coding agents 🤖
 
 > [!TIP]
 > Try each problem yourself first. Use coding agents for hints, explanations
@@ -42,60 +106,7 @@ read the guide first.
 
 </details>
 
-When working through the problems, look out for these markers:
-
-- 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
-  that give away a little more each time)
-- 😱 a tricky section
-- 🚀 an optional extension.
-
-Some investigations also end with a collapsible **What did you discover?**
-section: read it after you have formed your own view.
-
-You do not need to do everything, or to do things in order. Problems range from
-a few minutes to several sessions.
-
-For an overview of the repository layout and development setup, see
-[DEVELOPMENT.md](DEVELOPMENT.md).
-
-## Getting started
-
-The dev container is ready to use, but not required. For a local setup with the
-notebooks and scientific tools, install the complete environment with:
-
-```bash
-uv sync --all-groups --extra science
-```
-
-Then try a first exercise, for example the quick warm-up
-[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
-
-1. Read the prompt, then run its test. It is **expected to fail** at first:
-
-   ```bash
-   uv run pytest tests/test_language.py -k exponentiate -q
-   ```
-
-2. Implement `exponentiate` in `src/pyproblems/language.py`.
-3. Rerun the same command until it passes: that is red to green.
-4. Keep going with the Python language problems, or pick any other!
-
-## How to complete an exercise
-
-- Each problem page, linked from the [index](#index-of-problems), opens with
-  anything you need beforehand and the test command that checks it. Some pages
-  group several related exercises.
-- Use the focused test command for the exercise you are working on. Most
-  exercises begin as stubs, so their tests are red until you implement them.
-  Topic-level commands run every exercise in a topic and are more useful after
-  you have completed several.
-- Aim to make one small change at a time and rerun the test.
-- Look for 💡 hints only when you are stuck, opening one level at a time, and
-  try the 🚀 extensions if you want more.
-- The early language exercises use only the Python standard library; scientific
-  exercises need the optional science packages installed above.
-
-## Working with notebooks
+### Working with notebooks 📓
 
 The notebooks in [`analysis`](analysis/) are workspaces for your investigations,
 not completed examples. Open them in VS Code with Jupyter support, or run
@@ -126,14 +137,11 @@ explanations. Use seeded random generators so experiments can be repeated.
 Notebook investigations have no automatic pass or fail: your plots, numerical
 checks and explanations are the result.
 
-## Index of problems
+## The problems
 
 Pick a topic that interests you. Each link opens a file under `problems/`;
 related exercises in the same file stay together here too. Pythonic Python pages
 are under `problems/pythonic-python/`, and algorithms under `problems/algorithms/`.
-
-Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
-🌶️🌶️🌶️ challenging. A page may start gently and build up.
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
