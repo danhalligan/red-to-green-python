@@ -1,7 +1,5 @@
 # Python Fundamentals
 
-[← All problems](../README.md#index-of-problems)
-
 > **Before you start:** nothing. These are quick warm-ups: short problems that
 > are good practice in their own right. Do any of them, in any order, and skip
 > the ones you already know.
@@ -188,14 +186,3 @@ print(list(numbers))
 
 Implement `average(values)`, which returns the mean of any iterable of numbers,
 including a one-shot iterator or generator that can only be read once.
-
-## Where next?
-
-- **Classes and polymorphism:** [Object-oriented Python](object-oriented-python.md)
-  is the next step on the Python core route.
-- **Search:** the [Sudoku solver](algorithms/sudoku-solver.md) starts with a
-  checker warm-up before building a backtracking search.
-- **Recurrence relationships:** [...Try, try again](algorithms/rugby.md) builds on
-  Q4, Fibonacci.
-- **Testing and refactoring:** [Refactoring and Test-First Development](refactoring-and-test-first.md).
-- Or return to the [routes](../README.md#choosing-a-route).

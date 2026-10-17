@@ -1,7 +1,5 @@
 # Models of Life 🌿
 
-[← All problems](../README.md#index-of-problems)
-
 These two small simulations explore how systems change over time. Game of Life
 is deterministic: the board and rules determine each next generation. Dawkins'
 weasel is stochastic: random mutation and selection mean repeated runs can
@@ -129,14 +127,3 @@ Beware that `1 - (1 - p) ** n` rounds to zero when $p$ is tiny;
 `-np.expm1(n * np.log1p(-p))` keeps the small positive value.
 
 </details>
-
-## Where next?
-
-- **Analyse real data:** [Data Analysis](data-analysis.md) and
-  [Scientific Python](scientific-python.md) use the same scientific stack.
-- **Fit models to data:** [Statistical Modelling](statistical-modelling.md)
-  is the most advanced topic.
-- **Algorithms:** [Algorithms and Search](algorithms-and-search.md).
-- **More simulation:** [Against the Odds](against-the-odds.md) uses simulation to
-  test your intuition about probability.
-- Return to the [routes](../README.md#choosing-a-route).

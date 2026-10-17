@@ -1,7 +1,5 @@
 # Refactoring and Test-First Development
 
-[← All problems](../README.md#index-of-problems)
-
 **In this topic:** [The Gilded Rose Kata](#the-gilded-rose-kata-) ·
 [99 Bottles](#99-bottles). Both are optional katas and independent of each
 other: pick whichever appeals, or do both for practice.
@@ -138,13 +136,3 @@ Take one down and pass it around, 5 bottles of beer on the wall.
    treating 5 as a six-pack or by changing only the first half of the verse,
    and confirm that at least one test fails each time. A test that cannot fail
    tells you nothing.
-
-## Where next?
-
-- **Search algorithms:** [Word ladder](algorithms/word-ladder.md) finishes the
-  Python core route.
-- **Real data:** after the core route, the
-  [Scientific Python route](../README.md#choosing-a-route) starts with
-  [Mysterious data](data-analysis.md#q1-mysterious-data-).
-- **The other kata**, if you did only one: [Gilded Rose](#the-gilded-rose-kata-)
-  or [99 Bottles](#99-bottles).

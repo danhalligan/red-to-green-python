@@ -1,7 +1,5 @@
 # Scientific Python 🔬
 
-[← All problems](../README.md#index-of-problems)
-
 > **Before you start:** basic Python and NumPy, and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >
@@ -318,14 +316,3 @@ samples. With skewed data, the sample mean is itself skewed at small $n$, and no
 interval of this symmetric kind has exactly 95% coverage until $n$ is larger.
 
 </details>
-
-## Where next?
-
-- **Apply a straight-line fit:** [Data Analysis Q3](data-analysis.md#q3-linear-regression-predicting-the-next-old-faithful-eruption)
-  fits a regression to the Old Faithful data. Route 2 also visits
-  [Mysterious data](data-analysis.md#q1-mysterious-data-) and
-  [Steak, Tea, and Toast](data-analysis.md#q2-categorical-data-steak-tea-and-toast).
-- **Models with no closed form:** [Statistical Modelling](statistical-modelling.md)
-  builds on Q4, likelihood and numerical maximum likelihood.
-- **Simulations:** [Models of Life](models-of-life.md).
-- Return to the [routes](../README.md#choosing-a-route).

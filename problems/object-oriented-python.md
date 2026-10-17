@@ -1,7 +1,5 @@
 # Object-oriented Python
 
-[← All problems](../README.md#index-of-problems)
-
 > **Before you start:** basic Python.
 >
 > **You’ll practise:** classes, instances, inheritance, method overriding,
@@ -207,12 +205,3 @@ time, because it remembers where it is in its program. `sing` needed no changes.
 ```bash
 uv run pytest tests/test_oop.py -k cover -q
 ```
-
-## Where next?
-
-- **Refactoring a larger OO codebase:** the
-  [Gilded Rose kata](refactoring-and-test-first.md#the-gilded-rose-kata-) asks you
-  to restructure and extend existing classes. It is on the Python core route.
-- **Another way to practise:** [99 Bottles](refactoring-and-test-first.md#99-bottles)
-  is the other kata on that route, and needs only Python Fundamentals.
-- Return to the [routes](../README.md#choosing-a-route) to choose your next topic.

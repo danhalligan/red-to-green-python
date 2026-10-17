@@ -1,7 +1,5 @@
 # Statistical Modelling
 
-[← All problems](../README.md#index-of-problems)
-
 **In this topic:** [Gaussian-mixture](#gaussian-mixture-) (optional) ·
 [Gaussian-mixture EM](#gaussian-mixture-em-): [E-step](#e-step),
 [M-step](#m-step), [Iteration](#iteration), [Soft EM](#soft-em) and
@@ -218,11 +216,3 @@ This is the same dataset as the earlier
 What do your fitted clusters say about that straight line, and about what it
 was missing? The notebook also suggests an extension that revisits the
 prediction using the clusters.
-
-## Where next?
-
-- **Simulation:** [Models of Life](models-of-life.md) explores systems that
-  change over time.
-- **Algorithms:** [Algorithms and Search](algorithms-and-search.md) needs only
-  Python Fundamentals.
-- Return to the [routes](../README.md#choosing-a-route).

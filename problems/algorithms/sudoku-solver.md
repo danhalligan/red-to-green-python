@@ -1,7 +1,5 @@
 # Sudoku solver 🔢
 
-[← All problems](../../README.md#index-of-problems)
-
 > **Before you start:** [Python Fundamentals](../python-fundamentals.md).
 > Start with the checker warm-up below, then build on it to write a solver.
 >
@@ -109,10 +107,3 @@ need tens of thousands of calls in the first-blank order but under a hundred wit
 the most-constrained rule.
 
 </details>
-
-## Where next?
-
-- **Another search:** [Word ladder](word-ladder.md) uses breadth-first search.
-- **Dynamic programming:** [...Try, try again](rugby.md) and then
-  [Global sequence alignment](global-sequence-alignment.md).
-- Back to [Algorithms and Search](../algorithms-and-search.md).

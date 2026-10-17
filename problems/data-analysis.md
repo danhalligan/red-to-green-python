@@ -1,7 +1,5 @@
 # Data Analysis
 
-[← All problems](../README.md#index-of-problems)
-
 > **Before you start:** basic Python and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
 >
@@ -35,11 +33,6 @@ data before choosing a model.
 ```bash
 uv run pytest tests/test_statistics.py -k summarize_xy
 ```
-
-**Next on Route 2:** [Scientific Python Q1](scientific-python.md#q1-how-uncertain-is-an-average)
-and [Q3](scientific-python.md#q3-two-methods-two-answers), before returning to
-[Q2](#q2-categorical-data-steak-tea-and-toast) and
-[Q3](#q3-linear-regression-predicting-the-next-old-faithful-eruption) here.
 
 ## Q2. Categorical data: Steak, Tea, and Toast
 
@@ -133,14 +126,3 @@ think about what the residuals are telling you. What do you notice about the
 data itself? Hold that thought: you can come back to this data in the
 [multivariate Gaussian EM](statistical-modelling.md#multivariate-gaussian-em)
 exercise.
-
-## Where next?
-
-- **Look into the structure:** [Statistical Modelling](statistical-modelling.md)
-  fits mixtures to this same Old Faithful data. It is optional and challenging
-  (😱), and needs
-  [Scientific Python Q4](scientific-python.md#q4-recovering-the-parameters).
-- **If you skipped them:** [Scientific Python](scientific-python.md) covers
-  standard errors, the bootstrap and likelihood, which this topic uses.
-- **Simulation:** [Models of Life](models-of-life.md).
-- Return to the [routes](../README.md#choosing-a-route).

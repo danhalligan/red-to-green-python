@@ -1,7 +1,5 @@
 # Against the Odds 🎲
 
-[← All problems](../README.md#index-of-problems)
-
 Probability puzzles where your gut is confidently wrong. Each has a short story,
 a few small functions to write, and an investigation that shows why. They share a
 routine: **predict** the answer and write it down, **simulate** it, **calculate**
@@ -243,13 +241,3 @@ approach as the number of prisoners grows to 1,000?
 ```bash
 uv run pytest tests/test_prisoners.py -k "cycle or loop"
 ```
-
-## Where next?
-
-- **More simulation:** [Scientific Python](scientific-python.md) turns simulation
-  into a tool for checking statistics, and
-  [Dawkins' weasel](models-of-life.md#dawkins-weasel-) simulates evolution.
-- **Counting and search:** [Algorithms and Search](algorithms-and-search.md),
-  including [...Try, try again](algorithms/rugby.md), which counts possibilities
-  too many to list.
-- Return to the [routes](../README.md#choosing-a-route).

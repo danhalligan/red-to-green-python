@@ -1,7 +1,5 @@
 # ...Try, try again 🏉
 
-[← All problems](../../README.md#index-of-problems)
-
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [Fibonacci](../python-fundamentals.md#q4-fibonacci-sequence)
@@ -234,15 +232,3 @@ solves $x^2 = x + 1$.[^try-growth]
 [^try-growth]: Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
     $f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
     $x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
-
-## Where next?
-
-You have used a one-dimensional dynamic programming table to *count* the possible
-solutions. In
-[Global sequence alignment](global-sequence-alignment.md#dynamic-programming--needleman-wunsch-),
-you will extend the same idea to two dimensions and use it to find an *optimal*
-solution.
-
-- **Other searches:** [Word ladder](word-ladder.md) and the
-  [Sudoku solver](sudoku-solver.md).
-- Back to [Algorithms and Search](../algorithms-and-search.md).
