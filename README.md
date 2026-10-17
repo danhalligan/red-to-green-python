@@ -76,10 +76,34 @@ Then try a first exercise, for example the quick warm-up
 - Aim to make one small change at a time and rerun the test.
 - Look for 💡 hints only when you are stuck, opening one level at a time, and
   try the 🚀 extensions if you want more.
-- Notebook analyses (in `analysis/`) have no pass or fail, so they are checked
-  by your own plots and explanations.
 - The early language exercises use only the Python standard library; scientific
   exercises need the optional science packages installed above.
+
+## Working with notebooks
+
+The notebooks in [analysis/](analysis/) are workspaces for your investigations,
+not completed examples. Open them in VS Code with Jupyter support, or run
+`uv run jupyter lab` from the repository root. Use the project's `.venv` as
+the kernel, with the notebook and science packages installed as described above.
+
+Some notebooks serve several problems. 
+- The [Old Faithful notebook](analysis/old_faithful.ipynb) uses the same data to
+explore uncertainty, prediction and model choice;
+- [Simulation Studies](analysis/simulation_studies.ipynb) checks statistical
+methods against simulated data with known answers; and
+- [Against the Odds](analysis/against_the_odds.ipynb) contains investigations
+for all three probability puzzles. Follow your problem page to the relevant
+section; you do not need to complete the whole notebook for each problem.
+
+Run the setup cells first, then fill the `TODO` cells for your investigation,
+running any earlier cells that section depends on. Implement reusable functions
+in the source module named by the problem and check them with its tests; use
+the notebook to call those functions, run experiments and make plots. Add code
+cells as needed, and Markdown cells for your predictions, observations and
+explanations. Use seeded random generators so experiments can be repeated.
+
+Notebook investigations have no automatic pass or fail: your plots, numerical
+checks and explanations are the result.
 
 ## Index of problems
 
@@ -165,10 +189,6 @@ build on it, with covariance matrices needed for multivariate EM.
   🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
 - [Expectation-maximisation](problems/statistical-modelling/expectation-maximisation.md)
   🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
-
-The [Old Faithful notebook](analysis/old_faithful.ipynb) is shared across these
-topics: the same data supports questions about uncertainty, prediction and
-model choice. Each exercise links to its relevant section.
 
 ### Against the Odds
 
