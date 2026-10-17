@@ -133,7 +133,7 @@ through tests and refactoring.
 - [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️🌶️:
+- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
 - [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
@@ -174,11 +174,11 @@ Basic NumPy, probability and statistics help; the bootstrap and confidence
 interval exercises build on standard error.
 
 - [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
-  🌶️🌶️: estimate standard error and test its behaviour across repeated samples.
+  🌶️: estimate standard error and test its behaviour across repeated samples.
 - [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
-  🌶️🌶️: compare bootstrap and analytic estimates of the same uncertainty.
+  🌶️: compare bootstrap and analytic estimates of the same uncertainty.
 - [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
-  🌶️🌶️🌶️: measure how often confidence intervals keep their promise.
+  🌶️🌶️: measure how often confidence intervals keep their promise.
 - [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
   🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
@@ -190,9 +190,9 @@ Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate EM.
 
 - [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
-  🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
+  🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
 - [Fitting a Gaussian mixture](problems/parameter-estimation/gaussian-mixture.md)
-  🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
+  🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
 - [Expectation-maximisation](problems/parameter-estimation/expectation-maximisation.md)
   🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
 
@@ -203,7 +203,7 @@ calculate and explain, using only the Python standard library; the investigation
 share a notebook and use the science packages for plots.
 
 - [The office party](problems/against-the-odds/office-party.md) 🌶️:
-  how many people before a shared birthday is more likely than not?
+  how many people are required before a shared birthday is more likely than not?
 - [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
   why is waiting for `HH` different from waiting for `HT`?
 - [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
@@ -221,22 +221,47 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 ## Further Reading 📚
 
-- [The Python Tutorial](https://docs.python.org/3/tutorial/)
-- [Python Standard Library](https://docs.python.org/3/library/)
-- [pytest documentation](https://docs.pytest.org/)
-- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html)
+Use these when you need background or want to go beyond an exercise; none is
+required reading before you start.
+
+### Python and testing
+
+- [The Python Tutorial](https://docs.python.org/3/tutorial/) explains core
+  language features, including generators and classes. Use it alongside the
+  Pythonic Python exercises when a concept is unfamiliar.
+- [Python Standard Library](https://docs.python.org/3/library/) is the reference
+  for built-in tools. Look up `itertools`, `collections` and `random` for the
+  language exercises and probability simulations.
+- [pytest documentation](https://docs.pytest.org/) explains assertions,
+  parametrisation and fixtures. Use it to understand the supplied tests and
+  write your own, especially in the test-first exercise.
+- [99 Bottles of OOP](https://www.sandimetz.com/99bottles/) develops an approach
+  to test-driven design and incremental refactoring. It is the book behind the
+  99 Bottles exercise, for readers who want to explore those design choices.
+
+### Working with scientific data
+
+- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html) introduces
+  arrays, axes and broadcasting: useful foundations for the simulations,
+  cellular automaton and mixture models.
 - [pandas getting started](https://pandas.pydata.org/docs/getting_started/)
-- [SciPy statistics](https://docs.scipy.org/doc/scipy/tutorial/stats.html)
-- [statsmodels User Guide](https://www.statsmodels.org/stable/user-guide.html)
-- [Refactoring](https://en.wikipedia.org/wiki/Code_refactoring)
-- [Test-driven development](https://en.wikipedia.org/wiki/Test-driven_development)
-- [99 Bottles of OOP](https://www.sandimetz.com/99bottles/)
-- [Needleman-Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm)
-- [Sudoku solving algorithms](https://en.wikipedia.org/wiki/Sudoku_solving_algorithms)
-- [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
-- [Expectation-Maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
-- [Dawkins' weasel program](https://en.wikipedia.org/wiki/Weasel_program)
-- [Birthday problem](https://en.wikipedia.org/wiki/Birthday_problem)
-- [Penney's game](https://en.wikipedia.org/wiki/Penney%27s_game) and the
-  [100 prisoners problem](https://en.wikipedia.org/wiki/100_prisoners_problem),
-  which give away the solutions to the puzzles in Against the Odds
+  covers selecting, cleaning, grouping and plotting tabular data. These are the
+  main tools used in the data-analysis notebooks.
+- [SciPy statistics tutorial](https://docs.scipy.org/doc/scipy/tutorial/stats.html)
+  explains probability distributions, sampling and distribution functions.
+  Consult it for the uncertainty investigations and likelihood calculations.
+- [SciPy optimisation tutorial](https://docs.scipy.org/doc/scipy/tutorial/optimize.html)
+  explains numerical minimisation and constraints. It provides background for
+  fitting normal and mixture models by maximising their log-likelihoods.
+
+### Prediction and model fitting
+
+- [scikit-learn getting started](https://scikit-learn.org/stable/getting_started.html)
+  introduces fitting, prediction, preprocessing and pipelines. It is a useful
+  companion to the Titanic exercise's unfamiliar library calls.
+- [scikit-learn cross-validation guide](https://scikit-learn.org/stable/modules/cross_validation.html)
+  explains validation strategies and their relationship to a separate test set.
+  Read it to understand or extend the Titanic evaluation workflow.
+- [Expectation-maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
+  gives the broader latent-variable interpretation of EM. Read it after the
+  mixture exercise to connect its alternating steps to the general method.

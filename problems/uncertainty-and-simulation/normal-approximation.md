@@ -16,17 +16,26 @@ In the [simulation studies notebook](../../analysis/simulation_studies.ipynb#2.-
 `scipy.stats` to plot the exact probability at each integer from 0 to 100
 alongside the continuous normal density.
 
-Note you should consider the continuity correction [^continuity-correction]
+Note you should consider the continuity correction
 when calculating the normal probabilities.
 
-[^continuity-correction]: A density is not a probability (a continuous variable
-    has probability zero of equalling any single value), whereas $P(X=k)$ is a
-    positive point mass. The *continuity correction* bridges the two by treating
-    each integer $k$ as standing for the unit-width interval from $k-0.5$ to
-    $k+0.5$. If $Y\sim\mathcal{N}(np,np(1-p))$, then
-    $$P(X\le k)\approx P(Y<k+0.5)$$.
-    Without the $+0.5$, $P(Y<k)$ misses half of the bar at $k$ and is
-    systematically too small.
+<details>
+<summary>💡 Hint: the continuity correction</summary>
+
+A density is not a probability (a continuous variable
+has probability zero of equalling any single value), whereas $P(X=k)$ is a
+positive point mass. The *continuity correction* bridges the two by treating
+each integer $k$ as standing for the unit-width interval from $k-0.5$ to
+$k+0.5$. If $Y\sim\mathcal{N}(np,np(1-p))$, then
+
+$$
+P(X\le k)\approx P(Y<k+0.5).
+$$
+
+Without the $+0.5$, $P(Y<k)$ misses half of the bar at $k$ and is
+systematically too small.
+
+</details>
 
 Compare the exact probabilities with the normal probabilities, for example by
 plotting the errors. Now find where the stand-in breaks down. Vary $n$ and $p$,
