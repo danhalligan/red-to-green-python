@@ -10,7 +10,7 @@ you need them, and learn Python by solving it. The problems run from
 FizzBuzz-sized warm-ups to data analysis, simulation, algorithms and statistical
 modelling, and along the way you will meet list comprehensions, generators,
 recursion, object orientation, test-first development, refactoring, graph
-search, maximum likelihood, expectation-maximisation, Probabilitys that
+search, maximum likelihood, expectation-maximisation, probabilities that
 defy intuition and even a cellular automaton.
 
 > [!TIP]
