@@ -87,7 +87,9 @@ def test_footnotes_are_defined_and_used(doc):
 @pytest.mark.parametrize(
     "page", PROBLEM_PAGES, ids=lambda page: str(page.relative_to(ROOT))
 )
-def test_problem_pages_link_back_to_the_index(page):
-    depth = len(page.relative_to(ROOT / "problems").parts)
-    index = "../" * depth + "README.md#index-of-problems"
-    assert f"]({index})" in page.read_text(encoding="utf-8")
+def test_problem_pages_are_listed_in_the_index(page):
+    readme = ROOT / "README.md"
+    indexed_pages = {
+        (readme.parent / file).resolve() for file, _ in local_links(readme) if file
+    }
+    assert page.resolve() in indexed_pages
