@@ -48,6 +48,8 @@ uv sync --group dev
 - Open an investigation with the question, not the answer. Give help as
   collapsible hints (`<details>` with a `<summary>`), in up to three levels:
   a nudge, a strategy, then implementation guidance without complete Python.
+  Use collapsible hints for explanations containing math: GitHub does not render
+  math in footnotes. Reserve footnotes for math-free explanations and notes.
   Put the explanation of a surprising result in a collapsible
   **What did you discover?** section after the investigation, and keep
   results out of headings, intros and hints that are visible beforehand.

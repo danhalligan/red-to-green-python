@@ -227,8 +227,13 @@ does `count(n) / count(n - 1)` tend to, and what is `count(n) / count(n - 10)`?
 (Compare it with the growth you saw in Stage 2.) Now try the number of tallies
 from the extension. What does all this tell you about how fast each count grows,
 and about why order makes the problem so much harder? 💡 The golden ratio
-solves $x^2 = x + 1$.[^try-growth]
+solves $x^2 = x + 1$.
 
-[^try-growth]: Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
-    $f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
-    $x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
+<details>
+<summary>💡 Hint: relating the recurrence to growth</summary>
+
+Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
+$f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
+$x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
+
+</details>
