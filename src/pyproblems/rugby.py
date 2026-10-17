@@ -1,4 +1,4 @@
-"""Rugby union scoring exercises: "...Try, try again"."""
+"""Rugby union scoring exercises: "Try, try again"."""
 
 
 def count_scoring_sequences(points: int) -> int:

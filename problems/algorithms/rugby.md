@@ -1,4 +1,4 @@
-# ...Try, try again 🏉
+# Try, try again 🏉
 
 > **Before you start:** basic Python.
 >

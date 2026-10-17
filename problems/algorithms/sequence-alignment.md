@@ -2,7 +2,7 @@
 
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [...Try, try again](rugby.md), which introduces
+> **Recommended first:** [Try, try again](rugby.md), which introduces
 > dynamic programming in one dimension.
 >
 > **You’ll practise:** generators and recursion, brute-force search, dynamic
@@ -70,7 +70,7 @@ sequences?
 
 ## Dynamic programming & Needleman-Wunsch 😱
 
-If you have completed [...Try, try again](rugby.md), you have already met dynamic
+If you have completed [Try, try again](rugby.md), you have already met dynamic
 programming. This problem extends that idea from counting possibilities in one
 dimension to finding optimal alignments in two dimensions.
 

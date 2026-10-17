@@ -83,7 +83,7 @@ uv run pytest tests/test_language.py -k fibonacci
 
 **Where this leads:** a value defined by the values before it is a *recurrence
 relationship*. You will use the same idea to count rugby scores in
-[...Try, try again](../algorithms/rugby.md).
+[Try, try again](../algorithms/rugby.md).
 
 ## Q5. First non-repeating character
 

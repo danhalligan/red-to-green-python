@@ -141,7 +141,7 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 
 - [Word ladder](problems/algorithms/word-ladder.md) 🌶️🌶️:
   turn `play` into `game` one letter at a time.
-- [...Try, try again](problems/algorithms/rugby.md) 🌶️🌶️:
+- [Try, try again](problems/algorithms/rugby.md) 🌶️🌶️:
   count the ways a rugby score could have happened, from recursion to dynamic
   programming. The Fibonacci exercise is useful background.
 - [Sudoku solver](problems/algorithms/sudoku-solver.md) 🌶️🌶️🌶️:
