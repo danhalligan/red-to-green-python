@@ -2,7 +2,7 @@
 
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [Fibonacci](../python-fundamentals.md#q4-fibonacci-sequence)
+> **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
 > (Python Fundamentals Q4), which introduces recurrence relationships.
 >
 > **You’ll practise:** breaking a problem into smaller ones, spotting repeated
@@ -221,7 +221,7 @@ event type is added in a fixed order, so every combination is counted once.
 
 **Investigation 🚀: how fast do the counts grow?** The ratio of consecutive
 Fibonacci numbers tends to the golden ratio, about 1.618. Check this with your
-[`fibonacci()`](../python-fundamentals.md#q4-fibonacci-sequence). Then look at
+[`fibonacci()`](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence). Then look at
 your scoring counts from about 50 points on: what
 does `count(n) / count(n - 1)` tend to, and what is `count(n) / count(n - 10)`?
 (Compare it with the growth you saw in Stage 2.) Now try the number of tallies

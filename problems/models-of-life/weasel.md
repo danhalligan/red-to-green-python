@@ -1,52 +1,4 @@
-# Models of Life 🌿
-
-These two small simulations explore how systems change over time. Game of Life
-is deterministic: the board and rules determine each next generation. Dawkins'
-weasel is stochastic: random mutation and selection mean repeated runs can
-differ. Both are simplified models and are interesting in unique ways.
-
-**In this topic:** [Conway's Game of Life](#conways-game-of-life-) ·
-[Dawkins' weasel](#dawkins-weasel-). The two exercises are independent.
-
-## Conway's Game of Life 🔫
-
-> **Before you start:** basic Python and NumPy, and the optional scientific stack
-> (`uv sync --all-groups --extra science`).
->
-> **You’ll practise:** NumPy arrays and slicing, neighbourhood calculations,
-> and simulating a cellular automaton.
->
-> **Check:** `uv run pytest tests/test_game_of_life.py -q`
-
-Conway's Game of Life is a cellular automaton: a grid of live and dead cells
-changes in discrete generations according to local rules. The rules fit in a
-paragraph. What they produce does not. Your job is to write the engine; the
-reward is watching what it does.
-
-For each cell, inspect its eight neighbouring positions. Follow these rules:
-1. A live cell survives with two or three live neighbours
-2. A dead cell becomes live with exactly three;
-3. All other cells are dead in the next generation. 
-
-This exercise uses finite, bounded arrays rather than wrapping edges, so cells
-outside the board are not counted.
-
-In [game_of_life.py](../src/pyproblems/game_of_life.py), implement
-`count_live_neighbors` and `step_game_of_life` with NumPy arrays; the docstrings
-give the details. Consider shifted array slices or padding to vectorise the local
-counts without accidentally wrapping edges. Everything else is provided:
-readable patterns in
-[game_of_life_shapes.yaml](../src/pyproblems/datasets/game_of_life_shapes.yaml)
-(`O` for live cells, `.` for empty ones), `load_shape` and `place_shape` to put
-one on a board, `render_board` to print it, and `animate_boards` to watch it
-move, so you can focus on the algorithm.
-
-When the tests pass, open the [Game of Life notebook](../analysis/game_of_life.ipynb).
-Start with the glider, then try the "Gosper Glider Gun". The last test, which
-counts how a 36-cell pattern grows over time, is the check that you have built
-it.
-
-## Dawkins' weasel 🦦
+# Dawkins' weasel 🦦
 
 > **Before you start:** basic Python and NumPy, and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
@@ -71,11 +23,11 @@ ties at random. For reproducibility in this Python version, retain the best
 candidate seen so far and inject a NumPy random generator.
 
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
-[evolution.py](../src/pyproblems/evolution.py). Each generation creates a fixed
+[evolution.py](../../src/pyproblems/evolution.py). Each generation creates a fixed
 number of mutated copies, keeps a highest-scoring candidate, and records the
 best score. Then watch it evolve.
 
-Use the [weasel simulation notebook](../analysis/weasel_simulation.ipynb) to
+Use the [weasel simulation notebook](../../analysis/weasel_simulation.ipynb) to
 investigate. How many generations does it take to reach the target? Compare
 several seeded runs rather than treating one random run as a universal answer,
 and ask why they differ. Then try a population of 100, and several mutation

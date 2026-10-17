@@ -1,46 +1,18 @@
-# Data Analysis
+# Steak, Tea, and Toast
 
-> **Before you start:** basic Python and the
-> optional scientific stack (`uv sync --all-groups --extra science`).
+> **Before you start:** basic Python and the optional scientific stack
+> (`uv sync --all-groups --extra science`).
 >
-> **You’ll practise:** exploring and plotting data, cleaning and summarising
-> ordered categories, judging whether a relationship is convincing, and fitting
-> and criticising a simple regression.
+> **You’ll practise:** cleaning ordered categories, exploring associations,
+> and judging evidence while accounting for multiple comparisons.
 >
-> **Check:** `uv run pytest tests/test_statistics.py -k summarize_xy -q`
-> checks the functions; the notebook analyses are checked by your own plots and
-> explanations.
-
-**In this topic:** [Q1 Mysterious data](#q1-mysterious-data-) ·
-[Q2 Steak, Tea, and Toast](#q2-categorical-data-steak-tea-and-toast) ·
-[Q3 Old Faithful regression](#q3-linear-regression-predicting-the-next-old-faithful-eruption)
-
-## Q1. Mysterious data 🤔
-
-Thirteen coordinate datasets are packaged under neutral names. In the
-[mysterious data notebook](../analysis/mysterious_data.ipynb), implement
-`summarize_xy` and `summarize_xy_datasets` in
-[statistics.py](../src/pyproblems/statistics.py), then compare their means,
-sample standard deviations, and Pearson correlations.
-
-Based only on those summaries, note which datasets seem interchangeable and
-record your prediction.
-
-Next, plot all 13 datasets with shared axis limits. Do the plots support your
-prediction? Describe the patterns you observe and explain why you should inspect
-data before choosing a model.
-
-```bash
-uv run pytest tests/test_statistics.py -k summarize_xy
-```
-
-## Q2. Categorical data: Steak, Tea, and Toast
+> **Check:** your notebook's plots, summaries and explanations; no automated tests.
 
 Do people who burn their toast also like well-done steaks? Is there any
 relationship between how people take their tea and their other preferences? A
 simple dataset compiled from the results of a Facebook poll lets you find out.
 
-![Steak, toast, and tea poll response scales](../assets/steak-toast-tea-poll.png)
+![Steak, toast, and tea poll response scales](../../assets/steak-toast-tea-poll.png)
 
 The data are available in `src/pyproblems/datasets/steak_toast_tea.csv`. Each
 row is one response and the three columns use the labels shown in the image:
@@ -64,7 +36,7 @@ are defensible;[^cleaning-policy] pick one but consider the implications.
     the contingency tables, so make it explicit. The decision might depend
     on what analyses you plan to do.
 
-Work through the [Steak, Tea, and Toast notebook](../analysis/steak_tea_toast.ipynb):
+Work through the [Steak, Tea, and Toast notebook](../../analysis/steak_tea_toast.ipynb):
 audit the data, make ordered categoricals, then investigate your questions with
 whatever tables and plots help you judge. State the denominator of every
 proportion, and whether you used all rows for each variable or only complete
@@ -106,23 +78,3 @@ correction) or at least report it. You could also consider Kendall's $\tau_b$
 data differently.
 
 </details>
-
-## Q3. Linear regression: predicting the next Old Faithful eruption
-
-Visitors to Old Faithful geyser want to know how long they will wait for the
-next eruption. `load_faithful_data()` in [data.py](../src/pyproblems/data.py)
-provides each eruption's duration and the waiting time until the following one,
-both in minutes.
-
-In the [Old Faithful notebook](../analysis/old_faithful.ipynb), fit a straight
-line predicting the waiting time from the eruption duration, for example with
-`numpy.polyfit` or `scipy.stats.linregress`. Interpret the intercept and slope in
-minutes, calculate $R^2$, and predict the wait after a 2-minute and a 4-minute
-eruption. Plot the data with the fitted line, and plot the residuals against the
-fitted values.
-
-The line has a decent $R^2$, but is it a good model? Look at both plots and
-think about what the residuals are telling you. What do you notice about the
-data itself? Hold that thought: you can come back to this data in the
-[multivariate Gaussian EM](statistical-modelling.md#multivariate-gaussian-em)
-exercise.

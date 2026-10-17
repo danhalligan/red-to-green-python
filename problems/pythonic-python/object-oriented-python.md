@@ -14,7 +14,7 @@
 [The robot joins the band](#the-robot-joins-the-band-)
 
 Work through the exercises in order: each builds on the code you wrote in the
-last. All of the code goes in [oop.py](../src/pyproblems/oop.py).
+last. All of the code goes in [oop.py](../../src/pyproblems/oop.py).
 
 ## Noisy animals 📣
 
@@ -40,7 +40,7 @@ print(", ".join(x.name for x in animals))
 ```
 
 The sound each animal makes is listed in the tests: read
-`test_animal_subclasses_override_speak` in [test_oop.py](../tests/test_oop.py) to
+`test_animal_subclasses_override_speak` in [test_oop.py](../../tests/test_oop.py) to
 see what `speak()` should return for `Dog`, `Cat` and `Bird`.
 
 Implement `__str__()` so `str(Dog("Woofy Goldberg"))` produces
@@ -96,7 +96,7 @@ the ten animals above (not the fox) in a list, in that order, and pass it in.
 You should now have the lyrics to
 [The Fox (What Does the Fox Say?)](https://www.youtube.com/watch?v=jofNR_WkoCE).
 The complete expected song is in
-[animal_song_full.txt](../tests/fixtures/animal_song_full.txt).
+[animal_song_full.txt](../../tests/fixtures/animal_song_full.txt).
 
 ```bash
 uv run pytest tests/test_oop.py -k "(lyric or fox or sing or wdtfs) and not (parrot or robot or cover)" -q

@@ -1,6 +1,6 @@
 # Sudoku solver 🔢
 
-> **Before you start:** [Python Fundamentals](../python-fundamentals.md).
+> **Before you start:** [Python Fundamentals](../pythonic-python/python-fundamentals.md).
 > Start with the checker warm-up below, then build on it to write a solver.
 >
 > **You’ll practise:** checking rows, columns and boxes, recursion, backtracking,

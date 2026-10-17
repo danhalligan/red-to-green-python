@@ -19,7 +19,7 @@
 ## Q1. Exponentiation
 
 Write a function to take numbers $x$ and return $e^x$ as `exponentiate(values)`
-in [language.py](../src/pyproblems/language.py). Note that the input can be any
+in [language.py](../../src/pyproblems/language.py). Note that the input can be any
 iterable, not just a list.
 
 Begin with a `for` loop and `list.append`. Once it works, try rewriting the
@@ -83,7 +83,7 @@ uv run pytest tests/test_language.py -k fibonacci
 
 **Where this leads:** a value defined by the values before it is a *recurrence
 relationship*. You will use the same idea to count rugby scores in
-[...Try, try again](algorithms/rugby.md).
+[...Try, try again](../algorithms/rugby.md).
 
 ## Q5. First non-repeating character
 

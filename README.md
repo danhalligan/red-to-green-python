@@ -52,7 +52,7 @@ uv sync --all-groups --extra science
 ```
 
 Then try a first exercise, for example the quick warm-up
-[Q1: Exponentiation](problems/python-fundamentals.md#q1-exponentiation):
+[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
 
 1. Read the prompt, then run its test. It is **expected to fail** at first:
 
@@ -84,8 +84,8 @@ Then try a first exercise, for example the quick warm-up
 ## Index of problems
 
 Pick a topic that interests you. Each link opens a file under `problems/`;
-related exercises in the same file stay together here too. The algorithms have
-separate files under `problems/algorithms/`.
+related exercises in the same file stay together here too. Pythonic Python pages
+are under `problems/pythonic-python/`, and algorithms under `problems/algorithms/`.
 
 Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
 🌶️🌶️🌶️ challenging. A page may start gently and build up.
@@ -93,22 +93,27 @@ Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
 
-### [Python Fundamentals](problems/python-fundamentals.md) 🌶️
+### Pythonic Python
 
-Short language exercises: exponentiation, adjacent products, FizzBuzz,
-Fibonacci generators, the first non-repeating character, and Python gotchas.
+Practise writing clear Python, organising it with classes, and improving it
+through tests and refactoring.
 
-### [Object-oriented Python](problems/object-oriented-python.md) 🌶️🌶️
+- [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) 🌶️:
+  short language exercises covering exponentiation, adjacent products, FizzBuzz,
+  Fibonacci generators, the first non-repeating character, and Python gotchas.
+- [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
+  build a cast of talking animals, from noisy animals and a silent fox to a
+  parrot that learns and a robot. Practise classes, inheritance and polymorphism.
+- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️🌶️:
+  tame an inherited codebase without breaking its existing behaviour.
+  Familiarity with classes helps.
+- [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
+  build 99 Bottles one test at a time, then write tests of your own.
 
-Build a cast of talking animals, from noisy animals and a silent fox to a
-parrot that learns and a robot. Practise classes, inheritance and polymorphism.
+### Algorithms and Search
 
-### [Refactoring and Test-First Development](problems/refactoring-and-test-first.md) 🌶️🌶️🌶️
-
-Two katas: tame an inherited codebase in Gilded Rose, or build 99 Bottles one
-test at a time. Familiarity with classes helps with Gilded Rose.
-
-### [Algorithms and Search](problems/algorithms-and-search.md)
+Four self-contained exercises, each with its own page, starter code and tests.
+You can start with any of them, but some build on earlier ideas, as shown below.
 
 - [Word ladder](problems/algorithms/word-ladder.md) 🌶️🌶️:
   turn `play` into `game` one letter at a time.
@@ -117,38 +122,76 @@ test at a time. Familiarity with classes helps with Gilded Rose.
   programming. The Fibonacci exercise is useful background.
 - [Sudoku solver](problems/algorithms/sudoku-solver.md) 🌶️🌶️🌶️:
   warm up with a checker, then backtrack your way to a solution.
-- [Global sequence alignment](problems/algorithms/global-sequence-alignment.md)
+- [Global sequence alignment](problems/algorithms/sequence-alignment.md)
   🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
   The rugby problem introduces the dynamic programming ideas used here.
 
-### [Data Analysis](problems/data-analysis.md) 🌶️🌶️
+### Data Analysis
 
-Explore thirteen mysterious datasets, investigate preferences for steak, tea
-and toast, and predict Old Faithful eruptions. Notebook-based work with
-plots, summaries and regression.
+Explore data, look for relationships, and question what summaries hide.
+These notebook-based exercises use the optional scientific stack.
 
-### [Scientific Python](problems/scientific-python.md) 🌶️🌶️🌶️
+- [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
+  thirteen datasets with matching summaries. What do their plots reveal?
+- [Steak, Tea, and Toast](problems/data-analysis/steak-tea-and-toast.md) 🌶️🌶️:
+  clean messy survey responses and investigate associations between preferences.
+- [Predicting Old Faithful](problems/data-analysis/predicting-old-faithful.md) 🌶️🌶️:
+  predict the next eruption with regression, then ask what the line misses.
 
-Investigate uncertainty in an average, the normal approximation, the bootstrap,
-maximum likelihood and confidence intervals. Basic probability and statistics
-help; the later exercises build on the earlier ones.
+### Uncertainty and Simulation
 
-### [Statistical Modelling](problems/statistical-modelling.md) 🌶️🌶️🌶️
+Use repeated experiments to find out how much you can trust an estimate.
+Basic NumPy, probability and statistics help; the bootstrap and confidence
+interval exercises build on standard error.
 
-Fit Gaussian mixtures by numerical optimisation and expectation-maximisation.
-These optional challenges assume likelihood (introduced in Scientific Python),
-probability densities, basic linear algebra and covariance matrices.
+- [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
+  🌶️🌶️: estimate standard error and test its behaviour across repeated samples.
+- [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
+  🌶️🌶️: compare bootstrap and analytic estimates of the same uncertainty.
+- [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
+  🌶️🌶️🌶️: measure how often confidence intervals keep their promise.
+- [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
+  🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
-### [Against the Odds](problems/against-the-odds.md) 🌶️🌶️🌶️
+### Statistical Modelling
 
-Three probability puzzles: the office party, waiting for heads, and the
-100 prisoners. Predict, simulate, calculate and explain, using only the Python
-standard library. They start gently and get harder.
+Choose a model, estimate its parameters, and examine what it misses.
+Start with likelihood for a single normal distribution; the mixture exercises
+build on it, with covariance matrices needed for multivariate EM.
 
-### [Models of Life](problems/models-of-life.md) 🌶️🌶️
+- [Recovering the parameters](problems/statistical-modelling/recovering-the-parameters.md)
+  🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
+- [Fitting a Gaussian mixture](problems/statistical-modelling/gaussian-mixture.md)
+  🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
+- [Expectation-maximisation](problems/statistical-modelling/expectation-maximisation.md)
+  🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
 
-Simulate Conway's Game of Life and Dawkins' weasel: cellular automata and
-evolution from simple rules.
+The [Old Faithful notebook](analysis/old_faithful.ipynb) is shared across these
+topics: the same data supports questions about uncertainty, prediction and
+model choice. Each exercise links to its relevant section.
+
+### Against the Odds
+
+Probability puzzles where your gut is confidently wrong. Predict, simulate,
+calculate and explain, using only the Python standard library; the investigations
+share a notebook and use the science packages for plots.
+
+- [The office party](problems/against-the-odds/office-party.md) 🌶️:
+  how many people before a shared birthday is more likely than not?
+- [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
+  why is waiting for `HH` different from waiting for `HT`?
+- [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
+  find a strategy for a hopeless-looking last chance at freedom.
+
+### Models of Life
+
+Explore how simple rules produce complex behaviour: deterministic cellular
+automata and stochastic evolution. Both exercises use NumPy.
+
+- [Conway's Game of Life](problems/models-of-life/game-of-life.md) 🌶️🌶️:
+  build a cellular automaton and watch patterns grow and move.
+- [Dawkins' weasel](problems/models-of-life/weasel.md) 🌶️🌶️:
+  can a sentence evolve out of gibberish through mutation and selection?
 
 ## Further Reading 📚
 
