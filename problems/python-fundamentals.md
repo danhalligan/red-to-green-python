@@ -4,20 +4,19 @@
 
 > **Before you start:** nothing. These are quick warm-ups: short problems that
 > are good practice in their own right. Do any of them, in any order, and skip
-> the ones you already know. Q7 is a little bigger, and the
-> [Sudoku solver](algorithms/sudoku-solver.md) builds on it.
+> the ones you already know.
 >
 > **You’ll practise:** functions, sequences, comprehensions, iteration,
 > dictionaries, generators, exceptions, and readable tests.
 >
-> **Check:** `uv run pytest tests/test_language.py tests/test_sudoku.py -q`, or
+> **Check:** `uv run pytest tests/test_language.py -q`, or
 > each question's own command below.
 
 **In this topic:** [Q1 Exponentiation](#q1-exponentiation) ·
 [Q2 Adjacent products](#q2-adjacent-products) · [Q3 FizzBuzz](#q3-fizzbuzz) ·
 [Q4 Fibonacci](#q4-fibonacci-sequence) ·
 [Q5 First non-repeating character](#q5-first-non-repeating-character) ·
-[Q6 Python gotchas](#q6-python-gotchas) · [Q7 Sudoku checker](#q7-sudoku-checker)
+[Q6 Python gotchas](#q6-python-gotchas)
 
 ## Q1. Exponentiation
 
@@ -190,34 +189,12 @@ print(list(numbers))
 Implement `average(values)`, which returns the mean of any iterable of numbers,
 including a one-shot iterator or generator that can only be read once.
 
-## Q7. Sudoku checker
-
-Sudoku asks you to fill a 9 by 9 grid so each row, column, and 3 by 3 box
-contains the digits 1 through 9 exactly once. A partially filled grid is
-*valid* when none of its supplied digits conflicts with those rules.
-
-Implement `sudoku_checker(grid)` in [sudoku.py](../src/pyproblems/sudoku.py).
-The input is a list of nine rows containing integers 1 through 9 or `None` for
-blanks.
-
-Compare the result with the labelled puzzles from `load_sudoku_data()` and try
-an empty grid, a valid completed grid, and a duplicate in each kind of
-constraint group.
-
-```bash
-uv run pytest tests/test_sudoku.py -q
-```
-
-**Where this leads:** the [Sudoku solver](algorithms/sudoku-solver.md) reuses
-your `sudoku_checker` to decide which digits can go in each cell of a
-backtracking search.
-
 ## Where next?
 
 - **Classes and polymorphism:** [Object-oriented Python](object-oriented-python.md)
   is the next step on the Python core route.
-- **Search:** the [Sudoku solver](algorithms/sudoku-solver.md) reuses your Sudoku
-  checker inside a backtracking search.
+- **Search:** the [Sudoku solver](algorithms/sudoku-solver.md) starts with a
+  checker warm-up before building a backtracking search.
 - **Recurrence relationships:** [...Try, try again](algorithms/rugby.md) builds on
   Q4, Fibonacci.
 - **Testing and refactoring:** [Refactoring and Test-First Development](refactoring-and-test-first.md).

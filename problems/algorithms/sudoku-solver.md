@@ -2,21 +2,37 @@
 
 [← All problems](../../README.md#index-of-problems)
 
-> **Needs:** the [Sudoku checker](../python-fundamentals.md#q7-sudoku-checker)
-> (Python Fundamentals Q7), because your solver builds on `sudoku_checker` in the
-> same file.
+> **Before you start:** [Python Fundamentals](../python-fundamentals.md).
+> Start with the checker warm-up below, then build on it to write a solver.
 >
-> **You’ll practise:** recursion, backtracking, and working on a copy instead
-> of mutating the input.
+> **You’ll practise:** checking rows, columns and boxes, recursion, backtracking,
+> and working on a copy instead of mutating the input.
 >
-> **Check:** `uv run pytest tests/test_sudoku_solver.py -q`
+> **Check:** `uv run pytest tests/test_sudoku.py tests/test_sudoku_solver.py -q`
 
-We are now going to build on our earlier Sudoku problem. We previously wrote a
-function to check a Sudoku grid was valid
-(the [Sudoku checker](../python-fundamentals.md#q7-sudoku-checker)), and now we
-will write a new function to find a solution: given a puzzle with some cells
-blank, fill in all of them, or report that no solution exists. Some puzzles have
-more than one solution, and you only need to find one.
+## Warm-up: Sudoku checker
+
+Sudoku asks you to fill a 9 by 9 grid so each row, column, and 3 by 3 box
+contains the digits 1 through 9 exactly once. A partially filled grid is
+*valid* when none of its supplied digits conflicts with those rules.
+
+Implement `sudoku_checker(grid)` in [sudoku.py](../../src/pyproblems/sudoku.py).
+The input is a list of nine rows containing integers 1 through 9 or `None` for
+blanks.
+
+Compare the result with the labelled puzzles from `load_sudoku_data()` and try
+an empty grid, a valid completed grid, and a duplicate in each kind of
+constraint group.
+
+```bash
+uv run pytest tests/test_sudoku.py -q
+```
+
+## Sudoku solver
+
+Now build on your checker to find a solution: given a puzzle with some cells
+blank, fill in all of them, or report that no solution exists. Some puzzles
+have more than one solution, and you only need to find one.
 
 Build on `sudoku_checker` in [sudoku.py](../../src/pyproblems/sudoku.py) by
 implementing `is_valid_placement(grid, row, column, value)` and
@@ -24,6 +40,10 @@ implementing `is_valid_placement(grid, row, column, value)` and
 give the argument conventions and edge cases. Test a completed grid, an
 unsolvable grid, and a puzzle with multiple valid solutions, as well as the
 supplied puzzles.
+
+```bash
+uv run pytest tests/test_sudoku_solver.py -q
+```
 
 Stuck? There are three 💡 hints, each giving a little more away.
 
