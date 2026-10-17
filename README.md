@@ -157,7 +157,7 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 
 ### Data Analysis
 
-Explore data, look for relationships, and question what summaries hide.
+Explore data, look for relationships, and evaluate predictions on unseen data.
 These notebook-based exercises use the optional scientific stack.
 
 - [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
@@ -182,17 +182,18 @@ interval exercises build on standard error.
 - [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
   🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
-### Statistical Modelling
+### Parameter Estimation
 
-Choose a model, estimate its parameters, and examine what it misses.
+Estimate model parameters using likelihood, numerical optimisation and
+expectation-maximisation.
 Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate EM.
 
-- [Recovering the parameters](problems/statistical-modelling/recovering-the-parameters.md)
+- [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
   🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a Gaussian mixture](problems/statistical-modelling/gaussian-mixture.md)
+- [Fitting a Gaussian mixture](problems/parameter-estimation/gaussian-mixture.md)
   🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
-- [Expectation-maximisation](problems/statistical-modelling/expectation-maximisation.md)
+- [Expectation-maximisation](problems/parameter-estimation/expectation-maximisation.md)
   🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
 
 ### Against the Odds
