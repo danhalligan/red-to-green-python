@@ -133,7 +133,7 @@ through tests and refactoring.
 - [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️🌶️:
+- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
 - [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
@@ -174,11 +174,11 @@ Basic NumPy, probability and statistics help; the bootstrap and confidence
 interval exercises build on standard error.
 
 - [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
-  🌶️🌶️: estimate standard error and test its behaviour across repeated samples.
+  🌶️: estimate standard error and test its behaviour across repeated samples.
 - [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
-  🌶️🌶️: compare bootstrap and analytic estimates of the same uncertainty.
+  🌶️: compare bootstrap and analytic estimates of the same uncertainty.
 - [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
-  🌶️🌶️🌶️: measure how often confidence intervals keep their promise.
+  🌶️🌶️: measure how often confidence intervals keep their promise.
 - [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
   🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
@@ -190,9 +190,9 @@ Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate EM.
 
 - [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
-  🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
+  🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
 - [Fitting a Gaussian mixture](problems/parameter-estimation/gaussian-mixture.md)
-  🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
+  🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
 - [Expectation-maximisation](problems/parameter-estimation/expectation-maximisation.md)
   🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
 
@@ -203,7 +203,7 @@ calculate and explain, using only the Python standard library; the investigation
 share a notebook and use the science packages for plots.
 
 - [The office party](problems/against-the-odds/office-party.md) 🌶️:
-  how many people before a shared birthday is more likely than not?
+  how many people are required before a shared birthday is more likely than not?
 - [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
   why is waiting for `HH` different from waiting for `HT`?
 - [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
