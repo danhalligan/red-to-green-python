@@ -95,6 +95,11 @@ methods against simulated data with known answers; and
 for all three probability puzzles. Follow your problem page to the relevant
 section; you do not need to complete the whole notebook for each problem.
 
+The [Titanic notebook](analysis/titanic.ipynb) is a staged machine-learning
+investigation. Its setup reserves a test set: keep exploration and model
+selection on the training rows, then open the test set only for the final
+evaluation.
+
 Run the setup cells first, then fill the `TODO` cells for your investigation,
 running any earlier cells that section depends on. Implement reusable functions
 in the source module named by the problem and check them with its tests; use
@@ -152,15 +157,15 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 
 ### Data Analysis
 
-Explore data, look for relationships, and question what summaries hide.
+Explore data, look for relationships, and evaluate predictions on unseen data.
 These notebook-based exercises use the optional scientific stack.
 
 - [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
   thirteen datasets with matching summaries. What do their plots reveal?
 - [Steak, Tea, and Toast](problems/data-analysis/steak-tea-and-toast.md) 🌶️🌶️:
   clean messy survey responses and investigate associations between preferences.
-- [Predicting Old Faithful](problems/data-analysis/predicting-old-faithful.md) 🌶️🌶️:
-  predict the next eruption with regression, then ask what the line misses.
+- [Predicting survival on the Titanic](problems/data-analysis/titanic.md) 🌶️🌶️🌶️:
+  build a prediction pipeline, beat a baseline, and test it on unseen passengers.
 
 ### Uncertainty and Simulation
 
@@ -177,17 +182,18 @@ interval exercises build on standard error.
 - [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
   🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
-### Statistical Modelling
+### Parameter Estimation
 
-Choose a model, estimate its parameters, and examine what it misses.
+Estimate model parameters using likelihood, numerical optimisation and
+expectation-maximisation.
 Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate EM.
 
-- [Recovering the parameters](problems/statistical-modelling/recovering-the-parameters.md)
+- [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
   🌶️🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a Gaussian mixture](problems/statistical-modelling/gaussian-mixture.md)
+- [Fitting a Gaussian mixture](problems/parameter-estimation/gaussian-mixture.md)
   🌶️🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
-- [Expectation-maximisation](problems/statistical-modelling/expectation-maximisation.md)
+- [Expectation-maximisation](problems/parameter-estimation/expectation-maximisation.md)
   🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
 
 ### Against the Odds

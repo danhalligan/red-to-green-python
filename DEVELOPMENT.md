@@ -3,8 +3,8 @@
 ## Requirements
 
 Use Python 3.11 or newer and [uv](https://docs.astral.sh/uv/). The project
-keeps its core runtime dependency-free; NumPy, pandas, SciPy, Matplotlib, and
-statsmodels are available through the optional `science` extra.
+keeps its core runtime dependency-free; NumPy, pandas, SciPy, Matplotlib,
+statsmodels and scikit-learn are available through the optional `science` extra.
 
 ## Set up
 

@@ -35,13 +35,21 @@ def run_setup(path: Path) -> dict:
 
 @pytest.fixture
 def science_stack(monkeypatch):
-    for module in ("matplotlib", "numpy", "pandas", "scipy", "statsmodels", "yaml"):
+    for module in (
+        "matplotlib",
+        "numpy",
+        "pandas",
+        "scipy",
+        "sklearn",
+        "statsmodels",
+        "yaml",
+    ):
         pytest.importorskip(module)
     monkeypatch.setenv("MPLBACKEND", "Agg")
 
 
 def test_notebooks_are_present():
-    assert len(NOTEBOOKS) == 7
+    assert len(NOTEBOOKS) == 8
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
@@ -75,3 +83,22 @@ def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
 
     assert faithful.shape == (272, 2)
     assert list(faithful.columns) == ["eruptions", "waiting"]
+
+
+def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
+    namespace = run_setup(ANALYSIS_DIR / "titanic.ipynb")
+    train, test = namespace["X_train"], namespace["X_test"]
+    y_train, y_test = namespace["y_train"], namespace["y_test"]
+
+    assert train.shape == (1047, 11)
+    assert test.shape == (262, 11)
+    assert set(train.index).isdisjoint(test.index)
+    assert set(train.index) | set(test.index) == set(range(1309))
+    assert train.index.equals(y_train.index)
+    assert test.index.equals(y_test.index)
+    assert set(y_train) == set(y_test) == {0, 1}
+    assert "Survived" not in train
+    assert train["Age"].isna().any()
+    assert train["Age"].dtype.kind == "f"
+    assert namespace["passengers"]["Age"].iloc[0] == 29.0
+    assert namespace["cv"].n_splits == 5
