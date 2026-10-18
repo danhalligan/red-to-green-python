@@ -95,11 +95,13 @@ def test_fibonacci_is_an_independent_infinite_generator():
     ("text", "expected"),
     [
         ("abacabad", "c"),
-        ("abacabaabacaba", "_"),
+        ("abacabaabacaba", None),
         ("z", "z"),
         ("bcb", "c"),
         ("a b!a", " "),
-        ("", "_"),
+        ("a_a", "_"),
+        ("__a", "a"),
+        ("", None),
     ],
 )
 def test_first_non_repeating_character(text, expected):

@@ -11,7 +11,8 @@
 **In this topic:** [Noisy animals](#noisy-animals-) ·
 [What Does the Fox Say?](#what-does-the-fox-say-) ·
 [A parrot that learns](#a-parrot-that-learns-) ·
-[The robot joins the band](#the-robot-joins-the-band-)
+[The robot joins the band](#the-robot-joins-the-band-) ·
+[Looking back](#looking-back)
 
 Work through the exercises in order: each builds on the code you wrote in the
 last. All of the code goes in [oop.py](../../src/pyproblems/oop.py).
@@ -68,10 +69,9 @@ subclasses.*
 
 Generating song lyrics is not an animal's job, so write it as a separate
 function. Implement `lyric(animal)`, which returns a line such as
-`Duck goes "quack"` using the animal's class name and `animal.speak()`. It
-asks the animal for its sound and never checks which kind of animal it has been
-given, so it works for every `Animal`: the same code gives a different result
-for each object. This is polymorphism.
+`Duck goes "quack"` using the animal's class name and `animal.speak()`. It needs only those two things from the object and never
+checks which kind of animal it has been given, so the same code gives a
+different result for each object. This is polymorphism.
 
 Nobody knows what the fox says, so make `Fox` an `Animal` whose `speak()` raises
 `UnknownSoundError` (already defined for you) instead of returning a sound. Now
@@ -160,7 +160,8 @@ uv run pytest tests/test_oop.py -k "robot and not cover" -q
 ```
 
 Now the surprise. `lyric()` and `sing()` were written before `Robot` existed,
-yet they work for it, because they only ever call `speak()`. Program a robot
+yet they work for it, because all they need from an object is a `speak()` method
+and a class name, and every Python object has a class name. Program a robot
 to say `"quack"` and compare it with a real duck:
 
 ```python
@@ -172,7 +173,9 @@ print(lyric(robo_duck))  # Robot goes "quack"
 print(isinstance(robo_duck, Duck))  # False
 ```
 
-If it quacks like a duck, `lyric()` treats it as a duck. This is *duck typing*:
+If it quacks like a duck, `lyric()` is happy: it never checks what the object
+is, and the line says `Robot` because that is the class name it asks for. This
+is *duck typing*:
 code needs only the methods an object provides, not its place in a class
 hierarchy, so unrelated classes can take part in the same code without a
 shared base class. The same goes for `listen_to()`, so you can even teach a
@@ -205,3 +208,34 @@ time, because it remembers where it is in its program. `sing` needed no changes.
 ```bash
 uv run pytest tests/test_oop.py -k cover -q
 ```
+
+## Looking back
+
+Ten animal classes that differ only in the string that `speak()` returns is a
+lot of effort.
+
+- Could `Dog`, `Cat` and `Bird` have been one `Animal` class with a `sound`
+  attribute? What would you have lost?
+- What changed with the `Parrot` and the `Robot`? Why do objects, which bundle
+  state with behaviour, earn their keep there?
+- The robot never inherited from `Animal`, yet `lyric()` and `sing()` worked
+  with it. What does Python need for polymorphism? When is inheritance still the
+  right tool?
+
+<details>
+<summary>Some thoughts</summary>
+
+Yes, for the first three a single class with a `sound` attribute would do, and
+it would be simpler. You would lose the class name that `lyric()` and `str()`
+use, and would need an explicit attribute for it. The classes here are a
+teaching device. Objects pay for themselves when they carry state that changes
+(the parrot's memory, the robot's place in its program) together with the
+behaviour that uses it.
+
+Python does not need a shared superclass for polymorphism: any object with a
+`speak()` method will do. Inheritance is useful when subclasses really share
+implementation (`Parrot` reuses `Bird`'s `"tweet"` through `super()`) or when
+you want `isinstance` checks to group related types. Sharing a method name alone
+is not a reason to inherit.
+
+</details>

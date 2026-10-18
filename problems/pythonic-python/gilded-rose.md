@@ -69,3 +69,17 @@ every item (such as the countdown of `sell_in`). If each kind of item's rule wer
 in one place, what would `update_quality` itself need to do?
 
 </details>
+
+## Looking back
+
+Now that the code is refactored and the new item works:
+
+- How many places would you have to edit to add another kind of item, compared
+  with the original thicket of `if` statements?
+- Does `update_quality` now read like a description of what the inn does? Could a
+  newcomer find the rule for one kind of item quickly?
+- Did your design need classes? Would a table of rules, or a few small
+  functions, have done as well? Which would you rather maintain?
+
+Did the refactoring genuinely make future changes simpler? If the honest answer
+is "not much", what would you change?

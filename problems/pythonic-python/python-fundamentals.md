@@ -25,6 +25,9 @@ iterable, not just a list.
 Begin with a `for` loop and `list.append`. Once it works, try rewriting the
 function as a list comprehension. Compare the two versions for readability.
 
+💡 **Hint:** `math.exp(x)` computes $e^x$, and is more accurate than
+`math.e ** x`.
+
 Check this exercise with:
 
 ```bash
@@ -88,7 +91,7 @@ relationship*. You will use the same idea to count rugby scores in
 ## Q5. First non-repeating character
 
 Given a string, find and return the first instance of a non-repeating character
-in it. If there is no such character, return `_`.
+in it. If there is no such character, return `None`.
 
 For example, in `abacabad`, both `c` and `d` occur once, but `c` comes first;
 in `abacabaabacaba`, every character repeats. The search is case-sensitive;
