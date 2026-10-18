@@ -43,48 +43,94 @@ phrases scored. Which gets closer to the target, and by how much?
 > [!NOTE]
 > The weasel is a deliberately simplified model. It has a fixed target that
 > real evolution never has, a score that rewards each correct letter separately,
-> and no recombination or changing environment. It shows that selection that
-> *keeps* partial progress is far more powerful than chance alone; it does not
-> show that evolution is aiming at anything.
+> and no changing environment. It shows that selection that *keeps* partial
+> progress is far more powerful than chance alone; it does not show that
+> evolution is aiming at anything.
 
 How good a model of evolution in nature is this? Consider the known target, the
 simple mutation process, and selection based on one fixed score.
 
-**Extension 🚀: why does cumulative selection work?** Explain what you saw with
-probability, in the notebook's optional final section:
+## Explaining what you saw 🚀
 
-1. How many possible 28-character phrases are there? What is the probability
-   that a random phrase has at least one correct position, and exactly one?
-2. If no position currently matches, what is the probability that at least one
-   of ten offspring gains a correct position?
-3. Once 18 positions match, what must happen at each of the remaining ten
-   positions for one offspring to match the entire target? What is the chance
-   that any of ten offspring does so?
-4. Use your answers to explain the gap you saw in the comparison with
-   independent random guessing.
+Two short probability questions explain the results above. Answer them in the
+notebook's probability sections, checking each against your simulations.
+
+**How hopeless is random guessing?** How many possible 28-character phrases are
+there? If we generated completely random phrases until we found the target, how
+long might we expect to wait? Compare your answer with the number of phrases the
+weasel scored in the comparison above.
 
 <details>
-<summary>💡 Hint: a useful trick for question 2</summary>
+<summary>💡 Hint: waiting for a rare event</summary>
 
-Use the complement rule: it is easier to find the probability that *none* of the
-ten offspring gains a correct position. For small $x$ and large $n$, the
-approximation $(1-x)^n\approx e^{-nx}$ can simplify the calculation.
+Each random phrase is an independent attempt that succeeds with probability $p$,
+the chance of drawing the one target phrase. The expected number of attempts
+until the first success is $1/p$. The answer is far too large to compare by eye,
+so use scientific notation or $\log_{10}$. If you could score a billion phrases
+a second, how long would that take?
+
+</details>
+
+**The last stubborn letter.** Your weasel has evolved 27 of the 28 correct
+characters. Surely it's nearly finished?
+
+Calculate the probability that one mutated offspring completes the phrase, and
+then the probability that at least one offspring in a generation succeeds. Does
+the predicted waiting time agree with your simulations?
+
+<details>
+<summary>💡 Hint 1: what must happen?</summary>
+
+For one offspring to match the whole target, something must happen at the one
+wrong position *and* something must happen at each of the other 27. Assume the
+mutations at different positions are independent. Remember that a mutating
+character becomes one of the 26 *other* symbols, only one of which is correct.
 
 </details>
 
 <details>
-<summary>💡 Hint: tiny probabilities in question 3</summary>
+<summary>💡 Hint 2: the formulae</summary>
+
+With mutation rate $\mu$, the wrong position must mutate (probability $\mu$) to
+the single correct symbol (probability $1/26$), and each of the other 27
+positions must be left alone (probability $1-\mu$ each). So one offspring
+succeeds with probability
+
+$$
+p = \frac{\mu}{26}(1-\mu)^{27}.
+$$
+
+With $n$ offspring, at least one succeeds with probability $q = 1-(1-p)^n$.
+If each generation is an independent attempt, the number of generations spent
+waiting is geometric, with mean $1/q$.
+
+</details>
+
+<details>
+<summary>💡 Hint 3: comparing with simulations, and tiny probabilities</summary>
+
+Your `match_history` shows how many generations a run spent with a best score of
+27 before reaching 28. Collect this over many seeds and compare the average with
+$1/q$. (State your assumptions: for instance, a run may skip 27 altogether.)
 
 Beware that `1 - (1 - p) ** n` rounds to zero when $p$ is tiny;
 `-np.expm1(n * np.log1p(-p))` keeps the small positive value.
 
 </details>
 
-**Extension 🚀: survival of the fittest?** The weasel breeds every generation from
-one winner. Real populations keep many individuals, some less fit than others, and
-a genetic algorithm (GA) does something similar. Implement `fittest`,
-`tournament_select` and `evolve_population`, which runs a mutation-only GA on a
-population of 100:
+## The Weasel World Championships 🚀
+
+Three evolutionary strategies are racing to produce the target phrase. Which
+will win?
+
+1. **Original weasel:** mutated copies of the single best candidate.
+2. **Mutation-only GA:** a population bred by tournament selection and mutation.
+3. **Recombination GA:** tournament selection, one-point crossover and mutation.
+
+The original weasel breeds every generation from one winner. Real populations
+keep many individuals, some less fit than others, and a genetic algorithm (GA)
+does something similar. Implement `fittest`, `tournament_select` and
+`evolve_population`, which runs a mutation-only GA on a population of 100:
 
 - **Tournament selection** picks a parent by sampling a few individuals at random
   (three by default) and taking the fittest of them. The best individuals are
@@ -99,13 +145,6 @@ drawn first from the generator just as the weasel draws its starting phrase, so 
 given seed can start every method from the same phrase.
 
 > **Check:** `uv run pytest tests/test_evolution_tournament.py -m advanced -q`
-
-Does allowing less-fit individuals to reproduce help or hinder progress towards the
-target? Use the notebook to compare `evolve_population` with `evolve_weasel` over
-20 to 30 seeds, counting generations to the target and any runs that fail to get
-there within a generation limit. Predict the result first. A fair comparison asks
-how many phrases each method scores, and gives the weasel the same number of copies
-and the same mutation rate as the GA, not just its defaults.
 
 <details>
 <summary>💡 Hint 1: a nudge</summary>
@@ -123,21 +162,14 @@ and the population (not just a best score) carries from one generation to the ne
 
 </details>
 
-**Extension 🚀: the weasels discover sex.** So far each offspring has one parent.
-**One-point crossover** gives it two: pick a cut position strictly inside the
-phrase, then join the first part of one parent to the rest of the other. Implement
-`one_point_crossover` and switch it on with `crossover=True` in
-`evolve_population`. For each offspring, choose two parents independently by
-tournament selection, cross them over, and then mutate the child as before. Keep
-the elite. Use crossover for every offspring.
+Now let the weasels discover sex. **One-point crossover** gives each offspring two
+parents: pick a cut position strictly inside the phrase, then join the first part
+of one parent to the rest of the other. Implement `one_point_crossover` and switch
+it on with `crossover=True` in `evolve_population`. For each offspring, choose two
+parents independently by tournament selection, cross them over, and then mutate
+the child as before. Keep the elite. Use crossover for every offspring.
 
 > **Check:** `uv run pytest tests/test_evolution_crossover.py -m advanced -q`
-
-Does recombination help the population evolve the target phrase more quickly? Can
-two imperfect phrases combine to produce something better than either parent? Compare
-`crossover=False` with `crossover=True` in the notebook, holding everything else
-constant, then try other mutation rates. Report your results as experimental
-findings: they depend on the settings and need not favour any one strategy.
 
 <details>
 <summary>💡 Hint: seeing recombination at work</summary>
@@ -146,3 +178,13 @@ Try crossing `"AAAABBBB"` with `"BBBBAAAA"` and scoring the children against
 `"AAAAAAAA"`.
 
 </details>
+
+**The race.** Predict the winner before running anything. Then compare the three
+strategies across 20 to 30 seeds in the notebook. Does recombination really help?
+Does changing the mutation rate affect the winner?
+
+A fair race gives every strategy the same target, population size, mutation rate
+and budget of scored phrases (so not each method's defaults), counts generations to
+the target, and reports any runs that fail to get there within a generation limit.
+Report your results as experimental findings: they depend on the settings and need
+not favour any one strategy.
