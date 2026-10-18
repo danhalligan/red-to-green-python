@@ -1,8 +1,8 @@
 # Red to Green: Python problems from FizzBuzz to mixture models
 
 [Get started](#getting-started-) ·
-[How to](#how-to-work-through-the-problems-) ·
 [Choose a problem](#the-problems) ·
+[How to](#how-to-work-through-the-problems-) ·
 [Notebooks](#working-with-notebooks-) · [Further reading](#further-reading-)
 
 ## Introduction
@@ -43,100 +43,6 @@ Then try a first exercise, for example the quick warm-up
 For an overview of the repository layout and development setup, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 
-## How to work through the problems 🧭
-
-You do not need to do everything, or to do things in order. Problems range from
-a few minutes to several sessions.
-
-### The basic workflow
-
-- Each problem page, linked from the [index](#the-problems), opens with
-  anything you need beforehand and the test command that checks it. Some pages
-  group several related exercises.
-- Use the focused test command for the exercise you are working on. Most
-  exercises begin as stubs, so their tests are red until you implement them.
-  Topic-level commands run every exercise in a topic and are more useful after
-  you have completed several.
-- Aim to make one small change at a time and rerun the test.
-- The early language exercises use only the Python standard library; scientific
-  exercises need the optional science packages installed above.
-
-### Hints, difficulty and extensions 💡
-
-Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
-🌶️🌶️🌶️ challenging. A page may start gently and build up.
-
-When working through the problems, look out for these markers:
-
-- 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
-  that give away a little more each time)
-- 😱 a tricky section
-- 🚀 an optional extension.
-
-Look for hints only when you are stuck, opening one level at a time, and try
-the extensions if you want more. Click a collapsible section's heading to open
-it. Some investigations also end with a collapsible **What did you discover?**
-section: read it after you have formed your own view.
-
-### Using coding agents 🤖
-
-> [!TIP]
-> Try each problem yourself first. Use coding agents for hints, explanations
-> and reviews of your attempts.
-
-<details>
-<summary>Using coding agents while learning</summary>
-
-The purpose of this package is partially to help you learn Python, but is also
-a collection of interesting and hopefully satisfying problems to solve. It is
-not simply about collecting completed solutions. A coding agent could complete
-the exercises for you, but that would miss the point entirely. Writing code,
-investigating failures, and explaining your choices build an understanding of
-Python, statistics and algorithms that remain useful in the age of agentic
-coding. You'll need this understanding to specify requirements, assess
-generated code, spot mistakes, and maintain the result. Consider using agents
-to support your learning with hints, explanations, or reviews of your own
-attempts. Try each problem yourself first, and make sure you can explain and
-test any code you adopt; passing tests alone is not the learning goal.
-
-[AGENTS.md](AGENTS.md) gives compatible coding agents learning-first guidance:
-offer hints before solutions and ask before editing your exercise code.
-Support varies by tool; if yours does not load it automatically, ask it to
-read the guide first.
-
-</details>
-
-### Working with notebooks 📓
-
-The notebooks in [`analysis`](analysis/) are workspaces for your investigations,
-not completed examples. Open them in VS Code with Jupyter support, or run
-`uv run jupyter lab` from the repository root. Use the project's `.venv` as
-the kernel, with the notebook and science packages installed as described above.
-
-Some notebooks serve several problems:
-- [Old Faithful](analysis/old_faithful.ipynb) uses the same data to
-explore uncertainty, prediction and model choice.
-- [Simulation Studies](analysis/simulation_studies.ipynb) checks statistical
-methods against simulated data with known answers.
-- [Against the Odds](analysis/against_the_odds.ipynb) contains investigations
-for all three probability puzzles. Follow your problem page to the relevant
-section; you do not need to complete the whole notebook for each problem.
-
-The [Titanic notebook](analysis/titanic.ipynb) is a staged machine-learning
-investigation. Its setup reserves a test set: keep exploration and model
-selection on the training rows, then open the test set only for the final
-evaluation.
-
-Run the setup cells first, then fill the `TODO` cells for your investigation,
-running any earlier cells that section depends on. Implement reusable functions
-in the source module named by the problem and check them with its tests; use
-the notebook to call those functions, run experiments and make plots. Add code
-cells as needed, and Markdown cells for your predictions, observations and
-explanations. Use seeded random generators so experiments can be repeated.
-
-Notebook investigations have no automatic pass or fail: your plots, numerical
-checks and explanations are the result.
-
 ## The problems
 
 Pick a topic that interests you. Each link opens a file under `problems/`;
@@ -145,6 +51,8 @@ are under `problems/pythonic-python/`, and algorithms under `problems/algorithms
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
+Not sure how to work through a problem, or what the 💡, 😱 and 🚀 markers mean? See
+[How to work through the problems](#how-to-work-through-the-problems-) below.
 
 ### Pythonic Python
 
@@ -249,6 +157,100 @@ automata and stochastic evolution. Both exercises use NumPy.
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
+
+## How to work through the problems 🧭
+
+You do not need to do everything, or to do things in order. Problems range from
+a few minutes to several sessions.
+
+### The basic workflow
+
+- Each problem page, linked from the [index](#the-problems), opens with
+  anything you need beforehand and the test command that checks it. Some pages
+  group several related exercises.
+- Use the focused test command for the exercise you are working on. Most
+  exercises begin as stubs, so their tests are red until you implement them.
+  Topic-level commands run every exercise in a topic and are more useful after
+  you have completed several.
+- Aim to make one small change at a time and rerun the test.
+- The early language exercises use only the Python standard library; scientific
+  exercises need the optional science packages installed above.
+
+### Hints, difficulty and extensions 💡
+
+Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
+🌶️🌶️🌶️ challenging. A page may start gently and build up.
+
+When working through the problems, look out for these markers:
+
+- 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
+  that give away a little more each time)
+- 😱 a tricky section
+- 🚀 an optional extension.
+
+Look for hints only when you are stuck, opening one level at a time, and try
+the extensions if you want more. Click a collapsible section's heading to open
+it. Some investigations also end with a collapsible **What did you discover?**
+section: read it after you have formed your own view.
+
+### Using coding agents 🤖
+
+> [!TIP]
+> Try each problem yourself first. Use coding agents for hints, explanations
+> and reviews of your attempts.
+
+<details>
+<summary>Using coding agents while learning</summary>
+
+The purpose of this package is partially to help you learn Python, but is also
+a collection of interesting and hopefully satisfying problems to solve. It is
+not simply about collecting completed solutions. A coding agent could complete
+the exercises for you, but that would miss the point entirely. Writing code,
+investigating failures, and explaining your choices build an understanding of
+Python, statistics and algorithms that remain useful in the age of agentic
+coding. You'll need this understanding to specify requirements, assess
+generated code, spot mistakes, and maintain the result. Consider using agents
+to support your learning with hints, explanations, or reviews of your own
+attempts. Try each problem yourself first, and make sure you can explain and
+test any code you adopt; passing tests alone is not the learning goal.
+
+[AGENTS.md](AGENTS.md) gives compatible coding agents learning-first guidance:
+offer hints before solutions and ask before editing your exercise code.
+Support varies by tool; if yours does not load it automatically, ask it to
+read the guide first.
+
+</details>
+
+### Working with notebooks 📓
+
+The notebooks in [`analysis`](analysis/) are workspaces for your investigations,
+not completed examples. Open them in VS Code with Jupyter support, or run
+`uv run jupyter lab` from the repository root. Use the project's `.venv` as
+the kernel, with the notebook and science packages installed as described above.
+
+Some notebooks serve several problems:
+- [Old Faithful](analysis/old_faithful.ipynb) uses the same data to
+explore uncertainty, prediction and model choice.
+- [Simulation Studies](analysis/simulation_studies.ipynb) checks statistical
+methods against simulated data with known answers.
+- [Against the Odds](analysis/against_the_odds.ipynb) contains investigations
+for all three probability puzzles. Follow your problem page to the relevant
+section; you do not need to complete the whole notebook for each problem.
+
+The [Titanic notebook](analysis/titanic.ipynb) is a staged machine-learning
+investigation. Its setup reserves a test set: keep exploration and model
+selection on the training rows, then open the test set only for the final
+evaluation.
+
+Run the setup cells first, then fill the `TODO` cells for your investigation,
+running any earlier cells that section depends on. Implement reusable functions
+in the source module named by the problem and check them with its tests; use
+the notebook to call those functions, run experiments and make plots. Add code
+cells as needed, and Markdown cells for your predictions, observations and
+explanations. Use seeded random generators so experiments can be repeated.
+
+Notebook investigations have no automatic pass or fail: your plots, numerical
+checks and explanations are the result.
 
 ## Further Reading 📚
 
