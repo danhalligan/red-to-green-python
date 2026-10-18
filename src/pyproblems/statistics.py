@@ -66,12 +66,3 @@ def gaussian_mixture_log_likelihood(
 ) -> float:
     """Calculate the log-likelihood for a two-normal mixture."""
     raise NotImplementedError
-
-
-def fit_gaussian_mixture(observations: ArrayLike) -> dict[str, float]:
-    """Fit a two-normal mixture from deterministic starts and order by mean.
-
-    It is a good idea to keep each standard deviation above a small floor, since
-    the likelihood is unbounded if a component collapses onto a single point.
-    """
-    raise NotImplementedError

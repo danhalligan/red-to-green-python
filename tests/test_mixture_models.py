@@ -6,6 +6,7 @@ from pyproblems.mixture_models import (
     EMResult,
     GaussianMixtureParameters,
     MultivariateGaussianMixtureParameters,
+    animate_faithful_mixtures,
     expectation_maximization,
     fit_faithful_gaussian_mixture,
     fit_hard_gaussian_mixture,
@@ -17,6 +18,7 @@ from pyproblems.mixture_models import (
     multivariate_mixture_log_likelihood,
     multivariate_soft_expectation_step,
     multivariate_soft_maximization_step,
+    plot_faithful_mixture,
     soft_expectation_step,
     soft_maximization_step,
 )
@@ -356,3 +358,55 @@ def test_multivariate_fit_orders_components_by_the_first_mean_coordinate():
     assert swapped.mean1 == pytest.approx(forward.mean1)
     assert swapped.mean2 == pytest.approx(forward.mean2)
     assert swapped.weight1 == pytest.approx(forward.weight1)
+
+
+FAITHFUL_START = MultivariateGaussianMixtureParameters(
+    np.array([2.8, 75.0]),
+    np.array([[0.8, 7.0], [7.0, 70.0]]),
+    np.array([3.6, 58.0]),
+    np.array([[0.8, 7.0], [7.0, 70.0]]),
+    0.5,
+)
+
+
+@pytest.fixture
+def probabilities(monkeypatch):
+    """Stand in for the learner's E-step with fixed random probabilities."""
+    values = np.random.default_rng(1).uniform(size=272)
+    monkeypatch.setattr(
+        "pyproblems.mixture_models.multivariate_soft_expectation_step",
+        lambda observations, parameters: values,
+    )
+    return values
+
+
+def test_plot_faithful_mixture_colours_points_by_most_likely_component(
+    probabilities,
+):
+    matplotlib = pytest.importorskip("matplotlib")
+    matplotlib.use("Agg")
+
+    axes = plot_faithful_mixture(FAITHFUL_START, title="Fit")
+    colours = axes.collections[0].get_facecolor()[:, :3]
+
+    assert len(colours) == 272
+    expected = np.array(
+        [
+            matplotlib.colors.to_rgb("tab:blue" if p >= 0.5 else "tab:orange")
+            for p in probabilities
+        ]
+    )
+    assert colours == pytest.approx(expected)
+    assert len(axes.patches) == 4
+    assert axes.get_title() == "Fit"
+
+
+def test_animate_faithful_mixtures_makes_one_frame_per_parameter_set(
+    probabilities,
+):
+    matplotlib = pytest.importorskip("matplotlib")
+    matplotlib.use("Agg")
+
+    animation = animate_faithful_mixtures([FAITHFUL_START] * 3, interval=50)
+
+    assert animation.to_jshtml().count("data:image/png;base64") == 3

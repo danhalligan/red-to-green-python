@@ -1,4 +1,4 @@
-# Expectation-maximisation 😱
+# Fitting a mixture of distributions 😱
 
 > **Before you start:** the optional scientific stack
 > (`uv sync --all-groups --extra science`).
@@ -6,33 +6,66 @@
 > **Recommended first:**
 > [Recovering the parameters](recovering-the-parameters.md)
 > (likelihood and maximum likelihood). The final part introduces Old Faithful
-> with a short regression diagnostic before fitting a mixture. The
-> [Fitting a Gaussian mixture](gaussian-mixture.md) exercise is not required.
+> with a short regression diagnostic before fitting a mixture.
 >
-> **You’ll practise:** expectation-maximisation, hard and soft assignment,
-> weighted estimates, and fitting a bivariate mixture to real data.
+> **You’ll practise:** the mixture likelihood, working in log space, hidden
+> labels, expectation-maximisation (EM), hard and soft assignment, weighted
+> estimates, and fitting a bivariate mixture to real data.
 >
-> **Check:** `uv run pytest tests/test_mixture_models.py -m advanced -q`
+> **Check:** `uv run pytest tests/test_statistics.py -k gaussian_mixture_log_likelihood -q`
+> for the likelihood, then `uv run pytest tests/test_mixture_models.py -m advanced -q`
+> for EM.
+
+Suppose observations come from one of two Gaussian distributed populations, but
+we do not know which population produced each observation. If the first
+population has weight $\pi$, the density for one observation is
+
+$$
+f(x\mid\theta) = \pi \phi(x\mid\mu_1,\sigma_1) + (1-\pi) \phi(x\mid\mu_2,\sigma_2),
+$$
+
+where $\phi$ is the Gaussian density function and
+$\theta=(\mu_1,\sigma_1,\mu_2,\sigma_2,\pi)$. How can we estimate $\theta$ from
+the observations alone?
 
 Recall from the likelihood question in
 [Recovering the parameters](recovering-the-parameters.md)
-that the ML estimates
-of a normal distribution are simply the sample mean and the *population*
-standard deviation.  However, when we do not know which distribution each
-observation came from, we can't easily use this analytical result. Although the
-approach of numerically optimising over all parameters works,
-it is slow and impractical, particularly if we consider mixtures of more
-distributions!
+that the ML estimates of a normal distribution are simply the sample mean and
+the *population* standard deviation. For a mixture, the sum inside the
+logarithm of the log-likelihood means there is no such closed form.
 
-A much more efficient approach is
+## Calculating the log-likelihood
+
+In [statistics.py](../../src/pyproblems/statistics.py), implement
+`gaussian_mixture_log_likelihood`. It takes named component means, positive
+standard deviations, a mixture weight (strictly between zero and one), and the
+observations. Remember, the likelihood is the product of mixture densities
+across observations and the log-likelihood is the sum of the log mixture
+densities across observations. Work in log space so that observations far in
+the tails do not underflow.
+
+## Finding the maximum
+
+We could maximise this log-likelihood over all five parameters numerically
+(equivalent to our approach in
+[Recovering the parameters](recovering-the-parameters.md)). That can work, but
+it is tricky: the parameters are constrained, there are local optima, and the
+likelihood is unbounded if a component collapses onto a single observation. To
+see the last point, evaluate your function with `mean1` equal to one of the
+observations and a shrinking `standard_deviation1`. The difficulties grow with
+every extra component.
+
+There is a neat way round this. Imagine each observation came with a *hidden
+label* saying which population produced it. With the labels, estimation becomes
+easy again: the ML estimates for each population are just the mean and
+population standard deviation of its own observations, and the weight is the
+fraction of observations with each label. No optimisation is needed.
+
+We do not have the labels, but we can *guess* them from our current parameter
+estimates, and then use the guessed labels to improve the estimates. Treating
+the labels as missing data in this way is called
 [Expectation-Maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
-(EM), which treats this as a *missing data* problem. We introduce a set of
-unknown labels which tell us which distribution each observation came from.
-This is useful because, with the labels, estimation becomes easy again:
-the ML estimates for each distribution are just its mean and population standard
-deviation, with no optimisation.
-
-The EM approach when the labels are missing is:
+(EM):
 
 1. Guess the parameter values.
 2. Use the parameter values to infer likely labels (the E-step).
@@ -148,6 +181,21 @@ Compare your fitted log-likelihood with the reference value in the tests (about
 -1130.27). The [Old Faithful notebook](../../analysis/old_faithful.ipynb#Gaussian-mixture) gives rough
 starting values and asks you to plot the fit. EM is not guaranteed to find the
 global maximum from every starting point.
+
+Because the fit is held in a `MultivariateGaussianMixtureParameters` object,
+[mixture_models.py](../../src/pyproblems/mixture_models.py) can supply plotting
+helpers that work with it. `plot_faithful_mixture(parameters)` draws the
+Old Faithful data with each component in its own colour (mean and ellipses one
+and two standard deviations out), and colours each eruption by the component
+that most likely produced it, using your `multivariate_soft_expectation_step`.
+Plot your starting values and your fitted result to check that the clusters look
+sensible.
+
+If you want to watch EM at work, `animate_faithful_mixtures(history)` animates a
+list of parameter objects. Fitting with `max_iterations=0` returns the initial
+parameters, so collecting the fits for `max_iterations=0, 1, 2, ...` gives the
+parameters after each iteration. Try different starting values and see how the
+animation changes.
 
 What do your fitted clusters say about the straight line, and about what it
 was missing? The notebook also suggests an extension that revisits the

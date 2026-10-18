@@ -209,16 +209,15 @@ interval exercises build on standard error.
 ### Parameter Estimation
 
 Estimate model parameters using likelihood, numerical optimisation and
-expectation-maximisation.
+mixture models fitted by expectation-maximisation.
 Start with likelihood for a single normal distribution; the mixture exercises
-build on it, with covariance matrices needed for multivariate EM.
+build on it, with covariance matrices needed for multivariate mixtures.
 
 - [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
   🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a Gaussian mixture](problems/parameter-estimation/gaussian-mixture.md)
-  🌶️🌶️: fit two hidden populations by direct numerical optimisation (optional).
-- [Expectation-maximisation](problems/parameter-estimation/expectation-maximisation.md)
-  🌶️🌶️🌶️: build hard and soft EM, then fit a bivariate mixture to Old Faithful.
+- [Fitting a mixture of distributions](problems/parameter-estimation/fitting-a-mixture.md)
+  🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
+  soft mixtures and a bivariate mixture to Old Faithful.
 
 ### Against the Odds
 

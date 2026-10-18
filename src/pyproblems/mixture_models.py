@@ -1,10 +1,15 @@
 """Expectation-maximisation exercises for Gaussian mixture models."""
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
-from typing import Generic, TypeVar
+from typing import TYPE_CHECKING, Generic, TypeVar
 
+import numpy as np
 from numpy.typing import ArrayLike, NDArray
+
+if TYPE_CHECKING:
+    from matplotlib.animation import FuncAnimation
+    from matplotlib.axes import Axes
 
 
 @dataclass(frozen=True)
@@ -259,3 +264,105 @@ def fit_faithful_gaussian_mixture(
     waiting) observations, then call `fit_multivariate_gaussian_mixture`.
     """
     raise NotImplementedError
+
+
+_COMPONENT_COLOURS = ("tab:blue", "tab:orange")
+
+
+def _draw_faithful_mixture(
+    axes: "Axes", parameters: MultivariateGaussianMixtureParameters, title: str
+) -> None:
+    from matplotlib.patches import Ellipse
+
+    from pyproblems.data import load_faithful_data
+
+    observations = np.array(load_faithful_data())
+    means = (np.asarray(parameters.mean1), np.asarray(parameters.mean2))
+    covariances = (
+        np.asarray(parameters.covariance1),
+        np.asarray(parameters.covariance2),
+    )
+
+    # Colour each point by its more likely component, as in a hard E-step.
+    assignment = np.where(
+        multivariate_soft_expectation_step(observations, parameters) >= 0.5, 0, 1
+    )
+
+    axes.scatter(
+        observations[:, 0],
+        observations[:, 1],
+        c=[_COMPONENT_COLOURS[index] for index in assignment],
+        s=20,
+        alpha=0.8,
+    )
+    for mean, covariance, colour in zip(
+        means, covariances, _COMPONENT_COLOURS, strict=True
+    ):
+        values, vectors = np.linalg.eigh(covariance)
+        angle = np.degrees(np.arctan2(vectors[1, -1], vectors[0, -1]))
+        for radius in (1, 2):
+            axes.add_patch(
+                Ellipse(
+                    mean,
+                    2 * radius * np.sqrt(values[-1]),
+                    2 * radius * np.sqrt(values[0]),
+                    angle=angle,
+                    fill=False,
+                    edgecolor=colour,
+                    linewidth=2 if radius == 1 else 1,
+                )
+            )
+        axes.plot(*mean, marker="x", color=colour, markersize=10, markeredgewidth=2)
+
+    axes.set_xlabel("Eruption duration (minutes)")
+    axes.set_ylabel("Waiting time (minutes)")
+    axes.set_title(title)
+
+
+def plot_faithful_mixture(
+    parameters: MultivariateGaussianMixtureParameters,
+    *,
+    axes: "Axes | None" = None,
+    title: str = "",
+) -> "Axes":
+    """Plot the Old Faithful data with a two-component bivariate mixture.
+
+    Each eruption is coloured by the component that is most likely to have
+    produced it, using your `multivariate_soft_expectation_step`. Each component
+    is drawn in its own colour, with its mean and ellipses one and two standard
+    deviations from the mean. Plots on `axes` if given, otherwise on a new
+    figure, and returns the axes. Needs matplotlib.
+    """
+    import matplotlib.pyplot as plt
+
+    if axes is None:
+        _, axes = plt.subplots(figsize=(8, 6))
+    _draw_faithful_mixture(axes, parameters, title)
+    return axes
+
+
+def animate_faithful_mixtures(
+    history: Sequence[MultivariateGaussianMixtureParameters],
+    *,
+    interval: int = 200,
+) -> "FuncAnimation":
+    """Return an animation of successive mixtures, `interval` milliseconds apart.
+
+    `history` holds the parameters after each EM iteration, starting with the
+    initial values. In a notebook, show it with
+    `HTML(animate_faithful_mixtures(history).to_jshtml())`, using `HTML` from
+    `IPython.display`. Needs matplotlib.
+    """
+    import matplotlib.pyplot as plt
+    from matplotlib.animation import FuncAnimation
+
+    figure, axes = plt.subplots(figsize=(8, 6))
+
+    def draw(iteration: int):
+        axes.clear()
+        _draw_faithful_mixture(axes, history[iteration], f"Iteration {iteration}")
+        axes.set_xlim(1, 6)
+        axes.set_ylim(35, 105)
+
+    plt.close(figure)  # Show only the animation, not a static copy of the figure.
+    return FuncAnimation(figure, draw, frames=len(history), interval=interval)

@@ -12,7 +12,7 @@
   Old Faithful regression diagnostic inside the EM application.
 * Establish a Python-first programming and statistics exercise package.
 * Add core language, inheritance, refactoring, test-first, scientific-Python,
-  Sudoku, and optional Gaussian-mixture exercises.
+  Sudoku, and Gaussian-mixture likelihood exercises.
 * Package the survey, mystery-coordinate, and Sudoku datasets for standard
   library resource loading.
 * Add learner scaffolds for sequence alignment, Sudoku solving, Game of Life,
