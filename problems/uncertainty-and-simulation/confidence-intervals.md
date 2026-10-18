@@ -20,7 +20,7 @@ true mean in about 95% of repeated samples. That is a claim about the procedure,
 and a simulation can test it, because there we know the truth.
 
 This question has no new function to write. In the [simulation studies
-notebook](../../analysis/simulation_studies.ipynb#4.-Confidence-interval-coverage), use `standard_error` and your own
+notebook](../../analysis/simulation_studies.ipynb#3.-Confidence-interval-coverage), use `standard_error` and your own
 resampling loop. Draw samples of size 5, 10, 30 and 100 from a normal population
 and from a skewed one (an exponential distribution), with the true mean known.
 For each sample calculate three intervals: the normal interval above, the same

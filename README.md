@@ -111,8 +111,6 @@ interval exercises build on standard error.
   🌶️: compare bootstrap and analytic estimates of the same uncertainty.
 - [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
   🌶️🌶️: measure how often confidence intervals keep their promise.
-- [When does the normal approximation fail?](problems/uncertainty-and-simulation/normal-approximation.md)
-  🌶️: find when a continuous approximation to a discrete distribution breaks down.
 
 ### Parameter Estimation
 

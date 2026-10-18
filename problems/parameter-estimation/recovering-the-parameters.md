@@ -59,7 +59,7 @@ As a validation, compare with the analytical estimates: the sample mean and the
 population standard deviation. In the [Old Faithful
 notebook](../../analysis/old_faithful.ipynb#A-normal-model-for-waiting-times), fit a normal distribution to the waiting
 times and judge how well it describes them. Then, in the [simulation studies
-notebook](../../analysis/simulation_studies.ipynb#3.-Does-the-normal-MLE-recover-the-truth?), test the estimator: fit many
+notebook](../../analysis/simulation_studies.ipynb#2.-Does-the-normal-MLE-recover-the-truth?), test the estimator: fit many
 repeated samples from a normal population with known parameters, at several
 sample sizes including small ones, and compare the average estimate with the
 truth. Do the estimates recover the true parameters on average? Does that depend
