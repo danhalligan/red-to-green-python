@@ -13,6 +13,5 @@ htmlcov/
 .ruff_cache/
 .ipynb_checkpoints/
 .DS_Store
-IMPROVEMENTS.md
 README_files/
 README.html
