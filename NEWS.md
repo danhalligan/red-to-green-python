@@ -4,7 +4,7 @@
   character bigram model on the packaged word list and samples new words from
   it, with an optional trigram extension and an investigation notebook.
 * Add two optional extensions to Dawkins' weasel: a mutation-only genetic
-  algorithm with tournament selection and elitism, then one-point crossover.
+  algorithm with tournament selection, then one-point crossover.
   Return the weasel's result as a dictionary rather than a dataclass.
 * Replace the standalone Old Faithful regression with a staged Titanic
   classification investigation: majority baseline, fold-local preprocessing,

@@ -102,17 +102,18 @@ def evolve_population(
 
     Start from `population_size` identical copies of one uniformly random
     phrase over `WEASEL_ALPHABET`, drawn first from `rng`, so every difference
-    in the population arises by mutation (and crossover). Keep the single
-    fittest phrase unchanged each generation (elitism); the rest of the
-    population is new offspring, each with one parent chosen by
-    `tournament_select`, or two joined by `one_point_crossover` when
-    `crossover` is true, and then mutated with `mutate_message`.
+    in the population arises by mutation (and crossover). Each generation
+    replaces the whole population with `population_size` new offspring, each
+    with one parent chosen by `tournament_select` from the old population, or
+    two joined by `one_point_crossover` when `crossover` is true, and then
+    mutated with `mutate_message`. Nothing is carried over unchanged, so the
+    best score can fall.
 
     Stop when some phrase matches the target or after `max_generations`. Return
-    a dictionary with keys `candidate` (the best phrase), `generations` (the
-    number run), `match_history` (the best score in each population, starting
-    with the initial one, so `generations + 1` entries) and `population` (the
-    final phrases, a tuple of `population_size` strings). Use only the injected
-    `rng` so runs are reproducible.
+    a dictionary with keys `candidate` (the fittest phrase in the final
+    population), `generations` (the number run), `match_history` (the best score
+    in each population, starting with the initial one, so `generations + 1`
+    entries) and `population` (the final phrases, a tuple of `population_size`
+    strings). Use only the injected `rng` so runs are reproducible.
     """
     raise NotImplementedError

@@ -135,22 +135,21 @@ does something similar. Implement `fittest`, `tournament_select` and
 - **Tournament selection** picks a parent by sampling a few individuals at random
   (three by default) and taking the fittest of them. The best individuals are
   chosen often, but weaker ones sometimes win a tournament too.
-- **Elitism** copies the single fittest individual into the next generation
-  unchanged, so the best score can never fall.
 
-Each generation keeps the elite, then fills the rest of the population with
-mutated copies of tournament winners, using your `mutate_message` and
+Each generation replaces the whole population with new offspring: each is a
+mutated copy of a tournament winner, using your `mutate_message` and
 `matching_characters`. Start from 100 identical copies of one random phrase,
 drawn first from the generator just as the weasel draws its starting phrase, so a
-given seed can start every method from the same phrase.
+given seed can start every method from the same phrase. Nothing is carried over
+unchanged, so unlike the weasel the best score can fall.
 
 > **Check:** `uv run pytest tests/test_evolution_tournament.py -m advanced -q`
 
 <details>
 <summary>💡 Hint 1: a nudge</summary>
 
-Write `fittest` and `tournament_select` first and test them alone. Then think about
-how many offspring the elite leaves room for.
+Write `fittest` and `tournament_select` first and test them alone. Then build
+each generation's offspring one at a time.
 
 </details>
 
@@ -167,7 +166,7 @@ parents: pick a cut position strictly inside the phrase, then join the first par
 of one parent to the rest of the other. Implement `one_point_crossover` and switch
 it on with `crossover=True` in `evolve_population`. For each offspring, choose two
 parents independently by tournament selection, cross them over, and then mutate
-the child as before. Keep the elite. Use crossover for every offspring.
+the child as before. Use crossover for every offspring.
 
 > **Check:** `uv run pytest tests/test_evolution_crossover.py -m advanced -q`
 
