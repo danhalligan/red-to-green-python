@@ -11,8 +11,9 @@
   logistic regression, a random-forest comparison, and one held-out evaluation.
   Provide preprocessing and guided notebook skeletons, keeping the focus on
   exploration, features and evaluation. Package all 1,309 labelled titanic3
-  passengers without outcome-revealing fields, add scikit-learn to the science extra, and keep the
-  Old Faithful regression diagnostic inside the EM application.
+  passengers without outcome-revealing fields, add scikit-learn to the science
+  extra, and keep the Old Faithful regression diagnostic inside the EM
+  application.
 * Establish a Python-first programming and statistics exercise package.
 * Add core language, inheritance, refactoring, test-first, scientific-Python,
   Sudoku, and Gaussian-mixture likelihood exercises.
@@ -33,11 +34,11 @@
   (`ols_coefficients`, with the Old Faithful regression now using any library
   straight-line fit) and put the Dawkins' weasel simulation before its optional
   probability questions.
-* Make the README a pick-and-mix catalogue (size, style, hook and optional
-  "try first" suggestions) with the learning routes kept as optional
-  recommendations; frame the simple exercises as quick warm-ups and 99 Bottles as
-  an optional test-first kata, and replace course-style prerequisites with
-  "before you start" notes. Rework Gilded Rose around inheriting awkward legacy
-  code, make the Gosper glider gun the payoff of Game of Life (with provided
-  `place_shape` and `animate_boards` helpers), and add an evolution-versus-guessing
-  comparison to the weasel.
+* Make the README a pick-and-mix catalogue (size, style, hook and optional "try
+  first" suggestions) with the learning routes kept as optional recommendations;
+  frame the simple exercises as quick warm-ups and 99 Bottles as an optional
+  test-first kata, and replace course-style prerequisites with "before you
+  start" notes. Rework Gilded Rose around inheriting awkward legacy code, make
+  the Gosper glider gun the payoff of Game of Life (with provided `place_shape`
+  and `animate_boards` helpers), and add an evolution-versus-guessing comparison
+  to the weasel.

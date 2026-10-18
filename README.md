@@ -7,9 +7,9 @@
 
 ## Introduction
 
-Welcome! This is a collection of Python puzzles that begin *red* and end
-*green*. Most functions start as stubs whose tests fail, and your job is to turn
-them green ✅.
+Welcome! This is a collection of Python problems to solve. You solve them by
+writing functions that start as stubs and whose tests fail and are *red* 🔴.
+If you complete them correctly the tests will turn *green* 🟢!
 
 Problems run from FizzBuzz-sized warm-ups to data analysis, simulation,
 algorithms and statistical modelling, and along the way you will meet list
@@ -151,7 +151,7 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 ### Generative Models
 
-- [The AI that makes up words](problems/generative-models/wordsmith.md) 🤖
+- [The AI that makes up words](problems/generative-models/wordsmith.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
