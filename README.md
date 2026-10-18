@@ -243,6 +243,13 @@ automata and stochastic evolution. Both exercises use NumPy.
   can a sentence evolve out of gibberish through mutation and selection? Optional
   extensions add a tournament-selection genetic algorithm, then recombination.
 
+### Generative Models
+
+- [The AI that makes up words](problems/generative-models/wordsmith.md) 🤖
+  🌶️🌶️: train a tiny probabilistic language model on English words, invent new
+  ones, and investigate whether remembering more characters makes a better
+  wordsmith.
+
 ## Further Reading 📚
 
 Use these when you need background or want to go beyond an exercise; none is

@@ -1,5 +1,8 @@
 # pyproblems 0.1.0
 
+* Add "The AI that makes up words", a standard-library exercise that trains a
+  character bigram model on the packaged word list and samples new words from
+  it, with an optional trigram extension and an investigation notebook.
 * Add two optional extensions to Dawkins' weasel: a mutation-only genetic
   algorithm with tournament selection and elitism, then one-point crossover.
   Return the weasel's result as a dictionary rather than a dataclass.
