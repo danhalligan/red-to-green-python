@@ -98,11 +98,17 @@ the fraction of observations in component one. Write
 
 ## Iteration
 
-Write `expectation_maximization`, which iterates a supplied E-step and M-step
-until the log-likelihood stops changing, and `mixture_log_likelihood`, which
-calculates the sum of the log mixture densities across observations. Stop on
-the *absolute* change in log-likelihood.[^abs-change] The docstrings give the
-exact signatures, stopping rule and return values, and the tests check them.
+Write `em_steps`, a generator much like your
+[Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
+one. It yields the parameters after each iteration (first the initial values,
+then the result of an E-step followed by an M-step, and so on, endlessly) and
+never decides when to stop. Then write `expectation_maximization`, which takes
+values from `em_steps` until the log-likelihood stops changing, and
+`mixture_log_likelihood`, which calculates the sum of the log mixture densities
+across observations. Stop on the *absolute* change in log-likelihood.[^abs-change]
+The docstrings give the exact signatures, stopping rule and return values, and
+the tests check them. Neither function needs to know what the parameters are, so
+they should work for any model with an E-step and an M-step.
 
 [^abs-change]: Hard EM optimises a different objective, so its log-likelihood
     can fall from one iteration to the next, whereas soft EM never decreases it
@@ -173,9 +179,11 @@ Each standard deviation is now replaced by a covariance matrix, held in a
 counterparts of the soft-EM functions:
 `multivariate_mixture_log_likelihood`,
 `multivariate_soft_expectation_step`, `multivariate_soft_maximization_step` and
-`fit_multivariate_gaussian_mixture`. Finally, write
+`fit_multivariate_gaussian_mixture`. Reuse your `expectation_maximization` for
+the last of these: the loop shouldn't need to change. Finally, write
 `fit_faithful_gaussian_mixture(initial_parameters)`, which fits the packaged Old
-Faithful data.
+Faithful data. The two components are interchangeable (swapping them gives the
+same likelihood), so a fit keeps the labels of your starting values.
 
 Compare your fitted log-likelihood with the reference value in the tests (about
 -1130.27). The [Old Faithful notebook](../../analysis/old_faithful.ipynb#Gaussian-mixture) gives rough
@@ -192,10 +200,9 @@ Plot your starting values and your fitted result to check that the clusters look
 sensible.
 
 If you want to watch EM at work, `animate_faithful_mixtures(history)` animates a
-list of parameter objects. Fitting with `max_iterations=0` returns the initial
-parameters, so collecting the fits for `max_iterations=0, 1, 2, ...` gives the
-parameters after each iteration. Try different starting values and see how the
-animation changes.
+list of parameter objects. Your `em_steps` yields the parameters after each
+iteration, so `list(islice(em_steps(...), 40))` makes a ready-made history. Try
+different starting values and see how the animation changes.
 
 What do your fitted clusters say about the straight line, and about what it
 was missing? The notebook also suggests an extension that revisits the

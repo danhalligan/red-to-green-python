@@ -1,6 +1,6 @@
 """Expectation-maximisation exercises for Gaussian mixture models."""
 
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Generic, TypeVar
 
@@ -42,9 +42,8 @@ class MultivariateGaussianMixtureParameters:
     weight1: float
 
 
-ParametersT = TypeVar(
-    "ParametersT", GaussianMixtureParameters, MultivariateGaussianMixtureParameters
-)
+ParametersT = TypeVar("ParametersT")
+LatentT = TypeVar("LatentT")
 
 
 @dataclass(frozen=True)
@@ -132,21 +131,43 @@ def mixture_log_likelihood(
     raise NotImplementedError
 
 
+def em_steps(
+    observations: ArrayLike,
+    initial_parameters: ParametersT,
+    expectation_step: Callable[[ArrayLike, ParametersT], LatentT],
+    maximization_step: Callable[[ArrayLike, LatentT], ParametersT],
+) -> Iterator[ParametersT]:
+    """Yield the parameters after each EM iteration, starting with the initial ones.
+
+    The first value yielded is `initial_parameters` itself. Each later value
+    comes from one more iteration: call `expectation_step(observations,
+    parameters)` on the latest parameters, then `maximization_step(observations,
+    latent)` on its result, where `latent` is whatever the E-step returned.
+
+    The generator is endless and lazy. It does no work until it is asked for the
+    next value and never decides when to stop, so take what you need with `next`
+    or `itertools.islice`. It cannot know what the parameters represent, so it
+    works for any model with an E-step and an M-step.
+    """
+    raise NotImplementedError
+
+
 def expectation_maximization(
     observations: ArrayLike,
-    initial_parameters: GaussianMixtureParameters,
-    expectation_step: Callable,
-    maximization_step: Callable,
-    log_likelihood: Callable,
+    initial_parameters: ParametersT,
+    expectation_step: Callable[[ArrayLike, ParametersT], LatentT],
+    maximization_step: Callable[[ArrayLike, LatentT], ParametersT],
+    log_likelihood: Callable[[ArrayLike, ParametersT], float],
     *,
     tolerance: float = 1e-10,
     max_iterations: int = 1000,
-) -> EMResult[GaussianMixtureParameters]:
+) -> EMResult[ParametersT]:
     """Iterate supplied E- and M-steps until likelihood convergence.
 
     `expectation_step(observations, parameters)` returns labels or weights,
     `maximization_step(observations, those)` returns new parameters, and
-    `log_likelihood(observations, parameters)` returns a float.
+    `log_likelihood(observations, parameters)` returns a float. Use `em_steps`
+    for the iterations, and decide here when to stop.
 
     One iteration is one E-step followed by one M-step. Stop when the absolute
     change in log-likelihood between consecutive iterations is below
@@ -158,8 +179,7 @@ def expectation_maximization(
 
     Returns an `EMResult` with the fitted `parameters`,
     their `log_likelihood`, the number of `iterations` and whether it
-    `converged`. The component labels can be swapped without changing the
-    model, so return the component with the lower mean first.
+    `converged`. Nothing here depends on what the parameters are.
     """
     raise NotImplementedError
 
@@ -245,9 +265,9 @@ def fit_multivariate_gaussian_mixture(
 ) -> EMResult[MultivariateGaussianMixtureParameters]:
     """Fit a multivariate Gaussian mixture using soft EM.
 
-    Iterate the multivariate soft E- and M-steps as in
-    `expectation_maximization`, using `multivariate_mixture_log_likelihood`.
-    Return the component with the smaller first mean coordinate first.
+    Reuse `expectation_maximization` with the multivariate soft E- and M-steps
+    and `multivariate_mixture_log_likelihood`: the loop itself should not need
+    to change. The components keep the labels of `initial_parameters`.
     """
     raise NotImplementedError
 
@@ -349,7 +369,8 @@ def animate_faithful_mixtures(
     """Return an animation of successive mixtures, `interval` milliseconds apart.
 
     `history` holds the parameters after each EM iteration, starting with the
-    initial values. In a notebook, show it with
+    initial values; `list(islice(em_steps(...), n))` makes one. In a notebook,
+    show it with
     `HTML(animate_faithful_mixtures(history).to_jshtml())`, using `HTML` from
     `IPython.display`. Needs matplotlib.
     """

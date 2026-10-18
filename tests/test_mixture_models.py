@@ -1,3 +1,5 @@
+from itertools import islice
+
 import numpy as np
 import pytest
 
@@ -7,6 +9,7 @@ from pyproblems.mixture_models import (
     GaussianMixtureParameters,
     MultivariateGaussianMixtureParameters,
     animate_faithful_mixtures,
+    em_steps,
     expectation_maximization,
     fit_faithful_gaussian_mixture,
     fit_hard_gaussian_mixture,
@@ -333,7 +336,7 @@ def test_multivariate_m_step_rejects_singular_covariance():
         multivariate_soft_maximization_step(on_a_line, [1.0, 1.0, 0.0, 0.0])
 
 
-def test_multivariate_fit_orders_components_by_the_first_mean_coordinate():
+def test_multivariate_fit_keeps_the_labels_of_the_starting_values():
     generator = np.random.default_rng(9)
     observations = np.vstack(
         (
@@ -348,16 +351,73 @@ def test_multivariate_fit_orders_components_by_the_first_mean_coordinate():
     forward = fit_multivariate_gaussian_mixture(
         observations,
         MultivariateGaussianMixtureParameters(low, identity, high, identity, 0.5),
-    ).parameters
+    )
     swapped = fit_multivariate_gaussian_mixture(
         observations,
         MultivariateGaussianMixtureParameters(high, identity, low, identity, 0.5),
-    ).parameters
+    )
 
-    assert forward.mean1[0] < forward.mean2[0]
-    assert swapped.mean1 == pytest.approx(forward.mean1)
-    assert swapped.mean2 == pytest.approx(forward.mean2)
-    assert swapped.weight1 == pytest.approx(forward.weight1)
+    assert forward.parameters.mean1[0] < forward.parameters.mean2[0]
+    assert swapped.parameters.mean1 == pytest.approx(forward.parameters.mean2)
+    assert swapped.parameters.mean2 == pytest.approx(forward.parameters.mean1)
+    assert swapped.parameters.weight1 == pytest.approx(1 - forward.parameters.weight1)
+    assert swapped.log_likelihood == pytest.approx(forward.log_likelihood)
+
+
+def test_em_steps_yields_the_initial_parameters_then_one_iteration_at_a_time():
+    steps = em_steps([0.0], 1, lambda data, p: p + 1, lambda data, latent: latent * 2)
+
+    assert list(islice(steps, 4)) == [1, 4, 10, 22]
+
+
+def test_em_steps_passes_the_observations_and_latent_values_to_the_steps():
+    seen = []
+
+    def expectation(observations, parameters):
+        seen.append(("E", observations, parameters))
+        return parameters + 100
+
+    def maximization(observations, latent):
+        seen.append(("M", observations, latent))
+        return latent + 1
+
+    steps = em_steps("data", 0, expectation, maximization)
+    assert list(islice(steps, 2)) == [0, 101]
+    assert seen == [("E", "data", 0), ("M", "data", 100)]
+
+
+def test_em_steps_is_lazy_and_never_ends():
+    calls = []
+
+    def expectation(observations, parameters):
+        calls.append(parameters)
+        return parameters
+
+    steps = em_steps([0.0], 0, expectation, lambda data, latent: latent + 1)
+    assert calls == []
+    assert next(steps) == 0
+    assert calls == []
+    assert next(steps) == 1
+    assert calls == [0]
+    assert len(list(islice(steps, 5_000))) == 5_000
+
+
+def test_expectation_maximization_works_for_parameters_that_are_not_mixtures():
+    # Each iteration moves a single number halfway towards the data's mean.
+    def mean(observations):
+        return sum(observations) / len(observations)
+
+    fitted = expectation_maximization(
+        [1.0, 2.0, 6.0],
+        0.0,
+        lambda data, p: p,
+        lambda data, latent: (latent + mean(data)) / 2,
+        lambda data, p: -abs(p - mean(data)),
+        tolerance=1e-9,
+    )
+
+    assert fitted.converged
+    assert fitted.parameters == pytest.approx(3.0, abs=1e-6)
 
 
 FAITHFUL_START = MultivariateGaussianMixtureParameters(
