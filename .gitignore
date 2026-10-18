@@ -12,8 +12,6 @@ dist/
 htmlcov/
 .ruff_cache/
 .ipynb_checkpoints/
-red-to-green-python-solutions/
-
 .DS_Store
 IMPROVEMENTS.md
 README_files/
