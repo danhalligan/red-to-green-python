@@ -32,6 +32,8 @@ one on a board, `render_board` to print it, and `animate_boards` to watch it
 move, so you can focus on the algorithm.
 
 When the tests pass, open the [Game of Life notebook](../../analysis/game_of_life.ipynb).
-Start with the glider, then try the "Gosper Glider Gun". The last test, which
-counts how a 36-cell pattern grows over time, is the check that you have built
-it.
+Start with the glider, then take on the final challenge: can you build a machine
+that makes more machines? Load the "Gosper Glider Gun", only 36 cells, and see
+whether it can repeatedly create something that travels across the grid. The last
+test, which counts how a 36-cell pattern grows over time, is the check that you
+have built it.

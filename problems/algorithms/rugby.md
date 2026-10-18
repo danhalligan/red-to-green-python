@@ -13,8 +13,7 @@
 
 **In this exercise:** [Stage 1](#stage-1-reconstruct-the-match) ·
 [Stage 2](#stage-2-the-commentator-gets-carried-away) ·
-[Stage 3](#stage-3-the-entire-season), then an optional extension and
-investigation (🚀).
+[Stage 3](#stage-3-the-entire-season), then an optional extension (🚀).
 
 A rugby match has finished, but the scoring record has been lost. All we have is
 the final score. The commentator insists there must be dozens of ways the points
@@ -216,24 +215,5 @@ the moment each event type is added.
 With the outer loop over scores and the inner loop over events, every ordering
 is counted. With the outer loop over events and the inner loop over scores, each
 event type is added in a fixed order, so every combination is counted once.
-
-</details>
-
-**Investigation 🚀: how fast do the counts grow?** The ratio of consecutive
-Fibonacci numbers tends to the golden ratio, about 1.618. Check this with your
-[`fibonacci()`](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence). Then look at
-your scoring counts from about 50 points on: what
-does `count(n) / count(n - 1)` tend to, and what is `count(n) / count(n - 10)`?
-(Compare it with the growth you saw in Stage 2.) Now try the number of tallies
-from the extension. What does all this tell you about how fast each count grows,
-and about why order makes the problem so much harder? 💡 The golden ratio
-solves $x^2 = x + 1$.
-
-<details>
-<summary>💡 Hint: relating the recurrence to growth</summary>
-
-Fibonacci satisfies $f_n = f_{n-1} + f_{n-2}$. Trying
-$f_n = x^n$ gives $x^n = x^{n-1} + x^{n-2}$, which simplifies to
-$x^2 = x + 1$. Do the same with the recurrence for your scoring counts.
 
 </details>
