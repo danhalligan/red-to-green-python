@@ -1,5 +1,7 @@
 # The AI that makes up words 🤖
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python. No scientific packages are needed, and the
 > optional investigation notebook uses only the standard library.
 >

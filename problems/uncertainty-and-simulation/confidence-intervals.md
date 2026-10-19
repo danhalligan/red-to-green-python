@@ -1,5 +1,7 @@
 # Can you trust a 95% interval? 🚀
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** [How uncertain is an average?](standard-error.md),
 > [Two methods, two answers](bootstrap.md), and the optional scientific stack
 > (`uv sync --all-groups --extra science`).

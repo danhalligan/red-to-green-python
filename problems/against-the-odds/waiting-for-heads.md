@@ -1,5 +1,7 @@
 # Waiting for heads 🪙
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python. The extension uses the
 > [Against the Odds notebook](../../analysis/against_the_odds.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
@@ -49,7 +51,7 @@ common?
 uv run pytest tests/test_coin_patterns.py -k average
 ```
 
-**Stage 3: predict without simulating 😱.** Implement
+**Stage 3: predict without simulating.** Implement
 `expected_waiting_time(pattern)`, the exact expected number of flips for any
 pattern. The tests check every pattern up to length four, and a pattern of 20
 heads, which is far too slow to simulate. Check your formula against your

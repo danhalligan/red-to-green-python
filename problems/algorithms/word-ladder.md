@@ -1,5 +1,7 @@
 # Word ladder 🪜
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python.
 >
 > **You’ll practise:** sets and strings, searching a network of words, and

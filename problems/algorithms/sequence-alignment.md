@@ -1,5 +1,7 @@
 # Global sequence alignment 🧬
 
+> **Difficulty:** 🌶️🌶️🌶️
+>
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [Try, try again](rugby.md), which introduces
@@ -13,7 +15,7 @@
 > part only, add `-k "score_alignment or all_alignments or brute_force_finds"`.
 
 **In this exercise:** [Naive brute force](#naive-brute-force) ·
-[Dynamic programming & Needleman-Wunsch](#dynamic-programming--needleman-wunsch-)
+[Dynamic programming & Needleman-Wunsch](#dynamic-programming--needleman-wunsch)
 
 ## Naive brute force
 
@@ -68,7 +70,7 @@ Time your function as the sequences get longer, then think about the 10 and 11
 base example above. How long do you think it would take for two 1,000 base
 sequences?
 
-## Dynamic programming & Needleman-Wunsch 😱
+## Dynamic programming & Needleman-Wunsch
 
 If you have completed [Try, try again](rugby.md), you have already met dynamic
 programming. This problem extends that idea from counting possibilities in one

@@ -1,5 +1,7 @@
 # Refactoring: The Gilded Rose Kata 🌹
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [Object-oriented Python](object-oriented-python.md), so

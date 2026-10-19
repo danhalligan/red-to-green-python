@@ -51,7 +51,7 @@ are under `problems/pythonic-python/`, and algorithms under `problems/algorithms
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
-Not sure how to work through a problem, or what the 💡, 😱 and 🚀 markers mean? See
+Not sure how to work through a problem, or what the 💡 and 🚀 markers mean? See
 [How to work through the problems](#how-to-work-through-the-problems-) below.
 
 ### Pythonic Python
@@ -176,14 +176,14 @@ a few minutes to several sessions.
 
 ### Hints, difficulty and extensions 💡
 
-Difficulty is a rough guide: 🌶️ gentle, 🌶️🌶️ takes some thought,
-🌶️🌶️🌶️ challenging. A page may start gently and build up.
+Difficulty is a rough guide, shown at the top of each problem page as well as
+in the index: 🌶️ gentle, 🌶️🌶️ takes some thought, 🌶️🌶️🌶️ challenging. A page
+may start gently and build up.
 
 When working through the problems, look out for these markers:
 
 - 💡 a hint (in a footnote or a collapsible section, sometimes in three levels
   that give away a little more each time)
-- 😱 a tricky section
 - 🚀 an optional extension.
 
 Look for hints only when you are stuck, opening one level at a time, and try

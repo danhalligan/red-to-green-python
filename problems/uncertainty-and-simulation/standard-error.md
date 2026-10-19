@@ -1,5 +1,7 @@
 # How uncertain is an average?
 
+> **Difficulty:** 🌶️
+>
 > **Before you start:** basic Python and NumPy, and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >

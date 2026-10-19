@@ -1,5 +1,7 @@
 # Steak, Tea, and Toast
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >

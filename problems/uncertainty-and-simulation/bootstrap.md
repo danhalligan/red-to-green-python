@@ -1,5 +1,7 @@
 # Two methods, two answers
 
+> **Difficulty:** 🌶️
+>
 > **Before you start:** [How uncertain is an average?](standard-error.md) and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
 >

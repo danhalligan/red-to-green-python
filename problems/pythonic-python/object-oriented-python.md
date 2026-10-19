@@ -1,5 +1,7 @@
 # Object-oriented Python
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python.
 >
 > **You’ll practise:** classes, instances, inheritance, method overriding,

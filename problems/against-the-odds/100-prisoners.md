@@ -1,5 +1,7 @@
 # The 100 prisoners 🔐
 
+> **Difficulty:** 🌶️🌶️🌶️
+>
 > **Before you start:** basic Python. The investigation uses the
 > [Against the Odds notebook](../../analysis/against_the_odds.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).

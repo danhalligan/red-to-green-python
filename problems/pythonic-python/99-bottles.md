@@ -1,5 +1,7 @@
 # Test-first: 99 Bottles
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python. This is an optional test-first kata: a
 > practice exercise in working one test at a time, not an algorithmic puzzle.
 >

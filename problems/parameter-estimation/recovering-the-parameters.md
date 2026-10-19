@@ -1,5 +1,7 @@
 # Recovering the parameters
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python, NumPy and probability densities, and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
 >

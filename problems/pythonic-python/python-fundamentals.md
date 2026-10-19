@@ -1,5 +1,7 @@
 # Python Fundamentals
 
+> **Difficulty:** 🌶️
+>
 > **Before you start:** nothing. These are quick warm-ups: short problems that
 > are good practice in their own right. Do any of them, in any order, and skip
 > the ones you already know.

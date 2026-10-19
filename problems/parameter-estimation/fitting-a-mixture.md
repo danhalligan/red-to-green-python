@@ -1,5 +1,7 @@
-# Fitting a mixture of distributions 😱
+# Fitting a mixture of distributions
 
+> **Difficulty:** 🌶️🌶️🌶️
+>
 > **Before you start:** the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >

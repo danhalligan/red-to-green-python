@@ -1,5 +1,7 @@
 # Sudoku solver 🔢
 
+> **Difficulty:** 🌶️🌶️🌶️
+>
 > **Before you start:** [Python Fundamentals](../pythonic-python/python-fundamentals.md).
 > Start with the checker warm-up below, then build on it to write a solver.
 >

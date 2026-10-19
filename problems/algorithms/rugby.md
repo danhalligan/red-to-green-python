@@ -1,5 +1,7 @@
 # Try, try again 🏉
 
+> **Difficulty:** 🌶️🌶️
+>
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
