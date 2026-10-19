@@ -16,7 +16,8 @@
 [Q2 Adjacent products](#q2-adjacent-products) · [Q3 FizzBuzz](#q3-fizzbuzz) ·
 [Q4 Fibonacci](#q4-fibonacci-sequence) ·
 [Q5 First non-repeating character](#q5-first-non-repeating-character) ·
-[Q6 Python gotchas](#q6-python-gotchas)
+[Q6 Python gotchas](#q6-python-gotchas) ·
+[Q7 Look-and-say](#q7-look-and-say)
 
 ## Q1. Exponentiation
 
@@ -191,3 +192,44 @@ print(list(numbers))
 
 Implement `average(values)`, which returns the mean of any iterable of numbers,
 including a one-shot iterator or generator that can only be read once.
+
+## Q7. Look-and-say
+
+Like the Fibonacci exercise, here we are also generating a sequence of numbers.
+The trick here though is that to get each new number you "say what you see"!
+
+- Starting with `1`. Read it aloud as "one 1", giving your next number `11`
+- `11` is read as "two 1s" giving `21`
+- Next is "one 2, one 1": `1211`
+- Then "one 1, one 2, two ones2", i.e. `111221`
+
+Each term is a tiny description of the one before it. This is the 
+[look-and-say sequence](https://en.wikipedia.org/wiki/Look-and-say_sequence).
+
+Implement `look_and_say()` in `language.py` as a generator that yields strings
+indefinitely, starting with `"1"`. Each call should return an independent
+iterator, and requesting more terms from an existing iterator should continue
+where it left off.
+
+```python
+from itertools import islice
+
+list(islice(look_and_say(), 6))
+# ["1", "11", "21", "1211", "111221", "312211"]
+```
+
+<details>
+<summary>Hint: finding the groups</summary>
+
+Scan a term from left to right, tracking the current digit and its run length.
+Make sure the final group is included too. Alternatively, investigate
+`itertools.groupby`, which groups consecutive equal values.
+
+</details>
+
+```bash
+uv run pytest tests/test_language.py -k look_and_say -q
+```
+
+**Optional extension:** let callers choose a starting string. Can you think of 
+a starting string that never changes?

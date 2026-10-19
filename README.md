@@ -61,7 +61,8 @@ through tests and refactoring.
 
 - [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) 🌶️:
   short language exercises covering exponentiation, adjacent products, FizzBuzz,
-  Fibonacci generators, the first non-repeating character, and Python gotchas.
+  Fibonacci and look-and-say generators, the first non-repeating character, and
+  Python gotchas.
 - [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.

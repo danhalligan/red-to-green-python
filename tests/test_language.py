@@ -14,6 +14,7 @@ from pyproblems.language import (
     first_non_repeating_character,
     fizzbuzz,
     keep_odd,
+    look_and_say,
     make_grid,
 )
 
@@ -89,6 +90,33 @@ def test_fibonacci_is_an_independent_infinite_generator():
     assert iter(first) is first
     assert list(islice(first, 9)) == [0, 1, 1, 2, 3, 5, 8, 13, 21]
     assert list(islice(second, 6)) == [0, 1, 1, 2, 3, 5]
+
+
+def test_look_and_say_yields_string_terms():
+    assert list(islice(look_and_say(), 9)) == [
+        "1",
+        "11",
+        "21",
+        "1211",
+        "111221",
+        "312211",
+        "13112221",
+        "1113213211",
+        "31131211131221",
+    ]
+
+
+def test_look_and_say_iterators_continue_independently():
+    first = look_and_say()
+    second = look_and_say()
+
+    assert iter(first) is first
+    assert iter(second) is second
+    assert list(islice(first, 6)) == ["1", "11", "21", "1211", "111221", "312211"]
+    assert list(islice(second, 3)) == ["1", "11", "21"]
+    assert next(first) == "13112221"
+    assert next(second) == "1211"
+    assert next(first) == "1113213211"
 
 
 @pytest.mark.parametrize(

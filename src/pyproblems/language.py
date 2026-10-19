@@ -23,6 +23,11 @@ def fibonacci() -> Iterator[int]:
     raise NotImplementedError
 
 
+def look_and_say() -> Iterator[str]:
+    """Yield look-and-say terms indefinitely as strings, starting with '1'."""
+    raise NotImplementedError
+
+
 def first_non_repeating_character(text: str) -> str | None:
     """Return the first unique character, or None if none exists."""
     raise NotImplementedError
