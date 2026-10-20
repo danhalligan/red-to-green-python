@@ -4,7 +4,7 @@
 >
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
+> **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q6-fibonacci-sequence)
 > (Python Fundamentals Q4), which introduces recurrence relationships.
 >
 > **You’ll practise:** breaking a problem into smaller ones, spotting repeated

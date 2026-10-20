@@ -101,7 +101,7 @@ the fraction of observations in component one. Write
 ## Iteration
 
 Write `em_steps`, a generator much like your
-[Fibonacci](../pythonic-python/python-fundamentals.md#q4-fibonacci-sequence)
+[Fibonacci](../pythonic-python/python-fundamentals.md#q6-fibonacci-sequence)
 one. It yields the parameters after each iteration (first the initial values,
 then the result of an E-step followed by an M-step, and so on, endlessly) and
 never decides when to stop. Then write `expectation_maximization`, which takes

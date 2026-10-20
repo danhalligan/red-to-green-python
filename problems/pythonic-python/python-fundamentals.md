@@ -14,9 +14,9 @@
 
 **In this topic:** [Q1 Exponentiation](#q1-exponentiation) ·
 [Q2 Adjacent products](#q2-adjacent-products) · [Q3 FizzBuzz](#q3-fizzbuzz) ·
-[Q4 Fibonacci](#q4-fibonacci-sequence) ·
-[Q5 First non-repeating character](#q5-first-non-repeating-character) ·
-[Q6 Python gotchas](#q6-python-gotchas) ·
+[Q4 First non-repeating character](#q4-first-non-repeating-character) ·
+[Q5 Python gotchas](#q5-python-gotchas) ·
+[Q6 Fibonacci](#q6-fibonacci-sequence) ·
 [Q7 Look-and-say](#q7-look-and-say)
 
 ## Q1. Exponentiation
@@ -67,31 +67,7 @@ example, `fizzbuzz(5)` should return `['1', '2', 'Fizz', '4', 'Buzz']`.
 uv run pytest tests/test_language.py -k fizzbuzz
 ```
 
-## Q4. Fibonacci sequence
-
-The Fibonacci sequence starts as 0, 1, 1, 2, 3, 5. After the starting values
-0 and 1, each new value is the sum of the two before it.
-
-Implement `fibonacci()` as a generator that yields the Fibonacci sequence
-indefinitely. Each call to `fibonacci()` should return an independent iterator.
-Try `next()` to request individual values and `itertools.islice` to take a
-finite prefix without materialising the infinite sequence.
-
-```python
-from itertools import islice
-
-list(islice(fibonacci(), 8))
-```
-
-```bash
-uv run pytest tests/test_language.py -k fibonacci
-```
-
-**Where this leads:** a value defined by the values before it is a *recurrence
-relationship*. You will use the same idea to count rugby scores in
-[Try, try again](../algorithms/rugby.md).
-
-## Q5. First non-repeating character
+## Q4. First non-repeating character
 
 Given a string, find and return the first instance of a non-repeating character
 in it. If there is no such character, return `None`.
@@ -106,7 +82,7 @@ Implement `first_non_repeating_character(text)`.
 uv run pytest tests/test_language.py -k non_repeating
 ```
 
-## Q6. Python gotchas
+## Q5. Python gotchas
 
 These short examples expose behaviour that can be surprising when translating
 habits from other languages or when reading unfamiliar Python. Before running
@@ -192,6 +168,30 @@ print(list(numbers))
 
 Implement `average(values)`, which returns the mean of any iterable of numbers,
 including a one-shot iterator or generator that can only be read once.
+
+## Q6. Fibonacci sequence
+
+The Fibonacci sequence starts as 0, 1, 1, 2, 3, 5. After the starting values
+0 and 1, each new value is the sum of the two before it.
+
+Implement `fibonacci()` as a generator that yields the Fibonacci sequence
+indefinitely. Each call to `fibonacci()` should return an independent iterator.
+Try `next()` to request individual values and `itertools.islice` to take a
+finite prefix without materialising the infinite sequence.
+
+```python
+from itertools import islice
+
+list(islice(fibonacci(), 8))
+```
+
+```bash
+uv run pytest tests/test_language.py -k fibonacci
+```
+
+**Where this leads:** a value defined by the values before it is a *recurrence
+relationship*. You will use the same idea to count rugby scores in
+[Try, try again](../algorithms/rugby.md).
 
 ## Q7. Look-and-say
 

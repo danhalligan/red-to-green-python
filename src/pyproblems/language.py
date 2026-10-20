@@ -18,16 +18,6 @@ def fizzbuzz(n: int) -> list[str]:
     raise NotImplementedError
 
 
-def fibonacci() -> Iterator[int]:
-    """Yield the Fibonacci sequence indefinitely, starting with zero."""
-    raise NotImplementedError
-
-
-def look_and_say() -> Iterator[str]:
-    """Yield look-and-say terms indefinitely as strings, starting with '1'."""
-    raise NotImplementedError
-
-
 def first_non_repeating_character(text: str) -> str | None:
     """Return the first unique character, or None if none exists."""
     raise NotImplementedError
@@ -60,4 +50,14 @@ def approximately_equal(first: float, second: float) -> bool:
 
 def average(values: Iterable[float]) -> float:
     """Return the mean of any iterable, including a one-shot iterator."""
+    raise NotImplementedError
+
+
+def fibonacci() -> Iterator[int]:
+    """Yield the Fibonacci sequence indefinitely, starting with zero."""
+    raise NotImplementedError
+
+
+def look_and_say() -> Iterator[str]:
+    """Yield look-and-say terms indefinitely as strings, starting with '1'."""
     raise NotImplementedError
