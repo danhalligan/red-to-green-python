@@ -99,6 +99,10 @@ These notebook-based exercises use the optional scientific stack.
   clean messy survey responses and investigate associations between preferences.
 - [Predicting survival on the Titanic](problems/data-analysis/titanic.md) 🌶️🌶️🌶️:
   build a prediction pipeline, beat a baseline, and test it on unseen passengers.
+- [Spinning plates 🧪](problems/data-analysis/spinning-plates.md) 🌶️🌶️: rescue a
+  seemingly failed laboratory experiment performed on a 96 well plate: parse
+  plate-reader files, reconstruct the sample mapping, build a tidy DataFrame
+  pipeline and decide whether the results can be trusted.
 
 ### Uncertainty and Simulation
 
