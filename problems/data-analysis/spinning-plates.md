@@ -13,12 +13,12 @@
 > data-processing functions. Your notebook's plots and explanations check the
 > investigation; there is no single right answer to the final question.
 
+### EXP-042
+
 Lab scientists often have to keep several tasks, projects and responsibilities
 going at the same time, and there always seem to be 96-well plates all over the
 place. One of them is now yours.
 
-> ### The plate that lied
->
 > **From:** Dr Jo Martin  
 > **To:** The Data Science Team  
 > **Subject:** HELP!!! Plate EXP-042 is gaslighting me (urgent-ish, mostly urgent)
@@ -46,7 +46,7 @@ place. One of them is now yours.
 > P.S. There's a run record somewhere in there too. I wrote down what I could
 > remember. It has been a very long week.
 
-Can you find out if the experiment worked?
+**Can you find out what happened and if the experiment worked?**
 
 Work in the [Spinning plates notebook](../../analysis/spinning_plates.ipynb). It
 calls the functions you will write in
@@ -103,7 +103,7 @@ columns.
 > The layout is the plate *as designed*, and nobody has deliberately corrupted
 > it. Treat it as correct unless the evidence says otherwise.
 
-## 1. The instrument's revenge
+## 1. Excel failed, python to the rescue 🦸
 
 The export is not a table. Open it and look at what a parser would have to
 handle: sections, header rows, matrices, instrument notes, and readings that are
@@ -148,9 +148,11 @@ How many readings carry a flag? Which of them would you trust?
 
 ## 2. One well, one row
 
-Tidy data has one observation per row and one variable per column. The export is
-tidy by *reading*; for analysis you want one row per *well*, with both channels
-side by side and everything known about the well alongside. Implement:
+[Tidy data](https://byuidatascience.github.io/python4ds/tidy-data.html) has one observation per row and one variable per column. The export might be readable 
+by eye, but for analysis you want one row per *well*, with both channels
+side by side and everything known about the well alongside.
+
+Implement:
 
 - `pivot_channels(readings)` reshapes the tidy readings to one row per well,
   with a column of signals and a column of QC flags for each channel.
@@ -173,11 +175,13 @@ notice a well that is absent from one side, so compare the sets of wells too.
 Check your work with
 `uv run pytest tests/test_plate_reader.py -k "pivot or join" -q`.
 
-## 3. The controls don't make sense
+## 3. Out of control
 
 Build the analysis table in the notebook and compare it with what the briefing
-says each control should do. A plate heatmap puts measurements back where the
-wells physically are, which makes spatial problems far easier to see. The
+says each control should do.
+
+A plate heatmap shows measurements in the same layout as they would be on a 
+plate, which makes spatial problems far easier to see. The
 notebook provides one, drawn beside the intended layout.
 
 The control measurements may look reasonable one at a time, yet fail to match the
@@ -190,8 +194,8 @@ Two helpers support the investigation:
   mapping is a function that takes a well name and returns the name of the well
   whose reading belongs to it. It must send every well to a different source
   well.
-- `z_prime(high, low)` computes the Z′-factor, the standard assay-quality
-  measure of how well two control groups are separated.
+- `z_prime(high, low)` computes the [Z′-factor](https://en.wikipedia.org/wiki/Z-factor), 
+  the standard assay-quality measure of how well two control groups are separated.
 
 Check them with `uv run pytest tests/test_plate_reader.py -k "remap or z_prime" -q`.
 
@@ -245,7 +249,7 @@ procedure.
 Does anything in the run record support your hypothesis? It should corroborate
 the answer, not replace the controls.
 
-## 4. The experiment comes back to life
+## 4. Cleaning up the signal
 
 Process the readings with the mapping you chose. Implement:
 
@@ -303,23 +307,15 @@ replicate means and their uncertainty is enough.
 
 ## 5. Would you sign off on this?
 
-> The corrected experiment now appears successful.
->
-> But the original sample-to-measurement mapping was wrong.
->
-> Your colleague wants to progress Compound A to the next stage.
->
-> Would you recommend progressing it, repeating the experiment or rejecting the
-> result?
+Your colleague wants to progress Compound A to the next stage. Would you
+recommend progressing it, repeating the experiment or rejecting the result?
 
 Write a short conclusion, supported by your plots and QC findings. Some things to
 consider:
 
-- How convincingly do the controls establish what went wrong?
-- Is there independent evidence of what happened?
-- Do the corrected controls meet reasonable QC expectations?
-- Are the responses consistent across replicate wells?
-- Was the correction chosen independently of the result you were hoping for?
-- Does a convincing result within one plate establish biological reproducibility?
+- How convincingly can you establish what if anything went wrong?
+- What evidence is there for what may have happened?
+- Do the controls meet reasonable QC expectations?
+- Are responses consistent across replicate wells?
 - What uncertainty remains about sample identities and instrument handling?
 - What confirmatory experiment would you recommend?
