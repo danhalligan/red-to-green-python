@@ -71,9 +71,9 @@ def pivot_channels(readings: pd.DataFrame) -> pd.DataFrame:
 
     Return columns plate_id, well, row, column, then one column of signals per
     channel (in the order the channels first appear: "biomarker", "reference"),
-    then one `<channel>_flag` column of qc flags per channel. Rows are in plate
-    order (by row letter, then column number) with a fresh 0..n-1 index.
-    The input is not modified.
+    then one `<channel>_flag` column of qc flags per channel. The signal columns
+    must be floats. Rows are in plate order (by row letter, then column
+    number) with a fresh 0..n-1 index. The input is not modified.
     """
     # TODO: pivot the signals and qc flags so each well is a single row.
     raise NotImplementedError

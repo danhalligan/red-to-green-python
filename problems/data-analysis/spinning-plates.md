@@ -58,7 +58,7 @@ spend your time on the data rather than on Matplotlib.
 
 A 96-well plate has eight rows (A–H) and twelve columns (1–12), so wells are
 named `A01` to `H12`. Cells were grown in the wells and treated with three
-compounds, each at four concentrations (in µM) with five replicate wells per
+compounds, each at four concentrations (in µM) with four replicate wells per
 concentration. The remaining wells are controls:
 
 | `sample_type` | What is in the well | Biomarker signal | Reference signal |
@@ -210,9 +210,11 @@ it was not chosen with, and whether anything independent supports it.
 <details>
 <summary>💡 Hint 1: look at the controls</summary>
 
-Compare each type of control in both channels, and compare the numbers with their
-positions on the plate. The reference channel and the biomarker channel tell you
-different things: which controls does each one separate?
+Compare each type of control in both channels, and compare the numbers with
+their positions on the plate. The controls were laid out in columns, so look at
+the heatmaps for stripes: do they appear where the layout says they should? The
+reference channel and the biomarker channel tell you different things: which
+controls does each one separate?
 
 </details>
 

@@ -285,6 +285,8 @@ def test_pivot_gives_one_row_per_well_with_a_column_per_channel():
         [100.5, nan, 300.0, nan, 500.0, 600.25], nan_ok=True
     )
     assert wells["reference"].tolist() == [10.0, 20.0, 30.0, 40.0, 50.0, 5.0]
+    assert wells["biomarker"].dtype == float
+    assert wells["reference"].dtype == float
 
 
 def test_pivot_keeps_the_qc_flags_with_their_readings():
@@ -377,10 +379,10 @@ def test_packaged_layout_joins_to_every_well_of_the_export():
     assert len(joined) == 96
     assert joined["well"].is_unique
     assert joined["sample_type"].value_counts().to_dict() == {
-        "treatment": 60,
-        "vehicle": 14,
-        "inhibitor": 12,
-        "blank": 10,
+        "treatment": 48,
+        "vehicle": 16,
+        "inhibitor": 16,
+        "blank": 16,
     }
     pd.testing.assert_frame_equal(joined[WIDE_COLUMNS], wells)
 
@@ -654,4 +656,4 @@ def test_packaged_plate_runs_through_the_whole_pipeline_keeping_the_raw_data():
     # B11 and E01 are missing and D11 is saturated, whichever well is which.
     assert processed["usable"].sum() == 93
     assert len(summary) == 12
-    assert summary["n"].between(0, 5).all()
+    assert summary["n"].between(0, 4).all()

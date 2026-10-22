@@ -203,10 +203,10 @@ def test_plate_layout_assigns_every_well_once_with_replicated_conditions():
         f"{row}{column:02d}" for row in "ABCDEFGH" for column in range(1, 13)
     ]
     assert Counter(row["sample_type"] for row in layout) == {
-        "treatment": 60,
-        "vehicle": 14,
-        "inhibitor": 12,
-        "blank": 10,
+        "treatment": 48,
+        "vehicle": 16,
+        "inhibitor": 16,
+        "blank": 16,
     }
     treatments = Counter(
         (row["compound"], row["concentration_um"])
@@ -214,7 +214,7 @@ def test_plate_layout_assigns_every_well_once_with_replicated_conditions():
         if row["sample_type"] == "treatment"
     )
     assert len(treatments) == 12
-    assert set(treatments.values()) == {5}
+    assert set(treatments.values()) == {4}
     assert {compound for compound, _ in treatments} == {
         "Compound A",
         "Compound B",
