@@ -1,5 +1,10 @@
 # pyproblems 0.1.0
 
+* Extend the Game of Life shape library with still lifes (block, beehive,
+  eater), oscillators (blinker, toad, beacon, pulsar, pentadecathlon, figure
+  eight, tumbler) and small long-lived patterns (R-pentomino, diehard,
+  pi-heptomino, acorn), with tests that check each one's behaviour and prompts
+  to explore them in the notebook.
 * Add "Spinning plates", a laboratory data-science puzzle: parse an awkward
   96-well plate-reader export, build a tidy DataFrame pipeline, investigate why
   the controls fail, normalise two measurement channels and decide whether the

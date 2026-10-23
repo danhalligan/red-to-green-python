@@ -1,3 +1,5 @@
+# Spaceships
+
 glider: |
   .O.
   ..O
@@ -33,3 +35,92 @@ gosper_glider_gun: |
   ..........O.....O.......O...........
   ...........O...O....................
   ............OO......................
+
+# Still lifes
+
+block: |
+  OO
+  OO
+
+beehive: |
+  .OO.
+  O..O
+  .OO.
+
+eater: |
+  OO..
+  O.O.
+  ..O.
+  ..OO
+
+# Oscillators
+
+blinker: |
+  OOO
+
+toad: |
+  .OOO
+  OOO.
+
+beacon: |
+  OO..
+  OO..
+  ..OO
+  ..OO
+
+pulsar: |
+  ..OOO...OOO..
+  .............
+  O....O.O....O
+  O....O.O....O
+  O....O.O....O
+  ..OOO...OOO..
+  .............
+  ..OOO...OOO..
+  O....O.O....O
+  O....O.O....O
+  O....O.O....O
+  .............
+  ..OOO...OOO..
+
+pentadecathlon: |
+  ..O....O..
+  OO.OOOO.OO
+  ..O....O..
+
+figure_eight: |
+  OOO...
+  OOO...
+  OOO...
+  ...OOO
+  ...OOO
+  ...OOO
+
+tumbler: |
+  .O.....O.
+  O.O...O.O
+  O..O.O..O
+  ..O...O..
+  ..OO.OO..
+
+# Small patterns with long, surprising lives
+
+r_pentomino: |
+  .OO
+  OO.
+  .O.
+
+diehard: |
+  ......O.
+  OO......
+  .O...OOO
+
+pi_heptomino: |
+  OOO
+  O.O
+  O.O
+
+acorn: |
+  .O.....
+  ...O...
+  OO..OOO
