@@ -13,13 +13,11 @@
 > data-processing functions. Your notebook's plots and explanations check the
 > investigation; there is no single right answer to the final question.
 
-### EXP-042
-
 Lab scientists often have to keep several tasks, projects and responsibilities
 going at the same time, and there always seem to be 96-well plates all over the
 place. One of them is now yours.
 
-> **From:** Dr Jo Martin  
+> **From:** Dr Pippa Petts  
 > **To:** The Data Science Team  
 > **Subject:** HELP!!! Plate EXP-042 is gaslighting me (urgent-ish, mostly urgent)
 >
@@ -41,7 +39,7 @@ place. One of them is now yours.
 > work? Can I trust any of it? Please help!!!
 >
 > Thank you thank you thank you,  
-> Jo
+> Pippa
 >
 > P.S. There's a run record somewhere in there too. I wrote down what I could
 > remember. It has been a very long week.

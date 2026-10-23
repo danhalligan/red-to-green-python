@@ -1,10 +1,10 @@
-Well Well Well 9600 - Plate Reader Export
+Well Ahead 9000 - Plate Reader Export
 Export format 2.3 (now with fewer surprises)
 
 
 [Run Information]
-Instrument:        Well Well Well 9600 (serial WWW-0457)
-Software:          Plate Expectations 4.2.1
+Instrument:        Well Ahead 9000 (serial WA-0457)
+Software:          Plate Up 4.2.1
 Plate ID:          EXP-042
 Plate type:        96-well, black wall, clear bottom
 Run date:          2026-10-16

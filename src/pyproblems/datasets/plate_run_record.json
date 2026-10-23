@@ -2,11 +2,11 @@
   "plate_id": "EXP-042",
   "experiment": "Project Dose of Reality: concentration-response screen",
   "run_date": "2026-10-16",
-  "plate_wrangler": "Dr Jo Martin",
+  "plate_wrangler": "Dr Pippa Petts",
   "instrument": {
-    "model": "Well Well Well 9600",
-    "serial": "WWW-0457",
-    "software": "Plate Expectations 4.2.1"
+    "model": "Well Ahead 9000",
+    "serial": "WA-0457",
+    "software": "Plate Up 4.2.1"
   },
   "plate": {
     "format": "96-well, black wall, clear bottom",
