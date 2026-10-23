@@ -49,7 +49,7 @@ def science_stack(monkeypatch):
 
 
 def test_notebooks_are_present():
-    assert len(NOTEBOOKS) == 9
+    assert len(NOTEBOOKS) == 10
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
@@ -102,3 +102,15 @@ def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
     assert train["Age"].dtype.kind == "f"
     assert namespace["passengers"]["Age"].iloc[0] == 29.0
     assert namespace["cv"].n_splits == 5
+
+
+def test_spinning_plates_setup_points_at_the_data_files(science_stack):
+    namespace = run_setup(ANALYSIS_DIR / "spinning_plates.ipynb")
+    data_dir = namespace["data_dir"]
+
+    for name in (
+        "plate_reader_export.txt",
+        "plate_layout.csv",
+        "plate_run_record.json",
+    ):
+        assert data_dir.joinpath(name).is_file()

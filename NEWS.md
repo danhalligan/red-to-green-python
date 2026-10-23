@@ -1,5 +1,10 @@
 # pyproblems 0.1.0
 
+* Add "Spinning plates", a laboratory data-science puzzle: parse an awkward
+  96-well plate-reader export, build a tidy DataFrame pipeline, investigate why
+  the controls fail, normalise two measurement channels and decide whether the
+  recovered result can be trusted. Includes a synthetic experiment (export,
+  layout and run record), starter code, tests and an investigation notebook.
 * Add "The AI that makes up words", a standard-library exercise that trains a
   character bigram model on the packaged word list and samples new words from
   it, with an optional trigram extension and an investigation notebook.

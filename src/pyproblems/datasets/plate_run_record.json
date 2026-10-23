@@ -1,0 +1,43 @@
+{
+  "plate_id": "EXP-042",
+  "experiment": "Project Dose of Reality: concentration-response screen",
+  "run_date": "2026-10-16",
+  "plate_wrangler": "Dr Pippa Petts",
+  "instrument": {
+    "model": "Well Ahead 9000",
+    "serial": "WA-0457",
+    "software": "Plate Up 4.2.1"
+  },
+  "plate": {
+    "format": "96-well, black wall, clear bottom",
+    "cells": "Reporter cells, passage 14",
+    "seeded": "2026-10-14",
+    "treated": "2026-10-15"
+  },
+  "loading": {
+    "carrier": "tray 1",
+    "a1_corner": "rear-right"
+  },
+  "log": [
+    {
+      "time": "14:46",
+      "event": "Plate removed from incubator; lid removed"
+    },
+    {
+      "time": "14:49",
+      "event": "Coffee (the fourth of the day)"
+    },
+    {
+      "time": "14:52",
+      "event": "Tray jammed; plate lifted out and put back in"
+    },
+    {
+      "time": "15:02",
+      "event": "Read started"
+    },
+    {
+      "time": "15:09",
+      "event": "Read finished; data exported; fingers crossed"
+    }
+  ]
+}

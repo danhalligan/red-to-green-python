@@ -1,0 +1,97 @@
+well,sample_type,compound,concentration_um,replicate
+A01,treatment,Compound A,3,1
+A02,treatment,Compound A,0.3,1
+A03,inhibitor,Reference inhibitor,,1
+A04,treatment,Compound B,30,1
+A05,treatment,Compound B,0.03,1
+A06,vehicle,DMSO,,1
+A07,treatment,Compound C,30,1
+A08,treatment,Compound C,30,2
+A09,inhibitor,Reference inhibitor,,2
+A10,inhibitor,Reference inhibitor,,3
+A11,blank,,,1
+A12,blank,,,2
+B01,treatment,Compound A,0.03,1
+B02,treatment,Compound A,0.3,2
+B03,inhibitor,Reference inhibitor,,4
+B04,treatment,Compound B,0.03,2
+B05,treatment,Compound B,0.03,3
+B06,vehicle,DMSO,,2
+B07,treatment,Compound C,0.03,1
+B08,treatment,Compound C,3,1
+B09,inhibitor,Reference inhibitor,,5
+B10,inhibitor,Reference inhibitor,,6
+B11,blank,,,3
+B12,blank,,,4
+C01,treatment,Compound A,30,1
+C02,treatment,Compound A,0.03,2
+C03,inhibitor,Reference inhibitor,,7
+C04,treatment,Compound B,0.3,1
+C05,treatment,Compound B,0.3,2
+C06,vehicle,DMSO,,3
+C07,treatment,Compound C,3,2
+C08,treatment,Compound C,0.03,2
+C09,inhibitor,Reference inhibitor,,8
+C10,inhibitor,Reference inhibitor,,9
+C11,blank,,,5
+C12,blank,,,6
+D01,treatment,Compound A,0.3,3
+D02,treatment,Compound A,3,2
+D03,inhibitor,Reference inhibitor,,10
+D04,treatment,Compound B,3,1
+D05,treatment,Compound B,3,2
+D06,vehicle,DMSO,,4
+D07,treatment,Compound C,3,3
+D08,treatment,Compound C,0.3,1
+D09,inhibitor,Reference inhibitor,,11
+D10,inhibitor,Reference inhibitor,,12
+D11,blank,,,7
+D12,blank,,,8
+E01,treatment,Compound A,3,3
+E02,treatment,Compound A,0.03,3
+E03,inhibitor,Reference inhibitor,,13
+E04,treatment,Compound B,3,3
+E05,treatment,Compound B,30,2
+E06,vehicle,DMSO,,5
+E07,treatment,Compound C,0.3,2
+E08,treatment,Compound C,30,3
+E09,vehicle,DMSO,,6
+E10,vehicle,DMSO,,7
+E11,blank,,,9
+E12,blank,,,10
+F01,treatment,Compound A,30,2
+F02,treatment,Compound A,3,4
+F03,inhibitor,Reference inhibitor,,14
+F04,treatment,Compound B,0.3,3
+F05,treatment,Compound B,3,4
+F06,vehicle,DMSO,,8
+F07,treatment,Compound C,0.03,3
+F08,treatment,Compound C,0.3,3
+F09,vehicle,DMSO,,9
+F10,vehicle,DMSO,,10
+F11,blank,,,11
+F12,blank,,,12
+G01,treatment,Compound A,0.03,4
+G02,treatment,Compound A,30,3
+G03,inhibitor,Reference inhibitor,,15
+G04,treatment,Compound B,0.03,4
+G05,treatment,Compound B,0.3,4
+G06,vehicle,DMSO,,11
+G07,treatment,Compound C,30,4
+G08,treatment,Compound C,0.03,4
+G09,vehicle,DMSO,,12
+G10,vehicle,DMSO,,13
+G11,blank,,,13
+G12,blank,,,14
+H01,treatment,Compound A,30,4
+H02,treatment,Compound A,0.3,4
+H03,inhibitor,Reference inhibitor,,16
+H04,treatment,Compound B,30,3
+H05,treatment,Compound B,30,4
+H06,vehicle,DMSO,,14
+H07,treatment,Compound C,3,4
+H08,treatment,Compound C,0.3,4
+H09,vehicle,DMSO,,15
+H10,vehicle,DMSO,,16
+H11,blank,,,15
+H12,blank,,,16

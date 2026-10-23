@@ -9,7 +9,11 @@
     "notebook.markup.fontSize": 13,
     "[markdown]": {
         "editor.formatOnSave": true,
-        "editor.wordWrapColumn": 80
+        "editor.wordWrapColumn": 80,
+        "editor.rulers": [
+            80
+        ],
+        "rewrap.wrappingColumn": 80
     },
     "[python]": {
         "editor.formatOnSave": true,
