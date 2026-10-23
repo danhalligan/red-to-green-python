@@ -14,9 +14,9 @@ Temperature:       37.0 C
 
 
 [Measurement Settings]
-Channel 1:         Biomarker   Ex 485 nm / Em 535 nm   Gain 80   Flashes 10
-Channel 2:         Reference   Ex 640 nm / Em 680 nm   Gain 60   Flashes 10
-Saturation limit:  20000 RFU (reported as OVER)
+Channel 1:          Biomarker   Ex 485 nm / Em 535 nm   Gain 80   Flashes 10
+Channel 2:          Reference   Ex 640 nm / Em 680 nm   Gain 60   Flashes 10
+Saturation limit:   20000 RFU (reported as OVER)
 Low signal warning: reading below 315 RFU (Biomarker) / 450 RFU (Reference)
 
 

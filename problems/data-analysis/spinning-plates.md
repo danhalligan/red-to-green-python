@@ -73,9 +73,9 @@ have a background level, and neither can be trusted beyond the instrument's
 limits.
 
 Three files describe the run. They are in
-[`src/pyproblems/datasets/`](../../src/pyproblems/datasets/), and reading them is
-part of the job: open them in an editor, then load them in the notebook (its setup
-gives you `data_dir`, the folder that holds them).
+[`src/pyproblems/datasets/`](../../src/pyproblems/datasets/), and reading them
+is part of the job: open them in an editor, then load them in the notebook (its
+setup gives you `data_dir`, the folder that holds them).
 
 - **The plate-reader export**
   ([plate_reader_export.txt](../../src/pyproblems/datasets/plate_reader_export.txt)):
@@ -93,9 +93,7 @@ gives you `data_dir`, the folder that holds them).
 
 You will build a pipeline: parse the export, reshape it, validate it, join the
 layout, apply quality control, correct for background, normalise, and summarise.
-You will not need one enormous chain of pandas calls; named intermediate tables
-are equally good. Keep the raw readings unchanged and put derived values in new
-columns.
+You should keep any raw readings unchanged and put derived values in new columns.
 
 > [!IMPORTANT]
 > The layout is the plate *as designed*, and nobody has deliberately corrupted
@@ -146,9 +144,12 @@ How many readings carry a flag? Which of them would you trust?
 
 ## 2. One well, one row
 
-[Tidy data](https://byuidatascience.github.io/python4ds/tidy-data.html) has one observation per row and one variable per column. The export might be readable 
-by eye, but for analysis you want one row per *well*, with both channels
-side by side and everything known about the well alongside.
+[Tidy data](https://byuidatascience.github.io/python4ds/tidy-data.html) has
+**one observation per row and one variable per column**. The export might be
+readable by eye, being laid out in the plate arrangement, but for an analysis
+pipline you need one row per *well*, with both channels side by side and
+everything known about the well alongside, so you can operate on all
+measurements of one type by applying a function to a column.
 
 Implement:
 
@@ -173,41 +174,40 @@ notice a well that is absent from one side, so compare the sets of wells too.
 Check your work with
 `uv run pytest tests/test_plate_reader.py -k "pivot or join" -q`.
 
-## 3. Out of control
+## 3. Loss of control
 
 Build the analysis table in the notebook and compare it with what the briefing
 says each control should do.
 
 A plate heatmap shows measurements in the same layout as they would be on a 
-plate, which makes spatial problems far easier to see. The
-notebook provides one, drawn beside the intended layout.
+plate, which makes spatial problems far easier to see. The notebook draws the
+intended layout beside the two channels.
 
-The control measurements may look reasonable one at a time, yet fail to match the
-wells they were supposedly in. What could explain this? Can you test competing
-explanations?
+The control measurements may look reasonable one at a time, but it looks like
+they fail to match the wells they were supposedly in! What could explain this?
+How would you tell the competing explanations apart? Write your explanations
+down before you test them.
 
-Two helpers support the investigation:
+A helper is available for testing explanations:
 
 - `remap_readings(wells, mapping)` reassigns readings to different wells. A
   mapping is a function that takes a well name and returns the name of the well
   whose reading belongs to it. It must send every well to a different source
   well.
-- `z_prime(high, low)` computes the [Z′-factor](https://en.wikipedia.org/wiki/Z-factor), 
-  the standard assay-quality measure of how well two control groups are separated.
 
-Check them with `uv run pytest tests/test_plate_reader.py -k "remap or z_prime" -q`.
+Check it with `uv run pytest tests/test_plate_reader.py -k remap -q`.
 
-Then investigate in the notebook. Write down the candidate explanations you can
-think of, turn each into a mapping, and compare them on the controls. You must
-**provide evidence** for the explanation you choose. Good evidence includes how
-well the control groups separate, whether the controls agree with what you know
-about high, low and background wells, whether your choice holds up on controls
-it was not chosen with, and whether anything independent supports it.
+Then investigate in the notebook. You must **provide evidence** for the
+explanation you choose: say what you tested, what you found, and how decisive it
+is.
 
 > [!IMPORTANT]
-> Choose the explanation using the **controls only**. If you choose whichever one
-> makes your compounds look best, the dose-response curve cannot tell you
-> anything afterwards.
+> Decide between explanations *before* you look at what each one does to the
+> compounds' dose-response curves. If you choose whichever one makes your
+> compounds look best, the curves cannot tell you anything afterwards.
+
+Does anything in the run record support your hypothesis? It should corroborate
+the answer, not replace the controls.
 
 <details>
 <summary>💡 Hint 1: look at the controls</summary>
@@ -224,9 +224,9 @@ controls does each one separate?
 <summary>💡 Hint 2: question the mapping</summary>
 
 Perhaps all the readings are attached to the wrong wells in the same systematic
-way? Consider simple geometrical transformations of the plate, and be prepared to
-test several. A good test says clearly which wells should be high and which low,
-and asks whether the measurements agree.
+way? Consider simple geometrical transformations of the plate, and be prepared
+to test several. A good test says clearly which wells should be high and which
+low, and asks whether the measurements agree.
 
 </details>
 
@@ -234,37 +234,48 @@ and asks whether the measurements agree.
 <summary>💡 Hint 3: a concrete strategy</summary>
 
 A 180° rotation of a plate reverses both the row order and the column order, so
-`A01` swaps with `H12`, `A02` with `H11`, and in general row letter *r* and column
-*c* swap with the opposite row letter and column 13 − *c*. Write that as a
-mapping, alongside the three simpler ones (as exported, rows reversed only,
-columns reversed only). For each, remap the readings, then compare the vehicle,
-inhibitor and blank wells in each channel using odd replicates, and finally
-confirm on the even ones. Then compare the result with the run record and the lab
-procedure.
+`A01` swaps with `H12`, `A02` with `H11`, and in general row letter *r* and
+column *c* swap with the opposite row letter and column 13 − *c*. Write that as
+a mapping, alongside the three simpler ones (as exported, rows reversed only,
+columns reversed only). For each, remap the readings and compare the result with
+the layout, looking at the vehicle, inhibitor and blank wells in each channel.
+Then compare the result with the run record and the lab procedure.
 
 </details>
 
-Does anything in the run record support your hypothesis? It should corroborate
-the answer, not replace the controls.
+## 4. The Pipeline
 
-## 4. Cleaning up the signal
+Process the readings with the mapping you chose by chaining functions together
+in a **pipeline**: each step takes a DataFrame and returns a modified DataFrame,
+which becomes the input to the next step. Small, named steps make an analysis
+easy to read, test and rerun. pandas can chain them for you with
+`DataFrame.pipe`, for example `data.pipe(first_step).pipe(second_step, option)`.
 
-Process the readings with the mapping you chose. Implement:
+Implement these steps:
 
-- `mark_usable(wells)` applies your **QC policy** by adding a `usable` column.
+1. `mark_usable(wells)` applies your **QC policy** by adding a `usable` column.
   Decide which flags exclude a well, and say why.
-- `subtract_blank(wells)` estimates the background in each channel from the
+2. `subtract_blank(wells)` estimates the background in each channel from the
   usable blank wells and subtracts it, adding `biomarker_net` and
   `reference_net`.
-- `normalise_to_reference(wells)` divides the biomarker by the reference so that
+3. `normalise_to_reference(wells)` divides the biomarker by the reference so that
   differences in the amount of cellular material cancel, adding `normalised`.
-- `percent_of_vehicle(wells, column)` expresses a column relative to the vehicle
-  controls.
-- `summarise_replicates(wells, column)` summarises the replicate wells for each
-  compound and concentration.
+4. `percent_of_vehicle(wells, column)` expresses a column relative to the vehicle
+  controls. It returns the new column rather than a whole DataFrame, so attach it
+  with `assign`.
+5. `summarise_replicates(wells, column)` summarises the replicate wells for each
+  compound and concentration. It turns the wells into a summary table, so it is
+  the last step.
+
+`z_prime(high, low)` is a separate quality check, not a pipeline step: it takes
+two groups of values and returns a single number, the
+[Z′-factor](https://en.wikipedia.org/wiki/Z-factor), the standard assay-quality
+measure of how well two control groups are separated. Above about 0.5 is
+excellent; near zero or negative means the controls overlap. Implement it too,
+and use it to check your corrected controls.
 
 Check them with
-`uv run pytest tests/test_plate_reader.py -k "usable or blank or normalise or vehicle or summarise or pipeline" -q`.
+`uv run pytest tests/test_plate_reader.py -k "usable or blank or normalise or vehicle or summarise or z_prime or pipeline" -q`.
 
 <details>
 <summary>💡 Hint 1: background first</summary>
@@ -296,9 +307,9 @@ as missing below it.
 </details>
 
 Then, in the notebook, plot the concentration-response curves for each compound,
-and check your corrected controls: do they separate well enough to trust the
-plate? Compare the blank-subtracted biomarker with the normalised one. Which
-corrections did you need? Did any of the compounds do anything?
+and check your corrected controls with `z_prime`: do they separate well enough to
+trust the plate? Compare the blank-subtracted biomarker with the normalised one.
+Which corrections did you need? Did any of the compounds do anything?
 
 There is no need to fit a curve or compute an IC50. A clear picture of the
 replicate means and their uncertainty is enough.
