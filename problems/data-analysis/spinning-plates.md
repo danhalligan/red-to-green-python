@@ -74,8 +74,8 @@ limits.
 
 Three files describe the run. They are in
 [`src/pyproblems/datasets/`](../../src/pyproblems/datasets/), and reading them
-is part of the job: open them in an editor, then load them in the notebook (its
-setup gives you `data_dir`, the folder that holds them).
+is part of the job. Open the export and the layout in an editor, then load them
+in the notebook (its setup gives you `data_dir`, the folder that holds them).
 
 - **The plate-reader export**
   ([plate_reader_export.txt](../../src/pyproblems/datasets/plate_reader_export.txt)):
@@ -87,9 +87,7 @@ setup gives you `data_dir`, the folder that holds them).
   and `replicate` of every well.
 - **The run record**
   ([plate_run_record.json](../../src/pyproblems/datasets/plate_run_record.json)):
-  who ran the plate, on which instrument, and a short log of what happened. The
-  lab's standard procedure is to load plates with well A1 at the front-left of the
-  tray.
+  who ran the plate, on which instrument, and a short log of what happened.
 
 You will build a pipeline: parse the export, reshape it, validate it, join the
 layout, apply quality control, correct for background, normalise, and summarise.
@@ -206,17 +204,14 @@ is.
 > compounds' dose-response curves. If you choose whichever one makes your
 > compounds look best, the curves cannot tell you anything afterwards.
 
-Does anything in the run record support your hypothesis? It should corroborate
-the answer, not replace the controls.
+Take a look at the run record. Does anything support your hypothesis?
 
 <details>
 <summary>💡 Hint 1: look at the controls</summary>
 
-Compare each type of control in both channels, and compare the numbers with
-their positions on the plate. The controls were laid out in columns, so look at
-the heatmaps for stripes: do they appear where the layout says they should? The
-reference channel and the biomarker channel tell you different things: which
-controls does each one separate?
+Compare the expected locations of each control type with the observed signals.
+Does the spatial pattern make sense? Look at both channels: different controls
+may be more easily distinguished in one channel than the other.
 
 </details>
 
@@ -239,7 +234,7 @@ column *c* swap with the opposite row letter and column 13 − *c*. Write that a
 a mapping, alongside the three simpler ones (as exported, rows reversed only,
 columns reversed only). For each, remap the readings and compare the result with
 the layout, looking at the vehicle, inhibitor and blank wells in each channel.
-Then compare the result with the run record and the lab procedure.
+Then compare the result with the run record.
 
 </details>
 
@@ -308,8 +303,15 @@ as missing below it.
 
 Then, in the notebook, plot the concentration-response curves for each compound,
 and check your corrected controls with `z_prime`: do they separate well enough to
-trust the plate? Compare the blank-subtracted biomarker with the normalised one.
-Which corrections did you need? Did any of the compounds do anything?
+trust the plate?
+
+Finally, compare four analyses of the same readings: with and without your
+orientation correction, and with the blank-subtracted biomarker or the
+reference-normalised one. Interpret the differences rather than just drawing the
+plots. How does the replicate variability (for example the SEM of each
+condition) change when you normalise to the reference, and why? For each analysis
+you would not show a colleague, explain how it could mislead them. Which
+corrections did you need? Did any of the compounds do anything?
 
 There is no need to fit a curve or compute an IC50. A clear picture of the
 replicate means and their uncertainty is enough.

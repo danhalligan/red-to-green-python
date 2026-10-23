@@ -389,7 +389,7 @@ def test_packaged_layout_joins_to_every_well_of_the_export():
 
 # Stage 3: the controls don't make sense
 
-TURN_ROUND = {
+SWAPS = {
     "A01": "B03",
     "A02": "B02",
     "A03": "B01",
@@ -401,7 +401,7 @@ TURN_ROUND = {
 
 def test_remap_moves_readings_and_flags_between_wells():
     original = wide_wells()
-    remapped = remap_readings(original, TURN_ROUND.__getitem__)
+    remapped = remap_readings(original, SWAPS.__getitem__)
     first, last = remapped.iloc[0], remapped.iloc[-1]
 
     assert first["well"] == "A01"
@@ -415,7 +415,7 @@ def test_remap_moves_readings_and_flags_between_wells():
 
 def test_remap_leaves_labels_where_they_are():
     original = join_layout(wide_wells(), mini_layout())
-    remapped = remap_readings(original, TURN_ROUND.__getitem__)
+    remapped = remap_readings(original, SWAPS.__getitem__)
 
     assert remapped["well"].tolist() == WELLS
     for column in ["plate_id", "row", "column", *LAYOUT_COLUMNS]:
@@ -430,17 +430,15 @@ def test_remap_with_the_identity_changes_nothing():
 
 def test_remap_twice_with_a_self_inverse_mapping_restores_the_table():
     original = wide_wells()
-    once = remap_readings(original, TURN_ROUND.__getitem__)
+    once = remap_readings(original, SWAPS.__getitem__)
 
     assert not once["reference"].equals(original["reference"])
-    pd.testing.assert_frame_equal(
-        remap_readings(once, TURN_ROUND.__getitem__), original
-    )
+    pd.testing.assert_frame_equal(remap_readings(once, SWAPS.__getitem__), original)
 
 
 def test_remap_can_move_only_the_requested_columns():
     original = wide_wells()
-    remapped = remap_readings(original, TURN_ROUND.__getitem__, columns=["reference"])
+    remapped = remap_readings(original, SWAPS.__getitem__, columns=["reference"])
 
     assert remapped["reference"].tolist() == [5.0, 50.0, 40.0, 30.0, 20.0, 10.0]
     pd.testing.assert_series_equal(remapped["biomarker"], original["biomarker"])
@@ -462,7 +460,7 @@ def test_remap_leaves_the_input_unchanged():
     wells = wide_wells()
     before = wells.copy()
 
-    remap_readings(wells, TURN_ROUND.__getitem__)
+    remap_readings(wells, SWAPS.__getitem__)
 
     pd.testing.assert_frame_equal(wells, before)
 
