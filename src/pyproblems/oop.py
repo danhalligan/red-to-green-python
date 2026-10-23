@@ -3,11 +3,15 @@
 from collections.abc import Iterable
 from typing import Any
 
-REFRAIN = "Ring-ding-ding-ding-dingeringeding!"
-
 
 class UnknownSoundError(Exception):
-    """Raised by speak() when nobody knows what an animal says."""
+    """Raised by speak() when nobody knows what an animal says.
+
+    The message is the best guess at the sound.
+    """
+
+    def __init__(self, message: str = "Who Knows!") -> None:
+        super().__init__(message)
 
 
 class Animal:
@@ -15,6 +19,7 @@ class Animal:
 
     def __init__(self, name: str | None = None) -> None:
         """Store the animal's optional name as the instance attribute `name`."""
+        # TODO: store the animal's name
         raise NotImplementedError
 
     def speak(self) -> str:
@@ -23,6 +28,7 @@ class Animal:
 
     def __str__(self) -> str:
         """Return a readable description of this animal."""
+        # TODO: return the readable description
         raise NotImplementedError
 
 
@@ -85,25 +91,26 @@ class Fox(Animal):
     """An animal whose sound nobody knows."""
 
     def speak(self) -> str:
-        """Raise UnknownSoundError: nobody knows what the fox says."""
+        """Raise UnknownSoundError, with the fox's best guess as its message."""
         raise NotImplementedError
 
 
-def sing(animals: Iterable[Any], guess: str = REFRAIN) -> str:
-    """Return one lyric line per animal, each followed by a newline.
+def sing(animals: Iterable[Any]) -> list[str]:
+    """Return a list of song lines: one lyric per animal.
 
-    An animal whose sound is unknown gets the mystery verse instead, with
-    `guess` as the answer and the animal's lower-case class name in the question:
+    An animal whose sound is unknown gets the mystery verse instead (four
+    lines), using the lower-case class name in the question and the
+    UnknownSoundError message as the answer:
 
         But there's one sound
         That no one knows
-        What does the fox say?
-        "Ring-ding-ding-ding-dingeringeding!"
+        What does the [class] say?
+        "[message]"
     """
     raise NotImplementedError
 
 
-def wdtfs(animals: Iterable[Animal]) -> str:
+def wdtfs(animals: Iterable[Animal]) -> list[str]:
     """Return the song "What Does the Fox Say?": the animals, then the fox."""
     return sing([*animals, Fox()])
 
@@ -114,12 +121,8 @@ class Parrot(Bird):
     def __init__(self, name: str | None = None) -> None:
         raise NotImplementedError
 
-    def hear(self, sound: str) -> None:
-        """Remember sound so that speak() repeats it."""
-        raise NotImplementedError
-
     def listen_to(self, animal: Any) -> None:
-        """Learn whatever sound `animal.speak()` returns."""
+        """Learn whatever sound `animal.speak()` returns; speak() repeats it."""
         raise NotImplementedError
 
     def speak(self) -> str:
@@ -127,24 +130,27 @@ class Parrot(Bird):
 
 
 class Robot:
-    """A speaker that is not an Animal: it recites a programmed sequence."""
+    """A speaker that is not an Animal: it remembers sounds and replays them."""
 
     def __init__(self, name: str) -> None:
         raise NotImplementedError
 
-    def program_speech(self, lines: Iterable[str]) -> None:
-        """Replace the program with `lines` and start again from the first."""
+    def program_with(self, speaker: Any) -> None:
+        """Remember what `speaker.speak()` says now, after anything already learned."""
         raise NotImplementedError
 
     def speak(self) -> str:
-        """Return the next programmed line, or "Beep boop" once they run out."""
+        """Return the oldest unspoken sound, forgetting it.
+
+        Raise UnknownSoundError("Beep boop") once the memory is empty.
+        """
         raise NotImplementedError
 
 
-def cover(band: Iterable[Animal], robot: Robot) -> str:
+def cover(band: list[Animal], robot: Robot) -> list[str]:
     """Return the song with `robot` standing in for every animal in `band`.
 
-    Program the robot with the sounds of the band, in order, and sing one line
-    for each. Then ask the exhausted robot what the fox says.
+    Teach the robot what each animal says, in order, then sing one line for
+    each, followed by the mystery verse for the exhausted robot.
     """
     raise NotImplementedError

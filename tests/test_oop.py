@@ -3,7 +3,6 @@ from pathlib import Path
 import pytest
 
 from pyproblems.oop import (
-    REFRAIN,
     Animal,
     Bird,
     Cat,
@@ -27,6 +26,26 @@ from pyproblems.oop import (
 
 FULL_CAST = [Dog, Cat, Bird, Mouse, Cow, Frog, Elephant, Duck, Fish, Seal]
 FIXTURES = Path(__file__).parent / "fixtures"
+REFRAIN = "Ring-ding-ding-ding-dingeringeding!"
+
+
+class Says:
+    """A minimal speaker (not an Animal) with a fixed sound."""
+
+    def __init__(self, sound: str) -> None:
+        self.sound = sound
+
+    def speak(self) -> str:
+        return self.sound
+
+
+def mystery_verse(animal: str, guess: str) -> list[str]:
+    return [
+        "But there's one sound",
+        "That no one knows",
+        f"What does the {animal} say?",
+        f'"{guess}"',
+    ]
 
 
 @pytest.mark.parametrize(
@@ -90,6 +109,11 @@ def test_lyric_uses_the_class_name_not_the_instance_name():
     assert lyric(Cat("Chairman Meow")) == 'Cat goes "meow"'
 
 
+def test_unknown_sound_error_has_a_default_message():
+    assert str(UnknownSoundError()) == "Who Knows!"
+    assert str(UnknownSoundError("Wa-pa-pa-pa-pa-pa-pow!")) == "Wa-pa-pa-pa-pa-pa-pow!"
+
+
 def test_fox_is_an_animal_whose_sound_is_unknown():
     fox = Fox()
 
@@ -98,29 +122,35 @@ def test_fox_is_an_animal_whose_sound_is_unknown():
         fox.speak()
 
 
+def test_fox_offers_the_refrain_as_its_guess():
+    with pytest.raises(UnknownSoundError) as error:
+        Fox().speak()
+
+    assert str(error.value) == REFRAIN
+
+
 def test_lyric_does_not_hide_an_unknown_sound():
     with pytest.raises(UnknownSoundError):
         lyric(Fox())
 
 
 def test_sing_gives_one_line_per_animal():
-    assert sing([Dog(), Duck()]) == 'Dog goes "woof"\nDuck goes "quack"\n'
+    assert sing([Dog(), Duck()]) == ['Dog goes "woof"', 'Duck goes "quack"']
 
 
 def test_sing_turns_an_unknown_sound_into_a_question():
-    assert sing([Cat(), Fox()]) == (
-        'Cat goes "meow"\n'
-        "But there's one sound\n"
-        "That no one knows\n"
-        "What does the fox say?\n"
-        f'"{REFRAIN}"\n'
-    )
+    assert sing([Cat(), Fox()]) == [
+        'Cat goes "meow"',
+        *mystery_verse("fox", REFRAIN),
+    ]
 
 
-def test_sing_accepts_a_different_guess():
-    assert sing([Fox()], guess="Wa-pa-pa-pa-pa-pa-pow!").endswith(
-        '"Wa-pa-pa-pa-pa-pa-pow!"\n'
-    )
+def test_sing_uses_the_error_message_as_the_answer():
+    class Wolf(Animal):
+        def speak(self) -> str:
+            raise UnknownSoundError("Wa-pa-pa-pa-pa-pa-pow!")
+
+    assert sing([Wolf()]) == mystery_verse("wolf", "Wa-pa-pa-pa-pa-pa-pow!")
 
 
 def test_sing_names_whichever_animal_is_unknown():
@@ -128,7 +158,7 @@ def test_sing_names_whichever_animal_is_unknown():
         def speak(self) -> str:
             raise UnknownSoundError
 
-    assert "What does the yeti say?" in sing([Yeti()])
+    assert sing([Yeti()]) == mystery_verse("yeti", "Who Knows!")
 
 
 def test_sing_does_not_swallow_other_errors():
@@ -139,13 +169,13 @@ def test_sing_does_not_swallow_other_errors():
 def test_wdtfs_matches_short_snapshot():
     expected = (FIXTURES / "animal_song_short.txt").read_text(encoding="utf-8")
 
-    assert wdtfs([Bird(), Cat(), Mouse()]) == expected
+    assert wdtfs([Bird(), Cat(), Mouse()]) == expected.splitlines()
 
 
 def test_wdtfs_matches_full_snapshot():
     expected = (FIXTURES / "animal_song_full.txt").read_text(encoding="utf-8")
 
-    assert wdtfs([animal_type() for animal_type in FULL_CAST]) == expected
+    assert wdtfs([animal_type() for animal_type in FULL_CAST]) == expected.splitlines()
 
 
 def test_parrot_tweets_until_it_hears_something():
@@ -159,8 +189,8 @@ def test_parrot_tweets_until_it_hears_something():
 def test_parrot_repeats_the_last_sound_it_heard():
     parrot = Parrot()
 
-    parrot.hear("woof")
-    parrot.hear("hello")
+    parrot.listen_to(Dog())
+    parrot.listen_to(Says("hello"))
 
     assert parrot.speak() == "hello"
     assert lyric(parrot) == 'Parrot goes "hello"'
@@ -169,7 +199,7 @@ def test_parrot_repeats_the_last_sound_it_heard():
 def test_parrots_remember_independently():
     polly, percy = Parrot(), Parrot()
 
-    polly.hear("hello")
+    polly.listen_to(Says("hello"))
 
     assert percy.speak() == "tweet"
 
@@ -188,7 +218,7 @@ def test_parrot_learns_by_listening_to_another_animal():
 
 def test_parrot_can_listen_to_another_parrot():
     polly, percy = Parrot(), Parrot()
-    polly.hear("hello")
+    polly.listen_to(Says("hello"))
 
     percy.listen_to(polly)
 
@@ -197,7 +227,7 @@ def test_parrot_can_listen_to_another_parrot():
 
 def test_parrot_does_not_learn_from_an_unknown_sound():
     parrot = Parrot()
-    parrot.hear("hello")
+    parrot.listen_to(Says("hello"))
 
     with pytest.raises(UnknownSoundError):
         parrot.listen_to(Fox())
@@ -207,105 +237,121 @@ def test_parrot_does_not_learn_from_an_unknown_sound():
 
 def test_parrot_ends_the_song_with_its_answer_to_the_fox_mystery():
     parrot = Parrot("Polly Morphism")
-    parrot.hear(REFRAIN)
+    parrot.listen_to(Says(REFRAIN))
 
     song = sing([Dog(), Fox(), parrot])
 
-    assert song.splitlines()[-1] == f'Parrot goes "{REFRAIN}"'
+    assert song[-1] == f'Parrot goes "{REFRAIN}"'
 
 
 def test_robot_is_not_an_animal():
     assert not isinstance(Robot("Marvin the Paranoid Android"), Animal)
 
 
-def test_robot_beeps_until_it_is_programmed():
+def test_robot_has_a_name():
+    assert Robot("Marvin the Paranoid Android").name == "Marvin the Paranoid Android"
+
+
+def test_robot_with_an_empty_memory_does_not_know_what_to_say():
     robot = Robot("Marvin the Paranoid Android")
 
-    assert robot.name == "Marvin the Paranoid Android"
-    assert robot.speak() == "Beep boop"
+    with pytest.raises(UnknownSoundError, match="Beep boop"):
+        robot.speak()
 
 
-def test_robot_speaks_its_program_in_order_then_beeps():
+def test_robot_speaks_what_it_learned_in_order_then_runs_out():
     robot = Robot("Marvin the Paranoid Android")
-    robot.program_speech(["Here I am", "Brain the size of a planet"])
+    robot.program_with(Says("Here I am"))
+    robot.program_with(Says("Brain the size of a planet"))
 
     assert robot.speak() == "Here I am"
     assert robot.speak() == "Brain the size of a planet"
-    assert robot.speak() == "Beep boop"
-    assert robot.speak() == "Beep boop"
+    for _ in range(2):
+        with pytest.raises(UnknownSoundError, match="Beep boop"):
+            robot.speak()
 
 
-def test_reprogramming_a_robot_starts_the_sequence_again():
-    robot = Robot("Marvin the Paranoid Android")
-    robot.program_speech(["one", "two"])
+def test_robot_remembers_what_the_speaker_says_when_programmed():
+    parrot = Parrot()
+    parrot.listen_to(Says("hello"))
+    robot = Robot("Marvin")
+
+    robot.program_with(parrot)
+    parrot.listen_to(Says("goodbye"))
+
+    assert robot.speak() == "hello"
+
+
+def test_programming_adds_to_what_the_robot_remembers():
+    robot = Robot("Marvin")
+    robot.program_with(Dog())
+    robot.program_with(Cat())
     robot.speak()
 
-    robot.program_speech(["alpha", "beta"])
+    robot.program_with(Cow())
 
-    assert [robot.speak(), robot.speak()] == ["alpha", "beta"]
+    assert [robot.speak(), robot.speak()] == ["meow", "moo"]
 
 
-def test_reprogramming_an_exhausted_robot_makes_it_speak_again():
-    robot = Robot("Marvin the Paranoid Android")
-    robot.program_speech(["one"])
+def test_an_exhausted_robot_can_be_programmed_again():
+    robot = Robot("Marvin")
+    robot.program_with(Dog())
     robot.speak()
-    robot.speak()
 
-    robot.program_speech(["two"])
+    robot.program_with(Cat())
 
-    assert robot.speak() == "two"
+    assert robot.speak() == "meow"
 
 
-def test_robots_keep_independent_programs_and_positions():
+def test_robots_keep_independent_memories():
     marvin, robbie = Robot("Marvin"), Robot("Robbie")
-    marvin.program_speech(["one", "two"])
-    robbie.program_speech(["alpha", "beta"])
+    marvin.program_with(Dog())
+    marvin.program_with(Cat())
+    robbie.program_with(Cow())
 
     marvin.speak()
 
-    assert robbie.speak() == "alpha"
-    assert marvin.speak() == "two"
+    assert robbie.speak() == "moo"
+    assert marvin.speak() == "meow"
 
 
-def test_robot_program_is_not_changed_by_later_edits_to_the_list():
-    lines = ["one", "two"]
+def test_robot_cannot_learn_an_unknown_sound():
     robot = Robot("Marvin")
-    robot.program_speech(lines)
 
-    lines.append("three")
-    lines[0] = "changed"
+    with pytest.raises(UnknownSoundError):
+        robot.program_with(Fox())
 
-    assert [robot.speak(), robot.speak(), robot.speak()] == ["one", "two", "Beep boop"]
-
-
-def test_robot_program_can_be_any_iterable():
-    robot = Robot("Marvin")
-    robot.program_speech(line for line in ["one", "two"])
-
-    assert [robot.speak(), robot.speak()] == ["one", "two"]
+    with pytest.raises(UnknownSoundError, match="Beep boop"):
+        robot.speak()
 
 
 def test_lyric_works_for_a_robot_too():
     robot = Robot("Marvin")
-    robot.program_speech(["Hello"])
+    robot.program_with(Says("Hello"))
 
     assert lyric(robot) == 'Robot goes "Hello"'
 
 
+def test_lyric_does_not_hide_an_empty_robots_unknown_sound():
+    with pytest.raises(UnknownSoundError, match="Beep boop"):
+        lyric(Robot("Marvin"))
+
+
 def test_parrot_can_learn_from_a_robot():
     robot = Robot("Marvin")
-    robot.program_speech(["Life, don't talk to me about life"])
+    robot.program_with(Says("Life, don't talk to me about life"))
     parrot = Parrot()
 
     parrot.listen_to(robot)
 
     assert parrot.speak() == "Life, don't talk to me about life"
-    assert robot.speak() == "Beep boop"
+    with pytest.raises(UnknownSoundError, match="Beep boop"):
+        robot.speak()
 
 
 def test_a_programmed_robot_can_stand_in_for_a_duck():
     robo_duck = Robot("RoboDuck")
-    robo_duck.program_speech(["quack"])
+    robo_duck.program_with(Duck())
 
     assert not isinstance(robo_duck, Duck)
     assert lyric(robo_duck) == 'Robot goes "quack"'
@@ -317,28 +363,41 @@ def test_lyric_and_sing_work_for_any_object_that_can_speak():
             return "ding dong"
 
     assert lyric(Doorbell()) == 'Doorbell goes "ding dong"'
-    assert sing([Doorbell(), Dog()]) == 'Doorbell goes "ding dong"\nDog goes "woof"\n'
+    assert sing([Doorbell(), Dog()]) == ['Doorbell goes "ding dong"', 'Dog goes "woof"']
+
+
+def test_robot_is_asked_only_once_per_line():
+    robot = Robot("Marvin")
+    robot.program_with(Dog())
+    robot.program_with(Cat())
+
+    assert sing([robot]) == ['Robot goes "woof"']
+    assert robot.speak() == "meow"
+
+
+def test_sing_gives_an_empty_robot_the_mystery_verse():
+    assert sing([Robot("Marvin")]) == mystery_verse("robot", "Beep boop")
 
 
 def test_cover_replaces_every_animal_with_the_robot():
     robot = Robot("Marvin the Paranoid Android")
 
-    assert cover([Bird(), Cat(), Mouse()], robot) == (
-        'Robot goes "tweet"\n'
-        'Robot goes "meow"\n'
-        'Robot goes "squeek"\n'
-        "But there's one sound\n"
-        "That no one knows\n"
-        "What does the fox say?\n"
-        '"Beep boop"\n'
-    )
+    assert cover([Bird(), Cat(), Mouse()], robot) == [
+        'Robot goes "tweet"',
+        'Robot goes "meow"',
+        'Robot goes "squeek"',
+        "But there's one sound",
+        "That no one knows",
+        "What does the robot say?",
+        '"Beep boop"',
+    ]
 
 
 def test_cover_sings_the_whole_song_in_the_same_order():
     expected = (FIXTURES / "animal_song_full.txt").read_text(encoding="utf-8")
     band = [animal_type() for animal_type in FULL_CAST]
 
-    covered = cover(band, Robot("Marvin")).splitlines()
+    covered = cover(band, Robot("Marvin"))
 
     sounds = [line.split('"')[1] for line in covered[:10]]
     assert sounds == [animal.speak() for animal in band]
@@ -347,19 +406,12 @@ def test_cover_sings_the_whole_song_in_the_same_order():
 
 def test_cover_uses_what_each_animal_says_now():
     parrot = Parrot()
-    parrot.hear("hello")
+    parrot.listen_to(Says("hello"))
 
-    assert cover([parrot, Dog()], Robot("Marvin")).splitlines()[:2] == [
+    assert cover([parrot, Dog()], Robot("Marvin"))[:2] == [
         'Robot goes "hello"',
         'Robot goes "woof"',
     ]
-
-
-def test_cover_replaces_the_robots_earlier_program():
-    robot = Robot("Marvin")
-    robot.program_speech(["old", "program", "here"])
-
-    assert cover([Cow()], robot).splitlines()[0] == 'Robot goes "moo"'
 
 
 def test_cover_can_be_repeated_with_the_same_robot():
@@ -368,19 +420,13 @@ def test_cover_can_be_repeated_with_the_same_robot():
     assert cover([Dog(), Cat()], robot) == cover([Dog(), Cat()], robot)
 
 
-def test_cover_accepts_any_iterable_of_animals():
-    covered = cover((animal for animal in [Dog(), Cat()]), Robot("Marvin"))
-
-    assert covered.splitlines()[:2] == ['Robot goes "woof"', 'Robot goes "meow"']
-
-
 def test_cover_with_an_empty_band_is_just_the_mystery_verse():
-    assert cover([], Robot("Marvin")) == sing([Fox()], guess="Beep boop")
+    assert cover([], Robot("Marvin")) == mystery_verse("robot", "Beep boop")
 
 
 def test_cover_does_not_change_the_animals():
     parrot = Parrot()
-    parrot.hear("hello")
+    parrot.listen_to(Says("hello"))
 
     cover([parrot], Robot("Marvin"))
 
