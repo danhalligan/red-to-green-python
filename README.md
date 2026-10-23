@@ -43,7 +43,7 @@ Then try a first exercise, for example the quick warm-up
 For an overview of the repository layout and development setup, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 
-## The problems
+## The problems ⚠️
 
 Pick a topic that interests you. Each link opens a file under `problems/`;
 related exercises in the same file stay together here too. Pythonic Python pages
