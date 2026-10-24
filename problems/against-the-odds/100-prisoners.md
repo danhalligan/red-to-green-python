@@ -42,9 +42,7 @@ strategy.
 
 **Stage 1: no plan.** Implement `shuffled_drawers`, `random_strategy`,
 `count_successes` and `estimate_survival`. 💡 There are hints.[^prisoners-random]
-Estimate the survival chance with 2, 4, 6 and 10 prisoners, each allowed to open
-half the drawers, and compare it with your prediction. Why can you not simply
-simulate 100 prisoners and see? What is the chance, by pure calculation?
+Once they work you can play the game in the notebook, below.
 
 ```bash
 uv run pytest tests/test_prisoners.py -k "not clever and not cycle and not loop"
@@ -56,10 +54,7 @@ uv run pytest tests/test_prisoners.py -k "not clever and not cycle and not loop"
 
 **Stage 2: use what you see.** The prisoners cannot talk, but they can react to
 what they find. Implement `clever_strategy` so that the prisoners do much better
-than random. 💡 There is a hint.[^prisoners-start] Then estimate the survival
-chance with 10, 20, 50 and 100 prisoners, each allowed half the drawers, with both
-strategies. How does it change as the number of prisoners grows? Is that what you
-expected?
+than random. 💡 There is a hint.[^prisoners-start]
 
 ```bash
 uv run pytest tests/test_prisoners.py -k clever
@@ -72,20 +67,39 @@ uv run pytest tests/test_prisoners.py -k clever
 **Investigation 🚀: alone and together.** In the
 [notebook](../../analysis/against_the_odds.ipynb), compare the average number of
 prisoners who find their number under each strategy. Then plot the distribution
-of that number across thousands of games. What do you notice about the averages,
-and what about the shapes? Which strategy makes the prisoners' fates depend on
-one another, and what does that buy them?
-
-**Extension 🚀: why does it work?** Draw an arrangement of eight drawers as
+ofExtension 🚀: why does it work?** Draw an arrangement of eight drawers as
 arrows from each drawer to the drawer whose number it holds. Follow the arrows
 from any drawer: where do you end up? Implement `cycle_lengths(arrangement)` to
-split an arrangement into its closed loops and return their lengths. Compare them
-with `count_successes` in a few games. Write down the rule linking the loops to
-the prisoners who succeed, and explain why a prisoner's own number is always
-somewhere in their chain. Then use that rule to estimate the survival chance
-without simulating any prisoners, which is much faster. What does the chance
-approach as the number of prisoners grows to 1,000?
+split an arrangement into its closed loops and return their lengths. You will use
+it in the notebook to explain the clever strategy.
 
 ```bash
 uv run pytest tests/test_prisoners.py -k "cycle or loop"
 ```
+
+## Investigation: over to the notebook 📓
+
+The functions are done, so now use them. From here the work happens in the
+[Against the Odds notebook](../../analysis/against_the_odds.ipynb#The-100-prisoners),
+not in `prisoners.py`: open it, run the setup cell, and find the **The 100
+prisoners** section. The plotting code is provided; your job is to fill in the
+tables of results and explain what they show. There are no tests for this part,
+so write down your prediction before you run each cell.
+
+1. **Survival chance.** Build a table of the estimated survival chance with 10,
+   20, 50 and 100 prisoners, each allowed to open half the drawers, for both
+   strategies, and plot it. Compare it with your prediction. How does the chance
+   change as the number of prisoners grows? Is that what you expected? Why can you
+   not simply simulate the random strategy with 100 prisoners and see? What is the
+   chance, by pure calculation?
+2. **Alone and together 🚀.** Compare the average number of prisoners who find
+   their number under each strategy. Then plot the distribution of that number
+   across thousands of games. What do you notice about the averages, and what
+   about the shapes? Which strategy makes the prisoners' fates depend on one
+   another, and what does that buy them?
+3. **Loops 🚀.** Compare `cycle_lengths` with `count_successes` in many games.
+   Write down the rule linking the loops to the prisoners who succeed, and explain
+   why a prisoner's own number is always somewhere in their chain. Then use that
+   rule to estimate the survival chance without simulating any prisoners, which is
+   much faster. What does the chance approach as the number of prisoners grows to
+   1,000?
