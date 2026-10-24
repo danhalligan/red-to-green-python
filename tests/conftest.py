@@ -1,7 +1,14 @@
+import random
 import signal
 from contextlib import contextmanager
 
 import pytest
+
+
+@pytest.fixture(autouse=True)
+def seeded_random():
+    """Start every test from the same state of the global `random` module."""
+    random.seed(2026)
 
 
 @pytest.fixture

@@ -4,7 +4,6 @@ Prisoners and drawers are both numbered from 0. Drawer `i` holds a number, and
 together the numbers are an arrangement of 0 to n - 1, each exactly once.
 """
 
-import random
 from collections.abc import Callable, Sequence
 
 
@@ -42,19 +41,20 @@ class Room:
         return number
 
 
-# A strategy opens drawers through the room; `rng` is there if it wants one.
-Strategy = Callable[[Room, random.Random], None]
+# A strategy opens drawers through the room.
+Strategy = Callable[[Room], None]
 
 
-def shuffled_drawers(size: int, *, rng: random.Random) -> list[int]:
+def shuffled_drawers(size: int) -> list[int]:
     """Return a random arrangement of the numbers 0 to `size` - 1.
 
-    Entry `i` is the number inside drawer `i`. Use only `rng`.
+    Entry `i` is the number inside drawer `i`. Use the `random` module, so that
+    `random.seed` gives a reproducible arrangement.
     """
     raise NotImplementedError
 
 
-def random_strategy(room: Room, rng: random.Random) -> None:
+def random_strategy(room: Room) -> None:
     """Open `room.limit` different drawers, chosen at random.
 
     Stopping early once `room.found` is fine. Assume `room.limit` is at most
@@ -63,7 +63,7 @@ def random_strategy(room: Room, rng: random.Random) -> None:
     raise NotImplementedError
 
 
-def clever_strategy(room: Room, rng: random.Random) -> None:
+def clever_strategy(room: Room) -> None:
     """Look for `room.prisoner`'s number in a way that beats `random_strategy`.
 
     Open drawers one at a time through `room`, stopping when the number is found
@@ -73,13 +73,11 @@ def clever_strategy(room: Room, rng: random.Random) -> None:
     raise NotImplementedError
 
 
-def count_successes(
-    strategy: Strategy, drawers: Sequence[int], limit: int, rng: random.Random
-) -> int:
+def count_successes(strategy: Strategy, drawers: Sequence[int], limit: int) -> int:
     """Return how many prisoners find their own number.
 
     Each prisoner enters a fresh `Room` for these `drawers` (everything is
-    closed again after the last prisoner), runs `strategy(room, rng)` once, and
+    closed again after the last prisoner), runs `strategy(room)` once, and
     succeeds if `room.found` is then True.
     """
     raise NotImplementedError
@@ -91,7 +89,6 @@ def estimate_survival(
     prisoners: int,
     limit: int,
     trials: int,
-    rng: random.Random,
 ) -> float:
     """Estimate the chance that every prisoner finds their own number.
 

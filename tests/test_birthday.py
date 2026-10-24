@@ -66,34 +66,22 @@ def test_exact_probability_defaults_to_a_year():
 
 
 def test_estimate_is_close_to_the_true_chance():
-    estimate = estimate_shared_birthday_probability(
-        4, trials=20_000, rng=random.Random(1), days=10
-    )
+    estimate = estimate_shared_birthday_probability(4, trials=20_000, days=10)
     assert estimate == pytest.approx(0.496, abs=0.03)
 
 
 def test_estimate_is_certain_or_impossible_at_the_extremes():
-    rng = random.Random(2)
-    assert estimate_shared_birthday_probability(2, trials=50, rng=rng, days=1) == 1.0
-    assert estimate_shared_birthday_probability(1, trials=50, rng=rng, days=10) == 0.0
+    assert estimate_shared_birthday_probability(2, trials=50, days=1) == 1.0
+    assert estimate_shared_birthday_probability(1, trials=50, days=10) == 0.0
 
 
-def test_estimate_is_reproducible_with_a_seeded_generator():
-    first = estimate_shared_birthday_probability(
-        10, trials=500, rng=random.Random(42), days=50
-    )
-    second = estimate_shared_birthday_probability(
-        10, trials=500, rng=random.Random(42), days=50
-    )
+def test_estimate_is_reproducible_with_a_seed():
+    random.seed(42)
+    first = estimate_shared_birthday_probability(10, trials=500, days=50)
+    random.seed(42)
+    second = estimate_shared_birthday_probability(10, trials=500, days=50)
     assert first == second
     assert 0 < first < 1
-
-
-def test_estimate_uses_only_the_supplied_generator():
-    random.seed(5)
-    before = random.getstate()
-    estimate_shared_birthday_probability(5, trials=50, rng=random.Random(1), days=20)
-    assert random.getstate() == before
 
 
 @pytest.mark.parametrize(

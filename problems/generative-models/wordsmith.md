@@ -62,14 +62,14 @@ uv run pytest tests/test_wordsmith.py -k "train_model and not trigram"
 
 ## Stage 2: invent some words
 
-Now put the model to work. Implement `generate_word(model, rng)`. Start from the
+Now put the model to work. Implement `generate_word(model)`. Start from the
 beginning-of-word marker. At each step, pick the next character at random, so
 that a common transition is more likely than a rare one. Stop when the
 end-of-word marker comes up, and return the letters without any markers.
 
 The word comes from the transitions the model has learned, never from the
-dictionary itself. Use the `random.Random` you are given so that a seed gives
-the same word every time. A model can wander forever, so there is a
+dictionary itself. Use the `random` module, so that calling `random.seed` first
+gives the same word every time. A model can wander forever, so there is a
 `max_length`; return `None` when an attempt fails. The docstring spells out what
 counts as a failure, and you can simply discard those attempts when you make
 several words.
@@ -115,7 +115,7 @@ begin with two start markers.
 ## Investigation: what does it invent?
 
 Use the [wordsmith notebook](../../analysis/wordsmith.ipynb) to train a model on
-the whole word list and generate 100 words with a seeded generator. Which ones
+the whole word list and generate 100 words with a fixed random seed. Which ones
 look convincing, and which are ridiculous? Are any of them real English words?
 Can you find ten plausible new words that weren't in your original dictionary?
 (The dictionary is a set, so you can check whether a word is already known.)

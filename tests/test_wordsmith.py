@@ -10,8 +10,8 @@ TINY = {"cat", "car", "dog"}
 
 
 def draw(model, seed, count, **options):
-    rng = random.Random(seed)
-    return [generate_word(model, rng, **options) for _ in range(count)]
+    random.seed(seed)
+    return [generate_word(model, **options) for _ in range(count)]
 
 
 def test_train_model_counts_start_of_word_transitions():
@@ -120,7 +120,7 @@ def test_a_model_with_one_continuation_each_gives_a_predictable_word():
 def test_generate_word_stops_at_the_end_marker():
     model = {START: Counter({"a": 1}), "a": Counter({"b": 1}), "b": Counter({END: 1})}
 
-    assert generate_word(model, random.Random(0)) == "ab"
+    assert generate_word(model) == "ab"
 
 
 def test_generate_word_respects_the_weights():
@@ -149,36 +149,36 @@ def test_generate_word_can_choose_rare_transitions():
 def test_generate_word_gives_up_on_words_that_are_too_long():
     loop = {START: Counter({"a": 1}), "a": Counter({"a": 1})}
 
-    assert generate_word(loop, random.Random(0), max_length=10) is None
+    assert generate_word(loop, max_length=10) is None
 
 
 def test_max_length_limits_the_letters_in_a_word():
     model = train_model({"abc"})
 
-    assert generate_word(model, random.Random(0), max_length=3) == "abc"
-    assert generate_word(model, random.Random(0), max_length=2) is None
+    assert generate_word(model, max_length=3) == "abc"
+    assert generate_word(model, max_length=2) is None
 
 
 def test_generate_word_gives_up_when_a_context_has_no_continuation():
     model = {START: Counter({"a": 1})}
 
-    assert generate_word(model, random.Random(0)) is None
+    assert generate_word(model) is None
 
 
 def test_generate_word_never_returns_an_empty_word():
     model = {START: Counter({END: 1})}
 
-    assert generate_word(model, random.Random(0)) is None
+    assert generate_word(model) is None
 
 
 def test_generate_word_rejects_an_empty_model_and_a_bad_length():
     with pytest.raises(ValueError):
-        generate_word({}, random.Random(0))
+        generate_word({})
     with pytest.raises(ValueError):
-        generate_word(train_model(TINY), random.Random(0), max_length=0)
+        generate_word(train_model(TINY), max_length=0)
 
 
-def test_generation_is_reproducible_with_a_seeded_generator():
+def test_generation_is_reproducible_with_a_seed():
     model = train_model({"cat", "car", "cart", "dog", "dot", "cargo", "tag", "gator"})
 
     first = draw(model, seed=7, count=30)
@@ -257,7 +257,7 @@ def test_trigram_generation_follows_the_two_character_context():
         "bc": Counter({END: 1}),
     }
 
-    assert generate_word(model, random.Random(0)) == "abc"
+    assert generate_word(model) == "abc"
 
 
 def test_trigram_models_generate_from_the_packaged_words():

@@ -6,8 +6,8 @@
 > [Against the Odds notebook](../../analysis/against_the_odds.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
 >
-> **You’ll practise:** sets, passing a seeded random generator as an argument,
-> arithmetic with huge integers, and searching with `next` and
+> **You’ll practise:** sets, seeding the `random` module for repeatable
+> simulations, arithmetic with huge integers, and searching with `next` and
 > `itertools.count`.
 >
 > **Check:** `uv run pytest tests/test_birthday.py -q`, or the focused command at
@@ -24,19 +24,19 @@ independent birthdays.
 
 **Stage 1: ask the crowd.** In [birthday.py](../../src/pyproblems/birthday.py),
 implement `has_shared_birthday` and `estimate_shared_birthday_probability`.
-The estimate takes a `random.Random` called `rng` rather than using the global
-`random` functions: a generator seeded with `random.Random(42)` gives the same
-answer every time, and the tests check that you only used the one you were
-given. 💡 There is a hint.[^birthday-set] Estimate the chance for several group
-sizes and run it with different seeds. How much do the answers wobble? How many
-trials do you need before the second decimal place stops changing?
+The estimate uses the functions in the `random` module. Calling `random.seed(42)`
+before it gives the same estimate every time, so results can be repeated, and
+the tests check that you get this. 💡 There is a hint.[^birthday-set] Estimate
+the chance for several group sizes and run it with different seeds. How much do
+the answers wobble? How many trials do you need before the second decimal place
+stops changing?
 
 ```bash
 uv run pytest tests/test_birthday.py -k "not exact and not smallest"
 ```
 
 [^birthday-set]: A set holds each value once, so a group has a shared birthday
-    exactly when turning it into a set makes it smaller. `rng.choices(range(365),
+    exactly when turning it into a set makes it smaller. `random.choices(range(365),
     k=people)` draws a whole group in one call.
 
 **Stage 2: do the sum.** A simulation can only estimate. Implement

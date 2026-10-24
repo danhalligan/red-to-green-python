@@ -8,7 +8,7 @@
 >
 > **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q6-fibonacci-sequence)
 > (Python Fundamentals Q4), for endless generators, and
-> [The office party](office-party.md) for seeded generators.
+> [The office party](office-party.md) for random numbers and seeding.
 >
 > **You’ll practise:** endless generators, reading an iterator lazily, a
 > sliding window with `collections.deque`, slicing strings, and checking a
@@ -24,7 +24,7 @@ many flips does each of you wait? Predict both numbers before you start. Would
 you bet that they are the same?
 
 **Stage 1: a stream of flips.** In
-[coin_patterns.py](../../src/pyproblems/coin_patterns.py), implement `coin_flips(rng)`,
+[coin_patterns.py](../../src/pyproblems/coin_patterns.py), implement `coin_flips()`,
 an endless generator of `"H"` and `"T"`, and `flips_until(pattern, flips)`, the
 number of flips needed for the pattern to first appear. It must read flips lazily
 and stop the instant the pattern appears, because the stream never ends and you
@@ -41,7 +41,7 @@ uv run pytest tests/test_coin_patterns.py -k "coin_flips or flips_until"
     start=1)` counts the flips for you.
 
 **Stage 2: run the experiment.** Implement
-`average_waiting_time(pattern, *, trials, rng)`, the mean number of flips over
+`average_waiting_time(pattern, *, trials)`, the mean number of flips over
 many trials, using `coin_flips` and `flips_until`. You will compare it with your
 predictions in the notebook below.
 
@@ -98,7 +98,7 @@ so write down your prediction before you run each cell.
    a pattern of three flips first, then your friend chooses a different one, and
    whichever pattern shows up first wins. Does choosing second help? Use
    `flips_until` on the *same* list of flips for both patterns, built from
-   `list(islice(coin_flips(rng), 200))`, to see who wins. Play all 56 ordered
+   `list(islice(coin_flips(), 200))`, to see who wins. Play all 56 ordered
    pairs of patterns many times and build a table of how often the pattern
    chosen first wins. Is there a best pattern to choose first? What does that
    say about the idea that one pattern is simply "better" than another? This

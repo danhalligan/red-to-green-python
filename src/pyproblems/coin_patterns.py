@@ -1,13 +1,12 @@
 """Coin-flip exercises: how long until a pattern appears?"""
 
-import random
 from collections.abc import Iterable, Iterator
 
 
-def coin_flips(rng: random.Random) -> Iterator[str]:
+def coin_flips() -> Iterator[str]:
     """Yield an endless stream of fair coin flips: "H" or "T".
 
-    Use only `rng`, so a seeded generator gives a reproducible stream.
+    Use the `random` module, so that `random.seed` gives a reproducible stream.
     """
     raise NotImplementedError
 
@@ -22,11 +21,10 @@ def flips_until(pattern: str, flips: Iterable[str]) -> int:
     raise NotImplementedError
 
 
-def average_waiting_time(pattern: str, *, trials: int, rng: random.Random) -> float:
+def average_waiting_time(pattern: str, *, trials: int) -> float:
     """Estimate the mean number of flips until `pattern` first appears.
 
-    Run `trials` experiments, each with a new stream of fair coin flips made
-    from `rng`.
+    Run `trials` experiments, each with a new stream of fair coin flips.
     """
     raise NotImplementedError
 

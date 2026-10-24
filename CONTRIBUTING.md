@@ -15,6 +15,13 @@ probabilities, empty or malformed inputs) unless handling it is the point of the
 exercise. Learners are welcome to add such checks, but the tests should not
 require them. Reference solutions may include them as good practice.
 
+Do not make learners pass a random generator through their functions unless
+controlling reproducibility is the goal of the exercise. Simulation exercises
+should use the global `random` module: `tests/conftest.py` seeds it before every
+test, and a test of reproducibility calls `random.seed` itself. Choose
+tolerances of about five standard errors, so a correct implementation passes
+whatever sequence of numbers it happens to draw.
+
 The collection is intended to be a set of interesting, independently
 approachable puzzles, not a comprehensive Python course.
 

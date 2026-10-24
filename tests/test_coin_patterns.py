@@ -36,20 +36,23 @@ def exact_waiting_time(pattern):
 
 
 def test_coin_flips_are_heads_and_tails_in_roughly_equal_measure():
-    flips = list(islice(coin_flips(random.Random(1)), 1000))
+    flips = list(islice(coin_flips(), 1000))
 
     assert set(flips) == {"H", "T"}
     assert 400 < flips.count("H") < 600
 
 
 def test_coin_flips_never_run_out():
-    assert len(list(islice(coin_flips(random.Random(1)), 20_000))) == 20_000
+    assert len(list(islice(coin_flips(), 20_000))) == 20_000
 
 
-def test_coin_flips_are_reproducible_with_a_seeded_generator():
-    first = list(islice(coin_flips(random.Random(7)), 50))
-    second = list(islice(coin_flips(random.Random(7)), 50))
-    other = list(islice(coin_flips(random.Random(8)), 50))
+def test_coin_flips_are_reproducible_with_a_seed():
+    random.seed(7)
+    first = list(islice(coin_flips(), 50))
+    random.seed(7)
+    second = list(islice(coin_flips(), 50))
+    random.seed(8)
+    other = list(islice(coin_flips(), 50))
 
     assert first == second
     assert first != other
@@ -91,30 +94,25 @@ def test_flips_until_stops_reading_as_soon_as_the_pattern_appears():
 
 
 def test_flips_until_works_on_an_endless_stream():
-    count = flips_until("HHHHH", coin_flips(random.Random(11)))
+    count = flips_until("HHHHH", coin_flips())
 
     assert count >= 5
 
 
 @pytest.mark.parametrize("pattern", ["H", "HH", "HT", "HHT", "THT"])
 def test_average_waiting_time_is_close_to_the_exact_expectation(pattern):
-    average = average_waiting_time(pattern, trials=20_000, rng=random.Random(5))
+    average = average_waiting_time(pattern, trials=20_000)
 
     assert average == pytest.approx(exact_waiting_time(pattern), rel=0.05)
 
 
-def test_average_waiting_time_is_reproducible_with_a_seeded_generator():
-    first = average_waiting_time("HT", trials=200, rng=random.Random(42))
-    second = average_waiting_time("HT", trials=200, rng=random.Random(42))
+def test_average_waiting_time_is_reproducible_with_a_seed():
+    random.seed(42)
+    first = average_waiting_time("HT", trials=200)
+    random.seed(42)
+    second = average_waiting_time("HT", trials=200)
 
     assert first == second
-
-
-def test_average_waiting_time_uses_only_the_supplied_generator():
-    random.seed(5)
-    before = random.getstate()
-    average_waiting_time("HH", trials=50, rng=random.Random(1))
-    assert random.getstate() == before
 
 
 @pytest.mark.parametrize(

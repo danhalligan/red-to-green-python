@@ -1,6 +1,5 @@
 """A tiny character-level language model that invents words."""
 
-import random
 from collections import Counter
 from collections.abc import Iterable
 
@@ -33,7 +32,6 @@ def train_model(
 
 def generate_word(
     model: dict[str, Counter[str]],
-    rng: random.Random,
     max_length: int = 20,
 ) -> str | None:
     """Sample a word from a model made by `train_model`.
@@ -44,11 +42,11 @@ def generate_word(
     along, until `END` is sampled. Return the letters generated, without any
     markers.
 
-    Use only `rng`, and sample from the characters in sorted order, so a seeded
-    generator gives the same word whatever order the model's counts were added
-    in. Return None for an unsuccessful attempt: if the word would have more
-    than `max_length` letters, if a context has no recorded continuation, or if
-    the word would be empty. Raise ValueError if `model` is empty or
-    `max_length` is less than 1.
+    Use the `random` module, and sample from the characters in sorted order, so
+    that `random.seed` gives the same word whatever order the model's counts
+    were added in. Return None for an unsuccessful attempt: if the word would
+    have more than `max_length` letters, if a context has no recorded
+    continuation, or if the word would be empty. Raise ValueError if `model` is
+    empty or `max_length` is less than 1.
     """
     raise NotImplementedError

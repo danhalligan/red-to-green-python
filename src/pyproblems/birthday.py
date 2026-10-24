@@ -1,6 +1,5 @@
 """Birthday paradox exercises."""
 
-import random
 from collections.abc import Sequence
 
 DAYS_IN_YEAR = 365
@@ -19,14 +18,13 @@ def estimate_shared_birthday_probability(
     people: int,
     *,
     trials: int,
-    rng: random.Random,
     days: int = DAYS_IN_YEAR,
 ) -> float:
     """Estimate the chance that a random group has a shared birthday.
 
     Each trial gives each of `people` a birthday chosen independently and
     uniformly from `days` days. Return the fraction of `trials` groups with a
-    shared birthday. Use only the supplied `rng`, so a seeded generator gives a
+    shared birthday. Use the `random` module, so that `random.seed` gives a
     reproducible estimate.
     """
     raise NotImplementedError

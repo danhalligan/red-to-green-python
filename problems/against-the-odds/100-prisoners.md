@@ -7,7 +7,7 @@
 > the science packages (`uv sync --all-groups --extra science`).
 >
 > **Recommended first:** [The office party](office-party.md), for
-> simulating with a seeded generator.
+> simulating with random numbers.
 >
 > **You’ll practise:** passing functions as arguments, a class that controls
 > what code can see, shuffling, following chains of references, and finding
@@ -36,7 +36,7 @@ In [prisoners.py](../../src/pyproblems/prisoners.py), each prisoner is given a
 `room.open(i)`, which returns the number inside. The room counts the drawers
 opened, refuses more than `room.limit` by raising `TooManyDrawersError`, and notes
 in `room.found` whether the prisoner has seen their own number. A prisoner's
-plan is a *strategy*: a function `strategy(room, rng)` that opens drawers. Because
+plan is a *strategy*: a function `strategy(room)` that opens drawers. Because
 functions can be passed as arguments, the same game can be played with any
 strategy.
 
@@ -50,8 +50,8 @@ simulate 100 prisoners and see? What is the chance, by pure calculation?
 uv run pytest tests/test_prisoners.py -k "not clever and not cycle and not loop"
 ```
 
-[^prisoners-random]: `rng.shuffle` shuffles a list in place, and
-    `rng.sample(range(n), k)` picks `k` different values. Each prisoner needs a
+[^prisoners-random]: `random.shuffle` shuffles a list in place, and
+    `random.sample(range(n), k)` picks `k` different values. Each prisoner needs a
     fresh `Room`, because the drawers are closed again between prisoners.
 
 **Stage 2: use what you see.** The prisoners cannot talk, but they can react to
