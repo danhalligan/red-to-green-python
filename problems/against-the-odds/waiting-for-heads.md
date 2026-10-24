@@ -90,10 +90,10 @@ so write down your prediction before you run each cell.
 
 1. **`HH` against `HT`.** Compare the simulated averages with your predictions
    and with `expected_waiting_time`.
-2. **Every short pattern.** Build a table of simulated and exact waiting times
-   for every pattern of three flips and of four, and plot them. Which patterns
-   are quickest, and which are slowest? What do the quick ones have in common,
-   and how does the formula above explain it?
+2. **Patterns of three flips.** Build a table of simulated and exact waiting times
+   for every pattern of three flips, and plot them. Which patterns are quickest,
+   and which are slowest? What do the quick ones have in common, and how does the
+   formula above explain it?
 3. **Extension 🚀: Penney's game.** Now you play against your friend. You choose
    a pattern of three flips first, then your friend chooses a different one, and
    whichever pattern shows up first wins. Does choosing second help? Use

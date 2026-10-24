@@ -107,10 +107,7 @@ so write down your prediction before you run each cell.
    rule to estimate the survival chance without simulating any prisoners, which is
    much faster. Plot the length of the longest loop across many random
    arrangements of 100 drawers: how often is it longer than half the drawers?
-   Then, for different numbers of drawers each prisoner may open, compare the
-   survival chance from playing the game with `estimate_survival` with the share
-   of arrangements whose longest loop fits. What does the chance approach as the
-   number of prisoners grows to 1,000?
+   What does the chance approach as the number of prisoners grows to 1,000?
 
 <details>
 <summary>What did you discover?</summary>
@@ -145,9 +142,7 @@ always agree.
 
 Everybody survives exactly when no loop is longer than `limit`. In your
 histogram, about a third of the arrangements of 100 drawers have a longest loop
-of at most 50: that share is the survival chance. Playing the game with different
-limits gives the same curve as the share of arrangements whose longest loop fits,
-so the loops alone decide the outcome. When `limit` is
+of at most 50: that share is the survival chance. When `limit` is
 half the drawers, at most one loop can be longer than that, and the chance of a
 loop of exact length $k$ is $1/k$. The survival probability is therefore
 $$1 - \sum_{k=n/2+1}^{n} \frac{1}{k},$$
