@@ -1,4 +1,4 @@
-# Mysterious data 🤔
+# Mysterious data 🦖
 
 > **Difficulty:** 🌶️
 >

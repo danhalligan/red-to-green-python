@@ -1,7 +1,9 @@
+import math
 from itertools import islice
 
 import numpy as np
 import pytest
+from scipy.stats import norm
 
 from pyproblems.data import load_faithful_data
 from pyproblems.mixture_models import (
@@ -15,6 +17,7 @@ from pyproblems.mixture_models import (
     fit_hard_gaussian_mixture,
     fit_multivariate_gaussian_mixture,
     fit_soft_gaussian_mixture,
+    gaussian_mixture_log_likelihood,
     hard_expectation_step,
     hard_maximization_step,
     mixture_log_likelihood,
@@ -27,6 +30,78 @@ from pyproblems.mixture_models import (
 )
 
 pytestmark = pytest.mark.advanced
+
+
+def test_gaussian_mixture_log_likelihood_uses_log_sum_exp():
+    observations = np.array([-1.0, 0.0, 1.0, 8.0])
+    component_a = np.log(0.3) + norm.logpdf(observations, loc=0, scale=1)
+    component_b = np.log(0.7) + norm.logpdf(observations, loc=8, scale=2)
+    expected = np.sum(np.logaddexp(component_a, component_b))
+
+    actual = gaussian_mixture_log_likelihood(
+        mean1=0,
+        standard_deviation1=1,
+        mean2=8,
+        standard_deviation2=2,
+        weight1=0.3,
+        observations=observations,
+    )
+
+    assert actual == pytest.approx(expected)
+
+
+@pytest.mark.parametrize(
+    "parameters",
+    [
+        {"standard_deviation1": 0},
+        {"standard_deviation2": -1},
+        {"weight1": 0},
+        {"weight1": 1},
+        {"mean1": math.nan},
+    ],
+)
+def test_gaussian_mixture_log_likelihood_rejects_invalid_parameters(
+    parameters,
+):
+    arguments = {
+        "mean1": 0.0,
+        "standard_deviation1": 1.0,
+        "mean2": 5.0,
+        "standard_deviation2": 1.0,
+        "weight1": 0.5,
+        "observations": [0.0, 5.0],
+    }
+    arguments.update(parameters)
+
+    with pytest.raises(ValueError):
+        gaussian_mixture_log_likelihood(**arguments)
+
+
+def test_gaussian_mixture_log_likelihood_is_finite_far_in_the_tail():
+    observations = np.array([-1000.0, 0.0, 1000.0])
+    expected = np.sum(
+        np.logaddexp(
+            np.log(0.3) + norm.logpdf(observations, loc=0, scale=1),
+            np.log(0.7) + norm.logpdf(observations, loc=5, scale=1),
+        )
+    )
+
+    actual = gaussian_mixture_log_likelihood(0, 1, 5, 1, 0.3, observations)
+
+    assert math.isfinite(actual)
+    assert actual == pytest.approx(expected)
+
+
+def test_gaussian_mixture_log_likelihood_is_unbounded_as_a_component_collapses():
+    observations = [0.0, 1.0, 2.0, 5.0]
+    scales = [1.0, 1e-3, 1e-6, 1e-12]
+    values = [
+        gaussian_mixture_log_likelihood(0, scale, 3, 2, 0.3, observations)
+        for scale in scales
+    ]
+
+    assert values == sorted(values)
+    assert values[-1] > values[0] + 20
 
 
 def test_hard_e_step_assigns_to_the_more_likely_component():

@@ -14,7 +14,7 @@
 > labels, expectation-maximisation (EM), hard and soft assignment, weighted
 > estimates, and fitting a bivariate mixture to real data.
 >
-> **Check:** `uv run pytest tests/test_statistics.py -k gaussian_mixture_log_likelihood -q`
+> **Check:** `uv run pytest tests/test_mixture_models.py -k gaussian_mixture_log_likelihood -q`
 > for the likelihood, then `uv run pytest tests/test_mixture_models.py -m advanced -q`
 > for EM.
 
@@ -38,7 +38,7 @@ logarithm of the log-likelihood means there is no such closed form.
 
 ## Calculating the log-likelihood
 
-In [statistics.py](../../src/pyproblems/statistics.py), implement
+In [mixture_models.py](../../src/pyproblems/mixture_models.py), implement
 `gaussian_mixture_log_likelihood`. It takes named component means, positive
 standard deviations, a mixture weight (strictly between zero and one), and the
 observations. Remember, the likelihood is the product of mixture densities
@@ -100,17 +100,17 @@ the fraction of observations in component one. Write
 
 ## Iteration
 
-Write `em_steps`, a generator much like your
-[Fibonacci](../pythonic-python/python-fundamentals.md#q6-fibonacci-sequence)
-one. It yields the parameters after each iteration (first the initial values,
-then the result of an E-step followed by an M-step, and so on, endlessly) and
-never decides when to stop. Then write `expectation_maximization`, which takes
-values from `em_steps` until the log-likelihood stops changing, and
-`mixture_log_likelihood`, which calculates the sum of the log mixture densities
-across observations. Stop on the *absolute* change in log-likelihood.[^abs-change]
-The docstrings give the exact signatures, stopping rule and return values, and
-the tests check them. Neither function needs to know what the parameters are, so
-they should work for any model with an E-step and an M-step.
+Write `em_steps`, a generator that yields the parameters after each iteration
+(first the initial values, then the result of an E-step followed by an M-step,
+and so on, endlessly). 
+
+Then write `expectation_maximization`, which takes values from `em_steps` until
+the log-likelihood stops changing, and `mixture_log_likelihood`, which
+calculates the sum of the log mixture densities across observations. Stop on the
+*absolute* change in log-likelihood.[^abs-change] The docstrings give the exact
+signatures, stopping rule and return values, and the tests check them. Neither
+function needs to know what the parameters are, so they should work for any
+model with an E-step and an M-step.
 
 [^abs-change]: Hard EM optimises a different objective, so its log-likelihood
     can fall from one iteration to the next, whereas soft EM never decreases it

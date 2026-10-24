@@ -40,15 +40,3 @@ def normal_log_likelihood(
 def fit_normal_mle(observations: ArrayLike) -> NormalFit:
     """Fit normal mean and standard deviation by numerical maximisation."""
     raise NotImplementedError
-
-
-def gaussian_mixture_log_likelihood(
-    mean1: float,
-    standard_deviation1: float,
-    mean2: float,
-    standard_deviation2: float,
-    weight1: float,
-    observations: ArrayLike,
-) -> float:
-    """Calculate the log-likelihood for a two-normal mixture."""
-    raise NotImplementedError

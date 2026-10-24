@@ -56,6 +56,18 @@ class EMResult(Generic[ParametersT]):
     converged: bool
 
 
+def gaussian_mixture_log_likelihood(
+    mean1: float,
+    standard_deviation1: float,
+    mean2: float,
+    standard_deviation2: float,
+    weight1: float,
+    observations: ArrayLike,
+) -> float:
+    """Calculate the log-likelihood for a two-normal mixture."""
+    raise NotImplementedError
+
+
 def hard_expectation_step(
     observations: ArrayLike, parameters: GaussianMixtureParameters
 ) -> NDArray:
