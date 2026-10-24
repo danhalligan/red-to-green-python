@@ -1,10 +1,8 @@
 """Scientific-Python statistics exercises."""
 
-from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
 import numpy as np
-import pandas as pd
 from numpy.typing import ArrayLike
 
 
@@ -19,18 +17,6 @@ class NormalFit:
 
 def standard_error(values: ArrayLike) -> float:
     """Estimate standard error using the sample standard deviation."""
-    raise NotImplementedError
-
-
-def summarize_xy(dataset: Mapping[str, Sequence[float]]) -> dict[str, float]:
-    """Calculate means, sample standard deviations, and correlation for x/y."""
-    raise NotImplementedError
-
-
-def summarize_xy_datasets(
-    datasets: Mapping[str, Mapping[str, Sequence[float]]],
-) -> pd.DataFrame:
-    """Return one row of summary statistics for each named x/y dataset."""
     raise NotImplementedError
 
 

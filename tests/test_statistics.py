@@ -1,11 +1,9 @@
 import math
 
 import numpy as np
-import pandas as pd
 import pytest
 from scipy.stats import norm
 
-from pyproblems.data import load_xy_data
 from pyproblems.statistics import (
     NormalFit,
     bootstrap_standard_error,
@@ -13,8 +11,6 @@ from pyproblems.statistics import (
     gaussian_mixture_log_likelihood,
     normal_log_likelihood,
     standard_error,
-    summarize_xy,
-    summarize_xy_datasets,
 )
 
 
@@ -26,33 +22,6 @@ def test_standard_error_uses_sample_standard_deviation():
 def test_standard_error_requires_two_observations(values):
     with pytest.raises(ValueError, match="at least 2"):
         standard_error(values)
-
-
-def test_summarize_xy_returns_named_statistics():
-    summary = summarize_xy({"x": [1, 2, 3], "y": [1, 4, 5]})
-
-    assert summary == pytest.approx(
-        {
-            "x_mean": 2.0,
-            "y_mean": 10 / 3,
-            "x_sd": 1.0,
-            "y_sd": 2.0816659994661326,
-            "corr": 0.9607689228305228,
-        }
-    )
-
-
-def test_summarize_xy_datasets_preserves_names_and_common_summaries():
-    summaries = summarize_xy_datasets(load_xy_data())
-
-    assert isinstance(summaries, pd.DataFrame)
-    assert list(summaries.index) == [f"Dataset{i}" for i in range(1, 14)]
-    assert list(summaries.columns) == ["x_mean", "y_mean", "x_sd", "y_sd", "corr"]
-    assert summaries["x_mean"].to_numpy() == pytest.approx([54.26] * 13, abs=0.01)
-    assert summaries["y_mean"].to_numpy() == pytest.approx([47.83] * 13, abs=0.01)
-    assert summaries["x_sd"].to_numpy() == pytest.approx([16.76] * 13, abs=0.01)
-    assert summaries["y_sd"].to_numpy() == pytest.approx([26.93] * 13, abs=0.01)
-    assert summaries["corr"].to_numpy() == pytest.approx([-0.065] * 13, abs=0.01)
 
 
 def test_bootstrap_standard_error_is_reproducible_and_near_analytic_estimate():
