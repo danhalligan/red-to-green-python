@@ -40,6 +40,10 @@ Then try a first exercise, for example the quick warm-up
 3. Rerun the same command until it passes: that is red to green.
 4. Keep going with the Python language problems, or pick any other!
 
+New to VS Code, environments or reading test failures? Follow
+[Getting going in VS Code](GETTING_STARTED.md) for a step-by-step walkthrough,
+including how to use the Testing panel and keep the output manageable.
+
 For an overview of the repository layout and development setup, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 

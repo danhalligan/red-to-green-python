@@ -11,6 +11,7 @@ DOCS = [
     ROOT / "README.md",
     ROOT / "DEVELOPMENT.md",
     ROOT / "CONTRIBUTING.md",
+    ROOT / "GETTING_STARTED.md",
     *sorted((ROOT / "problems").rglob("*.md")),
 ]
 PROBLEM_PAGES = [path for path in DOCS if "problems" in path.relative_to(ROOT).parts]
