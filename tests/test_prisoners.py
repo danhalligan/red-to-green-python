@@ -218,13 +218,6 @@ def test_estimate_survival_is_reproducible_with_a_seeded_generator():
     assert 0 < first < 1
 
 
-def test_estimate_survival_rejects_fewer_than_one_trial():
-    with pytest.raises(ValueError):
-        estimate_survival(
-            random_strategy, prisoners=4, limit=2, trials=0, rng=random.Random(1)
-        )
-
-
 @pytest.mark.parametrize(
     ("arrangement", "expected"),
     [

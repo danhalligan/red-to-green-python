@@ -58,10 +58,22 @@ uv run pytest tests/test_birthday.py -k "exact or smallest"
 [^birthday-next]: `next(n for n in itertools.count() if ...)` returns the first
     value from an endless counter that passes a test, without building a list.
 
-**Investigation 🚀: why so few?** A group of $n$ people contains
-$\binom{n}{2}$ pairs of people (`math.comb(n, 2)`). Compare the number of pairs
-at your answer with the number of days. What does that suggest? In the
-[notebook](../../analysis/against_the_odds.ipynb), change the number of days to 10,
-100, 1,000, 10,000 and 100,000, find the group size for even odds each time, and
-plot it against the number of days. What is the pattern, and does it fit the
-pairs argument?
+## Over to the notebook 📓
+
+The functions are done, so now use them. From here the work happens in the
+[Against the Odds notebook](../../analysis/against_the_odds.ipynb#The-office-party),
+not in `birthday.py`: open it, run the setup cell, and find the **The office
+party** section. The plotting code is provided; your job is to fill in the
+tables of results and explain what they show.
+
+1. **Simulation against the sum.** Build a table of estimated and exact chances
+   for group sizes from 2 to 60, then plot both. How many trials do you need
+   before the simulated points hug the exact curve?
+2. **Why so few? 🚀** A group of $n$ people contains $\binom{n}{2}$ pairs of
+   people (`math.comb(n, 2)`). Compare the number of pairs at your answer with
+   the number of days. What does that suggest? Then, for 10, 100, 1,000, 10,000
+   and 100,000 days, find the group size for even odds and tabulate it with the
+   number of pairs. Plot group size against days. What is the pattern, and does
+   it fit the pairs argument?
+3. **Uneven birthdays.** Real birthdays are not equally likely. Predict whether
+   that makes a match more or less likely, then check by simulation.

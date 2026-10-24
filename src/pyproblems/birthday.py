@@ -27,7 +27,7 @@ def estimate_shared_birthday_probability(
     Each trial gives each of `people` a birthday chosen independently and
     uniformly from `days` days. Return the fraction of `trials` groups with a
     shared birthday. Use only the supplied `rng`, so a seeded generator gives a
-    reproducible estimate. Raise ValueError if `trials` is less than 1.
+    reproducible estimate.
     """
     raise NotImplementedError
 
@@ -36,8 +36,7 @@ def shared_birthday_probability(people: int, days: int = DAYS_IN_YEAR) -> float:
     """Return the exact chance that a random group has a shared birthday.
 
     Assume every one of `days` days is equally likely for everybody, and that
-    birthdays are independent. Raise ValueError if `people` is negative or
-    `days` is less than 1.
+    birthdays are independent.
     """
     raise NotImplementedError
 
@@ -45,8 +44,5 @@ def shared_birthday_probability(people: int, days: int = DAYS_IN_YEAR) -> float:
 def smallest_group_with_probability(threshold: float, days: int = DAYS_IN_YEAR) -> int:
     """Return the smallest group size whose chance of a shared birthday reaches
     `threshold`.
-
-    Build on `shared_birthday_probability`. Raise ValueError unless
-    0 < `threshold` < 1.
     """
     raise NotImplementedError

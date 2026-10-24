@@ -96,8 +96,7 @@ def estimate_survival(
     """Estimate the chance that every prisoner finds their own number.
 
     Each trial fills the drawers afresh with `shuffled_drawers`. Return the
-    fraction of `trials` in which all `prisoners` succeed. Raise ValueError if
-    `trials` is less than 1.
+    fraction of `trials` in which all `prisoners` succeed.
     """
     raise NotImplementedError
 

@@ -17,8 +17,7 @@ def flips_until(pattern: str, flips: Iterable[str]) -> int:
 
     Read `flips` one at a time and stop as soon as the most recent flips spell
     `pattern`; `flips` may be endless. For example, "HT" first appears after 5
-    flips of "TTHHTH...", and "HH" after 2 flips of "HHH...". Raise ValueError if
-    `pattern` is empty, or if `flips` ends without containing it.
+    flips of "TTHHTH...", and "HH" after 2 flips of "HHH...".
     """
     raise NotImplementedError
 
@@ -27,14 +26,11 @@ def average_waiting_time(pattern: str, *, trials: int, rng: random.Random) -> fl
     """Estimate the mean number of flips until `pattern` first appears.
 
     Run `trials` experiments, each with a new stream of fair coin flips made
-    from `rng`. Raise ValueError if `trials` is less than 1.
+    from `rng`.
     """
     raise NotImplementedError
 
 
 def expected_waiting_time(pattern: str) -> float:
-    """Return the exact expected number of flips until `pattern` first appears.
-
-    Raise ValueError if `pattern` is empty or contains anything but "H" and "T".
-    """
+    """Return the exact expected number of flips until `pattern` first appears."""
     raise NotImplementedError

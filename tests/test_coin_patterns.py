@@ -96,16 +96,6 @@ def test_flips_until_works_on_an_endless_stream():
     assert count >= 5
 
 
-def test_flips_until_rejects_an_empty_pattern():
-    with pytest.raises(ValueError):
-        flips_until("", "HTHT")
-
-
-def test_flips_until_rejects_flips_that_end_without_the_pattern():
-    with pytest.raises(ValueError):
-        flips_until("HH", "HTHT")
-
-
 @pytest.mark.parametrize("pattern", ["H", "HH", "HT", "HHT", "THT"])
 def test_average_waiting_time_is_close_to_the_exact_expectation(pattern):
     average = average_waiting_time(pattern, trials=20_000, rng=random.Random(5))
@@ -127,11 +117,6 @@ def test_average_waiting_time_uses_only_the_supplied_generator():
     assert random.getstate() == before
 
 
-def test_average_waiting_time_rejects_fewer_than_one_trial():
-    with pytest.raises(ValueError):
-        average_waiting_time("HH", trials=0, rng=random.Random(1))
-
-
 @pytest.mark.parametrize(
     "pattern",
     [
@@ -148,9 +133,3 @@ def test_expected_waiting_time_matches_the_exact_expectation(pattern):
 
 def test_expected_waiting_time_copes_with_long_patterns():
     assert expected_waiting_time("H" * 20) == pytest.approx(2**21 - 2)
-
-
-@pytest.mark.parametrize("pattern", ["", "HX", "hh", "HTT2"])
-def test_expected_waiting_time_rejects_bad_patterns(pattern):
-    with pytest.raises(ValueError):
-        expected_waiting_time(pattern)

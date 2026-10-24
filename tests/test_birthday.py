@@ -65,12 +65,6 @@ def test_exact_probability_defaults_to_a_year():
     assert shared_birthday_probability(40) == shared_birthday_probability(40, 365)
 
 
-@pytest.mark.parametrize(("people", "days"), [(-1, 365), (5, 0)])
-def test_exact_probability_rejects_impossible_inputs(people, days):
-    with pytest.raises(ValueError):
-        shared_birthday_probability(people, days)
-
-
 def test_estimate_is_close_to_the_true_chance():
     estimate = estimate_shared_birthday_probability(
         4, trials=20_000, rng=random.Random(1), days=10
@@ -102,11 +96,6 @@ def test_estimate_uses_only_the_supplied_generator():
     assert random.getstate() == before
 
 
-def test_estimate_rejects_fewer_than_one_trial():
-    with pytest.raises(ValueError):
-        estimate_shared_birthday_probability(5, trials=0, rng=random.Random(1))
-
-
 @pytest.mark.parametrize(
     ("threshold", "days", "expected"),
     [(0.25, 10, 3), (0.5, 10, 5), (0.99, 10, 9), (0.0001, 10, 2), (0.9999, 3, 4)],
@@ -121,9 +110,3 @@ def test_smallest_group_is_the_first_to_reach_the_threshold(threshold, days):
     size = smallest_group_with_probability(threshold, days)
     assert exact_by_multiplying(size, days) >= threshold
     assert exact_by_multiplying(size - 1, days) < threshold
-
-
-@pytest.mark.parametrize("threshold", [0, 1, -0.5, 1.5])
-def test_smallest_group_rejects_thresholds_outside_zero_to_one(threshold):
-    with pytest.raises(ValueError):
-        smallest_group_with_probability(threshold)
