@@ -63,6 +63,17 @@ def random_strategy(room: Room) -> None:
     raise NotImplementedError
 
 
+def fixed_strategy(room: Room) -> None:
+    """Open the same drawers whoever you are, as agreed in advance.
+
+    The plan cannot depend on the prisoner or on what is found, so choose the
+    drawers from `room.limit` alone: for example, the first `room.limit` drawers.
+    Stopping early once `room.found` is fine. Assume `room.limit` is at most
+    `room.size`.
+    """
+    raise NotImplementedError
+
+
 def clever_strategy(room: Room) -> None:
     """Look for `room.prisoner`'s number in a way that beats `random_strategy`.
 

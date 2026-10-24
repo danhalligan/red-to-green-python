@@ -103,3 +103,32 @@ so write down your prediction before you run each cell.
    chosen first wins. Is there a best pattern to choose first? What does that
    say about the idea that one pattern is simply "better" than another? This
    extension does not depend on Stage 3.
+
+<details>
+<summary>What did you discover?</summary>
+
+On average `HH` needs 6 flips but `HT` needs only 4, even though both are
+equally likely at any pair of flips. The difference is what a miss costs. Having
+just seen an `H`, a failed attempt at `HT` (another `H`) still leaves you one
+step in, because the latest `H` could start a new `HT`. A failed `HH` (a `T`)
+throws all your progress away.
+
+This is what the formula measures: the expected wait is the sum of $2^k$ over
+every $k$ for which the first $k$ flips of the pattern equal its last $k$ flips.
+The whole pattern always counts, so $\text{HT}$ gives $2^2 = 4$, while
+$\text{HH}$ gives $2^1 + 2^2 = 6$. Of the patterns of three flips, those that
+cannot overlap themselves (`HHT`, `HTT`, `THH` and `TTH`) are quickest, at 8
+flips. `HTH` and `THT` take 10, and `HHH` and `TTT`, which overlap most, are
+slowest, at 14. The simulated table matches this rule in every row.
+
+In Penney's game, choosing second helps. Whichever pattern is chosen first,
+there is a reply that appears first between about 66% and 88% of the time, so
+**no pattern is a good first choice**. No pattern beats every other, because
+"appears first" is not transitive: each pattern can be beaten by another, a bit
+like rock, paper, scissors.
+
+The best reply is easy to remember. Take the opposite of the middle flip of the
+first pattern, then add its first two flips. For `HHT` that is `T` followed by
+`HH`, giving `THH`, which matches your table.
+
+</details>

@@ -9,6 +9,7 @@ from pyproblems.prisoners import (
     count_successes,
     cycle_lengths,
     estimate_survival,
+    fixed_strategy,
     random_strategy,
     shuffled_drawers,
 )
@@ -100,7 +101,27 @@ def test_random_strategy_always_succeeds_when_allowed_every_drawer():
         assert room.found
 
 
-@pytest.mark.parametrize("strategy", [random_strategy, clever_strategy])
+def test_fixed_strategy_only_ever_opens_the_agreed_drawers():
+    opened = set()
+    for drawers in (EASY_EIGHT, HARD_EIGHT):
+        for prisoner in range(8):
+            room = RecordingRoom(drawers, limit=4, prisoner=prisoner)
+            fixed_strategy(room)
+
+            assert room.found or room.opened == 4
+            opened |= set(room.visited)
+
+    assert len(opened) <= 4
+
+
+def test_fixed_strategy_saves_exactly_as_many_prisoners_as_drawers_opened():
+    assert count_successes(fixed_strategy, EASY_EIGHT, 4) == 4
+    assert count_successes(fixed_strategy, HARD_EIGHT, 4) == 4
+    for _ in range(20):
+        assert count_successes(fixed_strategy, shuffled_drawers(12), 5) == 5
+
+
+@pytest.mark.parametrize("strategy", [random_strategy, fixed_strategy, clever_strategy])
 def test_strategies_stay_within_the_limit(strategy):
     for prisoner in range(8):
         room = Room(HARD_EIGHT, limit=4, prisoner=prisoner)
@@ -147,11 +168,17 @@ def test_the_clever_strategy_can_fail_almost_everyone():
     assert count_successes(clever_strategy, HARD_EIGHT, 4) == 1
 
 
-@pytest.mark.parametrize("strategy", [random_strategy, clever_strategy])
+@pytest.mark.parametrize("strategy", [random_strategy, fixed_strategy, clever_strategy])
 def test_everyone_survives_when_every_drawer_may_be_opened(strategy):
     survival = estimate_survival(strategy, prisoners=6, limit=6, trials=50)
 
     assert survival == 1.0
+
+
+def test_estimate_survival_fixed_strategy_never_frees_everyone():
+    chance = estimate_survival(fixed_strategy, prisoners=6, limit=5, trials=200)
+
+    assert chance == 0.0
 
 
 def test_estimate_survival_random_strategy_for_two_prisoners():

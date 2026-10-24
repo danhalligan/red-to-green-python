@@ -77,3 +77,35 @@ tables of results and explain what they show.
    it fit the pairs argument?
 3. **Uneven birthdays.** Real birthdays are not equally likely. Predict whether
    that makes a match more or less likely, then check by simulation.
+
+<details>
+<summary>What did you discover?</summary>
+
+The chance passes one half at **23 people**, far fewer than the roughly 180 many
+people guess by thinking of half the days in a year. With 10,000 trials per group
+size the simulation tracks the exact curve to within about 0.01 (the standard
+error of such an estimate is at most 0.005), and each extra decimal place of
+agreement costs about 100 times as many trials.
+
+The intuition fails because we compare the group with *ourselves*, which is only
+$n - 1$ possible matches. Any two people can match, and there are
+$\binom{n}{2}$ pairs.
+
+For other numbers of days, the number of pairs at even odds stays close to $0.7$
+times the number of days (it tends to $\ln 2 \approx 0.69$), so the group size
+grows like $\sqrt{\text{days}}$, at about $1.18\sqrt{\text{days}}$. Each pair
+matches with probability $1/\text{days}$, so the expected number of matching
+pairs is about $\binom{n}{2}/\text{days}$. For small chances,
+$P(\text{no match}) \approx e^{-n(n-1)/(2\,\text{days})}$. Setting that to
+$1/2$ gives $n(n-1) \approx 2\ln 2 \times \text{days}$, so
+$n \approx 1.18\sqrt{\text{days}}$. A group only needs to grow with the square
+root of the number of days, not the number of days itself.
+
+Uneven birthdays make a match **more** likely. In a busy-season example where 40
+days are three times as popular as the other 325, the chance with 23 people
+rises from about 0.51 to about 0.59. When some days are popular, two people are
+more likely to land on the same one. Uniform birthdays are the *least*
+favourable case for a match, so the standard answer of 23 is an upper bound for
+any real population.
+
+</details>
