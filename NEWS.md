@@ -1,4 +1,4 @@
-# pyproblems 0.1.0
+# red-to-green-python 0.1.0
 
 * Reorganise the repository around self-contained exercises. Each exercise now
   has its own folder under `exercises/<topic>/<exercise>/` holding its README,

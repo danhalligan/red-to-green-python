@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyproblems"
+name = "red-to-green-python"
 version = "0.1.0"
 description = "Python exercises from FizzBuzz to mixture models: turn failing tests from red to green"
 readme = "README.md"
