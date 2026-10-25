@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from pyproblems.evolution import (
+from pyproblems.weasel import (
     WEASEL_ALPHABET,
     WEASEL_TARGET,
     evolve_weasel,

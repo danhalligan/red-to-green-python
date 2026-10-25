@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from pyproblems.plate_reader import (
+from pyproblems.spinning_plates import (
     join_layout,
     mark_usable,
     normalise_to_reference,

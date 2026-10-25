@@ -9,7 +9,7 @@
 > **You’ll practise:** functions, sequences, comprehensions, iteration,
 > dictionaries, generators, exceptions, and readable tests.
 >
-> **Check:** `uv run pytest tests/test_language.py -q`, or
+> **Check:** `uv run pytest tests/test_fundamentals.py -q`, or
 > each question's own command below.
 
 **In this topic:** [Q1 Exponentiation](#q1-exponentiation) ·
@@ -22,7 +22,7 @@
 ## Q1. Exponentiation
 
 Write a function to take numbers $x$ and return $e^x$ as `exponentiate(values)`
-in [language.py](../../src/pyproblems/language.py). Note that the input can be any
+in [fundamentals.py](../../src/pyproblems/fundamentals.py). Note that the input can be any
 iterable, not just a list.
 
 Begin with a `for` loop and `list.append`. Once it works, try rewriting the
@@ -34,7 +34,7 @@ function as a list comprehension. Compare the two versions for readability.
 Check this exercise with:
 
 ```bash
-uv run pytest tests/test_language.py -k exponentiate -q
+uv run pytest tests/test_fundamentals.py -k exponentiate -q
 ```
 
 ## Q2. Adjacent products
@@ -46,12 +46,12 @@ when fewer than two values are supplied. The input may be any iterable.
 For example, for the list `[3, 6, -2, -5, 7, 3]` you should return `21`, since
 7 and 3 produce the largest product.
 
-Implement `adjacent_elements_product(values)` in `language.py`.
+Implement `adjacent_elements_product(values)` in `fundamentals.py`.
 
 💡 **Hint:** `itertools.pairwise` could be useful here.
 
 ```bash
-uv run pytest tests/test_language.py -k adjacent
+uv run pytest tests/test_fundamentals.py -k adjacent
 ```
 
 ## Q3. FizzBuzz
@@ -64,7 +64,7 @@ Implement `fizzbuzz(n)` to return strings from 1 through `n`, inclusive. For
 example, `fizzbuzz(5)` should return `['1', '2', 'Fizz', '4', 'Buzz']`.
 
 ```bash
-uv run pytest tests/test_language.py -k fizzbuzz
+uv run pytest tests/test_fundamentals.py -k fizzbuzz
 ```
 
 ## Q4. First non-repeating character
@@ -79,7 +79,7 @@ spaces and punctuation count too.
 Implement `first_non_repeating_character(text)`.
 
 ```bash
-uv run pytest tests/test_language.py -k non_repeating
+uv run pytest tests/test_fundamentals.py -k non_repeating
 ```
 
 ## Q5. Python gotchas
@@ -87,11 +87,11 @@ uv run pytest tests/test_language.py -k non_repeating
 These short examples expose behaviour that can be surprising when translating
 habits from other languages or when reading unfamiliar Python. Before running
 each snippet, write down its output and explain the mechanism. Then write a
-correct version as a function in `language.py`, where the tests check that the
+correct version as a function in `fundamentals.py`, where the tests check that the
 intended behaviour holds.
 
 ```bash
-uv run pytest tests/test_language.py -k gotcha
+uv run pytest tests/test_fundamentals.py -k gotcha
 ```
 
 ### a. A mutable default argument
@@ -186,7 +186,7 @@ list(islice(fibonacci(), 8))
 ```
 
 ```bash
-uv run pytest tests/test_language.py -k fibonacci
+uv run pytest tests/test_fundamentals.py -k fibonacci
 ```
 
 **Where this leads:** a value defined by the values before it is a *recurrence
@@ -206,7 +206,7 @@ The trick here though is that to get each new number you "say what you see"!
 Each term is a tiny description of the one before it. This is the 
 [look-and-say sequence](https://en.wikipedia.org/wiki/Look-and-say_sequence).
 
-Implement `look_and_say()` in `language.py` as a generator that yields strings
+Implement `look_and_say()` in `fundamentals.py` as a generator that yields strings
 indefinitely, starting with `"1"`. Each call should return an independent
 iterator, and requesting more terms from an existing iterator should continue
 where it left off.
@@ -228,7 +228,7 @@ Make sure the final group is included too. Alternatively, investigate
 </details>
 
 ```bash
-uv run pytest tests/test_language.py -k look_and_say -q
+uv run pytest tests/test_fundamentals.py -k look_and_say -q
 ```
 
 **Optional extension:** let callers choose a starting string. Can you think of 

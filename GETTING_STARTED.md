@@ -93,7 +93,7 @@ read **Q1: Exponentiation**. Tip: open a Markdown file's formatted preview with
 
 Every exercise works the same way. A function in the `src/pyproblems/` folder is
 a *stub*: it has a name and a description but no working code. For this one,
-open `src/pyproblems/language.py`:
+open `src/pyproblems/fundamentals.py`:
 
 ```python
 def exponentiate(values: Iterable[float]) -> list[float]:
@@ -106,7 +106,7 @@ Next to it, a test in the `tests/` folder checks your function. The tests are
 exercise's test in the terminal:
 
 ```bash
-uv run pytest tests/test_language.py -k exponentiate -q
+uv run pytest tests/test_fundamentals.py -k exponentiate -q
 ```
 
 Now replace `raise NotImplementedError` with your own code and run the command
@@ -125,7 +125,7 @@ _____________________ test_exponentiate_accepts_iterables ______________________
 >       values = exponentiate([0.0, 1.0, 2.0])
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/test_language.py:23: 
+tests/test_fundamentals.py:23: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 values = [0.0, 1.0, 2.0]
@@ -135,9 +135,9 @@ values = [0.0, 1.0, 2.0]
 >       raise NotImplementedError
 E       NotImplementedError
 
-src/pyproblems/language.py:8: NotImplementedError
+src/pyproblems/fundamentals.py:8: NotImplementedError
 =========================== short test summary info ============================
-FAILED tests/test_language.py::test_exponentiate_accepts_iterables - NotImple...
+FAILED tests/test_fundamentals.py::test_exponentiate_accepts_iterables - NotI...
 1 failed, 33 deselected in 0.03s
 ```
 
@@ -198,13 +198,13 @@ A few options make the output shorter:
 For example, to work through a file one failure at a time:
 
 ```bash
-uv run pytest tests/test_language.py -x -q --tb=short
+uv run pytest tests/test_fundamentals.py -x -q --tb=short
 ```
 
 And to see just which tests pass and fail:
 
 ```bash
-uv run pytest tests/test_language.py -q --tb=no
+uv run pytest tests/test_fundamentals.py -q --tb=no
 ```
 
 You can combine them, and you can always scroll back to the first `E` line of the

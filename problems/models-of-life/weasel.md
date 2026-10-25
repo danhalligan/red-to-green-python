@@ -8,7 +8,7 @@
 > **You’ll practise:** random number generators, stochastic simulation, and
 > investigating a model by experiment.
 >
-> **Check:** `uv run pytest tests/test_evolution.py -m advanced -q`
+> **Check:** `uv run pytest tests/test_weasel.py -m advanced -q`
 
 Start with 28 random characters. Copy them with the odd typo, keep the best copy,
 and repeat. Can a sentence evolve out of gibberish? In *The Blind Watchmaker*,
@@ -25,11 +25,11 @@ ties at random. For reproducibility in this Python version, retain the best
 candidate seen so far and inject a NumPy random generator.
 
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
-[evolution.py](../../src/pyproblems/evolution.py). Each generation creates a fixed
+[weasel.py](../../src/pyproblems/weasel.py). Each generation creates a fixed
 number of mutated copies, keeps a highest-scoring candidate, and records the
 best score. Then watch it evolve.
 
-Use the [weasel simulation notebook](../../analysis/weasel_simulation.ipynb) to
+Use the [weasel simulation notebook](../../analysis/weasel.ipynb) to
 investigate. How many generations does it take to reach the target? Compare
 several seeded runs rather than treating one random run as a universal answer,
 and ask why they differ. Then try a population of 100, and several mutation
@@ -145,7 +145,7 @@ drawn first from the generator just as the weasel draws its starting phrase, so 
 given seed can start every method from the same phrase. Nothing is carried over
 unchanged, so unlike the weasel the best score can fall.
 
-> **Check:** `uv run pytest tests/test_evolution_tournament.py -m advanced -q`
+> **Check:** `uv run pytest tests/test_weasel_tournament.py -m advanced -q`
 
 <details>
 <summary>💡 Hint 1: a nudge</summary>
@@ -170,7 +170,7 @@ it on with `crossover=True` in `evolve_population`. For each offspring, choose t
 parents independently by tournament selection, cross them over, and then mutate
 the child as before. Use crossover for every offspring.
 
-> **Check:** `uv run pytest tests/test_evolution_crossover.py -m advanced -q`
+> **Check:** `uv run pytest tests/test_weasel_crossover.py -m advanced -q`
 
 <details>
 <summary>💡 Hint: seeing recombination at work</summary>

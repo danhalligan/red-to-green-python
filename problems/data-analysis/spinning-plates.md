@@ -9,7 +9,7 @@
 > quality control, normalisation, plotting, and deciding how far to trust a
 > result.
 >
-> **Check:** `uv run pytest tests/test_plate_reader.py -q` checks the
+> **Check:** `uv run pytest tests/test_spinning_plates.py -q` checks the
 > data-processing functions. Your notebook's plots and explanations check the
 > investigation; there is no single right answer to the final question.
 
@@ -48,7 +48,7 @@ place. One of them is now yours.
 
 Work in the [Spinning plates notebook](../../analysis/spinning_plates.ipynb). It
 calls the functions you will write in
-[plate_reader.py](../../src/pyproblems/plate_reader.py), which also supplies two
+[spinning_plates.py](../../src/pyproblems/spinning_plates.py), which also supplies two
 plotting helpers (`plate_heatmap` and `plot_concentration_response`) so you can
 spend your time on the data rather than on Matplotlib.
 
@@ -102,7 +102,7 @@ You should keep any raw readings unchanged and put derived values in new columns
 The export is not a table. Open it and look at what a parser would have to
 handle: sections, header rows, matrices, instrument notes, and readings that are
 not numbers at all. Implement two functions in
-[plate_reader.py](../../src/pyproblems/plate_reader.py):
+[spinning_plates.py](../../src/pyproblems/spinning_plates.py):
 
 - `parse_plate_reader(text)` turns the export into **one row per well per
   channel**, with columns `plate_id`, `well`, `row`, `column`, `channel`,
@@ -136,7 +136,7 @@ notes afterwards.
 </details>
 
 Check your work with
-`uv run pytest tests/test_plate_reader.py -k "parse or validate" -q`.
+`uv run pytest tests/test_spinning_plates.py -k "parse or validate" -q`.
 
 How many readings carry a flag? Which of them would you trust?
 
@@ -170,7 +170,7 @@ notice a well that is absent from one side, so compare the sets of wells too.
 </details>
 
 Check your work with
-`uv run pytest tests/test_plate_reader.py -k "pivot or join" -q`.
+`uv run pytest tests/test_spinning_plates.py -k "pivot or join" -q`.
 
 ## 3. Loss of control
 
@@ -193,7 +193,7 @@ A helper is available for testing explanations:
   whose reading belongs to it. It must send every well to a different source
   well.
 
-Check it with `uv run pytest tests/test_plate_reader.py -k remap -q`.
+Check it with `uv run pytest tests/test_spinning_plates.py -k remap -q`.
 
 Then investigate in the notebook. You must **provide evidence** for the
 explanation you choose: say what you tested, what you found, and how decisive it
@@ -270,7 +270,7 @@ excellent; near zero or negative means the controls overlap. Implement it too,
 and use it to check your corrected controls.
 
 Check them with
-`uv run pytest tests/test_plate_reader.py -k "usable or blank or normalise or vehicle or summarise or z_prime or pipeline" -q`.
+`uv run pytest tests/test_spinning_plates.py -k "usable or blank or normalise or vehicle or summarise or z_prime or pipeline" -q`.
 
 <details>
 <summary>💡 Hint 1: background first</summary>

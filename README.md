@@ -33,10 +33,10 @@ Then try a first exercise, for example the quick warm-up
 1. Read the prompt, then run its test. It is **expected to fail** at first:
 
    ```bash
-   uv run pytest tests/test_language.py -k exponentiate -q
+   uv run pytest tests/test_fundamentals.py -k exponentiate -q
    ```
 
-2. Implement `exponentiate` in `src/pyproblems/language.py`.
+2. Implement `exponentiate` in `src/pyproblems/fundamentals.py`.
 3. Rerun the same command until it passes: that is red to green.
 4. Keep going with the Python language problems, or pick any other!
 

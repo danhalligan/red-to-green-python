@@ -3,7 +3,7 @@ from itertools import islice
 
 import pytest
 
-from pyproblems.language import (
+from pyproblems.fundamentals import (
     add_tag,
     adjacent_elements_product,
     approximately_equal,
