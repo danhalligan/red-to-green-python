@@ -1,6 +1,6 @@
 """Integrity checks for the Titanic passenger data."""
 
-from exercises.data_analysis.titanic_disaster.loaders import load_titanic_data
+from exercises.titanic_disaster.loaders import load_titanic_data
 
 
 def test_titanic_data_preserves_labels_identifiers_and_missingness():

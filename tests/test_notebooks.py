@@ -11,25 +11,25 @@ import pytest
 
 ROOT = Path(__file__).parents[1]
 EXERCISES_DIR = ROOT / "exercises"
-SPINNING_PLATES_DIR = EXERCISES_DIR / "data_analysis" / "spinning_plates"
+SPINNING_PLATES_DIR = EXERCISES_DIR / "spinning_plates"
 NOTEBOOKS = sorted(EXERCISES_DIR.rglob("*.ipynb"))
 
 # Every exercise with an investigation keeps its notebook beside its README.
 REQUIRED_NOTEBOOKS = [
-    "against_the_odds/one_hundred_prisoners",
-    "against_the_odds/office_party",
-    "against_the_odds/waiting_for_heads",
-    "data_analysis/mysterious_data",
-    "data_analysis/spinning_plates",
-    "data_analysis/steak_tea_toast",
-    "data_analysis/titanic_disaster",
-    "generative_models/wordsmith",
-    "models_of_life/game_of_life",
-    "models_of_life/dawkins_weasel",
-    "parameter_estimation/fitting_a_mixture",
-    "parameter_estimation/recovering_the_parameters",
-    "pythonic_python/noisy_animals",
-    "uncertainty_and_simulation/known_unknowns",
+    "one_hundred_prisoners",
+    "office_party",
+    "waiting_for_heads",
+    "mysterious_data",
+    "spinning_plates",
+    "steak_tea_toast",
+    "titanic_disaster",
+    "wordsmith",
+    "game_of_life",
+    "dawkins_weasel",
+    "fitting_a_mixture",
+    "recovering_the_parameters",
+    "noisy_animals",
+    "known_unknowns",
 ]
 
 
@@ -108,9 +108,7 @@ def test_notebook_setup_runs(path, science_stack):
 
 
 def test_steak_tea_toast_setup_loads_raw_responses_as_a_dataframe(science_stack):
-    namespace = run_setup(
-        EXERCISES_DIR / "data_analysis/steak_tea_toast/investigate.ipynb"
-    )
+    namespace = run_setup(EXERCISES_DIR / "steak_tea_toast/investigate.ipynb")
     raw_responses = namespace["raw_responses"]
 
     assert raw_responses.shape == (79, 3)
@@ -118,17 +116,13 @@ def test_steak_tea_toast_setup_loads_raw_responses_as_a_dataframe(science_stack)
 
 
 def test_mysterious_data_setup_loads_all_datasets(science_stack):
-    namespace = run_setup(
-        EXERCISES_DIR / "data_analysis/mysterious_data/investigate.ipynb"
-    )
+    namespace = run_setup(EXERCISES_DIR / "mysterious_data/investigate.ipynb")
 
     assert len(namespace["coordinate_data"]) == 13
 
 
 def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
-    namespace = run_setup(
-        EXERCISES_DIR / "parameter_estimation/fitting_a_mixture/investigate.ipynb"
-    )
+    namespace = run_setup(EXERCISES_DIR / "fitting_a_mixture/investigate.ipynb")
     faithful = namespace["faithful"]
 
     assert faithful.shape == (272, 2)
@@ -136,9 +130,7 @@ def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
 
 
 def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
-    namespace = run_setup(
-        EXERCISES_DIR / "data_analysis/titanic_disaster/investigate.ipynb"
-    )
+    namespace = run_setup(EXERCISES_DIR / "titanic_disaster/investigate.ipynb")
     train, test = namespace["X_train"], namespace["X_test"]
     y_train, y_test = namespace["y_train"], namespace["y_test"]
 

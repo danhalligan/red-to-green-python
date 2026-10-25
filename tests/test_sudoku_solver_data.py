@@ -1,6 +1,6 @@
 """Integrity checks for the Sudoku puzzles."""
 
-from exercises.algorithms.sudoku_solver.loaders import load_sudoku_data
+from exercises.sudoku_solver.loaders import load_sudoku_data
 
 
 def _grid_is_valid(grid: list[list[int | None]]) -> bool:
