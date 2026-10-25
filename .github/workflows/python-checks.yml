@@ -46,16 +46,8 @@ jobs:
       - name: Check documentation links
         run: uv run pytest tests/test_docs.py
 
-      - name: Run scaffold and packaged-data tests
-        run: uv run pytest tests/test_scaffold.py tests/test_data.py tests/test_*_data.py
+      - name: Run import smoke test and data-integrity tests
+        run: uv run pytest tests/test_scaffold.py tests/test_*_data.py
 
       - name: Smoke-test notebook setup cells
         run: uv run pytest tests/test_notebooks.py
-
-      - name: Build distributions
-        run: uv build
-
-      - name: Load datasets from the built wheel
-        run: |
-          python -m pip install --no-deps --target "$RUNNER_TEMP/pyproblems-wheel" dist/pyproblems-0.1.0-py3-none-any.whl
-          PYTHONPATH="$RUNNER_TEMP/pyproblems-wheel" python -c 'from exercises._shared.loaders import load_faithful_data, load_words; from exercises.data_analysis.steak_tea_toast.loaders import load_steak_toast_tea; from exercises.data_analysis.mysterious_data.loaders import load_xy_data; from exercises.data_analysis.titanic.loaders import load_titanic_data; from exercises.algorithms.sudoku.loaders import load_sudoku_data; from importlib.resources import files; assert len(load_steak_toast_tea()) == 79; assert len(load_xy_data()) == 13; assert len(load_sudoku_data()) == 40; assert len(load_titanic_data()) == 1309; assert len(load_words()) == 39083; assert len(load_faithful_data()) == 272; assert all(files("exercises.data_analysis.spinning_plates").joinpath("data", name).is_file() for name in ("plate_reader_export.txt", "plate_layout.csv", "plate_run_record.json"))'

@@ -33,10 +33,12 @@ This is primarily a structural refactor. Do not redesign, solve or substantially
 - **Package name:** the top-level import package is `exercises`.
 - **No backwards compatibility:** old `problems/` URLs and `pyproblems` imports
   do not need forwarding pages or shims. This is a clean break.
-- **Catalogue:** use topic-level index READMEs (for example
-  `exercises/algorithms/README.md`) linked from the root README, so adding an
-  exercise rarely touches the root README. A topic index is not itself an
-  exercise.
+- **Catalogue (revised in Phase 4):** the root README keeps listing every
+  exercise individually, with its difficulty, so learners can see at a glance
+  which are gentle and which are hard. There are no topic-level index READMEs
+  (they would only duplicate the catalogue). Adding an exercise therefore means
+  adding one line to the root README, and `tests/test_docs.py` enforces that
+  each exercise is listed there with the same difficulty as its own README.
 - **Solutions repository:** `red-to-green-python-solutions` (a sibling
   directory) mirrors the current `src/pyproblems/` paths. It must be
   restructured in lockstep with this repository, using the same path mapping, so
@@ -437,8 +439,9 @@ Update `tests/test_docs.py` to:
 
 - Discover exercise README files recursively.
 - Validate relative links and heading anchors.
-- Confirm every exercise is discoverable from the main README, directly or through a clearly linked topic index.
-- Avoid treating a topic-level index or shared infrastructure README as a standalone exercise.
+- Confirm every exercise is listed in the main README (directly linked, with its difficulty) and that the difficulty matches the exercise's own README.
+- Confirm each exercise README has a `Difficulty` line, and a focused `uv run pytest exercises/...` command when the exercise has its own tests.
+- Avoid treating shared infrastructure READMEs as standalone exercises.
 
 Preserve the existing GitHub anchor and footnote validation where possible.
 

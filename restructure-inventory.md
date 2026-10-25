@@ -223,7 +223,9 @@ All six were answered as recommended: **Q1** split Against the Odds into three
 notebooks; **Q2** share `uncertainty.py` and `faithful.csv`, split the
 statistics notebooks per problem; **Q3** a small `data.py` inside each exercise
 with data; **Q4** keep existing module names; **Q5** fixtures and images in each
-exercise's `data/`; **Q6** every topic gets a README index. The original
+exercise's `data/`; **Q6** every topic gets a README index (**revised in Phase 4:
+no topic indexes; the root README keeps listing every exercise with its
+difficulty, and tests keep it in sync**). The original
 questions follow for reference.
 
 **Q1. Against the Odds notebook.** One notebook covers three puzzles, one section

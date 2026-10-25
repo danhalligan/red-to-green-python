@@ -52,8 +52,10 @@ For an overview of the repository layout and development setup, see
 
 Pick a topic that interests you. Each link opens an exercise folder under
 `exercises/` that holds everything for that problem: its instructions (the
-README), starter code, tests, and any notebook or data. Related exercises in the
-same folder stay together here too.
+README), starter code, tests, and any notebook or data. Exercises are grouped by
+topic, and each is marked with its difficulty (🌶️ gentle, 🌶️🌶️ takes some
+thought, 🌶️🌶️🌶️ challenging) so you can see at a glance which are easy and
+which are hard.
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
@@ -140,7 +142,7 @@ build on it, with covariance matrices needed for multivariate mixtures.
 
 Probability puzzles where your gut is confidently wrong. Predict, simulate,
 calculate and explain, using only the Python standard library; the investigations
-share a notebook and use the science packages for plots.
+use the science packages for plots.
 
 - [The office party](exercises/against_the_odds/office_party/README.md) 🌶️:
   how many people are required before a shared birthday is more likely than not?
@@ -174,20 +176,21 @@ a few minutes to several sessions.
 
 ### The basic workflow
 
-- Each problem page, linked from the [index](#the-problems-), opens with
-  anything you need beforehand and the test command that checks it. Some pages
-  group several related exercises.
+- Each exercise's README, linked from the [index](#the-problems-), opens with
+  anything you need beforehand and the test command that checks it. The same
+  folder holds the starter code, the tests and any notebook or data. Some
+  READMEs group several related exercises.
 - Use the focused test command for the exercise you are working on. Most
   exercises begin as stubs, so their tests are red until you implement them.
-  Topic-level commands run every exercise in a topic and are more useful after
-  you have completed several.
+  Run a whole topic with, for example, `uv run pytest exercises/algorithms/ -q`;
+  that is more useful after you have completed several exercises.
 - Aim to make one small change at a time and rerun the test.
 - The early language exercises use only the Python standard library; scientific
   exercises need the optional science packages installed above.
 
 ### Hints, difficulty and extensions 💡
 
-Difficulty is a rough guide, shown at the top of each problem page as well as
+Difficulty is a rough guide, shown at the top of each exercise README as well as
 in the index: 🌶️ gentle, 🌶️🌶️ takes some thought, 🌶️🌶️🌶️ challenging. A page
 may start gently and build up.
 
