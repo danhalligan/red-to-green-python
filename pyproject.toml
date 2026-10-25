@@ -35,8 +35,7 @@ notebook = [
 ]
 
 [tool.hatch.build.targets.wheel]
-# `exercises` replaces `src/pyproblems` as exercises migrate; remove the old one at the end.
-packages = ["src/pyproblems", "exercises"]
+packages = ["exercises"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "exercises"]

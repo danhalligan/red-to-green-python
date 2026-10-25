@@ -360,3 +360,40 @@ parameter_estimation (2), the `faithful.csv` dataset and `src/pyproblems/`.
 - **Baseline comparison:** all 802 tests collect and every learner test has its
   baseline outcome (629 `NotImplementedError`, 4 assertion failures, 52
   already-green). Only the relocated data tests and test IDs differ.
+
+## 10. Phase 3 notes (shared and multi-part exercises)
+
+Migrated: against_the_odds (office_party, waiting_for_heads, hundred_prisoners),
+uncertainty_and_simulation (standard_error, bootstrap, confidence_intervals),
+parameter_estimation (recovering_the_parameters, fitting_a_mixture). With these,
+`problems/`, `analysis/` and `src/` are gone from both repositories.
+
+- **Shared code stays shared:** `uncertainty.py` and `test_uncertainty.py` sit at
+  topic level in `exercises/uncertainty_and_simulation/` (used by standard_error,
+  bootstrap and the confidence-interval notebook), and the two READMEs keep their
+  `-k` commands. `likelihood.py` lives with recovering_the_parameters,
+  `mixture_models.py` with fitting_a_mixture.
+- **Shared data:** `faithful.csv` is in `exercises/_shared/data/` with
+  `load_faithful_data` in `_shared/loaders.py` and `tests/test_faithful_data.py`.
+  `tests/test_data.py` and `src/pyproblems/data.py` are deleted.
+- **Notebooks split (approved):** `against_the_odds` into 3, and `old_faithful` +
+  `simulation_studies` into 5 (standard_error = data intro + Standard error +
+  simulation 1; bootstrap; recovering_the_parameters = normal model + simulation
+  2; fitting_a_mixture = prediction + mixture; confidence_intervals = simulation
+  3). Cell text is verbatim except: intros (titles name one puzzle, one link to
+  the README; the "How this notebook is used" section is replaced by a pointer
+  to the README), trimmed setup imports, one phrase in the bootstrap notebook
+  ("analytic standard error from the previous section" now names
+  `standard_error`), the stale `pyproblems.statistics` mention, and a
+  `results = None` placeholder in the Penney TODO cell (it relied on a variable
+  from the removed office-party section). "The data" section is duplicated in the
+  four Old Faithful notebooks. Solution notebooks gained the minimum definitions
+  (`waiting`, `analytic_se`, `n`) their answers used to inherit.
+- **Cleanup done early:** with `src/pyproblems` empty, `pyproject.toml` now
+  packages only `exercises`, `tests/test_scaffold.py` is a small `exercises`
+  smoke test, and `tests/test_notebooks.py` asserts the 16 named notebooks exist
+  instead of a count. Distribution name stays `pyproblems`.
+- **Known leftovers for Phase 5:** some starter notebooks already contain a stored
+  output or execution count in the setup cell (pre-existing: Old Faithful data
+  frame, mysterious_data), and the kernel display name still says
+  `pyproblems (3.12.14)`.

@@ -116,11 +116,11 @@ Use repeated experiments to find out how much you can trust an estimate.
 Basic NumPy, probability and statistics help; the bootstrap and confidence
 interval exercises build on standard error.
 
-- [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
+- [How uncertain is an average?](exercises/uncertainty_and_simulation/standard_error/README.md)
   🌶️: estimate standard error and test its behaviour across repeated samples.
-- [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
+- [Two methods, two answers](exercises/uncertainty_and_simulation/bootstrap/README.md)
   🌶️: compare bootstrap and analytic estimates of the same uncertainty.
-- [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
+- [Can you trust a 95% interval?](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
   🌶️🌶️: measure how often confidence intervals keep their promise.
 
 ### Parameter Estimation
@@ -130,9 +130,9 @@ mixture models fitted by expectation-maximisation.
 Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate mixtures.
 
-- [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
+- [Recovering the parameters](exercises/parameter_estimation/recovering_the_parameters/README.md)
   🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a mixture of distributions](problems/parameter-estimation/fitting-a-mixture.md)
+- [Fitting a mixture of distributions](exercises/parameter_estimation/fitting_a_mixture/README.md)
   🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
   soft mixtures and a bivariate mixture to Old Faithful.
 
@@ -142,11 +142,11 @@ Probability puzzles where your gut is confidently wrong. Predict, simulate,
 calculate and explain, using only the Python standard library; the investigations
 share a notebook and use the science packages for plots.
 
-- [The office party](problems/against-the-odds/office-party.md) 🌶️:
+- [The office party](exercises/against_the_odds/office_party/README.md) 🌶️:
   how many people are required before a shared birthday is more likely than not?
-- [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
+- [Waiting for heads](exercises/against_the_odds/waiting_for_heads/README.md) 🌶️🌶️:
   why is waiting for `HH` different from waiting for `HT`?
-- [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
+- [The 100 prisoners](exercises/against_the_odds/hundred_prisoners/README.md) 🌶️🌶️🌶️:
   find a strategy for a hopeless-looking last chance at freedom.
 
 ### Models of Life
@@ -233,22 +233,16 @@ read the guide first.
 ### Working with notebooks 📓
 
 Each exercise's notebook is called `investigate.ipynb` and sits in its exercise
-folder next to the instructions (a few notebooks still live in
-[`analysis`](analysis/) while the repository is reorganised). They are
-workspaces for your investigations,
-not completed examples. Open them in VS Code with Jupyter support, or run
+folder next to the instructions. It is a workspace for your investigation,
+not a completed example. Open it in VS Code with Jupyter support, or run
 `uv run jupyter lab` from the repository root. Use the project's `.venv` as
 the kernel, with the notebook and science packages installed as described above.
 
-Some notebooks serve several problems:
-- [Old Faithful](analysis/old_faithful.ipynb) uses the same data to
-explore uncertainty, prediction and model choice.
-- [Simulation Studies](analysis/simulation_studies.ipynb) checks statistical
-methods against simulated data with known answers.
-- [Against the Odds](analysis/against_the_odds.ipynb) contains investigations
-for all three probability puzzles. Follow your problem page to the relevant
-section; you do not need to complete the whole notebook for each problem.
-
+Several statistics notebooks use the Old Faithful geyser data (in
+`exercises/_shared/data/`) to explore uncertainty, prediction and model choice,
+and some also check statistical methods against simulated data with known
+answers. Each problem has its own notebook, so you only need the one in your
+exercise folder.
 The [Titanic notebook](exercises/data_analysis/titanic/investigate.ipynb)
 is a staged machine-learning
 investigation. Its setup reserves a test set: keep exploration and model

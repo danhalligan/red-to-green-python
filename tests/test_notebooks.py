@@ -10,13 +10,29 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).parents[1]
-ANALYSIS_DIR = ROOT / "analysis"
 EXERCISES_DIR = ROOT / "exercises"
-SPINNING_PLATES_DIR = ROOT / "exercises" / "data_analysis" / "spinning_plates"
-# Notebooks are migrating from analysis/ into exercises/.
-NOTEBOOKS = sorted(
-    [*ANALYSIS_DIR.glob("*.ipynb"), *(ROOT / "exercises").rglob("*.ipynb")]
-)
+SPINNING_PLATES_DIR = EXERCISES_DIR / "data_analysis" / "spinning_plates"
+NOTEBOOKS = sorted(EXERCISES_DIR.rglob("*.ipynb"))
+
+# Every exercise with an investigation keeps its notebook beside its README.
+REQUIRED_NOTEBOOKS = [
+    "against_the_odds/hundred_prisoners",
+    "against_the_odds/office_party",
+    "against_the_odds/waiting_for_heads",
+    "data_analysis/mysterious_data",
+    "data_analysis/spinning_plates",
+    "data_analysis/steak_tea_toast",
+    "data_analysis/titanic",
+    "generative_models/wordsmith",
+    "models_of_life/game_of_life",
+    "models_of_life/weasel",
+    "parameter_estimation/fitting_a_mixture",
+    "parameter_estimation/recovering_the_parameters",
+    "pythonic_python/object_oriented_python",
+    "uncertainty_and_simulation/bootstrap",
+    "uncertainty_and_simulation/confidence_intervals",
+    "uncertainty_and_simulation/standard_error",
+]
 
 
 def notebook_id(path: Path) -> str:
@@ -58,8 +74,16 @@ def science_stack(monkeypatch):
     monkeypatch.setenv("MPLBACKEND", "Agg")
 
 
-def test_notebooks_are_present():
-    assert len(NOTEBOOKS) == 11
+@pytest.mark.parametrize("exercise", REQUIRED_NOTEBOOKS)
+def test_exercise_notebook_is_present(exercise):
+    assert (EXERCISES_DIR / exercise / "investigate.ipynb").is_file()
+
+
+def test_no_unexpected_notebooks():
+    expected = {
+        EXERCISES_DIR / name / "investigate.ipynb" for name in REQUIRED_NOTEBOOKS
+    }
+    assert set(NOTEBOOKS) == expected
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=notebook_id)
@@ -92,7 +116,9 @@ def test_mysterious_data_setup_loads_all_datasets(science_stack):
 
 
 def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
-    namespace = run_setup(ANALYSIS_DIR / "old_faithful.ipynb")
+    namespace = run_setup(
+        EXERCISES_DIR / "uncertainty_and_simulation/standard_error/investigate.ipynb"
+    )
     faithful = namespace["faithful"]
 
     assert faithful.shape == (272, 2)
