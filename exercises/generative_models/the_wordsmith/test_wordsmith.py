@@ -4,7 +4,7 @@ from collections import Counter
 import pytest
 
 from exercises._shared.loaders import load_words
-from exercises.generative_models.wordsmith.wordsmith import (
+from exercises.generative_models.the_wordsmith.wordsmith import (
     END,
     START,
     generate_word,

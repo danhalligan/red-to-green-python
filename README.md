@@ -164,7 +164,7 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 ### Generative Models
 
-- [The wordsmith](exercises/generative_models/wordsmith/README.md)
+- [The wordsmith](exercises/generative_models/the_wordsmith/README.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
