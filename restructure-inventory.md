@@ -300,7 +300,11 @@ commands changed.
   `import ...data` to the module, but it is confusing, so for exercises that
   need a real loader I propose calling it `loaders.py`. Decide in Phase 2.
 - **Integrity tests:** the 3 plate tests moved from `tests/test_data.py` into
-  `test_plate_data.py` in the exercise directory (code unchanged except the path).
+  `tests/test_spinning_plates_data.py` (code unchanged except the path). Data
+  integrity is repository infrastructure, not something a learner works on, so
+  these live in `tests/`, one file per dataset-owning exercise, not inside the
+  exercise directory. This amends the original spec, which co-located them.
+  Learners' focused commands then only run their own tests.
 - **`conftest.py`:** `exercises/conftest.py` is a temporary **copy** of
   `tests/conftest.py`, because tests in both places still need it. Delete
   `tests/conftest.py` once the last learner test leaves `tests/`.

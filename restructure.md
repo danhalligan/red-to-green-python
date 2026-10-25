@@ -466,7 +466,7 @@ Use `pathlib` or `importlib.resources` consistently. Prefer paths derived from t
 
 Preserve source attribution and licence notices alongside their data.
 
-Migrate dataset-integrity tests into the relevant exercise or shared-resource directory, retaining meaningful checks of row counts, schema and expected values.
+Keep dataset-integrity tests in `tests/` (they are repository infrastructure, not learner exercises), one file per dataset-owning exercise or shared resource (for example `tests/test_spinning_plates_data.py`), so adding an exercise does not mean editing a shared file. Read the data from the exercise's package path, and retain meaningful checks of row counts, schema and expected values.
 
 #### GitHub Actions
 
@@ -511,8 +511,8 @@ Update:
   - Replace the instruction that `tests/conftest.py` seeds `random` with
     `exercises/conftest.py`.
   - Replace the pre-PR command `uv run pytest tests/test_scaffold.py
-    tests/test_data.py` with the new infrastructure checks (`tests/` plus any
-    migrated data-integrity tests).
+    tests/test_data.py` with the new infrastructure checks (`tests/`, which
+    includes the per-exercise data-integrity tests).
   - Add the "how to create a new exercise" convention from section 7.
   - Keep the guidance on not completing starter code and on testing the concept.
 - `DEVELOPMENT.md`, specifically:

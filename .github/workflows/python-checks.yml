@@ -47,7 +47,7 @@ jobs:
         run: uv run pytest tests/test_docs.py
 
       - name: Run scaffold and packaged-data tests
-        run: uv run pytest tests/test_scaffold.py tests/test_data.py exercises/data_analysis/spinning_plates/test_plate_data.py
+        run: uv run pytest tests/test_scaffold.py tests/test_data.py tests/test_spinning_plates_data.py
 
       - name: Smoke-test notebook setup cells
         run: uv run pytest tests/test_notebooks.py
