@@ -1,6 +1,6 @@
 import pytest
 
-from exercises.pythonic_python.the_gilded_rose.gilded_rose import (
+from exercises.pythonic_python.gilded_rose.gilded_rose import (
     Item,
     update_quality,
 )

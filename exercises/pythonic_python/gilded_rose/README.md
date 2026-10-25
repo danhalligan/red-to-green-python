@@ -1,4 +1,4 @@
-# The Gilded Rose 🌹
+# Gilded Rose 🌹
 
 
 > **Difficulty:** 🌶️🌶️
@@ -12,7 +12,7 @@
 > **You’ll practise:** refactoring existing code safely, using tests as a
 > specification, and adding a feature to code you did not write.
 >
-> **Check:** `uv run pytest exercises/pythonic_python/the_gilded_rose/ -q`
+> **Check:** `uv run pytest exercises/pythonic_python/gilded_rose/ -q`
 
 This problem is about refactoring -- the process of improving the structure of code without changing its external behaviour. 
 

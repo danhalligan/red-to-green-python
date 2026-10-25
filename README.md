@@ -74,7 +74,7 @@ through tests and refactoring.
 - [Noisy animals](exercises/pythonic_python/noisy_animals/README.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [The Gilded Rose](exercises/pythonic_python/the_gilded_rose/README.md) 🌶️🌶️:
+- [Gilded Rose](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
 - [99 Bottles](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
@@ -164,7 +164,7 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 ### Generative Models
 
-- [The wordsmith](exercises/generative_models/the_wordsmith/README.md)
+- [Wordsmith](exercises/generative_models/wordsmith/README.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.

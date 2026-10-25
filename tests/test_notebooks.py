@@ -23,7 +23,7 @@ REQUIRED_NOTEBOOKS = [
     "data_analysis/spinning_plates",
     "data_analysis/steak_tea_toast",
     "data_analysis/titanic_disaster",
-    "generative_models/the_wordsmith",
+    "generative_models/wordsmith",
     "models_of_life/game_of_life",
     "models_of_life/dawkins_weasel",
     "parameter_estimation/fitting_a_mixture",

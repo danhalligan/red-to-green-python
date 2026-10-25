@@ -1,4 +1,4 @@
-# The wordsmith 🤖
+# Wordsmith 🤖
 
 *The AI that makes up words*
 
@@ -11,8 +11,8 @@
 > sampling, reproducible randomness, and judging the output of a generative
 > model.
 >
-> **Check:** `uv run pytest exercises/generative_models/the_wordsmith/test_wordsmith.py -k "not trigram" -q` for the
-> two core stages, or `uv run pytest exercises/generative_models/the_wordsmith/ -q` to include the
+> **Check:** `uv run pytest exercises/generative_models/wordsmith/test_wordsmith.py -k "not trigram" -q` for the
+> two core stages, or `uv run pytest exercises/generative_models/wordsmith/ -q` to include the
 > extension.
 
 You've been hired to invent names for a collection of fantasy creatures.
@@ -59,7 +59,7 @@ the details, including the optional `context_size` argument for the extension, w
 you can ignore for now.
 
 ```bash
-uv run pytest exercises/generative_models/the_wordsmith/test_wordsmith.py -k "train_model and not trigram"
+uv run pytest exercises/generative_models/wordsmith/test_wordsmith.py -k "train_model and not trigram"
 ```
 
 ## Stage 2: invent some words
@@ -77,7 +77,7 @@ counts as a failure, and you can simply discard those attempts when you make
 several words.
 
 ```bash
-uv run pytest exercises/generative_models/the_wordsmith/test_wordsmith.py -k "not train_model and not trigram"
+uv run pytest exercises/generative_models/wordsmith/test_wordsmith.py -k "not train_model and not trigram"
 ```
 
 <details>
@@ -143,7 +143,7 @@ code, not a second copy of it: `generate_word` can tell the context size from
 the keys of the model.
 
 ```bash
-uv run pytest exercises/generative_models/the_wordsmith/test_wordsmith.py -k trigram
+uv run pytest exercises/generative_models/wordsmith/test_wordsmith.py -k trigram
 ```
 
 ### Which model is better?
