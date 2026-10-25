@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from exercises.pythonic_python.object_oriented_python.oop import (
+from exercises.pythonic_python.noisy_animals.animals import (
     Animal,
     Bird,
     Cat,

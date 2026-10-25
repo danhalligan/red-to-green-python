@@ -191,7 +191,7 @@ uv run pytest exercises/pythonic_python/python_fundamentals/test_fundamentals.py
 
 **Where this leads:** a value defined by the values before it is a *recurrence
 relationship*. You will use the same idea to count rugby scores in
-[Try, try again](../../algorithms/rugby/README.md).
+[Try, try again](../../algorithms/try_try_again/README.md).
 
 ## Q7. Look-and-say
 

@@ -10,7 +10,7 @@
 > **You’ll practise:** breaking a problem into smaller ones, spotting repeated
 > work, caching, and building an answer up from the bottom.
 >
-> **Check:** `uv run pytest exercises/algorithms/rugby/ -q`, or the focused command at
+> **Check:** `uv run pytest exercises/algorithms/try_try_again/ -q`, or the focused command at
 > each stage.
 
 **In this exercise:** [Stage 1](#stage-1-reconstruct-the-match) ·
@@ -61,7 +61,7 @@ it against your function. How you do it is up to you: any approach that gets the
 right counts will do. Stuck? There are 💡 hints.
 
 ```bash
-uv run pytest exercises/algorithms/rugby/test_rugby.py -k "scoring_sequences and not carried_away and not season"
+uv run pytest exercises/algorithms/try_try_again/test_rugby.py -k "scoring_sequences and not carried_away and not season"
 ```
 
 <details>
@@ -95,7 +95,7 @@ the cost grow? The `carried_away` test gives up after five seconds and says so,
 rather than hanging. 💡 There are hints towards a fix.
 
 ```bash
-uv run pytest exercises/algorithms/rugby/test_rugby.py -k carried_away
+uv run pytest exercises/algorithms/try_try_again/test_rugby.py -k carried_away
 ```
 
 <details>
@@ -125,7 +125,7 @@ thresholds, including a trillion, which is hopeless unless you stop repeating
 work.
 
 ```bash
-uv run pytest exercises/algorithms/rugby/test_rugby.py -k smallest
+uv run pytest exercises/algorithms/try_try_again/test_rugby.py -k smallest
 ```
 
 ## Stage 3: The entire season
@@ -138,7 +138,7 @@ hints. The answer has nearly 3,000 digits, but thankfully Python
 integers do not overflow!
 
 ```bash
-uv run pytest exercises/algorithms/rugby/test_rugby.py -k season
+uv run pytest exercises/algorithms/try_try_again/test_rugby.py -k season
 ```
 
 <details>

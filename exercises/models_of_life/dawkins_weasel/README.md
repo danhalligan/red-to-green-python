@@ -8,7 +8,7 @@
 > **You’ll practise:** random number generators, stochastic simulation, and
 > investigating a model by experiment.
 >
-> **Check:** `uv run pytest exercises/models_of_life/weasel/test_weasel.py -m advanced -q`
+> **Check:** `uv run pytest exercises/models_of_life/dawkins_weasel/test_weasel.py -m advanced -q`
 
 Start with 28 random characters. Copy them with the odd typo, keep the best copy,
 and repeat. Can a sentence evolve out of gibberish? In *The Blind Watchmaker*,
@@ -145,7 +145,7 @@ drawn first from the generator just as the weasel draws its starting phrase, so 
 given seed can start every method from the same phrase. Nothing is carried over
 unchanged, so unlike the weasel the best score can fall.
 
-> **Check:** `uv run pytest exercises/models_of_life/weasel/test_weasel_tournament.py -m advanced -q`
+> **Check:** `uv run pytest exercises/models_of_life/dawkins_weasel/test_weasel_tournament.py -m advanced -q`
 
 <details>
 <summary>💡 Hint 1: a nudge</summary>
@@ -170,7 +170,7 @@ it on with `crossover=True` in `evolve_population`. For each offspring, choose t
 parents independently by tournament selection, cross them over, and then mutate
 the child as before. Use crossover for every offspring.
 
-> **Check:** `uv run pytest exercises/models_of_life/weasel/test_weasel_crossover.py -m advanced -q`
+> **Check:** `uv run pytest exercises/models_of_life/dawkins_weasel/test_weasel_crossover.py -m advanced -q`
 
 <details>
 <summary>💡 Hint: seeing recombination at work</summary>

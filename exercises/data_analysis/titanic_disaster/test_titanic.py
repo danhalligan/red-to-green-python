@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.utils.validation import check_is_fitted
 
-from exercises.data_analysis.titanic.titanic import (
+from exercises.data_analysis.titanic_disaster.titanic import (
     load_passengers,
     make_preprocessor,
     titanic_pipeline,

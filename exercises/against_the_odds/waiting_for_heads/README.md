@@ -8,7 +8,7 @@
 >
 > **Recommended first:** [Fibonacci](../../pythonic_python/python_fundamentals/README.md#q6-fibonacci-sequence)
 > (Python Fundamentals Q4), for endless generators, and
-> [The office party](../office_party/README.md) for random numbers and seeding.
+> [Office party](../office_party/README.md) for random numbers and seeding.
 >
 > **You’ll practise:** endless generators, reading an iterator lazily, a
 > sliding window with `collections.deque`, slicing strings, and checking a

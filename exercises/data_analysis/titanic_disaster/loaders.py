@@ -12,7 +12,9 @@ def load_titanic_data() -> list[dict[str, str | None]]:
     excluded. Split these records to evaluate predictions locally.
     Convert numeric columns in the analysis, leaving identifiers as strings.
     """
-    resource = files("exercises.data_analysis.titanic").joinpath("data", "titanic.csv")
+    resource = files("exercises.data_analysis.titanic_disaster").joinpath(
+        "data", "titanic.csv"
+    )
     with resource.open("r", encoding="utf-8", newline="") as source:
         return [
             {key: None if value == "" else value for key, value in row.items()}

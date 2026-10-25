@@ -9,7 +9,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from exercises.data_analysis.titanic.loaders import load_titanic_data
+from exercises.data_analysis.titanic_disaster.loaders import load_titanic_data
 
 NUMERIC_COLUMNS = ["PassengerId", "Survived", "Pclass", "Age", "SibSp", "Parch", "Fare"]
 TEXT_COLUMNS = ["Name", "Sex", "Ticket", "Cabin", "Embarked"]

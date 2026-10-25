@@ -104,6 +104,35 @@ def catalogue_entries() -> dict[Path, int]:
     return entries
 
 
+def catalogue_titles() -> dict[Path, str]:
+    """Map each exercise README linked from the root README to its link text."""
+    readme = ROOT / "README.md"
+    text = readme.read_text(encoding="utf-8")
+    return {
+        (readme.parent / target).resolve(): title
+        for title, target in re.findall(r"^- \[([^\]]*)\]\(([^)#\s]+)", text, re.M)
+    }
+
+
+def exercise_title(page: Path) -> str:
+    """Return an exercise README's H1 without its trailing emoji."""
+    heading = re.search(r"^# (.*)$", page.read_text(encoding="utf-8"), re.M)
+    assert heading, "the exercise README needs a title"
+    title = heading.group(1)
+    while title and (
+        title[-1].isspace() or unicodedata.category(title[-1])[0] in "SMC"
+    ):
+        title = title[:-1]
+    return title
+
+
+@pytest.mark.parametrize(
+    "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
+)
+def test_catalogue_title_matches_the_exercise(page):
+    assert catalogue_titles().get(page.resolve()) == exercise_title(page)
+
+
 @pytest.mark.parametrize(
     "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
 )

@@ -1,6 +1,6 @@
 import pytest
 
-from exercises.algorithms.rugby.rugby import (
+from exercises.algorithms.try_try_again.rugby import (
     count_scoring_combinations,
     count_scoring_sequences,
     smallest_score_with_more_sequences_than,

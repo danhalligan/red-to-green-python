@@ -1,4 +1,6 @@
-# Predicting survival on the Titanic 🚢
+# Titanic disaster 🚢
+
+*Predicting survival on the Titanic*
 
 > **Difficulty:** 🌶️🌶️🌶️
 >
@@ -8,7 +10,7 @@
 > **You’ll practise:** exploring data, thinking about informative features,
 > comparing two classifiers with cross-validation, and evaluating on unseen data.
 >
-> **Check:** `uv run pytest exercises/data_analysis/titanic/ -q` checks the pipeline.
+> **Check:** `uv run pytest exercises/data_analysis/titanic_disaster/ -q` checks the pipeline.
 > Your notebook's plots, comparisons and explanations check the investigation;
 > there is no required accuracy score.
 
@@ -98,7 +100,7 @@ preprocessor or the pipeline.
 
 </details>
 
-Check your work with `uv run pytest exercises/data_analysis/titanic/ -q`.
+Check your work with `uv run pytest exercises/data_analysis/titanic_disaster/ -q`.
 
 Why a pipeline? Replacement values and category encodings are learned from data
 too, so they must be learned only from the training rows in each fold. Passing

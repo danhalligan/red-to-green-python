@@ -2,7 +2,7 @@ import random
 
 import pytest
 
-from exercises.against_the_odds.hundred_prisoners.prisoners import (
+from exercises.against_the_odds.one_hundred_prisoners.prisoners import (
     Room,
     TooManyDrawersError,
     clever_strategy,

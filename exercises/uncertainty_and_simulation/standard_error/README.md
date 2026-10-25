@@ -1,4 +1,6 @@
-# How uncertain is an average?
+# Standard error
+
+*How uncertain is an average?*
 
 > **Difficulty:** 🌶️
 >

@@ -1,4 +1,6 @@
-# Fitting a mixture of distributions
+# Fitting a mixture
+
+*Fitting a mixture of distributions*
 
 > **Difficulty:** 🌶️🌶️🌶️
 >

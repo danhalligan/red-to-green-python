@@ -61,7 +61,7 @@ both Standard Error and Bootstrap.
 - Keep exercises that do not need the scientific stack on the Python standard
   library. Scientific libraries belong in the optional `science` extra.
 - Load exercise data with `importlib.resources` relative to the owning package
-  (for example `files("exercises.data_analysis.titanic")`), never through the
+  (for example `files("exercises.data_analysis.titanic_disaster")`), never through the
   working directory or `sys.path`. Put a loader in the exercise's `loaders.py`
   when more than one file needs it, and add a `tests/test_<exercise>_data.py`
   integrity test for each dataset.

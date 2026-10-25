@@ -8,7 +8,7 @@
 > **You’ll practise:** checking rows, columns and boxes, recursion, backtracking,
 > and working on a copy instead of mutating the input.
 >
-> **Check:** `uv run pytest exercises/algorithms/sudoku/ -q`
+> **Check:** `uv run pytest exercises/algorithms/sudoku_solver/ -q`
 
 ## Warm-up: Sudoku checker
 
@@ -25,7 +25,7 @@ an empty grid, a valid completed grid, and a duplicate in each kind of
 constraint group.
 
 ```bash
-uv run pytest exercises/algorithms/sudoku/test_sudoku.py -q
+uv run pytest exercises/algorithms/sudoku_solver/test_sudoku.py -q
 ```
 
 ## Sudoku solver
@@ -42,7 +42,7 @@ unsolvable grid, and a puzzle with multiple valid solutions, as well as the
 supplied puzzles.
 
 ```bash
-uv run pytest exercises/algorithms/sudoku/test_sudoku_solver.py -q
+uv run pytest exercises/algorithms/sudoku_solver/test_sudoku_solver.py -q
 ```
 
 Stuck? There are three 💡 hints, each giving a little more away.

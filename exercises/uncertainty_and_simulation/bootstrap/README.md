@@ -1,8 +1,10 @@
-# Two methods, two answers
+# Bootstrap
+
+*Two methods, two answers*
 
 > **Difficulty:** 🌶️
 >
-> **Before you start:** [How uncertain is an average?](../standard_error/README.md) and the
+> **Before you start:** [Standard error](../standard_error/README.md) and the
 > optional scientific stack (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** resampling with a seeded NumPy generator and comparing

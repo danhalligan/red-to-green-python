@@ -71,13 +71,13 @@ through tests and refactoring.
   short language exercises covering exponentiation, adjacent products, FizzBuzz,
   Fibonacci and look-and-say generators, the first non-repeating character, and
   Python gotchas.
-- [Object-oriented Python](exercises/pythonic_python/object_oriented_python/README.md) 🌶️🌶️:
+- [Noisy animals](exercises/pythonic_python/noisy_animals/README.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Refactoring (Gilded Rose)](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
+- [The Gilded Rose](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
-- [Test-first (99 Bottles)](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
+- [99 Bottles](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
   build 99 Bottles one test at a time, then write tests of your own.
 
 ### Algorithms and Search
@@ -87,12 +87,12 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 
 - [Word ladder](exercises/algorithms/word_ladder/README.md) 🌶️🌶️:
   turn `play` into `game` one letter at a time.
-- [Try, try again](exercises/algorithms/rugby/README.md) 🌶️🌶️:
+- [Try, try again](exercises/algorithms/try_try_again/README.md) 🌶️🌶️:
   count the ways a rugby score could have happened, from recursion to dynamic
   programming. The Fibonacci exercise is useful background.
-- [Sudoku solver](exercises/algorithms/sudoku/README.md) 🌶️🌶️🌶️:
+- [Sudoku solver](exercises/algorithms/sudoku_solver/README.md) 🌶️🌶️🌶️:
   warm up with a checker, then backtrack your way to a solution.
-- [Global sequence alignment](exercises/algorithms/sequence_alignment/README.md)
+- [Sequence alignment](exercises/algorithms/sequence_alignment/README.md)
   🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
   The rugby problem introduces the dynamic programming ideas used here.
 
@@ -105,7 +105,7 @@ These notebook-based exercises use the optional scientific stack.
   thirteen datasets with matching summaries. What do their plots reveal?
 - [Steak, Tea, and Toast](exercises/data_analysis/steak_tea_toast/README.md) 🌶️🌶️:
   clean messy survey responses and investigate associations between preferences.
-- [Predicting survival on the Titanic](exercises/data_analysis/titanic/README.md) 🌶️🌶️🌶️:
+- [Titanic disaster](exercises/data_analysis/titanic_disaster/README.md) 🌶️🌶️🌶️:
   build a prediction pipeline, beat a baseline, and test it on unseen passengers.
 - [Spinning plates](exercises/data_analysis/spinning_plates/README.md) 🌶️🌶️: rescue a
   seemingly failed laboratory experiment performed on a 96 well plate: parse
@@ -118,11 +118,11 @@ Use repeated experiments to find out how much you can trust an estimate.
 Basic NumPy, probability and statistics help; the bootstrap and confidence
 interval exercises build on standard error.
 
-- [How uncertain is an average?](exercises/uncertainty_and_simulation/standard_error/README.md)
+- [Standard error](exercises/uncertainty_and_simulation/standard_error/README.md)
   🌶️: estimate standard error and test its behaviour across repeated samples.
-- [Two methods, two answers](exercises/uncertainty_and_simulation/bootstrap/README.md)
+- [Bootstrap](exercises/uncertainty_and_simulation/bootstrap/README.md)
   🌶️: compare bootstrap and analytic estimates of the same uncertainty.
-- [Can you trust a 95% interval?](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
+- [Confidence intervals](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
   🌶️🌶️: measure how often confidence intervals keep their promise.
 
 ### Parameter Estimation
@@ -134,7 +134,7 @@ build on it, with covariance matrices needed for multivariate mixtures.
 
 - [Recovering the parameters](exercises/parameter_estimation/recovering_the_parameters/README.md)
   🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a mixture of distributions](exercises/parameter_estimation/fitting_a_mixture/README.md)
+- [Fitting a mixture](exercises/parameter_estimation/fitting_a_mixture/README.md)
   🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
   soft mixtures and a bivariate mixture to Old Faithful.
 
@@ -144,11 +144,11 @@ Probability puzzles where your gut is confidently wrong. Predict, simulate,
 calculate and explain, using only the Python standard library; the investigations
 use the science packages for plots.
 
-- [The office party](exercises/against_the_odds/office_party/README.md) 🌶️:
+- [Office party](exercises/against_the_odds/office_party/README.md) 🌶️:
   how many people are required before a shared birthday is more likely than not?
 - [Waiting for heads](exercises/against_the_odds/waiting_for_heads/README.md) 🌶️🌶️:
   why is waiting for `HH` different from waiting for `HT`?
-- [The 100 prisoners](exercises/against_the_odds/hundred_prisoners/README.md) 🌶️🌶️🌶️:
+- [The 100 prisoners](exercises/against_the_odds/one_hundred_prisoners/README.md) 🌶️🌶️🌶️:
   find a strategy for a hopeless-looking last chance at freedom.
 
 ### Models of Life
@@ -158,13 +158,13 @@ automata and stochastic evolution. Both exercises use NumPy.
 
 - [Conway's Game of Life](exercises/models_of_life/game_of_life/README.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
-- [Dawkins' weasel](exercises/models_of_life/weasel/README.md) 🌶️🌶️:
+- [Dawkins' weasel](exercises/models_of_life/dawkins_weasel/README.md) 🌶️🌶️:
   can a sentence evolve out of gibberish through mutation and selection? Optional
   extensions add a tournament-selection genetic algorithm, then recombination.
 
 ### Generative Models
 
-- [The AI that makes up words](exercises/generative_models/wordsmith/README.md)
+- [The wordsmith](exercises/generative_models/wordsmith/README.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
@@ -246,7 +246,7 @@ Several statistics notebooks use the Old Faithful geyser data (in
 and some also check statistical methods against simulated data with known
 answers. Each problem has its own notebook, so you only need the one in your
 exercise folder.
-The [Titanic notebook](exercises/data_analysis/titanic/investigate.ipynb)
+The [Titanic notebook](exercises/data_analysis/titanic_disaster/investigate.ipynb)
 is a staged machine-learning
 investigation. Its setup reserves a test set: keep exploration and model
 selection on the training rows, then open the test set only for the final

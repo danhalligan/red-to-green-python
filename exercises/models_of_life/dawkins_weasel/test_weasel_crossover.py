@@ -5,7 +5,7 @@ import re
 import numpy as np
 import pytest
 
-from exercises.models_of_life.weasel.weasel import (
+from exercises.models_of_life.dawkins_weasel.weasel import (
     WEASEL_ALPHABET,
     WEASEL_TARGET,
     evolve_population,

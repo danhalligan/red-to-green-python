@@ -1,10 +1,12 @@
-# Global sequence alignment 🧬
+# Sequence alignment 🧬
+
+*Global sequence alignment*
 
 > **Difficulty:** 🌶️🌶️🌶️
 >
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [Try, try again](../rugby/README.md), which introduces
+> **Recommended first:** [Try, try again](../try_try_again/README.md), which introduces
 > dynamic programming in one dimension.
 >
 > **You’ll practise:** generators and recursion, brute-force search, dynamic
@@ -72,7 +74,7 @@ sequences?
 
 ## Dynamic programming & Needleman-Wunsch
 
-If you have completed [Try, try again](../rugby/README.md), you have already met dynamic
+If you have completed [Try, try again](../try_try_again/README.md), you have already met dynamic
 programming. This problem extends that idea from counting possibilities in one
 dimension to finding optimal alignments in two dimensions.
 

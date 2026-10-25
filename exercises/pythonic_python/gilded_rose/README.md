@@ -1,10 +1,12 @@
-# Refactoring: The Gilded Rose Kata 🌹
+# The Gilded Rose 🌹
+
+*Refactoring: the Gilded Rose kata*
 
 > **Difficulty:** 🌶️🌶️
 >
 > **Before you start:** basic Python.
 >
-> **Recommended first:** [Object-oriented Python](../object_oriented_python/README.md), so
+> **Recommended first:** [Noisy animals](../noisy_animals/README.md), so
 > that classes, inheritance and polymorphism are familiar. You will be working
 > with a larger object-oriented codebase.
 >

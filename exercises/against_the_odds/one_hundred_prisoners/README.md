@@ -6,14 +6,14 @@
 > [Against the Odds notebook](investigate.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
 >
-> **Recommended first:** [The office party](../office_party/README.md), for
+> **Recommended first:** [Office party](../office_party/README.md), for
 > simulating with random numbers.
 >
 > **You’ll practise:** passing functions as arguments, a class that controls
 > what code can see, shuffling, following chains of references, and finding
 > loops with a `set`.
 >
-> **Check:** `uv run pytest exercises/against_the_odds/hundred_prisoners/ -q`, or the focused command
+> **Check:** `uv run pytest exercises/against_the_odds/one_hundred_prisoners/ -q`, or the focused command
 > at each stage.
 
 A prison director offers 100 prisoners, numbered 0 to 99, a last chance at
@@ -48,7 +48,7 @@ advance that everyone opens the same drawers, such as the first half.
 Once they work you can play the game in the notebook, below.
 
 ```bash
-uv run pytest exercises/against_the_odds/hundred_prisoners/test_prisoners.py -k "not clever and not cycle and not loop"
+uv run pytest exercises/against_the_odds/one_hundred_prisoners/test_prisoners.py -k "not clever and not cycle and not loop"
 ```
 
 [^prisoners-random]: `random.shuffle` shuffles a list in place, and
@@ -60,7 +60,7 @@ what they find. Implement `clever_strategy` so that the prisoners do much better
 than random. 💡 There is a hint.[^prisoners-start]
 
 ```bash
-uv run pytest exercises/against_the_odds/hundred_prisoners/test_prisoners.py -k clever
+uv run pytest exercises/against_the_odds/one_hundred_prisoners/test_prisoners.py -k clever
 ```
 
 [^prisoners-start]: Prisoner 7 must open *some* drawer first. Why not drawer 7?
@@ -77,7 +77,7 @@ split an arrangement into its closed loops and return their lengths. You will us
 it in the notebook to explain the clever strategy.
 
 ```bash
-uv run pytest exercises/against_the_odds/hundred_prisoners/test_prisoners.py -k "cycle or loop"
+uv run pytest exercises/against_the_odds/one_hundred_prisoners/test_prisoners.py -k "cycle or loop"
 ```
 
 ## Investigation: over to the notebook 📓

@@ -1,4 +1,4 @@
-# The office party 🎂
+# Office party 🎂
 
 > **Difficulty:** 🌶️
 >

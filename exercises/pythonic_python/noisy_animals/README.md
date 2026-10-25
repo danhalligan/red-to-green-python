@@ -1,4 +1,6 @@
-# Object-oriented Python
+# Noisy animals
+
+*Object-oriented Python*
 
 > **Difficulty:** 🌶️🌶️
 >
@@ -7,7 +9,7 @@
 > **You’ll practise:** classes, instances, inheritance, method overriding,
 > polymorphism, exceptions, mutable instance state, and duck typing.
 >
-> **Check:** `uv run pytest exercises/pythonic_python/object_oriented_python/ -q`, or the command at the end of
+> **Check:** `uv run pytest exercises/pythonic_python/noisy_animals/ -q`, or the command at the end of
 > each exercise below.
 
 **In this topic:** [Noisy animals](#noisy-animals-) ·
@@ -17,11 +19,11 @@
 [Looking back](#looking-back)
 
 Work through the exercises in order: each builds on the code you wrote in the
-last. All of the code goes in [oop.py](oop.py).
+last. All of the code goes in [animals.py](animals.py).
 
 ## Noisy animals 📣
 
-Complete the `Animal` base class `__init__` method in `oop.py`. This initialiser
+Complete the `Animal` base class `__init__` method in `animals.py`. This initialiser
 should store an optional name on the instance, so that `animal.name` returns it
 (or `None` if none was given). Note you can leave the `speak()` method alone:
 subclasses will provide their own sound by overriding that method.
@@ -42,7 +44,7 @@ print(", ".join(x.name for x in animals))
 ```
 
 The sound each animal makes is listed in the tests: read
-`test_animal_subclasses_override_speak` in [test_oop.py](test_oop.py) to
+`test_animal_subclasses_override_speak` in [test_animals.py](test_animals.py) to
 see what `speak()` should return for `Dog`, `Cat` and `Bird`.
 
 Implement `__str__()` so `str(Dog("Woofy Goldberg"))` produces
@@ -70,7 +72,7 @@ The tests for the later exercises fail until you reach them, so check this
 exercise on its own with:
 
 ```bash
-uv run pytest exercises/pythonic_python/object_oriented_python/test_oop.py -k "not (lyric or fox or sing or wdtfs or parrot or robot or cover)" -q
+uv run pytest exercises/pythonic_python/noisy_animals/test_animals.py -k "not (lyric or fox or sing or wdtfs or parrot or robot or cover)" -q
 ```
 
 ## What Does the Fox Say? 🦊
@@ -118,7 +120,7 @@ meet the band by name and hear the song for yourself. Its later sections use the
 parrot and the robot, so come back to it as you finish each exercise.
 
 ```bash
-uv run pytest exercises/pythonic_python/object_oriented_python/test_oop.py -k "(lyric or fox or sing or wdtfs) and not (parrot or robot or cover)" -q
+uv run pytest exercises/pythonic_python/noisy_animals/test_animals.py -k "(lyric or fox or sing or wdtfs) and not (parrot or robot or cover)" -q
 ```
 
 ## A parrot that learns 🦜
@@ -149,7 +151,7 @@ call `sing([Fox(), polly])`: the song ends with the parrot repeating what it
 heard.
 
 ```bash
-uv run pytest exercises/pythonic_python/object_oriented_python/test_oop.py -k "parrot and not (robot or cover)" -q
+uv run pytest exercises/pythonic_python/noisy_animals/test_animals.py -k "parrot and not (robot or cover)" -q
 ```
 
 ## The robot joins the band 🤖
@@ -170,7 +172,7 @@ Each robot keeps its own memory, and a robot that has not been programmed has
 nothing to say.
 
 ```bash
-uv run pytest exercises/pythonic_python/object_oriented_python/test_oop.py -k "robot and not cover" -q
+uv run pytest exercises/pythonic_python/noisy_animals/test_animals.py -k "robot and not cover" -q
 ```
 
 Now the surprise. `lyric()` and `sing()` were written before `Robot` existed,
@@ -235,7 +237,7 @@ it is spoken. `sing` needed no changes. After `cover` returns, call
 `robot.speak()`: what happens, and why?
 
 ```bash
-uv run pytest exercises/pythonic_python/object_oriented_python/test_oop.py -k cover -q
+uv run pytest exercises/pythonic_python/noisy_animals/test_animals.py -k cover -q
 ```
 
 With everything finished, return to the

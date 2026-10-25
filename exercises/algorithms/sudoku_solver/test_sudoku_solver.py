@@ -2,8 +2,8 @@ from copy import deepcopy
 
 import pytest
 
-from exercises.algorithms.sudoku.loaders import load_sudoku_data
-from exercises.algorithms.sudoku.sudoku import (
+from exercises.algorithms.sudoku_solver.loaders import load_sudoku_data
+from exercises.algorithms.sudoku_solver.sudoku import (
     is_valid_placement,
     sudoku_checker,
     sudoku_solver,

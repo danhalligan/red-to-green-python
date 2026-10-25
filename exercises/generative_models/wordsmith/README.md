@@ -1,4 +1,6 @@
-# The AI that makes up words 🤖
+# The wordsmith 🤖
+
+*The AI that makes up words*
 
 > **Difficulty:** 🌶️🌶️
 >

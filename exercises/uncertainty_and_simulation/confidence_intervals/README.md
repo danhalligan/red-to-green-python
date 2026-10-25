@@ -1,9 +1,11 @@
-# Can you trust a 95% interval? 🚀
+# Confidence intervals 🚀
+
+*Can you trust a 95% interval?*
 
 > **Difficulty:** 🌶️🌶️
 >
-> **Before you start:** [How uncertain is an average?](../standard_error/README.md),
-> [Two methods, two answers](../bootstrap/README.md), and the optional scientific stack
+> **Before you start:** [Standard error](../standard_error/README.md),
+> [Bootstrap](../bootstrap/README.md), and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** confidence intervals, simulation studies, and measuring
