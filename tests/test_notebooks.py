@@ -9,8 +9,17 @@ from pathlib import Path
 
 import pytest
 
-ANALYSIS_DIR = Path(__file__).parents[1] / "analysis"
-NOTEBOOKS = sorted(ANALYSIS_DIR.glob("*.ipynb"))
+ROOT = Path(__file__).parents[1]
+ANALYSIS_DIR = ROOT / "analysis"
+SPINNING_PLATES_DIR = ROOT / "exercises" / "data_analysis" / "spinning_plates"
+# Notebooks are migrating from analysis/ into exercises/.
+NOTEBOOKS = sorted(
+    [*ANALYSIS_DIR.glob("*.ipynb"), *(ROOT / "exercises").rglob("*.ipynb")]
+)
+
+
+def notebook_id(path: Path) -> str:
+    return str(path.relative_to(ROOT))
 
 
 def setup_source(path: Path) -> str:
@@ -52,13 +61,13 @@ def test_notebooks_are_present():
     assert len(NOTEBOOKS) == 11
 
 
-@pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
+@pytest.mark.parametrize("path", NOTEBOOKS, ids=notebook_id)
 def test_notebook_matches_schema(path):
     nbformat = pytest.importorskip("nbformat")
     nbformat.validate(nbformat.read(path, as_version=4))
 
 
-@pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda path: path.stem)
+@pytest.mark.parametrize("path", NOTEBOOKS, ids=notebook_id)
 def test_notebook_setup_runs(path, science_stack):
     run_setup(path)
 
@@ -105,7 +114,7 @@ def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
 
 
 def test_spinning_plates_setup_points_at_the_data_files(science_stack):
-    namespace = run_setup(ANALYSIS_DIR / "spinning_plates.ipynb")
+    namespace = run_setup(SPINNING_PLATES_DIR / "investigate.ipynb")
     data_dir = namespace["data_dir"]
 
     for name in (

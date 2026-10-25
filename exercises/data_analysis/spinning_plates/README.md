@@ -9,7 +9,7 @@
 > quality control, normalisation, plotting, and deciding how far to trust a
 > result.
 >
-> **Check:** `uv run pytest tests/test_spinning_plates.py -q` checks the
+> **Check:** `uv run pytest exercises/data_analysis/spinning_plates/ -q` checks the
 > data-processing functions. Your notebook's plots and explanations check the
 > investigation; there is no single right answer to the final question.
 
@@ -46,9 +46,9 @@ place. One of them is now yours.
 
 **Can you find out what happened and if the experiment worked?**
 
-Work in the [Spinning plates notebook](../../analysis/spinning_plates.ipynb). It
+Work in the [Spinning plates notebook](investigate.ipynb). It
 calls the functions you will write in
-[spinning_plates.py](../../src/pyproblems/spinning_plates.py), which also supplies two
+[spinning_plates.py](spinning_plates.py), which also supplies two
 plotting helpers (`plate_heatmap` and `plot_concentration_response`) so you can
 spend your time on the data rather than on Matplotlib.
 
@@ -73,20 +73,20 @@ have a background level, and neither can be trusted beyond the instrument's
 limits.
 
 Three files describe the run. They are in
-[`src/pyproblems/datasets/`](../../src/pyproblems/datasets/), and reading them
+[`data/`](data/), and reading them
 is part of the job. Open the export and the layout in an editor, then load them
 in the notebook (its setup gives you `data_dir`, the folder that holds them).
 
 - **The plate-reader export**
-  ([plate_reader_export.txt](../../src/pyproblems/datasets/plate_reader_export.txt)):
+  ([plate_reader_export.txt](data/plate_reader_export.txt)):
   the instrument's text file, with run details, settings, one 96-well matrix per
   channel and a short list of instrument notes.
 - **The plate layout**
-  ([plate_layout.csv](../../src/pyproblems/datasets/plate_layout.csv)): the
+  ([plate_layout.csv](data/plate_layout.csv)): the
   experiment as designed, with the `sample_type`, `compound`, `concentration_um`
   and `replicate` of every well.
 - **The run record**
-  ([plate_run_record.json](../../src/pyproblems/datasets/plate_run_record.json)):
+  ([plate_run_record.json](data/plate_run_record.json)):
   who ran the plate, on which instrument, and a short log of what happened.
 
 You will build a pipeline: parse the export, reshape it, validate it, join the
@@ -102,7 +102,7 @@ You should keep any raw readings unchanged and put derived values in new columns
 The export is not a table. Open it and look at what a parser would have to
 handle: sections, header rows, matrices, instrument notes, and readings that are
 not numbers at all. Implement two functions in
-[spinning_plates.py](../../src/pyproblems/spinning_plates.py):
+[spinning_plates.py](spinning_plates.py):
 
 - `parse_plate_reader(text)` turns the export into **one row per well per
   channel**, with columns `plate_id`, `well`, `row`, `column`, `channel`,
@@ -136,7 +136,7 @@ notes afterwards.
 </details>
 
 Check your work with
-`uv run pytest tests/test_spinning_plates.py -k "parse or validate" -q`.
+`uv run pytest exercises/data_analysis/spinning_plates/test_spinning_plates.py -k "parse or validate" -q`.
 
 How many readings carry a flag? Which of them would you trust?
 
@@ -170,7 +170,7 @@ notice a well that is absent from one side, so compare the sets of wells too.
 </details>
 
 Check your work with
-`uv run pytest tests/test_spinning_plates.py -k "pivot or join" -q`.
+`uv run pytest exercises/data_analysis/spinning_plates/test_spinning_plates.py -k "pivot or join" -q`.
 
 ## 3. Loss of control
 
@@ -193,7 +193,8 @@ A helper is available for testing explanations:
   whose reading belongs to it. It must send every well to a different source
   well.
 
-Check it with `uv run pytest tests/test_spinning_plates.py -k remap -q`.
+Check it with
+`uv run pytest exercises/data_analysis/spinning_plates/test_spinning_plates.py -k remap -q`.
 
 Then investigate in the notebook. You must **provide evidence** for the
 explanation you choose: say what you tested, what you found, and how decisive it
@@ -270,7 +271,7 @@ excellent; near zero or negative means the controls overlap. Implement it too,
 and use it to check your corrected controls.
 
 Check them with
-`uv run pytest tests/test_spinning_plates.py -k "usable or blank or normalise or vehicle or summarise or z_prime or pipeline" -q`.
+`uv run pytest exercises/data_analysis/spinning_plates/test_spinning_plates.py -k "usable or blank or normalise or vehicle or summarise or z_prime or pipeline" -q`.
 
 <details>
 <summary>💡 Hint 1: background first</summary>

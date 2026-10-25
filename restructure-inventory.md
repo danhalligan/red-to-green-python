@@ -285,3 +285,37 @@ execute under `nbmake` (about 3 minutes), 20 `extras/` tests pass, the extras
 scripts run, and Ruff check and format are clean. Total about 7 minutes, mostly
 the exercise suite and notebooks. This is the target to reproduce after each
 phase.
+
+## 8. Phase 1 notes (Spinning Plates)
+
+Migrated to `exercises/data_analysis/spinning_plates/` with `git mv`
+(README, `spinning_plates.py`, `test_spinning_plates.py`, `investigate.ipynb`,
+`data/`). Learner code and data are byte-identical; only imports, paths and
+commands changed.
+
+- **Data access:** notebook and tests use
+  `files("exercises.data_analysis.spinning_plates") / "data"` (no loader, no
+  `sys.path`, no dependence on the working directory). A per-exercise `data.py`
+  (Q3) would sit beside a `data/` directory of the same name. Python resolves
+  `import ...data` to the module, but it is confusing, so for exercises that
+  need a real loader I propose calling it `loaders.py`. Decide in Phase 2.
+- **Integrity tests:** the 3 plate tests moved from `tests/test_data.py` into
+  `test_plate_data.py` in the exercise directory (code unchanged except the path).
+- **`conftest.py`:** `exercises/conftest.py` is a temporary **copy** of
+  `tests/conftest.py`, because tests in both places still need it. Delete
+  `tests/conftest.py` once the last learner test leaves `tests/`.
+- **Infrastructure:** `testpaths` is now `["tests", "exercises"]`; the hatch
+  wheel lists both packages; the Ruff notebook ignore covers `exercises/**`;
+  `tests/test_notebooks.py` and `tests/test_docs.py` discover the new
+  locations (notebook test IDs are now relative paths, since every
+  `investigate.ipynb` shares a stem); `.vscode` pytest args and the CI data-test
+  step include `exercises`.
+- **Baseline comparison:** all 802 tests still collect; every
+  `test_spinning_plates` test has the same outcome as the baseline (43 fail with
+  `NotImplementedError`, none from import or path errors); the 3 data tests and
+  the infrastructure tests still pass. Only test IDs changed.
+- **Solutions repo:** `spinning_plates.py` and its notebook moved to the same
+  paths under `solutions/exercises/...`; `extras/` and the README updated;
+  `verify.sh` and CI run `nbmake` over `analysis` plus every notebook under
+  `exercises`, and CI checks out the public `restructure` branch for now (set it
+  back to `main` when merging).

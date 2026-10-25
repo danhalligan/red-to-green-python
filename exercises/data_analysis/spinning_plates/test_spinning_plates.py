@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from pyproblems.spinning_plates import (
+from exercises.data_analysis.spinning_plates.spinning_plates import (
     join_layout,
     mark_usable,
     normalise_to_reference,
@@ -22,7 +22,7 @@ from pyproblems.spinning_plates import (
 
 nan = np.nan
 
-DATASETS = files("pyproblems.datasets")
+DATASETS = files("exercises.data_analysis.spinning_plates").joinpath("data")
 
 
 def load_plate_reader_export():

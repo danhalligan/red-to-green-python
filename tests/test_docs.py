@@ -13,8 +13,13 @@ DOCS = [
     ROOT / "CONTRIBUTING.md",
     ROOT / "GETTING_STARTED.md",
     *sorted((ROOT / "problems").rglob("*.md")),
+    *sorted((ROOT / "exercises").rglob("README.md")),
 ]
-PROBLEM_PAGES = [path for path in DOCS if "problems" in path.relative_to(ROOT).parts]
+PROBLEM_PAGES = [
+    path
+    for path in DOCS
+    if {"problems", "exercises"} & set(path.relative_to(ROOT).parts)
+]
 
 
 def github_slug(heading: str) -> str:

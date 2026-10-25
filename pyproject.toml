@@ -35,10 +35,11 @@ notebook = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pyproblems"]
+# `exercises` replaces `src/pyproblems` as exercises migrate; remove the old one at the end.
+packages = ["src/pyproblems", "exercises"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "exercises"]
 addopts = "-ra"
 markers = [
     "advanced: optional numerical modelling exercises",
@@ -54,6 +55,7 @@ select = ["B", "E", "F", "I", "UP"]
 [tool.ruff.lint.per-file-ignores]
 # Starter notebooks import what learners will need and may have long lines.
 "analysis/*.ipynb" = ["E501", "F401"]
+"exercises/**/*.ipynb" = ["E501", "F401"]
 
 [tool.ruff.format]
 indent-style = "space"
