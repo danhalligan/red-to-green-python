@@ -8,7 +8,7 @@
 > **You’ll practise:** resampling with a seeded NumPy generator and comparing
 > bootstrap and analytic uncertainty estimates.
 >
-> **Check:** `uv run pytest tests/test_statistics.py -k bootstrap -q`
+> **Check:** `uv run pytest tests/test_uncertainty.py -k bootstrap -q`
 
 Two methods claim to estimate the uncertainty in the same measurement. Why don't
 they give exactly the same answer?

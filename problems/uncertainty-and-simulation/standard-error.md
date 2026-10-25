@@ -8,7 +8,7 @@
 > **You’ll practise:** estimating uncertainty, repeated sampling, and
 > distinguishing sampling variation from bias.
 >
-> **Check:** `uv run pytest tests/test_statistics.py -k "standard_error and not bootstrap" -q`
+> **Check:** `uv run pytest tests/test_uncertainty.py -k "standard_error and not bootstrap" -q`
 
 The standard error (SE) of a statistic is its standard deviation across
 repeated samples: how much it would vary if we could redraw the data. For the
@@ -23,7 +23,7 @@ it with $s$, the standard deviation of the sample we actually have (using $n-1$
 in the denominator): $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
 
 Implement `standard_error` using $s$ in
-[statistics.py](../../src/pyproblems/statistics.py).
+[uncertainty.py](../../src/pyproblems/uncertainty.py).
 
 Old Faithful is a geyser in Yellowstone National Park, and its eruption waiting
 times are a commonly used dataset in statistics. In the [Old Faithful

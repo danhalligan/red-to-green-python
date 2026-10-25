@@ -1,8 +1,7 @@
-"""Scientific-Python statistics exercises."""
+"""Likelihood and maximum-likelihood exercises."""
 
 from dataclasses import dataclass
 
-import numpy as np
 from numpy.typing import ArrayLike
 
 
@@ -13,21 +12,6 @@ class NormalFit:
     mean: float
     standard_deviation: float
     log_likelihood: float
-
-
-def standard_error(values: ArrayLike) -> float:
-    """Estimate standard error using the sample standard deviation."""
-    raise NotImplementedError
-
-
-def bootstrap_standard_error(
-    values: ArrayLike,
-    *,
-    rng: np.random.Generator | None = None,
-    resamples: int = 10000,
-) -> float:
-    """Estimate the standard error of the mean with bootstrap resampling."""
-    raise NotImplementedError
 
 
 def normal_log_likelihood(

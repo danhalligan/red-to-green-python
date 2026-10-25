@@ -8,7 +8,7 @@
 > **You’ll practise:** likelihood, log densities, numerical optimisation,
 > and checking estimator bias with repeated samples.
 >
-> **Check:** `uv run pytest tests/test_statistics.py -k "normal_log_likelihood or fit_normal_mle" -q`
+> **Check:** `uv run pytest tests/test_likelihood.py -q`
 
 Suppose you are handed a set of measurements and told they come from a normal
 distribution, but not which one. Can you recover the mean and standard deviation
@@ -39,7 +39,7 @@ $\ell(\mu,\sigma\mid x)=\log\mathcal{L}(\mu,\sigma\mid x)=\sum_i \log
 \phi(x_i\mid\mu,\sigma)$. Maximising the log-likelihood will also maximise the
 likelihood (as the log function is monotonic) and we don't have the issue of
 handling very small values. Implement `normal_log_likelihood` as a sum of log
-densities in [statistics.py](../../src/pyproblems/statistics.py).
+densities in [likelihood.py](../../src/pyproblems/likelihood.py).
 
 Implement `fit_normal_mle` by *numerical optimisation*. In other words, find the
 combination of parameter values that maximises the value of
