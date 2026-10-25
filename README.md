@@ -115,15 +115,11 @@ These notebook-based exercises use the optional scientific stack.
 ### Uncertainty and Simulation
 
 Use repeated experiments to find out how much you can trust an estimate.
-Basic NumPy, probability and statistics help; the bootstrap and confidence
-interval exercises build on standard error.
+Basic NumPy, probability and statistics help.
 
-- [Standard error](exercises/uncertainty_and_simulation/standard_error/README.md)
-  🌶️: estimate standard error and test its behaviour across repeated samples.
-- [Bootstrapping](exercises/uncertainty_and_simulation/bootstrapping/README.md)
-  🌶️: compare bootstrap and analytic estimates of the same uncertainty.
-- [Confidence intervals](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
-  🌶️🌶️: measure how often confidence intervals keep their promise.
+- [Known unknowns](exercises/uncertainty_and_simulation/known_unknowns/README.md)
+  🌶️🌶️: estimate uncertainty with standard errors, the bootstrap and confidence
+  intervals, then use simulation to test whether each method keeps its promise.
 
 ### Parameter Estimation
 

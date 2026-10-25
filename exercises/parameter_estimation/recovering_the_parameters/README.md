@@ -74,11 +74,11 @@ The MLE of $\mu$ is the sample mean, which is unbiased. The MLE of $\sigma^2$
 divides by $n$ rather than $n-1$, so on average it equals
 $\frac{n-1}{n}\sigma^2$, which is too small. This is the same factor that
 separated the bootstrap from $s/\sqrt{n}$ in
-[Bootstrapping](../../uncertainty_and_simulation/bootstrapping/README.md), for the same reason: the spread
+[Known unknowns](../../uncertainty_and_simulation/known_unknowns/README.md#stage-2-bootstrapping), for the same reason: the spread
 is measured around $\bar{x}$, which was fitted to the same data and so sits
 closer to the observations than the true mean does. Taking the square root to get
 $\hat\sigma$ adds the downward bend discussed in
-[Standard error](../../uncertainty_and_simulation/standard_error/README.md)
+[Known unknowns](../../uncertainty_and_simulation/known_unknowns/README.md#stage-1-standard-error)
 (Jensen's inequality), so
 $\hat\sigma$ is biased low for two reasons. Both effects shrink as $n$ grows, so
 the MLE is still a sensible estimator; the bias is largest for small samples.

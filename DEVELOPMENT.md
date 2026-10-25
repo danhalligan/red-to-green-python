@@ -43,10 +43,6 @@ exercises/conftest.py   fixtures shared by every exercise test
 tests/                  repository checks that are expected to pass
 ```
 
-A few exercises share code at topic level instead of duplicating it; for
-example `exercises/uncertainty_and_simulation/uncertainty.py` and its tests serve
-both Standard Error and Bootstrap.
-
 ## Project conventions
 
 - Treat `README.md` and each exercise's own `README.md` as the learner-facing

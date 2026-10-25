@@ -29,9 +29,7 @@ REQUIRED_NOTEBOOKS = [
     "parameter_estimation/fitting_a_mixture",
     "parameter_estimation/recovering_the_parameters",
     "pythonic_python/noisy_animals",
-    "uncertainty_and_simulation/bootstrapping",
-    "uncertainty_and_simulation/confidence_intervals",
-    "uncertainty_and_simulation/standard_error",
+    "uncertainty_and_simulation/known_unknowns",
 ]
 
 
@@ -129,7 +127,7 @@ def test_mysterious_data_setup_loads_all_datasets(science_stack):
 
 def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
     namespace = run_setup(
-        EXERCISES_DIR / "uncertainty_and_simulation/standard_error/investigate.ipynb"
+        EXERCISES_DIR / "parameter_estimation/fitting_a_mixture/investigate.ipynb"
     )
     faithful = namespace["faithful"]
 

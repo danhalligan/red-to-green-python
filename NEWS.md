@@ -8,6 +8,14 @@
   shared Against the Odds and Old Faithful / Simulation Studies notebooks are
   split into one notebook per problem. Repository checks stay in `tests/`.
 
+* Merge the Standard Error, Bootstrapping and Confidence Intervals exercises
+  into "Known unknowns", a single three-stage exercise on estimating uncertainty
+  that shares one module and one simulation notebook. The Old Faithful parts are
+  dropped in favour of simulation, `bootstrap_standard_error` gains a
+  `statistic` argument, new `normal_interval` and `bootstrap_interval` functions
+  build confidence intervals for any statistic, and the exercise uses them to
+  bootstrap the median, which has no standard-error formula.
+
 * Extend the Game of Life shape library with still lifes (block, beehive,
   eater), oscillators (blinker, toad, beacon, pulsar, pentadecathlon, figure
   eight, tumbler) and small long-lived patterns (R-pentomino, diehard,
