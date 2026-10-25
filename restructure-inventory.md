@@ -217,7 +217,14 @@ Notebook `from pyproblems...` imports: `birthday`, `coin_patterns`, `prisoners`
 as the working directory (`notebookFileRoot`), so they must not rely on the
 working directory after the move; derive data paths from imported modules.
 
-## 6. Open questions (please decide before the relevant phase)
+## 6. Decisions
+
+All six were answered as recommended: **Q1** split Against the Odds into three
+notebooks; **Q2** share `uncertainty.py` and `faithful.csv`, split the
+statistics notebooks per problem; **Q3** a small `data.py` inside each exercise
+with data; **Q4** keep existing module names; **Q5** fixtures and images in each
+exercise's `data/`; **Q6** every topic gets a README index. The original
+questions follow for reference.
 
 **Q1. Against the Odds notebook.** One notebook covers three puzzles, one section
 each. Recommendation: **split into three `investigate.ipynb` files**, one per
