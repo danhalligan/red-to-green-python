@@ -93,6 +93,18 @@ def test_notebook_matches_schema(path):
 
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=notebook_id)
+def test_notebook_has_no_stored_outputs(path):
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    stored = [
+        index
+        for index, cell in enumerate(notebook["cells"])
+        if cell["cell_type"] == "code"
+        and (cell.get("outputs") or cell.get("execution_count") is not None)
+    ]
+    assert not stored, f"cells {stored} carry outputs or execution counts"
+
+
+@pytest.mark.parametrize("path", NOTEBOOKS, ids=notebook_id)
 def test_notebook_setup_runs(path, science_stack):
     run_setup(path)
 
