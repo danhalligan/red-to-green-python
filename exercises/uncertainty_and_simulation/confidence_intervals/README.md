@@ -1,11 +1,9 @@
 # Confidence intervals 🚀
 
-*Can you trust a 95% interval?*
-
 > **Difficulty:** 🌶️🌶️
 >
 > **Before you start:** [Standard error](../standard_error/README.md),
-> [Bootstrap](../bootstrap/README.md), and the optional scientific stack
+> [Bootstrapping](../bootstrapping/README.md), and the optional scientific stack
 > (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** confidence intervals, simulation studies, and measuring

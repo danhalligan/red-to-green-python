@@ -1,7 +1,5 @@
 # Fitting a mixture
 
-*Fitting a mixture of distributions*
-
 > **Difficulty:** 🌶️🌶️🌶️
 >
 > **Before you start:** the optional scientific stack

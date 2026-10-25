@@ -1,7 +1,5 @@
 # Titanic disaster 🚢
 
-*Predicting survival on the Titanic*
-
 > **Difficulty:** 🌶️🌶️🌶️
 >
 > **Before you start:** basic Python, pandas and plotting, and the optional

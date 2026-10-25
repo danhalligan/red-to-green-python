@@ -1,6 +1,4 @@
-# Bootstrap
-
-*Two methods, two answers*
+# Bootstrapping
 
 > **Difficulty:** 🌶️
 >
@@ -12,18 +10,18 @@
 >
 > **Check:** `uv run pytest exercises/uncertainty_and_simulation/test_uncertainty.py -k bootstrap -q`
 
-Two methods claim to estimate the uncertainty in the same measurement. Why don't
-they give exactly the same answer?
-
 The standard error (of the mean) is the standard deviation
 of the sample mean across repeated samples. We estimated this from a single
 sample using the sample standard deviation.
 
-An alternative is a bootstrap approach. The idea here is to mimic repeated
+An alternative is *bootstrapping*. The idea here is to mimic repeated
 samples from a population using the *observed values* as a stand-in for the
 population. We repeatedly draw samples of size $n$ *with replacement* and
 calculate the mean of each. These *resample* means play the role of repeated
 *sample* means, and as such, their standard deviation estimates the standard error.
+
+These two methods claim to estimate the uncertainty in the same measurement. 
+Here we'll investigate whether they agree.
 
 Implement `bootstrap_standard_error` by computing the mean of each of 10,000
 resamples and returning the standard deviation of those means [^bs-sd]. Accept a

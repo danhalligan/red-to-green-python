@@ -1,7 +1,5 @@
 # 99 Bottles
 
-*Test-first*
-
 > **Difficulty:** 🌶️🌶️
 >
 > **Before you start:** basic Python. This is an optional test-first kata: a

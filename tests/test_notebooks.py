@@ -29,7 +29,7 @@ REQUIRED_NOTEBOOKS = [
     "parameter_estimation/fitting_a_mixture",
     "parameter_estimation/recovering_the_parameters",
     "pythonic_python/noisy_animals",
-    "uncertainty_and_simulation/bootstrap",
+    "uncertainty_and_simulation/bootstrapping",
     "uncertainty_and_simulation/confidence_intervals",
     "uncertainty_and_simulation/standard_error",
 ]

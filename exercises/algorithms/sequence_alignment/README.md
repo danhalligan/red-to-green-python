@@ -1,7 +1,5 @@
 # Sequence alignment 🧬
 
-*Global sequence alignment*
-
 > **Difficulty:** 🌶️🌶️🌶️
 >
 > **Before you start:** basic Python.
@@ -21,12 +19,12 @@
 
 ## Naive brute force
 
-We're going to explore how to find an optimal "global" alignment (one that
-aligns both sequences from beginning to end) of two DNA
-sequences. Throughout this exercise, a matching pair scores +1, a mismatch
-scores -1, and a character aligned with a gap scores -1. Our optimal alignment
-is then defined as the arrangement of the two sequences with the highest score.
-Our job is to find this.
+We're going to explore how to find an optimal "global" sequence alignment (one
+that aligns both sequences from beginning to end) of two DNA sequences.
+Throughout this exercise, a matching pair scores +1, a mismatch scores -1, and a
+character aligned with a gap scores -1. Our optimal alignment is then defined as
+the arrangement of the two sequences with the highest score. Our job is to find
+this.
 
 For example:
 

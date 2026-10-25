@@ -74,7 +74,7 @@ through tests and refactoring.
 - [Noisy animals](exercises/pythonic_python/noisy_animals/README.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [The Gilded Rose](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
+- [The Gilded Rose](exercises/pythonic_python/the_gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
 - [99 Bottles](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
@@ -120,7 +120,7 @@ interval exercises build on standard error.
 
 - [Standard error](exercises/uncertainty_and_simulation/standard_error/README.md)
   🌶️: estimate standard error and test its behaviour across repeated samples.
-- [Bootstrap](exercises/uncertainty_and_simulation/bootstrap/README.md)
+- [Bootstrapping](exercises/uncertainty_and_simulation/bootstrapping/README.md)
   🌶️: compare bootstrap and analytic estimates of the same uncertainty.
 - [Confidence intervals](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
   🌶️🌶️: measure how often confidence intervals keep their promise.
@@ -156,7 +156,7 @@ use the science packages for plots.
 Explore how simple rules produce complex behaviour: deterministic cellular
 automata and stochastic evolution. Both exercises use NumPy.
 
-- [Conway's Game of Life](exercises/models_of_life/game_of_life/README.md) 🌶️🌶️:
+- [Game of Life](exercises/models_of_life/game_of_life/README.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
 - [Dawkins' weasel](exercises/models_of_life/dawkins_weasel/README.md) 🌶️🌶️:
   can a sentence evolve out of gibberish through mutation and selection? Optional

@@ -1,6 +1,9 @@
 import pytest
 
-from exercises.pythonic_python.gilded_rose.gilded_rose import Item, update_quality
+from exercises.pythonic_python.the_gilded_rose.gilded_rose import (
+    Item,
+    update_quality,
+)
 
 
 def updated_item(sell_in, quality, name="normal item"):

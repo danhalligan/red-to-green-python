@@ -1,6 +1,4 @@
-# Noisy animals
-
-*Object-oriented Python*
+# Noisy animals 📣
 
 > **Difficulty:** 🌶️🌶️
 >
@@ -18,10 +16,9 @@
 [The robot joins the band](#the-robot-joins-the-band-) ·
 [Looking back](#looking-back)
 
-Work through the exercises in order: each builds on the code you wrote in the
-last. All of the code goes in [animals.py](animals.py).
-
-## Noisy animals 📣
+The exercise is about object-orientation -- an approach that structures code
+around objects—which are units that combine _data_ (attributes) and _functions_
+(methods) into single entities
 
 Complete the `Animal` base class `__init__` method in `animals.py`. This initialiser
 should store an optional name on the instance, so that `animal.name` returns it

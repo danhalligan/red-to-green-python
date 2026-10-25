@@ -74,7 +74,7 @@ The MLE of $\mu$ is the sample mean, which is unbiased. The MLE of $\sigma^2$
 divides by $n$ rather than $n-1$, so on average it equals
 $\frac{n-1}{n}\sigma^2$, which is too small. This is the same factor that
 separated the bootstrap from $s/\sqrt{n}$ in
-[Bootstrap](../../uncertainty_and_simulation/bootstrap/README.md), for the same reason: the spread
+[Bootstrapping](../../uncertainty_and_simulation/bootstrapping/README.md), for the same reason: the spread
 is measured around $\bar{x}$, which was fitted to the same data and so sits
 closer to the observations than the true mean does. Taking the square root to get
 $\hat\sigma$ adds the downward bend discussed in

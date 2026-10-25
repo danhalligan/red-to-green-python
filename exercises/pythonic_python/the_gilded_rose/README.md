@@ -1,6 +1,5 @@
 # The Gilded Rose 🌹
 
-*Refactoring: the Gilded Rose kata*
 
 > **Difficulty:** 🌶️🌶️
 >
@@ -13,12 +12,14 @@
 > **You’ll practise:** refactoring existing code safely, using tests as a
 > specification, and adding a feature to code you did not write.
 >
-> **Check:** `uv run pytest exercises/pythonic_python/gilded_rose/ -q`
+> **Check:** `uv run pytest exercises/pythonic_python/the_gilded_rose/ -q`
 
-You have inherited the inventory system of the Gilded Rose, a small inn that buys
-and sells fine goods. It works. Nobody dares touch it. The innkeeper, Allison,
-wants to start selling a new kind of item, and Leeroy, who wrote the code, has
-moved on to new adventures.
+This problem is about refactoring -- the process of improving the structure of code without changing its external behaviour. 
+
+You have inherited the inventory system of the Gilded Rose, a small inn that
+buys and sells fine goods. It works. Nobody dares touch it. The innkeeper,
+Allison, wants to start selling a new kind of item, and Leeroy, who wrote the
+code, has moved on to new adventures.
 
 Open `update_quality` in [gilded_rose.py](gilded_rose.py). It
 is a thicket of nested `if` statements, and adding a new kind of item means
