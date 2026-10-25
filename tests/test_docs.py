@@ -12,9 +12,12 @@ DOCS = [
     ROOT / "DEVELOPMENT.md",
     ROOT / "CONTRIBUTING.md",
     ROOT / "GETTING_STARTED.md",
-    *sorted((ROOT / "problems").rglob("*.md")),
+    *sorted((ROOT / "exercises").rglob("README.md")),
 ]
-PROBLEM_PAGES = [path for path in DOCS if "problems" in path.relative_to(ROOT).parts]
+EXERCISE_READMES = [
+    path for path in DOCS if "exercises" in path.relative_to(ROOT).parts
+]
+DIFFICULTY = re.compile(r"\*\*Difficulty:\*\*\s*((?:🌶️)+)")
 
 
 def github_slug(heading: str) -> str:
@@ -85,12 +88,74 @@ def test_footnotes_are_defined_and_used(doc):
     assert used == defined
 
 
-@pytest.mark.parametrize(
-    "page", PROBLEM_PAGES, ids=lambda page: str(page.relative_to(ROOT))
-)
-def test_problem_pages_are_listed_in_the_index(page):
+def catalogue_entries() -> dict[Path, int]:
+    """Map each exercise README linked from the root README to its chili count."""
     readme = ROOT / "README.md"
-    indexed_pages = {
-        (readme.parent / file).resolve() for file, _ in local_links(readme) if file
+    entries: dict[Path, int] = {}
+    bullets = re.split(r"^(?=- \[)", readme.read_text(encoding="utf-8"), flags=re.M)
+    for bullet in bullets:
+        link = re.match(r"- \[[^\]]*\]\(([^)#\s]+)", bullet)
+        if not link:
+            continue
+        chilis = re.search(r"((?:🌶️)+)", bullet)
+        entries[(readme.parent / link.group(1)).resolve()] = (
+            len(chilis.group(1)) // len("🌶️") if chilis else 0
+        )
+    return entries
+
+
+def catalogue_titles() -> dict[Path, str]:
+    """Map each exercise README linked from the root README to its link text."""
+    readme = ROOT / "README.md"
+    text = readme.read_text(encoding="utf-8")
+    return {
+        (readme.parent / target).resolve(): title
+        for title, target in re.findall(r"^- \[([^\]]*)\]\(([^)#\s]+)", text, re.M)
     }
-    assert page.resolve() in indexed_pages
+
+
+def exercise_title(page: Path) -> str:
+    """Return an exercise README's H1 without its trailing emoji."""
+    heading = re.search(r"^# (.*)$", page.read_text(encoding="utf-8"), re.M)
+    assert heading, "the exercise README needs a title"
+    title = heading.group(1)
+    while title and (
+        title[-1].isspace() or unicodedata.category(title[-1])[0] in "SMC"
+    ):
+        title = title[:-1]
+    return title
+
+
+@pytest.mark.parametrize(
+    "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
+)
+def test_catalogue_title_matches_the_exercise(page):
+    assert catalogue_titles().get(page.resolve()) == exercise_title(page)
+
+
+@pytest.mark.parametrize(
+    "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
+)
+def test_exercises_are_listed_in_the_catalogue(page):
+    assert page.resolve() in catalogue_entries()
+
+
+@pytest.mark.parametrize(
+    "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
+)
+def test_catalogue_difficulty_matches_the_exercise(page):
+    match = DIFFICULTY.search(page.read_text(encoding="utf-8"))
+    assert match, "the exercise README needs a **Difficulty:** line"
+    chilis = len(match.group(1)) // len("🌶️")
+    assert catalogue_entries().get(page.resolve()) == chilis
+
+
+@pytest.mark.parametrize(
+    "page", EXERCISE_READMES, ids=lambda page: str(page.relative_to(ROOT))
+)
+def test_exercises_with_tests_give_a_focused_command(page):
+    exercise = page.parent
+    if not any(exercise.glob("test_*.py")):
+        pytest.skip("this exercise has no tests of its own")
+    expected = f"uv run pytest {exercise.relative_to(ROOT)}"
+    assert expected in page.read_text(encoding="utf-8")

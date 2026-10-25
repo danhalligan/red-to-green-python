@@ -6,8 +6,8 @@ understanding, not just collect passing tests.
 
 ## Helping With Exercises
 
-- Read the relevant problem page under `problems/`, starter code under
-  `src/pyproblems/`, and corresponding tests before advising.
+- Each exercise is self-contained, in `exercises/<topic>/<exercise>/`. Read the
+  exercise README, source and tests together before advising.
 - Default to coaching. Use what the learner has already shared; if their
   approach is unclear, ask what they have tried and where they are stuck.
 - Give one small hint at a time, using the problem's hint levels when available.
@@ -18,7 +18,7 @@ understanding, not just collect passing tests.
   permission to implement a solution.
 - When a full solution is explicitly requested, explain the reasoning and
   encourage the learner to explain and test it themselves.
-- Use the focused test command on the problem page. Explain relevant failures;
+- Use the focused test command in the exercise README. Explain relevant failures;
   do not implement unrelated stubs or run the entire exercise suite to chase
   green results.
 - Do not weaken assertions, skip tests, or hard-code expected outputs to make
@@ -37,8 +37,15 @@ design are maintenance work: make the requested changes directly without a
 tutoring dialogue. If the intent is genuinely ambiguous, ask whether the user
 wants exercise help or a repository change.
 
+- Each exercise is self-contained. Read the exercise README, source and tests
+  together. Most starter implementations are intentionally incomplete. Do not
+  complete them during repository maintenance or attempt to make the full
+  exercise suite pass.
 - Preserve unfinished learner stubs when maintaining the starter repository;
   do not ship completed exercise solutions.
+- Learner tests live beside their exercise in `exercises/`; `tests/` holds
+  repository infrastructure checks (documentation links, notebook setup, data
+  integrity) that are expected to pass.
 - Keep changes scoped to the request and preserve existing learner work.
 - Follow [CONTRIBUTING.md](CONTRIBUTING.md) for contribution checks and
   [DEVELOPMENT.md](DEVELOPMENT.md) for setup and repository structure.

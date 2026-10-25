@@ -1,4 +1,12 @@
-# pyproblems 0.1.0
+# red-to-green-python 0.1.0
+
+* Reorganise the repository around self-contained exercises. Each exercise now
+  has its own folder under `exercises/<topic>/<exercise>/` holding its README,
+  starter code, tests, notebook (`investigate.ipynb`) and data, replacing the
+  separate `problems/`, `src/pyproblems/`, `tests/` and `analysis/` directories.
+  Run an exercise with `uv run pytest exercises/<topic>/<exercise>/ -q`. The
+  shared Against the Odds and Old Faithful / Simulation Studies notebooks are
+  split into one notebook per problem. Repository checks stay in `tests/`.
 
 * Extend the Game of Life shape library with still lifes (block, beehive,
   eater), oscillators (blinker, toad, beacon, pulsar, pentadecathlon, figure

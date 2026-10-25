@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyproblems"
+name = "red-to-green-python"
 version = "0.1.0"
 description = "Python exercises from FizzBuzz to mixture models: turn failing tests from red to green"
 readme = "README.md"
@@ -35,10 +35,10 @@ notebook = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pyproblems"]
+packages = ["exercises"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "exercises"]
 addopts = "-ra"
 markers = [
     "advanced: optional numerical modelling exercises",
@@ -53,7 +53,7 @@ select = ["B", "E", "F", "I", "UP"]
 
 [tool.ruff.lint.per-file-ignores]
 # Starter notebooks import what learners will need and may have long lines.
-"analysis/*.ipynb" = ["E501", "F401"]
+"exercises/**/*.ipynb" = ["E501", "F401"]
 
 [tool.ruff.format]
 indent-style = "space"

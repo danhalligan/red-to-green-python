@@ -28,15 +28,16 @@ uv sync --all-groups --extra science
 ```
 
 Then try a first exercise, for example the quick warm-up
-[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
+[Q1: Exponentiation](exercises/pythonic_python/python_fundamentals/README.md#q1-exponentiation):
 
 1. Read the prompt, then run its test. It is **expected to fail** at first:
 
    ```bash
-   uv run pytest tests/test_fundamentals.py -k exponentiate -q
+   uv run pytest exercises/pythonic_python/python_fundamentals/test_fundamentals.py -k exponentiate -q
    ```
 
-2. Implement `exponentiate` in `src/pyproblems/fundamentals.py`.
+2. Implement `exponentiate` in
+   `exercises/pythonic_python/python_fundamentals/fundamentals.py`.
 3. Rerun the same command until it passes: that is red to green.
 4. Keep going with the Python language problems, or pick any other!
 
@@ -49,9 +50,12 @@ For an overview of the repository layout and development setup, see
 
 ## The problems 🚨
 
-Pick a topic that interests you. Each link opens a file under `problems/`;
-related exercises in the same file stay together here too. Pythonic Python pages
-are under `problems/pythonic-python/`, and algorithms under `problems/algorithms/`.
+Pick a topic that interests you. Each link opens an exercise folder under
+`exercises/` that holds everything for that problem: its instructions (the
+README), starter code, tests, and any notebook or data. Exercises are grouped by
+topic, and each is marked with its difficulty (🌶️ gentle, 🌶️🌶️ takes some
+thought, 🌶️🌶️🌶️ challenging) so you can see at a glance which are easy and
+which are hard.
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
@@ -63,17 +67,17 @@ Not sure how to work through a problem, or what the 💡 and 🚀 markers mean? 
 Practise writing clear Python, organising it with classes, and improving it
 through tests and refactoring.
 
-- [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) 🌶️:
+- [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md) 🌶️:
   short language exercises covering exponentiation, adjacent products, FizzBuzz,
   Fibonacci and look-and-say generators, the first non-repeating character, and
   Python gotchas.
-- [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
+- [Noisy animals](exercises/pythonic_python/noisy_animals/README.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️:
+- [Gilded Rose](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
-- [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
+- [99 Bottles](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
   build 99 Bottles one test at a time, then write tests of your own.
 
 ### Algorithms and Search
@@ -81,14 +85,14 @@ through tests and refactoring.
 Four self-contained exercises, each with its own page, starter code and tests.
 You can start with any of them, but some build on earlier ideas, as shown below.
 
-- [Word ladder](problems/algorithms/word-ladder.md) 🌶️🌶️:
+- [Word ladder](exercises/algorithms/word_ladder/README.md) 🌶️🌶️:
   turn `play` into `game` one letter at a time.
-- [Try, try again](problems/algorithms/rugby.md) 🌶️🌶️:
+- [Try, try again](exercises/algorithms/try_try_again/README.md) 🌶️🌶️:
   count the ways a rugby score could have happened, from recursion to dynamic
   programming. The Fibonacci exercise is useful background.
-- [Sudoku solver](problems/algorithms/sudoku-solver.md) 🌶️🌶️🌶️:
+- [Sudoku solver](exercises/algorithms/sudoku_solver/README.md) 🌶️🌶️🌶️:
   warm up with a checker, then backtrack your way to a solution.
-- [Global sequence alignment](problems/algorithms/sequence-alignment.md)
+- [Sequence alignment](exercises/algorithms/sequence_alignment/README.md)
   🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
   The rugby problem introduces the dynamic programming ideas used here.
 
@@ -97,13 +101,13 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 Explore data, look for relationships, and evaluate predictions on unseen data.
 These notebook-based exercises use the optional scientific stack.
 
-- [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
+- [Mysterious data](exercises/data_analysis/mysterious_data/README.md) 🌶️:
   thirteen datasets with matching summaries. What do their plots reveal?
-- [Steak, Tea, and Toast](problems/data-analysis/steak-tea-and-toast.md) 🌶️🌶️:
+- [Steak, Tea, and Toast](exercises/data_analysis/steak_tea_toast/README.md) 🌶️🌶️:
   clean messy survey responses and investigate associations between preferences.
-- [Predicting survival on the Titanic](problems/data-analysis/titanic.md) 🌶️🌶️🌶️:
+- [Titanic disaster](exercises/data_analysis/titanic_disaster/README.md) 🌶️🌶️🌶️:
   build a prediction pipeline, beat a baseline, and test it on unseen passengers.
-- [Spinning plates](problems/data-analysis/spinning-plates.md) 🌶️🌶️: rescue a
+- [Spinning plates](exercises/data_analysis/spinning_plates/README.md) 🌶️🌶️: rescue a
   seemingly failed laboratory experiment performed on a 96 well plate: parse
   plate-reader files, reconstruct the sample mapping, build a tidy DataFrame
   pipeline and decide whether the results can be trusted.
@@ -114,11 +118,11 @@ Use repeated experiments to find out how much you can trust an estimate.
 Basic NumPy, probability and statistics help; the bootstrap and confidence
 interval exercises build on standard error.
 
-- [How uncertain is an average?](problems/uncertainty-and-simulation/standard-error.md)
+- [Standard error](exercises/uncertainty_and_simulation/standard_error/README.md)
   🌶️: estimate standard error and test its behaviour across repeated samples.
-- [Two methods, two answers](problems/uncertainty-and-simulation/bootstrap.md)
+- [Bootstrapping](exercises/uncertainty_and_simulation/bootstrapping/README.md)
   🌶️: compare bootstrap and analytic estimates of the same uncertainty.
-- [Can you trust a 95% interval?](problems/uncertainty-and-simulation/confidence-intervals.md)
+- [Confidence intervals](exercises/uncertainty_and_simulation/confidence_intervals/README.md)
   🌶️🌶️: measure how often confidence intervals keep their promise.
 
 ### Parameter Estimation
@@ -128,9 +132,9 @@ mixture models fitted by expectation-maximisation.
 Start with likelihood for a single normal distribution; the mixture exercises
 build on it, with covariance matrices needed for multivariate mixtures.
 
-- [Recovering the parameters](problems/parameter-estimation/recovering-the-parameters.md)
+- [Recovering the parameters](exercises/parameter_estimation/recovering_the_parameters/README.md)
   🌶️🌶️: fit a normal distribution by maximum likelihood and investigate bias.
-- [Fitting a mixture of distributions](problems/parameter-estimation/fitting-a-mixture.md)
+- [Fitting a mixture](exercises/parameter_estimation/fitting_a_mixture/README.md)
   🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
   soft mixtures and a bivariate mixture to Old Faithful.
 
@@ -138,13 +142,13 @@ build on it, with covariance matrices needed for multivariate mixtures.
 
 Probability puzzles where your gut is confidently wrong. Predict, simulate,
 calculate and explain, using only the Python standard library; the investigations
-share a notebook and use the science packages for plots.
+use the science packages for plots.
 
-- [The office party](problems/against-the-odds/office-party.md) 🌶️:
+- [Office party](exercises/against_the_odds/office_party/README.md) 🌶️:
   how many people are required before a shared birthday is more likely than not?
-- [Waiting for heads](problems/against-the-odds/waiting-for-heads.md) 🌶️🌶️:
+- [Waiting for heads](exercises/against_the_odds/waiting_for_heads/README.md) 🌶️🌶️:
   why is waiting for `HH` different from waiting for `HT`?
-- [The 100 prisoners](problems/against-the-odds/100-prisoners.md) 🌶️🌶️🌶️:
+- [The 100 prisoners](exercises/against_the_odds/one_hundred_prisoners/README.md) 🌶️🌶️🌶️:
   find a strategy for a hopeless-looking last chance at freedom.
 
 ### Models of Life
@@ -152,15 +156,15 @@ share a notebook and use the science packages for plots.
 Explore how simple rules produce complex behaviour: deterministic cellular
 automata and stochastic evolution. Both exercises use NumPy.
 
-- [Conway's Game of Life](problems/models-of-life/game-of-life.md) 🌶️🌶️:
+- [Game of Life](exercises/models_of_life/game_of_life/README.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
-- [Dawkins' weasel](problems/models-of-life/weasel.md) 🌶️🌶️:
+- [Dawkins' weasel](exercises/models_of_life/dawkins_weasel/README.md) 🌶️🌶️:
   can a sentence evolve out of gibberish through mutation and selection? Optional
   extensions add a tournament-selection genetic algorithm, then recombination.
 
 ### Generative Models
 
-- [The AI that makes up words](problems/generative-models/wordsmith.md)
+- [Wordsmith](exercises/generative_models/wordsmith/README.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
@@ -172,20 +176,21 @@ a few minutes to several sessions.
 
 ### The basic workflow
 
-- Each problem page, linked from the [index](#the-problems-), opens with
-  anything you need beforehand and the test command that checks it. Some pages
-  group several related exercises.
+- Each exercise's README, linked from the [index](#the-problems-), opens with
+  anything you need beforehand and the test command that checks it. The same
+  folder holds the starter code, the tests and any notebook or data. Some
+  READMEs group several related exercises.
 - Use the focused test command for the exercise you are working on. Most
   exercises begin as stubs, so their tests are red until you implement them.
-  Topic-level commands run every exercise in a topic and are more useful after
-  you have completed several.
+  Run a whole topic with, for example, `uv run pytest exercises/algorithms/ -q`;
+  that is more useful after you have completed several exercises.
 - Aim to make one small change at a time and rerun the test.
 - The early language exercises use only the Python standard library; scientific
   exercises need the optional science packages installed above.
 
 ### Hints, difficulty and extensions 💡
 
-Difficulty is a rough guide, shown at the top of each problem page as well as
+Difficulty is a rough guide, shown at the top of each exercise README as well as
 in the index: 🌶️ gentle, 🌶️🌶️ takes some thought, 🌶️🌶️🌶️ challenging. A page
 may start gently and build up.
 
@@ -230,21 +235,19 @@ read the guide first.
 
 ### Working with notebooks 📓
 
-The notebooks in [`analysis`](analysis/) are workspaces for your investigations,
-not completed examples. Open them in VS Code with Jupyter support, or run
+Each exercise's notebook is called `investigate.ipynb` and sits in its exercise
+folder next to the instructions. It is a workspace for your investigation,
+not a completed example. Open it in VS Code with Jupyter support, or run
 `uv run jupyter lab` from the repository root. Use the project's `.venv` as
 the kernel, with the notebook and science packages installed as described above.
 
-Some notebooks serve several problems:
-- [Old Faithful](analysis/old_faithful.ipynb) uses the same data to
-explore uncertainty, prediction and model choice.
-- [Simulation Studies](analysis/simulation_studies.ipynb) checks statistical
-methods against simulated data with known answers.
-- [Against the Odds](analysis/against_the_odds.ipynb) contains investigations
-for all three probability puzzles. Follow your problem page to the relevant
-section; you do not need to complete the whole notebook for each problem.
-
-The [Titanic notebook](analysis/titanic.ipynb) is a staged machine-learning
+Several statistics notebooks use the Old Faithful geyser data (in
+`exercises/_shared/data/`) to explore uncertainty, prediction and model choice,
+and some also check statistical methods against simulated data with known
+answers. Each problem has its own notebook, so you only need the one in your
+exercise folder.
+The [Titanic notebook](exercises/data_analysis/titanic_disaster/investigate.ipynb)
+is a staged machine-learning
 investigation. Its setup reserves a test set: keep exploration and model
 selection on the training rows, then open the test set only for the final
 evaluation.

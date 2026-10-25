@@ -1,12 +1,12 @@
 from importlib import resources
 
-import pyproblems
-import pyproblems.datasets
+import exercises
+import exercises._shared
 
 
 def test_package_imports():
-    assert pyproblems.__doc__
+    assert exercises.__doc__
 
 
-def test_dataset_package_is_discoverable():
-    assert resources.files(pyproblems.datasets).is_dir()
+def test_shared_data_is_discoverable():
+    assert resources.files(exercises._shared).joinpath("data").is_dir()
