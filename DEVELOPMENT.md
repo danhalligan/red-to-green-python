@@ -28,11 +28,12 @@ uv sync --group dev
 
 ## Repository layout
 
-Each exercise is one directory, `exercises/<topic>/<exercise>/`, holding
-everything a learner needs:
+Each exercise is one directory, `exercises/<exercise>/`, holding
+everything a learner needs. The topic groupings exist only in the root README's
+index, so exercise names must be unique:
 
 ```text
-exercises/<topic>/<exercise>/
+exercises/<exercise>/
     README.md           the instructions (learner-facing)
     <module>.py         the starter code
     test_<module>.py    the tests, red until the exercise is solved
@@ -57,7 +58,7 @@ tests/                  repository checks that are expected to pass
 - Keep exercises that do not need the scientific stack on the Python standard
   library. Scientific libraries belong in the optional `science` extra.
 - Load exercise data with `importlib.resources` relative to the owning package
-  (for example `files("exercises.data_analysis.titanic_disaster")`), never through the
+  (for example `files("exercises.titanic_disaster")`), never through the
   working directory or `sys.path`. Put a loader in the exercise's `loaders.py`
   when more than one file needs it, and add a `tests/test_<exercise>_data.py`
   integrity test for each dataset.
@@ -98,12 +99,12 @@ their own tests give a focused `uv run pytest` command. Heading anchors follow
 GitHub's rules, so a heading with an emoji ends in a hyphen (`#noisy-animals-`);
 update links if you rename a heading. External links are not checked.
 
-Run a single exercise or topic with its focused command from the exercise
-README, for example:
+Run a single exercise, or several together, with its focused command from the
+exercise README, for example:
 
 ```bash
-uv run pytest exercises/algorithms/word_ladder/ -q   # one exercise
-uv run pytest exercises/algorithms/ -q               # one topic
+uv run pytest exercises/word_ladder/ -q                          # one exercise
+uv run pytest exercises/word_ladder/ exercises/sudoku_solver/ -q # several
 ```
 
 The optional mixture-model contracts use the `advanced` marker:

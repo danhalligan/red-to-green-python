@@ -32,11 +32,12 @@ payoff.
 
 ## Adding an exercise
 
-Each exercise is a self-contained directory, `exercises/<topic>/<exercise>/`
-(`snake_case`, so it is importable). A typical coding exercise needs only:
+Each exercise is a self-contained directory, `exercises/<exercise>/`
+(`snake_case`, so it is importable, and unique across the repository: the topic
+groupings live only in the root `README.md`). A typical coding exercise needs only:
 
 ```text
-exercises/<topic>/<exercise>/
+exercises/<exercise>/
     __init__.py
     README.md
     <exercise>.py
@@ -45,7 +46,8 @@ exercises/<topic>/<exercise>/
 
 Add an `investigate.ipynb`, a `data/` directory (data, expected outputs or
 images) or a `loaders.py` only if the exercise needs them; do not generate
-boilerplate files that serve no purpose. A new topic needs its own `__init__.py`.
+boilerplate files that serve no purpose. Put the exercise under the matching
+heading of the root `README.md` index.
 Put code or data in `exercises/_shared/` only when several exercises genuinely
 share it.
 
@@ -54,14 +56,14 @@ Every exercise README should have:
 - An engaging title and a brief premise.
 - A `**Difficulty:**` line (🌶️ gentle, 🌶️🌶️ takes some thought, 🌶️🌶️🌶️
   challenging) and the relevant prerequisites.
-- A focused command, `uv run pytest exercises/<topic>/<exercise>/ -q`, and
+- A focused command, `uv run pytest exercises/<exercise>/ -q`, and
   clear instructions that point to the starter code.
 - Progressive hints where useful, and optional extensions or notebook
   investigations.
 
 Then add the exercise to the catalogue in the root `README.md`, with the same
 difficulty. Notebooks import with absolute package imports (for example
-`from exercises.<topic>.<exercise>.<module> import ...`) and find their data
+`from exercises.<exercise>.<module> import ...`) and find their data
 with `importlib.resources`, never `sys.path` or the working directory. Add a
 `tests/test_<exercise>_data.py` integrity test if you add a dataset.
 

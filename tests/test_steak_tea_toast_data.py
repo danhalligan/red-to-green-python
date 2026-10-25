@@ -1,6 +1,6 @@
 """Integrity checks for the Steak, Tea, and Toast poll data."""
 
-from exercises.data_analysis.steak_tea_toast.loaders import load_steak_toast_tea
+from exercises.steak_tea_toast.loaders import load_steak_toast_tea
 
 
 def test_steak_toast_tea_preserves_rows_invalid_values_and_missingness():

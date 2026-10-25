@@ -5,7 +5,7 @@ import json
 from collections import Counter
 from importlib.resources import files
 
-DATA = files("exercises.data_analysis.spinning_plates").joinpath("data")
+DATA = files("exercises.spinning_plates").joinpath("data")
 
 
 def test_plate_reader_export_has_its_sections_and_both_matrices():

@@ -4,7 +4,7 @@ from statistics import correlation, mean, stdev
 
 import pytest
 
-from exercises.data_analysis.mysterious_data.loaders import load_xy_data
+from exercises.mysterious_data.loaders import load_xy_data
 
 
 def test_xy_data_preserves_names_dimensions_and_summary_statistics():

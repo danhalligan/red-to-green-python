@@ -87,7 +87,7 @@ terminal start with `uv run`, which always uses `.venv` whatever you selected.
 
 ## 5. Your first exercise
 
-Open [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md) and
+Open [Python Fundamentals](exercises/python_fundamentals/README.md) and
 read **Q1: Exponentiation**. Tip: open a Markdown file's formatted preview with
 `Ctrl+Shift+V` (`Cmd+Shift+V` on a Mac).
 
@@ -95,7 +95,7 @@ Every exercise works the same way: each one has its own folder under
 `exercises/`, holding the instructions (`README.md`), the starter code and the
 tests. A function in the starter code is
 a *stub*: it has a name and a description but no working code. For this one,
-open `exercises/pythonic_python/python_fundamentals/fundamentals.py`:
+open `exercises/python_fundamentals/fundamentals.py`:
 
 ```python
 def exponentiate(values: Iterable[float]) -> list[float]:
@@ -108,7 +108,7 @@ Next to it, a test file (`test_fundamentals.py`) checks your function. The tests
 exercise's test in the terminal:
 
 ```bash
-uv run pytest exercises/pythonic_python/python_fundamentals/test_fundamentals.py -k exponentiate -q
+uv run pytest exercises/python_fundamentals/test_fundamentals.py -k exponentiate -q
 ```
 
 Now replace `raise NotImplementedError` with your own code and run the command
@@ -127,7 +127,7 @@ _____________________ test_exponentiate_accepts_iterables ______________________
 >       values = exponentiate([0.0, 1.0, 2.0])
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-exercises/pythonic_python/python_fundamentals/test_fundamentals.py:23: 
+exercises/python_fundamentals/test_fundamentals.py:23: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 values = [0.0, 1.0, 2.0]
@@ -137,9 +137,9 @@ values = [0.0, 1.0, 2.0]
 >       raise NotImplementedError
 E       NotImplementedError
 
-exercises/pythonic_python/python_fundamentals/fundamentals.py:8: NotImplementedError
+exercises/python_fundamentals/fundamentals.py:8: NotImplementedError
 =========================== short test summary info ============================
-FAILED exercises/pythonic_python/python_fundamentals/test_fundamentals.py::test_exponentiate_accepts_iterables - NotI...
+FAILED exercises/python_fundamentals/test_fundamentals.py::test_exponentiate_accepts_iterables - NotI...
 1 failed, 33 deselected in 0.03s
 ```
 
@@ -200,13 +200,13 @@ A few options make the output shorter:
 For example, to work through a file one failure at a time:
 
 ```bash
-uv run pytest exercises/pythonic_python/python_fundamentals/ -x -q --tb=short
+uv run pytest exercises/python_fundamentals/ -x -q --tb=short
 ```
 
 And to see just which tests pass and fail:
 
 ```bash
-uv run pytest exercises/pythonic_python/python_fundamentals/ -q --tb=no
+uv run pytest exercises/python_fundamentals/ -q --tb=no
 ```
 
 You can combine them, and you can always scroll back to the first `E` line of the
@@ -269,6 +269,6 @@ cells depend on it.
 ## Where next
 
 Go back to the [README](README.md#the-problems-) and pick a problem. If you are
-new to Python, [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md)
+new to Python, [Python Fundamentals](exercises/python_fundamentals/README.md)
 is the gentlest start. The [How to work through the problems](README.md#how-to-work-through-the-problems-)
 section explains the 💡 hints and 🚀 extensions.
