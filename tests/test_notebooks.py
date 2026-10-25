@@ -11,6 +11,7 @@ import pytest
 
 ROOT = Path(__file__).parents[1]
 ANALYSIS_DIR = ROOT / "analysis"
+EXERCISES_DIR = ROOT / "exercises"
 SPINNING_PLATES_DIR = ROOT / "exercises" / "data_analysis" / "spinning_plates"
 # Notebooks are migrating from analysis/ into exercises/.
 NOTEBOOKS = sorted(
@@ -73,7 +74,9 @@ def test_notebook_setup_runs(path, science_stack):
 
 
 def test_steak_tea_toast_setup_loads_raw_responses_as_a_dataframe(science_stack):
-    namespace = run_setup(ANALYSIS_DIR / "steak_tea_toast.ipynb")
+    namespace = run_setup(
+        EXERCISES_DIR / "data_analysis/steak_tea_toast/investigate.ipynb"
+    )
     raw_responses = namespace["raw_responses"]
 
     assert raw_responses.shape == (79, 3)
@@ -81,7 +84,9 @@ def test_steak_tea_toast_setup_loads_raw_responses_as_a_dataframe(science_stack)
 
 
 def test_mysterious_data_setup_loads_all_datasets(science_stack):
-    namespace = run_setup(ANALYSIS_DIR / "mysterious_data.ipynb")
+    namespace = run_setup(
+        EXERCISES_DIR / "data_analysis/mysterious_data/investigate.ipynb"
+    )
 
     assert len(namespace["coordinate_data"]) == 13
 
@@ -95,7 +100,7 @@ def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
 
 
 def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
-    namespace = run_setup(ANALYSIS_DIR / "titanic.ipynb")
+    namespace = run_setup(EXERCISES_DIR / "data_analysis/titanic/investigate.ipynb")
     train, test = namespace["X_train"], namespace["X_test"]
     y_train, y_test = namespace["y_train"], namespace["y_test"]
 

@@ -323,3 +323,40 @@ commands changed.
   `verify.sh` and CI run `nbmake` over `analysis` plus every notebook under
   `exercises`, and CI checks out the public `restructure` branch for now (set it
   back to `main` when merging).
+
+## 9. Phase 2 notes (independent exercises)
+
+Migrated with `git mv`: python_fundamentals, object_oriented_python,
+gilded_rose, ninety_nine_bottles, word_ladder, rugby, sudoku,
+sequence_alignment, mysterious_data, steak_tea_toast, titanic, wordsmith,
+game_of_life and weasel, plus `exercises/_shared/` (word list and licence). The
+last five (wordsmith, weasel, mysterious_data, steak_tea_toast, sequence_alignment)
+are beyond the spec's example list but are simple one-to-one moves. Remaining
+for Phase 3: against_the_odds (3), uncertainty_and_simulation (3),
+parameter_estimation (2), the `faithful.csv` dataset and `src/pyproblems/`.
+
+- **Starter code** is byte-identical except two loader imports: `titanic.py`
+  (`load_titanic_data` now from the exercise's `loaders.py`) and `game_of_life.py`
+  (`load_shape` reads the YAML from the exercise's `data/`). Test files only
+  changed in imports and fixture paths (`fixtures/` became `data/`).
+- **Loaders:** `loaders.py` (not `data.py`, to avoid a clash with `data/`) in
+  sudoku, mysterious_data, steak_tea_toast, titanic and `_shared` (`load_words`).
+  They use `importlib.resources`; no `sys.path` or cwd dependence.
+- **Data-integrity tests** moved from `tests/test_data.py` into
+  `tests/test_<exercise>_data.py` (steak_tea_toast, mysterious_data, sudoku,
+  titanic, words). `tests/test_data.py` keeps only the Old Faithful check and
+  `src/pyproblems/data.py` only `load_faithful_data`, both until Phase 3.
+- **Docs updated early** because their links broke: root README catalogue links,
+  the quick start, the notebooks section, `GETTING_STARTED.md`, and the
+  `waiting-for-heads` page's link to Python Fundamentals. The fuller README,
+  DEVELOPMENT.md, CONTRIBUTING.md and AGENTS.md rewrites stay in Phase 4. Topic
+  README indexes are also Phase 4 (the docs test still requires each exercise
+  README to be linked directly from the root README).
+- **CI:** the data-test step runs `tests/test_*_data.py`; the wheel smoke test
+  uses the new loaders (checked locally by building a wheel and importing from
+  it).
+- **Left for later:** the notebook kernel metadata `display_name` still says
+  `pyproblems (3.12.14)` in a few notebooks; Phase 5 decides whether to rename.
+- **Baseline comparison:** all 802 tests collect and every learner test has its
+  baseline outcome (629 `NotImplementedError`, 4 assertion failures, 52
+  already-green). Only the relocated data tests and test IDs differ.

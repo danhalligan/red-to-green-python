@@ -6,7 +6,7 @@
 > [Against the Odds notebook](../../analysis/against_the_odds.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
 >
-> **Recommended first:** [Fibonacci](../pythonic-python/python-fundamentals.md#q6-fibonacci-sequence)
+> **Recommended first:** [Fibonacci](../../exercises/pythonic_python/python_fundamentals/README.md#q6-fibonacci-sequence)
 > (Python Fundamentals Q4), for endless generators, and
 > [The office party](office-party.md) for random numbers and seeding.
 >

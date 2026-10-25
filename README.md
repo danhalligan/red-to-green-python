@@ -28,15 +28,16 @@ uv sync --all-groups --extra science
 ```
 
 Then try a first exercise, for example the quick warm-up
-[Q1: Exponentiation](problems/pythonic-python/python-fundamentals.md#q1-exponentiation):
+[Q1: Exponentiation](exercises/pythonic_python/python_fundamentals/README.md#q1-exponentiation):
 
 1. Read the prompt, then run its test. It is **expected to fail** at first:
 
    ```bash
-   uv run pytest tests/test_fundamentals.py -k exponentiate -q
+   uv run pytest exercises/pythonic_python/python_fundamentals/test_fundamentals.py -k exponentiate -q
    ```
 
-2. Implement `exponentiate` in `src/pyproblems/fundamentals.py`.
+2. Implement `exponentiate` in
+   `exercises/pythonic_python/python_fundamentals/fundamentals.py`.
 3. Rerun the same command until it passes: that is red to green.
 4. Keep going with the Python language problems, or pick any other!
 
@@ -49,9 +50,10 @@ For an overview of the repository layout and development setup, see
 
 ## The problems 🚨
 
-Pick a topic that interests you. Each link opens a file under `problems/`;
-related exercises in the same file stay together here too. Pythonic Python pages
-are under `problems/pythonic-python/`, and algorithms under `problems/algorithms/`.
+Pick a topic that interests you. Each link opens an exercise folder under
+`exercises/` that holds everything for that problem: its instructions (the
+README), starter code, tests, and any notebook or data. Related exercises in the
+same folder stay together here too.
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
@@ -63,17 +65,17 @@ Not sure how to work through a problem, or what the 💡 and 🚀 markers mean? 
 Practise writing clear Python, organising it with classes, and improving it
 through tests and refactoring.
 
-- [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) 🌶️:
+- [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md) 🌶️:
   short language exercises covering exponentiation, adjacent products, FizzBuzz,
   Fibonacci and look-and-say generators, the first non-repeating character, and
   Python gotchas.
-- [Object-oriented Python](problems/pythonic-python/object-oriented-python.md) 🌶️🌶️:
+- [Object-oriented Python](exercises/pythonic_python/object_oriented_python/README.md) 🌶️🌶️:
   build a cast of talking animals, from noisy animals and a silent fox to a
   parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Refactoring (Gilded Rose)](problems/pythonic-python/gilded-rose.md) 🌶️🌶️:
+- [Refactoring (Gilded Rose)](exercises/pythonic_python/gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
-- [Test-first (99 Bottles)](problems/pythonic-python/99-bottles.md) 🌶️🌶️:
+- [Test-first (99 Bottles)](exercises/pythonic_python/ninety_nine_bottles/README.md) 🌶️🌶️:
   build 99 Bottles one test at a time, then write tests of your own.
 
 ### Algorithms and Search
@@ -81,14 +83,14 @@ through tests and refactoring.
 Four self-contained exercises, each with its own page, starter code and tests.
 You can start with any of them, but some build on earlier ideas, as shown below.
 
-- [Word ladder](problems/algorithms/word-ladder.md) 🌶️🌶️:
+- [Word ladder](exercises/algorithms/word_ladder/README.md) 🌶️🌶️:
   turn `play` into `game` one letter at a time.
-- [Try, try again](problems/algorithms/rugby.md) 🌶️🌶️:
+- [Try, try again](exercises/algorithms/rugby/README.md) 🌶️🌶️:
   count the ways a rugby score could have happened, from recursion to dynamic
   programming. The Fibonacci exercise is useful background.
-- [Sudoku solver](problems/algorithms/sudoku-solver.md) 🌶️🌶️🌶️:
+- [Sudoku solver](exercises/algorithms/sudoku/README.md) 🌶️🌶️🌶️:
   warm up with a checker, then backtrack your way to a solution.
-- [Global sequence alignment](problems/algorithms/sequence-alignment.md)
+- [Global sequence alignment](exercises/algorithms/sequence_alignment/README.md)
   🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
   The rugby problem introduces the dynamic programming ideas used here.
 
@@ -97,11 +99,11 @@ You can start with any of them, but some build on earlier ideas, as shown below.
 Explore data, look for relationships, and evaluate predictions on unseen data.
 These notebook-based exercises use the optional scientific stack.
 
-- [Mysterious data](problems/data-analysis/mysterious-data.md) 🌶️:
+- [Mysterious data](exercises/data_analysis/mysterious_data/README.md) 🌶️:
   thirteen datasets with matching summaries. What do their plots reveal?
-- [Steak, Tea, and Toast](problems/data-analysis/steak-tea-and-toast.md) 🌶️🌶️:
+- [Steak, Tea, and Toast](exercises/data_analysis/steak_tea_toast/README.md) 🌶️🌶️:
   clean messy survey responses and investigate associations between preferences.
-- [Predicting survival on the Titanic](problems/data-analysis/titanic.md) 🌶️🌶️🌶️:
+- [Predicting survival on the Titanic](exercises/data_analysis/titanic/README.md) 🌶️🌶️🌶️:
   build a prediction pipeline, beat a baseline, and test it on unseen passengers.
 - [Spinning plates](exercises/data_analysis/spinning_plates/README.md) 🌶️🌶️: rescue a
   seemingly failed laboratory experiment performed on a 96 well plate: parse
@@ -152,15 +154,15 @@ share a notebook and use the science packages for plots.
 Explore how simple rules produce complex behaviour: deterministic cellular
 automata and stochastic evolution. Both exercises use NumPy.
 
-- [Conway's Game of Life](problems/models-of-life/game-of-life.md) 🌶️🌶️:
+- [Conway's Game of Life](exercises/models_of_life/game_of_life/README.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
-- [Dawkins' weasel](problems/models-of-life/weasel.md) 🌶️🌶️:
+- [Dawkins' weasel](exercises/models_of_life/weasel/README.md) 🌶️🌶️:
   can a sentence evolve out of gibberish through mutation and selection? Optional
   extensions add a tournament-selection genetic algorithm, then recombination.
 
 ### Generative Models
 
-- [The AI that makes up words](problems/generative-models/wordsmith.md)
+- [The AI that makes up words](exercises/generative_models/wordsmith/README.md)
   🌶️🌶️: train a tiny probabilistic language model on English words, invent new
   ones, and investigate whether remembering more characters makes a better
   wordsmith.
@@ -230,7 +232,10 @@ read the guide first.
 
 ### Working with notebooks 📓
 
-The notebooks in [`analysis`](analysis/) are workspaces for your investigations,
+Each exercise's notebook is called `investigate.ipynb` and sits in its exercise
+folder next to the instructions (a few notebooks still live in
+[`analysis`](analysis/) while the repository is reorganised). They are
+workspaces for your investigations,
 not completed examples. Open them in VS Code with Jupyter support, or run
 `uv run jupyter lab` from the repository root. Use the project's `.venv` as
 the kernel, with the notebook and science packages installed as described above.
@@ -244,7 +249,8 @@ methods against simulated data with known answers.
 for all three probability puzzles. Follow your problem page to the relevant
 section; you do not need to complete the whole notebook for each problem.
 
-The [Titanic notebook](analysis/titanic.ipynb) is a staged machine-learning
+The [Titanic notebook](exercises/data_analysis/titanic/investigate.ipynb)
+is a staged machine-learning
 investigation. Its setup reserves a test set: keep exploration and model
 selection on the training rows, then open the test set only for the final
 evaluation.

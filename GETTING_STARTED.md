@@ -87,13 +87,15 @@ terminal start with `uv run`, which always uses `.venv` whatever you selected.
 
 ## 5. Your first exercise
 
-Open [Python Fundamentals](problems/pythonic-python/python-fundamentals.md) and
+Open [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md) and
 read **Q1: Exponentiation**. Tip: open a Markdown file's formatted preview with
 `Ctrl+Shift+V` (`Cmd+Shift+V` on a Mac).
 
-Every exercise works the same way. A function in the `src/pyproblems/` folder is
+Every exercise works the same way: each one has its own folder under
+`exercises/`, holding the instructions (`README.md`), the starter code and the
+tests. A function in the starter code is
 a *stub*: it has a name and a description but no working code. For this one,
-open `src/pyproblems/fundamentals.py`:
+open `exercises/pythonic_python/python_fundamentals/fundamentals.py`:
 
 ```python
 def exponentiate(values: Iterable[float]) -> list[float]:
@@ -101,12 +103,12 @@ def exponentiate(values: Iterable[float]) -> list[float]:
     raise NotImplementedError
 ```
 
-Next to it, a test in the `tests/` folder checks your function. The tests are
+Next to it, a test file (`test_fundamentals.py`) checks your function. The tests are
 **expected to fail** at first: that is the *red* in red to green. Run this
 exercise's test in the terminal:
 
 ```bash
-uv run pytest tests/test_fundamentals.py -k exponentiate -q
+uv run pytest exercises/pythonic_python/python_fundamentals/test_fundamentals.py -k exponentiate -q
 ```
 
 Now replace `raise NotImplementedError` with your own code and run the command
@@ -125,7 +127,7 @@ _____________________ test_exponentiate_accepts_iterables ______________________
 >       values = exponentiate([0.0, 1.0, 2.0])
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/test_fundamentals.py:23: 
+exercises/pythonic_python/python_fundamentals/test_fundamentals.py:23: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 values = [0.0, 1.0, 2.0]
@@ -135,9 +137,9 @@ values = [0.0, 1.0, 2.0]
 >       raise NotImplementedError
 E       NotImplementedError
 
-src/pyproblems/fundamentals.py:8: NotImplementedError
+exercises/pythonic_python/python_fundamentals/fundamentals.py:8: NotImplementedError
 =========================== short test summary info ============================
-FAILED tests/test_fundamentals.py::test_exponentiate_accepts_iterables - NotI...
+FAILED exercises/pythonic_python/python_fundamentals/test_fundamentals.py::test_exponentiate_accepts_iterables - NotI...
 1 failed, 33 deselected in 0.03s
 ```
 
@@ -198,13 +200,13 @@ A few options make the output shorter:
 For example, to work through a file one failure at a time:
 
 ```bash
-uv run pytest tests/test_fundamentals.py -x -q --tb=short
+uv run pytest exercises/pythonic_python/python_fundamentals/ -x -q --tb=short
 ```
 
 And to see just which tests pass and fail:
 
 ```bash
-uv run pytest tests/test_fundamentals.py -q --tb=no
+uv run pytest exercises/pythonic_python/python_fundamentals/ -q --tb=no
 ```
 
 You can combine them, and you can always scroll back to the first `E` line of the
@@ -226,7 +228,8 @@ terminal. This project is already set up for it.
    bottom. It is the same information as in the terminal, but only for that one
    test.
 
-You can also run a single test from the editor. Open a test file in `tests/`
+You can also run a single test from the editor. Open a test file (named
+`test_...py`, next to the exercise's README)
 and click the green play icon in the gutter, next to a `def test_...` line. A
 failing test also marks the line in the *test* file that failed.
 
@@ -252,7 +255,7 @@ cells depend on it.
   interpreter at the bottom right (see
   [step 4](#4-select-the-interpreter)). Run `uv sync --all-groups --extra science`
   again, then use the Command Palette to run **Developer: Reload Window**.
-- **`ModuleNotFoundError: No module named 'pyproblems'`.** Python cannot find the
+- **`ModuleNotFoundError: No module named 'exercises'`.** Python cannot find the
   project's code. Run `uv sync` and check you selected the `.venv` interpreter.
   If your project folder lives inside a folder synced by iCloud (such as Desktop
   or Documents on a Mac) this can come and go. Move the project out of the synced
@@ -266,6 +269,6 @@ cells depend on it.
 ## Where next
 
 Go back to the [README](README.md#the-problems-) and pick a problem. If you are
-new to Python, [Python Fundamentals](problems/pythonic-python/python-fundamentals.md)
+new to Python, [Python Fundamentals](exercises/pythonic_python/python_fundamentals/README.md)
 is the gentlest start. The [How to work through the problems](README.md#how-to-work-through-the-problems-)
 section explains the 💡 hints and 🚀 extensions.
