@@ -14,6 +14,12 @@
   swapping in Student-t noise, a line that resists outliers. Its Old Faithful
   section is dropped; Fitting a mixture still introduces that data set.
 
+* Add "Penguin parade", a short pandas exercise on real Palmer Penguins data.
+  Combine a field table with a laboratory table, investigate missing results
+  using the recorded comments, and compare blood-isotope signatures of three
+  species. Includes starter code with tests, a notebook, and pinned source
+  documentation for the data.
+
 * Merge the Standard Error, Bootstrapping and Confidence Intervals exercises
   into "Known unknowns", a single three-stage exercise on estimating uncertainty
   that shares one module and one simulation notebook. The Old Faithful parts are
