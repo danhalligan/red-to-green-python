@@ -22,10 +22,10 @@ experiment.
 
 <sub>Menus from RMS *Titanic*, 14 April 1912, White Star Line. Left: the
 [first-class luncheon
-menu](https://commons.wikimedia.org/wiki/File:The_first_class_menus_of_R.M.S.TITANIC_(April_14._1912).jpg)
+menu](https://commons.wikimedia.org/wiki/File:The_first_class_menus_of_R.M.S.TITANIC_%28April_14._1912%29.jpg)
 ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) as tagged on
 Wikimedia Commons). Right: the [third-class
-menu](https://commons.wikimedia.org/wiki/File:The_third_class_menus_of_R.M.S.TITANIC_(April_14._1912%EF%BC%89.jpg)
+menu](https://commons.wikimedia.org/wiki/File:The_third_class_menus_of_R.M.S.TITANIC_%28April_14._1912%EF%BC%89.jpg)
 (public domain). Combined side by side and resized.</sub>
 
 Work in the [Titanic notebook](investigate.ipynb). Its setup calls
