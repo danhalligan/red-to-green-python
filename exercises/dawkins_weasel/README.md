@@ -24,6 +24,13 @@ and choose a highest-scoring copy as the parent of the next generation. Break
 ties at random. For reproducibility in this Python version, retain the best
 candidate seen so far and inject a NumPy random generator.
 
+![A least weasel standing on a weathered log](data/least-weasel.jpg)
+
+<sub>A least weasel (*Mustela nivalis*). Photo: [Keven
+Law](https://commons.wikimedia.org/wiki/File:Mustela_nivalis_-British_Wildlife_Centre-4.jpg),
+[CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), via Wikimedia
+Commons, resized.</sub>
+
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
 [weasel.py](weasel.py). Each generation creates a fixed
 number of mutated copies, keeps a highest-scoring candidate, and records the

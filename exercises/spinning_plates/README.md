@@ -17,6 +17,12 @@ Lab scientists often have to keep several tasks, projects and responsibilities
 going at the same time, and there always seem to be 96-well plates all over the
 place. One of them is now yours.
 
+![Performers balancing many spinning plates on long sticks](data/plate-spinning.jpg)
+
+<sub>Plate spinning, 24 November 1972. Photo: unknown, Correio da Manhã Fund,
+[Arquivo Nacional](https://commons.wikimedia.org/wiki/File:Correio_da_Manh%C3%A3_AN_052.jpg)
+(public domain), via Wikimedia Commons, resized.</sub>
+
 > **From:** Dr Pippa Petts  
 > **To:** The Data Science Team  
 > **Subject:** HELP!!! Plate EXP-042 is gaslighting me (urgent-ish, mostly urgent)

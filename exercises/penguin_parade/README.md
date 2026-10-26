@@ -26,6 +26,13 @@
 >
 > Where did the extra penguins come from?
 
+![Three chinstrap penguins walking across snow](data/chinstrap-penguins.jpg)
+
+<sub>Chinstrap penguins, one of the three species in the data. Photo: [Derek
+Oyen](https://unsplash.com/@goosegrease?utm_source=unsplash&utm_medium=referral)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral)
+(Unsplash License), resized.</sub>
+
 The data are real: Adélie, Chinstrap and Gentoo penguins sampled on islands near
 Palmer Station, Antarctica over three seasons. They come from the
 [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) data. The
