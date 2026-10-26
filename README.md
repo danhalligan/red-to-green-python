@@ -62,6 +62,22 @@ wherever you like; the notes below flag useful background, not a required order.
 Not sure how to work through a problem, or what the 💡 and 🚀 markers mean? See
 [How to work through the problems](#how-to-work-through-the-problems-) below.
 
+If you would like a guided path, here are two suggested routes. Each starts with
+the fundamentals and builds on the one before:
+
+- **Python for experimental scientists:**
+  [Python Fundamentals](exercises/python_fundamentals/README.md) →
+  [Steak, Tea, and Toast](exercises/steak_tea_toast/README.md) →
+  [Mysterious data](exercises/mysterious_data/README.md) →
+  [Spinning plates](exercises/spinning_plates/README.md) →
+  [Titanic disaster](exercises/titanic_disaster/README.md).
+- **Programming and problem-solving:**
+  [Python Fundamentals](exercises/python_fundamentals/README.md) →
+  [Wordsmith](exercises/wordsmith/README.md) →
+  [Word ladder](exercises/word_ladder/README.md) →
+  [Try, try again](exercises/try_try_again/README.md) →
+  [Sequence alignment](exercises/sequence_alignment/README.md).
+
 ### Pythonic Python
 
 Practise writing clear Python, organising it with classes, and improving it
