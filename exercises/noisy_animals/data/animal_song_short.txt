@@ -1,6 +1,6 @@
 Bird goes "tweet"
 Cat goes "meow"
-Mouse goes "squeek"
+Mouse goes "squeak"
 But there's one sound
 That no one knows
 What does the fox say?

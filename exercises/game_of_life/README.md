@@ -15,6 +15,13 @@ changes in discrete generations according to local rules. The rules fit in a
 paragraph. What they produce does not. Your job is to write the engine; the
 reward is watching what it does.
 
+![Diagram of the Simkin glider gun pattern on a grid](data/simkin-glider-gun.png)
+
+<sub>The Simkin glider gun, a pattern that emits a steady stream of gliders.
+Diagram: [Liambdonegan01](https://commons.wikimedia.org/wiki/File:Game_of_life_Simkin_glider_gun.svg),
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/), via Wikimedia
+Commons, resized.</sub>
+
 For each cell, inspect its eight neighbouring positions. Follow these rules:
 1. A live cell survives with two or three live neighbours
 2. A dead cell becomes live with exactly three;

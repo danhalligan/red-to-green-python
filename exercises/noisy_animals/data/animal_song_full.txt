@@ -1,7 +1,7 @@
 Dog goes "woof"
 Cat goes "meow"
 Bird goes "tweet"
-Mouse goes "squeek"
+Mouse goes "squeak"
 Cow goes "moo"
 Frog goes "croak"
 Elephant goes "toot"

@@ -16,11 +16,10 @@
 [The robot joins the band](#the-robot-joins-the-band-) ·
 [Looking back](#looking-back)
 
-The exercise is about object-orientation -- an approach that structures code
-around objects—which are units that combine _data_ (attributes) and _functions_
-(methods) into single entities
+This exercise is about object-orientation, an approach that structures code around
+*objects*: units that combine _data_ (attributes) and _functions_ (methods).
 
-Complete the `Animal` base class `__init__` method in `animals.py`. This initialiser
+Complete the `Animal` base class `__init__` method in [animals.py](animals.py). This initialiser
 should store an optional name on the instance, so that `animal.name` returns it
 (or `None` if none was given). Note you can leave the `speak()` method alone:
 subclasses will provide their own sound by overriding that method.
@@ -28,7 +27,9 @@ subclasses will provide their own sound by overriding that method.
 Implement `Dog`, `Cat` and `Bird`. The seven other animals (`Mouse`, `Cow`,
 `Frog`, `Elephant`, `Duck`, `Fish` and `Seal`) are already written, so you can
 see what a finished subclass looks like. Each class inherits from `Animal` and
-implements `speak()`. For example:
+implements `speak()`. The sound each animal makes is listed in the tests: read
+`test_animal_subclasses_override_speak` in [test_animals.py](test_animals.py) to
+see what `speak()` should return for `Dog`, `Cat` and `Bird`. For example:
 
 ```python
 dog = Dog("Woofy Goldberg")
@@ -40,14 +41,10 @@ animals = [Dog("Woofy Goldberg"), Cat("Chairman Meow"), Fish("Gill Bates")]
 print(", ".join(x.name for x in animals))
 ```
 
-The sound each animal makes is listed in the tests: read
-`test_animal_subclasses_override_speak` in [test_animals.py](test_animals.py) to
-see what `speak()` should return for `Dog`, `Cat` and `Bird`.
-
 Implement `__str__()` so `str(Dog("Woofy Goldberg"))` produces
 `Dog named Woofy Goldberg`, and `str(Cat())` (no name) is just `Cat`. You
 should be able to do this by just editing the Animal base class! To do this
-though, you'll need to look up the class name of each animal instance. 
+though, you'll need to look up the class name of each animal instance.
 
 For example:
 
@@ -221,7 +218,7 @@ print("\n".join(cover(band, robot)))
 ```text
 Robot goes "tweet"
 Robot goes "meow"
-Robot goes "squeek"
+Robot goes "squeak"
 But there's one sound
 That no one knows
 What does the robot say?

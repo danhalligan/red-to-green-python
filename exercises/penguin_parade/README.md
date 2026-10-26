@@ -13,18 +13,22 @@
 > **Check:** `uv run pytest exercises/penguin_parade/ -q` checks the two
 > functions. Your notebook's plot and explanations check the investigation.
 
-> You've joined an Antarctic ecology project studying three species of penguin.
->
-> The field team has measured hundreds of birds. A separate laboratory has
-> returned blood-isotope results that might say something about what they eat.
->
-> Your colleague has asked you to combine the records and find out whether the
-> species differ.
->
-> There's just one problem. Your first attempt at joining the files has produced
-> rather more penguins than the researchers remember sampling.
->
-> Where did the extra penguins come from?
+You've joined an Antarctic ecology project studying three species of penguin.
+The field team has done a survey and a separate laboratory has
+returned blood-isotope results that might say something about what they eat.
+
+Your colleague has asked you to combine the records and find out whether the
+species differ. There's just one problem. Your first attempt at joining the
+files has produced rather more penguins than the researchers remember sampling.
+
+**Where did the extra penguins come from?**
+
+![Three chinstrap penguins walking across snow](data/chinstrap-penguins.jpg)
+
+<sub>Chinstrap penguins, one of the three species in the data. Photo: [Derek
+Oyen](https://unsplash.com/@goosegrease?utm_source=unsplash&utm_medium=referral)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral)
+(Unsplash License), resized.</sub>
 
 The data are real: Adélie, Chinstrap and Gentoo penguins sampled on islands near
 Palmer Station, Antarctica over three seasons. They come from the

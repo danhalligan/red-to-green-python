@@ -10,8 +10,10 @@
 >
 > **Check:** `uv run pytest exercises/dawkins_weasel/test_weasel.py -m advanced -q`
 
-Start with 28 random characters. Copy them with the odd typo, keep the best copy,
-and repeat. Can a sentence evolve out of gibberish? In *The Blind Watchmaker*,
+** Start with 28 random characters. Copy them with the odd typo, keep the best
+copy, and repeat. Can a sentence evolve out of gibberish? **
+
+In *The Blind Watchmaker*,
 Richard Dawkins used a simple computer model like this to show how cumulative
 selection can build something that looks designed. The target here is the
 28-character
@@ -23,6 +25,13 @@ probability 0.99, or mutating it with probability 0.01 to one of the *other*
 and choose a highest-scoring copy as the parent of the next generation. Break
 ties at random. For reproducibility in this Python version, retain the best
 candidate seen so far and inject a NumPy random generator.
+
+![A least weasel standing on a weathered log](data/least-weasel.jpg)
+
+<sub>A least weasel (*Mustela nivalis*). Photo: [Keven
+Law](https://commons.wikimedia.org/wiki/File:Mustela_nivalis_-British_Wildlife_Centre-4.jpg),
+[CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), via Wikimedia
+Commons, resized.</sub>
 
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
 [weasel.py](weasel.py). Each generation creates a fixed

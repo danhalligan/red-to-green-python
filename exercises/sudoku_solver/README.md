@@ -16,6 +16,13 @@ Sudoku asks you to fill a 9 by 9 grid so each row, column, and 3 by 3 box
 contains the digits 1 through 9 exactly once. A partially filled grid is
 *valid* when none of its supplied digits conflicts with those rules.
 
+![An unsolved 9 by 9 Sudoku puzzle with some digits filled in](data/sudoku-puzzle.png)
+
+<sub>An example Sudoku puzzle. Diagram: [Tim
+Stellmach](https://commons.wikimedia.org/wiki/File:Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg),
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/), via Wikimedia
+Commons, resized.</sub>
+
 Implement `sudoku_checker(grid)` in [sudoku.py](sudoku.py).
 The input is a list of nine rows containing integers 1 through 9 or `None` for
 blanks.

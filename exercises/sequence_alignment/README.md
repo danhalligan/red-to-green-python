@@ -14,8 +14,6 @@
 > **Check:** `uv run pytest exercises/sequence_alignment/ -q`. For the brute-force
 > part only, add `-k "score_alignment or all_alignments or brute_force_finds"`.
 
-**In this exercise:** [Naive brute force](#naive-brute-force) ·
-[Dynamic programming & Needleman-Wunsch](#dynamic-programming--needleman-wunsch)
 
 ## Naive brute force
 
