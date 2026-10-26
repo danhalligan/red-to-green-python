@@ -49,7 +49,7 @@ class Bird(Animal):
 
 class Mouse(Animal):
     def speak(self) -> str:
-        return "squeek"
+        return "squeak"
 
 
 class Cow(Animal):

@@ -54,7 +54,7 @@ def mystery_verse(animal: str, guess: str) -> list[str]:
         (Dog, "woof"),
         (Cat, "meow"),
         (Bird, "tweet"),
-        (Mouse, "squeek"),
+        (Mouse, "squeak"),
         (Cow, "moo"),
         (Frog, "croak"),
         (Elephant, "toot"),
@@ -385,7 +385,7 @@ def test_cover_replaces_every_animal_with_the_robot():
     assert cover([Bird(), Cat(), Mouse()], robot) == [
         'Robot goes "tweet"',
         'Robot goes "meow"',
-        'Robot goes "squeek"',
+        'Robot goes "squeak"',
         "But there's one sound",
         "That no one knows",
         "What does the robot say?",
