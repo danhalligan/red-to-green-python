@@ -10,8 +10,10 @@
 >
 > **Check:** `uv run pytest exercises/dawkins_weasel/test_weasel.py -m advanced -q`
 
-Start with 28 random characters. Copy them with the odd typo, keep the best copy,
-and repeat. Can a sentence evolve out of gibberish? In *The Blind Watchmaker*,
+** Start with 28 random characters. Copy them with the odd typo, keep the best
+copy, and repeat. Can a sentence evolve out of gibberish? **
+
+In *The Blind Watchmaker*,
 Richard Dawkins used a simple computer model like this to show how cumulative
 selection can build something that looks designed. The target here is the
 28-character
