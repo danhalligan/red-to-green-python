@@ -20,6 +20,7 @@ REQUIRED_NOTEBOOKS = [
     "office_party",
     "waiting_for_heads",
     "mysterious_data",
+    "penguin_parade",
     "spinning_plates",
     "steak_tea_toast",
     "titanic_disaster",
@@ -119,6 +120,13 @@ def test_mysterious_data_setup_loads_all_datasets(science_stack):
     namespace = run_setup(EXERCISES_DIR / "mysterious_data/investigate.ipynb")
 
     assert len(namespace["coordinate_data"]) == 13
+
+
+def test_penguin_parade_setup_loads_both_tables(science_stack):
+    namespace = run_setup(EXERCISES_DIR / "penguin_parade/investigate.ipynb")
+
+    assert namespace["field"].shape == (344, 11)
+    assert namespace["lab"].shape == (331, 5)
 
 
 def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):

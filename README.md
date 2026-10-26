@@ -68,7 +68,7 @@ the fundamentals and builds on the one before:
 - **Python for experimental scientists:**
   [Python Fundamentals](exercises/python_fundamentals/README.md) →
   [Steak, Tea, and Toast](exercises/steak_tea_toast/README.md) →
-  [Mysterious data](exercises/mysterious_data/README.md) →
+  [Penguin parade](exercises/penguin_parade/README.md) →
   [Spinning plates](exercises/spinning_plates/README.md) →
   [Titanic disaster](exercises/titanic_disaster/README.md).
 - **Programming and problem-solving:**
@@ -119,6 +119,10 @@ These notebook-based exercises use the optional scientific stack.
 
 - [Mysterious data](exercises/mysterious_data/README.md) 🌶️:
   thirteen datasets with matching summaries. What do their plots reveal?
+- [Penguin parade](exercises/penguin_parade/README.md) 🌶️: a field team counted
+  344 penguins and your data join found rather more. Reconcile real biological
+  measurements, investigate missing lab results and see what blood isotopes
+  reveal.
 - [Steak, Tea, and Toast](exercises/steak_tea_toast/README.md) 🌶️🌶️:
   clean messy survey responses and investigate associations between preferences.
 - [Titanic disaster](exercises/titanic_disaster/README.md) 🌶️🌶️🌶️:
