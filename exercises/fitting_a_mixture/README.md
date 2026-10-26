@@ -6,7 +6,7 @@
 > (`uv sync --all-groups --extra science`).
 >
 > **Recommended first:**
-> [Recovering the parameters](../recovering_the_parameters/README.md)
+> [A likely story](../a_likely_story/README.md)
 > (likelihood and maximum likelihood). The final part introduces Old Faithful
 > with a short regression diagnostic before fitting a mixture.
 >
@@ -30,8 +30,8 @@ where $\phi$ is the Gaussian density function and
 $\theta=(\mu_1,\sigma_1,\mu_2,\sigma_2,\pi)$. How can we estimate $\theta$ from
 the observations alone?
 
-Recall from the likelihood question in
-[Recovering the parameters](../recovering_the_parameters/README.md)
+Recall from
+[A likely story](../a_likely_story/README.md#stage-2-a-likelihood-surface)
 that the ML estimates of a normal distribution are simply the sample mean and
 the *population* standard deviation. For a mixture, the sum inside the
 logarithm of the log-likelihood means there is no such closed form.
@@ -49,8 +49,8 @@ the tails do not underflow.
 ## Finding the maximum
 
 We could maximise this log-likelihood over all five parameters numerically
-(equivalent to our approach in
-[Recovering the parameters](../recovering_the_parameters/README.md)). That can work, but
+(for example with the `fit_mle` you wrote in
+[A likely story](../a_likely_story/README.md)). That can work, but
 it is tricky: the parameters are constrained, there are local optima, and the
 likelihood is unbounded if a component collapses onto a single observation. To
 see the last point, evaluate your function with `mean1` equal to one of the

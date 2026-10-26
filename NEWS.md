@@ -8,6 +8,12 @@
   shared Against the Odds and Old Faithful / Simulation Studies notebooks are
   split into one notebook per problem. Repository checks stay in `tests/`.
 
+* Replace "Recovering the parameters" with "A likely story", a three-stage
+  likelihood exercise on simulated data: a coin's likelihood curve, a normal
+  likelihood surface, and a general `fit_mle` that fits a regression and, by
+  swapping in Student-t noise, a line that resists outliers. Its Old Faithful
+  section is dropped; Fitting a mixture still introduces that data set.
+
 * Merge the Standard Error, Bootstrapping and Confidence Intervals exercises
   into "Known unknowns", a single three-stage exercise on estimating uncertainty
   that shares one module and one simulation notebook. The Old Faithful parts are

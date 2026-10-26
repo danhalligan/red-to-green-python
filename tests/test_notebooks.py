@@ -27,7 +27,7 @@ REQUIRED_NOTEBOOKS = [
     "game_of_life",
     "dawkins_weasel",
     "fitting_a_mixture",
-    "recovering_the_parameters",
+    "a_likely_story",
     "noisy_animals",
     "known_unknowns",
 ]
