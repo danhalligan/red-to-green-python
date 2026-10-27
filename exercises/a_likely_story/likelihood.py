@@ -16,6 +16,20 @@ class MLEFit:
 
 
 @dataclass(frozen=True)
+class LineFit:
+    """Maximum-likelihood estimates for a straight line with noisy observations.
+
+    ``scale`` is the standard deviation for normal noise, or the Student-t
+    scale for robust noise.
+    """
+
+    intercept: float
+    slope: float
+    scale: float
+    log_likelihood: float
+
+
+@dataclass(frozen=True)
 class NormalFit:
     """Maximum-likelihood estimates for a normal distribution."""
 
@@ -58,4 +72,14 @@ def linear_regression_log_likelihood(
     y: ArrayLike,
 ) -> float:
     """Log-likelihood of y given x when y = intercept + slope * x + normal noise."""
+    raise NotImplementedError
+
+
+def fit_line_mle(x: ArrayLike, y: ArrayLike) -> LineFit:
+    """Fit a line by maximum likelihood with normal noise."""
+    raise NotImplementedError
+
+
+def fit_robust_line_mle(x: ArrayLike, y: ArrayLike, df: float = 3.0) -> LineFit:
+    """Fit a line by maximum likelihood with Student-t noise, which resists outliers."""
     raise NotImplementedError

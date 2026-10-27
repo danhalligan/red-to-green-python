@@ -144,29 +144,46 @@ samples need care.
 
 ## Stage 3: Regression is a likelihood too
 
-> **Check:** `uv run pytest exercises/a_likely_story/test_likelihood.py -k regression -q`
+> **Check:** `uv run pytest exercises/a_likely_story/test_likelihood.py -k "regression or line" -q`
 
 A straight-line regression is just another model for how the data were
-generated: each $y_i$ is normal with mean $a + b x_i$ and standard deviation
-$\sigma$. The parameters are now $(a, b, \sigma)$, but nothing else changes.
-Implement `linear_regression_log_likelihood`, then, in [notebook section
-4](investigate.ipynb#4.-Regression-is-a-likelihood-too), simulate 30 points from
-a line you choose, fit it with `fit_mle`, and compare the result with
-least squares (`np.polyfit(x, y, 1)`). What do you notice, and can you explain
-it by looking at the normal log-density?
+generated: each $y_i$ is *normal* with *mean* $a + b x_i$ and *standard
+deviation* $\sigma$.
+
+The parameters are now $(a, b, \sigma)$, but nothing else changes. Implement
+`linear_regression_log_likelihood`, then use it in `fit_line_mle`, which takes
+`x` and `y`, runs `fit_mle` and returns a `LineFit` of the intercept, slope,
+noise scale and log-likelihood. As in Stage 2, fit $\log\sigma$ so that
+$\sigma$ stays positive. Starting every parameter at 0 is good enough here. In
+[notebook section 4](investigate.ipynb#4.-Regression-is-a-likelihood-too), fit
+the 30 simulated points and compare the result with least squares
+(`np.polyfit(x, y, 1)`). What do you notice, and can you explain it by looking
+at the normal log-density?
+
+<details>
+<summary>💡 Hint: reuse what you have</summary>
+
+You do not need a new density. If $y_i$ is normal with mean $a + b x_i$ and
+standard deviation $\sigma$, then the *residual* $y_i - (a + b x_i)$ is normal
+with mean 0 and the same $\sigma$. Calculate the residuals, then score them with
+your `normal_log_likelihood`.
+
+</details>
 
 ### When the data misbehave
 
 Now corrupt your data: move three of the points well away from the line, as if a
 sensor glitched. In [notebook section
 5](investigate.ipynb#5.-When-the-data-misbehave), fit the line again, by least
-squares and by your normal likelihood, and plot both against the true line.
+squares and with `fit_line_mle`, and plot both against the true line.
 
 Then change *one thing*: instead of a normal distribution for the noise, use a
 Student-$t$ distribution with 3 degrees of freedom, whose tails are much
 heavier, so large errors are rare but not astronomically so. You only need a new
-log-likelihood, using `scipy.stats.t.logpdf(y, 3, loc=a + b * x, scale=sigma)`
-in place of the normal log-density; `fit_mle` does the rest. Plot this fit too.
+log-likelihood, using `scipy.stats.t.logpdf(y, df, loc=a + b * x, scale=sigma)`
+in place of the normal log-density; `fit_mle` does the rest. Implement this as
+`fit_robust_line_mle(x, y, df=3.0)`, with the same result type as `fit_line_mle`
+(here `scale` is the $t$ scale, not the standard deviation). Plot this fit too.
 Which line would you trust, and why?
 
 <details>
@@ -185,9 +202,18 @@ the fit drags the whole line towards the outliers to reduce that penalty; three
 glitches near one end can flatten the slope or even reverse it. Under the
 Student-$t$ model the same point costs only about 8, so the fit can afford to
 treat it as a rare event and follow the other 27 points, and the slope barely
-moves. You did not write a special "robust regression" algorithm. You described
-a different probability for one data point, and maximum likelihood did the
-rest.
+moves. You did not need a special outlier-handling algorithm. You described a
+different probability for one data point, and maximum likelihood did the rest.
+
+This is a genuine technique, not just a classroom trick. Regression with
+Student-$t$ errors is a standard robust method, described by Lange, Little and
+Taylor in 1989 and taught in Bayesian texts such as *Bayesian Data Analysis*. It
+is available in practice, for example as `family = student` in R's brms or as a
+Student-$t$ likelihood in PyMC and Stan. It belongs with other robust
+approaches such as Huber regression and Theil–Sen, which you can find in
+scikit-learn. There are caveats. The degrees of freedom are a modelling choice
+(small values mean heavier tails; large values recover the normal model), and
+you can estimate them from the data.
 
 </details>
 
@@ -201,4 +227,4 @@ penalty it adds by default.
 
 This exercise prepares you for [Fitting a
 mixture](../fitting_a_mixture/README.md), where the likelihood has no
-closed-form maximum and a cleverer algorithm takes over.
+closed-form maximum and a cleverer algorithm takes over!
