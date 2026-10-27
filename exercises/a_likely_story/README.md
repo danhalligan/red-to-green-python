@@ -32,6 +32,15 @@ probability $p$, independently of the others, so the probability of one flip
 $x_i$ (1 for heads, 0 for tails) is $p$ if it is heads and $1-p$ if it is tails.
 The probability of the whole sequence is the product of these terms.
 
+> [!NOTE]
+> Here the data are one particular sequence of flips, such as `HHTHHTHHTH`, so we
+> score that exact order. If you only counted the heads, the probability of "7
+> heads in any order" would be the sequence probability multiplied by the number
+> of orderings, $\binom{10}{7}$ (the binomial distribution). That factor does not
+> depend on $p$. It adds the same constant to the log-likelihood at every $p$, so
+> the peak and the ratios between likelihoods are the same either way. Your
+> function should score the sequence.
+
 The *likelihood* is that same quantity viewed the other way round. The data are
 now fixed, because we have observed them, and we ask how the probability changes
 as we vary the parameter: $\mathcal{L}(p\mid x)=\prod_i P(x_i\mid p)$.
@@ -48,7 +57,8 @@ Implement `bernoulli_log_likelihood` in [likelihood.py](likelihood.py). Think
 about what should happen when $p$ is exactly 0 or 1.
 
 In [notebook section 1](investigate.ipynb#1.-Is-this-coin-fair?), plot
-$\ell(p)$ for 7 heads in 10 flips, and again for 70 heads in 100. Where is the
+$\ell(p)$ for a sequence of 10 flips with 7 heads, and again for 100 flips
+with 70 heads. Where is the
 peak in each case, and how does its shape differ? How many times more likely is
 the data under the best $p$ than under a fair coin ($p=0.5$)? Which data set
 would make you more suspicious of the coin, and why, given that both show 70%
