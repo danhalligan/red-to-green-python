@@ -53,7 +53,7 @@
   extra, and keep the Old Faithful regression diagnostic inside the EM
   application.
 * Establish a Python-first programming and statistics exercise package.
-* Add core language, inheritance, refactoring, test-first, scientific-Python,
+* Add core language, inheritance, refactoring, scientific-Python,
   Sudoku, and Gaussian-mixture likelihood exercises.
 * Package the survey, mystery-coordinate, and Sudoku datasets for standard
   library resource loading.
@@ -74,8 +74,8 @@
   probability questions.
 * Make the README a pick-and-mix catalogue (size, style, hook and optional "try
   first" suggestions) with the learning routes kept as optional recommendations;
-  frame the simple exercises as quick warm-ups and 99 Bottles as an optional
-  test-first kata, and replace course-style prerequisites with "before you
+  frame the simple exercises as quick warm-ups, and replace course-style
+  prerequisites with "before you
   start" notes. Rework Gilded Rose around inheriting awkward legacy code, make
   the Gosper glider gun the payoff of Game of Life (with provided `place_shape`
   and `animate_boards` helpers), and add an evolution-versus-guessing comparison

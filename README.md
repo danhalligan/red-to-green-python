@@ -13,8 +13,8 @@ If you complete them correctly the tests will turn *green* 🟢!
 
 Problems run from FizzBuzz-sized warm-ups to data analysis, simulation,
 algorithms and statistical modelling, and along the way you will meet list
-comprehensions, generators, recursion, object orientation, test-first
-development, refactoring, graph search, maximum likelihood,
+comprehensions, generators, recursion, object orientation, refactoring,
+graph search, maximum likelihood,
 expectation-maximisation, probabilities that defy intuition and even a cellular
 automaton.
 
@@ -93,8 +93,6 @@ through tests and refactoring.
 - [Gilded Rose](exercises/gilded_rose/README.md) 🌶️🌶️:
   tame an inherited codebase without breaking its existing behaviour.
   Familiarity with classes helps.
-- [99 Bottles](exercises/ninety_nine_bottles/README.md) 🌶️🌶️:
-  build 99 Bottles one test at a time, then write tests of your own.
 
 ### Algorithms and Search
 
@@ -294,11 +292,7 @@ required reading before you start.
   for built-in tools. Look up `itertools`, `collections` and `random` for the
   language exercises and probability simulations.
 - [pytest documentation](https://docs.pytest.org/) explains assertions,
-  parametrisation and fixtures. Use it to understand the supplied tests and
-  write your own, especially in the test-first exercise.
-- [99 Bottles of OOP](https://www.sandimetz.com/99bottles/) develops an approach
-  to test-driven design and incremental refactoring. It is the book behind the
-  99 Bottles exercise, for readers who want to explore those design choices.
+  parametrisation and fixtures. Use it to understand the supplied tests.
 
 ### Working with scientific data
 
