@@ -29,6 +29,7 @@ REQUIRED_NOTEBOOKS = [
     "dawkins_weasel",
     "fitting_a_mixture",
     "a_likely_story",
+    "beyond_reasonable_doubt",
     "noisy_animals",
     "known_unknowns",
 ]
@@ -154,6 +155,12 @@ def test_titanic_setup_reserves_disjoint_labelled_test_rows(science_stack):
     assert train["Age"].dtype.kind == "f"
     assert namespace["passengers"]["Age"].iloc[0] == 29.0
     assert namespace["cv"].n_splits == 5
+
+
+def test_beyond_reasonable_doubt_setup_loads_both_groups(science_stack):
+    namespace = run_setup(EXERCISES_DIR / "beyond_reasonable_doubt/investigate.ipynb")
+
+    assert namespace["results"]["patients"].sum() == 249
 
 
 def test_spinning_plates_setup_points_at_the_data_files(science_stack):
