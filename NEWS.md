@@ -1,5 +1,12 @@
 # red-to-green-python 0.1.0
 
+* Add "Golden Boot", a Bayesian updating exercise on every player's minutes and
+  goals in the 2017/18 Premier League (Wyscout open data, CC BY 4.0). Update a
+  Gamma prior for a forward's scoring rate, compare the stars with
+  posterior probabilities, check the estimates against the rest of the season,
+  and optionally ask whether shots or finishing is repeatable. Includes starter
+  code, tests, a notebook and a source note.
+
 * Reorganise the repository around self-contained exercises. Each exercise now
   has its own folder under `exercises/<exercise>/` holding its README,
   starter code, tests, notebook (`investigate.ipynb`) and data, replacing the
