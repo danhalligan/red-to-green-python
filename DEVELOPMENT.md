@@ -107,6 +107,25 @@ uv run pytest exercises/word_ladder/ -q                          # one exercise
 uv run pytest exercises/word_ladder/ exercises/sudoku_solver/ -q # several
 ```
 
+Prefer the narrowest check that covers your change, and widen it only before
+you push:
+
+- Working on one exercise: run `uv run pytest exercises/<exercise>/ -q`, plus
+  any `tests/test_<exercise>*.py` data-integrity test it has.
+- Editing Markdown: run `uv run pytest tests/test_docs.py -q`.
+- Editing a notebook's setup cells: run
+  `uv run pytest tests/test_notebooks.py -k <exercise> -q`.
+- Before pushing, or after changing shared code or `pyproject.toml`: run
+  `uv run pytest tests -q`, then `uv run pytest --collect-only`.
+
+Running the whole `exercises/` tree adds nothing on the learner branch, because
+unfinished exercises are expected to fail.
+
+The root `conftest.py` sets `MPLBACKEND=Agg` so tests never open plot windows.
+Matplotlib reads the variable when first imported, so keep it there rather than
+in a fixture. It only affects pytest; notebooks you open yourself still show
+figures.
+
 The optional mixture-model contracts use the `advanced` marker:
 
 ```bash
