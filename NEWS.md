@@ -1,5 +1,12 @@
 # red-to-green-python 0.1.0
 
+* Add "Beyond reasonable doubt", a Bayesian inference exercise on the published
+  counts from the EOLIA clinical trial of ECMO. Update Beta posteriors,
+  integrate numerically for the probability that the mortality reduction exceeds
+  a threshold, and investigate how the answer depends on the size of benefit
+  required, on the prior, and on what the trial can and cannot show. Includes
+  starter code, tests, a notebook and a source note.
+
 * Reorganise the repository around self-contained exercises. Each exercise now
   has its own folder under `exercises/<exercise>/` holding its README,
   starter code, tests, notebook (`investigate.ipynb`) and data, replacing the
