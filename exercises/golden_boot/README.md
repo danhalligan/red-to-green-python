@@ -11,8 +11,8 @@
 > means and credible intervals, comparing players by posterior probabilities, and
 > checking an estimate against what happened next.
 >
-> **Check:** `uv run pytest exercises/golden_boot/ -q` checks the two functions.
-> Your notebook's tables, plots and explanations check the investigation.
+> **Check:** `uv run pytest exercises/golden_boot/ -q` checks the functions you
+> write. Your notebook's tables, plots and explanations check the investigation.
 
 Mohamed Salah scored 32 Premier League goals in 2017/18, a record for a 38-game
 season. Harry Kane wasn't far behind.
@@ -131,12 +131,40 @@ is worse?
 
 ## Stage 6: How confident are you?
 
+> **Check:** `uv run pytest exercises/golden_boot/test_scoring_rates.py -k
+> probability_greater -q`
+
 In [notebook section 5](investigate.ipynb#5.-How-confident-are-you?), Salah has
-a higher posterior mean than Kane. Does that make him the better scorer?
-The supplied `probability_greater` estimates the probability that one player's
-*rate* exceeds another's, from simulated draws of the two posteriors. Compare
-Salah with Kane, Kane with Agüero, and Agüero with Vardy. How does the answer
-relate to the gap between the means and the width of the intervals?
+a higher posterior mean than Kane. Does that make him the better scorer? Answer
+it with a probability: how likely is it that Salah's *true rate* is higher than
+Kane's? Each rate is uncertain, and each has its own posterior, so we cannot read
+the answer from the two means.
+
+Implement `probability_greater` in [scoring_rates.py](scoring_rates.py). It takes
+two Gamma posteriors, as `(shape, rate)` pairs, and returns the estimated
+probability that the first rate exceeds the second.
+
+<details>
+<summary>💡 Hint 1: a probability about two uncertain numbers</summary>
+
+If you could draw a possible rate for each player from their posterior, you could
+ask which is larger. Do that many times. What fraction of draws favours the first
+player?
+
+</details>
+
+<details>
+<summary>💡 Hint 2: drawing from a Gamma posterior</summary>
+
+`rng = np.random.default_rng(seed)` makes a repeatable generator, and
+`rng.gamma(shape, scale, size)` draws from a Gamma distribution with a *scale*
+of $1/\text{rate}$. The mean of a boolean comparison such as `a > b` is the
+fraction of `True` values.
+
+</details>
+
+Then compare Salah with Kane, Kane with Agüero, and Agüero with Vardy. How does
+the answer relate to the gap between the means and the width of the intervals?
 
 > [!NOTE]
 > The draws describe our uncertainty about the rates. They are not simulated
@@ -177,10 +205,14 @@ how often those shots go in. Use the `shots` column.
 
 1. Calculate each forward's conversion (non-penalty goals per shot) for forwards
    with at least 20 shots, and compare Vardy with Kane.
-2. Shrink conversion with the supplied `beta_posterior_summary`, using a
-   $\operatorname{Beta}(15, 85)$ prior (a mean of 15%, worth 100 shots). This is
-   the same idea as before, for a probability and a count of shots. How far does
-   Vardy's conversion move?
+2. Implement `beta_posterior_summary` in [scoring_rates.py](scoring_rates.py)
+   (check: `uv run pytest exercises/golden_boot/test_scoring_rates.py -k
+   beta_posterior -q`), then use it to shrink conversion with a
+   $\operatorname{Beta}(15, 85)$ prior (a mean of 15%, worth 100 shots). A
+   $\operatorname{Beta}(\alpha, \beta)$ prior with $k$ goals from $n$ shots gives
+   a $\operatorname{Beta}(\alpha + k,\ \beta + n - k)$ posterior: the same idea as
+   before, for a probability and a count of shots. How far does Vardy's
+   conversion move?
 3. Split the season at match 19. For forwards with at least 15 shots in each half,
    see how well each quantity in the first half predicts the second: goals per
    90, shots per 90 and conversion.
