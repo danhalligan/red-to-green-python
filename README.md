@@ -152,8 +152,7 @@ exercises build on it, with covariance matrices needed for multivariate mixtures
   from a coin to a regression that shrugs off outliers.
 - [Golden Boot](exercises/golden_boot/README.md) 🌶️: who is the best
   goalscorer in the Premier League? Use real 2017/18 data and Bayesian updating
-  to see why a short record flatters a striker, and why the best scorers cool
-  off.
+  to see why a short record flatters a striker.
 - [Fitting a mixture](exercises/fitting_a_mixture/README.md)
   🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
   soft mixtures and a bivariate mixture to Old Faithful.

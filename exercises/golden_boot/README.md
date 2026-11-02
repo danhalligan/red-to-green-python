@@ -8,8 +8,7 @@
 > likelihood, but not required.
 >
 > **You’ll practise:** Bayesian updating of a rate with a Gamma prior, posterior
-> means and credible intervals, comparing players by posterior probabilities, and
-> checking an estimate against what happened next.
+> means and credible intervals, and comparing players by posterior probabilities.
 >
 > **Check:** `uv run pytest exercises/golden_boot/ -q` checks the functions you
 > write. Your notebook's tables, plots and explanations check the investigation.
@@ -31,9 +30,8 @@ stages below.
 
 The table has one row for each player in each Premier League match of the
 2017/18 season: minutes played, goals, penalty goals, non-penalty goals and
-shots. It comes from the Wyscout public soccer match event dataset, shared under
-a CC BY 4.0 licence. See the [source note](data/SOURCE.md) for the columns, the
-credit, and what the data can and cannot tell us. Minutes are approximate.
+shots. See the [source note](data/SOURCE.md) for the columns, the
+credit, and what the data can and cannot tell us.
 
 ## Stage 1: Who's the best goalscorer?
 
@@ -42,27 +40,84 @@ season totals for the forwards and calculate non-penalty goals per 90 minutes.
 Sort the list. Who tops it, and how many minutes did they play? Would you give
 them the Golden Boot?
 
-Notice why we count non-penalty goals: a player who takes the team's penalties
-can add several goals that depend on the manager's choice, not on open play.
-
 ## Stage 2: Before the first kick
 
 In [notebook section 2](investigate.ipynb#2.-Before-the-first-kick), meet the
-prior. Let $\lambda$ be a forward's scoring rate in goals per 90 minutes. We do
-not know $\lambda$, so we describe what we believe about it before looking at
-that player with a **prior**, a probability distribution. A **Gamma**
-distribution is a flexible family for a positive rate, with a shape $\alpha$ and
-a *rate* $\beta$. We use $\operatorname{Gamma}(6, 18)$, which has mean
-$6/18 = 1/3$ of a goal per 90 minutes.
+prior.
 
-The rate parameter acts like an exposure: this prior is as informative as 18
-full matches of evidence, although those matches are not real records. It is an
-illustrative modelling choice, not an established fact. Plot it. What does it say
-about a typical forward? Why use a distribution instead of one assumed rate?
+### The model for this exercise
 
-> [!NOTE]
+The number of goals a forward scores in 90 minutes can be modelled with a
+Poisson distribution, whose one parameter $\lambda$ is the average number of
+goals per 90 minutes: the forward's *scoring rate*.
+
+We don't know the value of $\lambda$, but we can describe the values it might
+take by modelling it with another distribution. A **Gamma** distribution is a
+good choice, and describes the possible values of $\lambda$ with two parameters:
+a shape $\alpha$ and a *rate* $\beta$.
+
+### The idea: prior + data = posterior
+
+Bayesian inference is a way of updating what you believe when evidence arrives.
+It has three parts:
+
+- A **prior**: what you believe about the unknown *before* looking at this
+  player's data.
+- The **data**: what you observe, here a player's goals and minutes.
+- A **posterior**: what you believe *after* combining the two.
+
+In short, **prior + data = posterior**. The posterior is a whole distribution,
+not one number, so it says both what the unknown is likely to be and how unsure
+we still are. It can also serve as the prior for the next piece of data.
+
+You already reason this way. A new striker joins your club and scores in his
+first match. Before you saw him play, you expected something like a typical
+forward (your prior). One goal is encouraging, but it is one match, so you only
+nudge that expectation upwards. After thirty matches, the evidence has taken
+over. Bayes' rule is the arithmetic for how far to move, given how strong the
+prior is and how much data there is.
+
+### Where does the prior come from?
+
+From information that is not in this player's own data: earlier seasons, other
+leagues, or simply what we know about the job. Forwards usually score about a
+goal every three games, and nobody expects one to score five a game. When we know
+little, we can choose a deliberately vague prior instead. Either way the prior is
+a choice made by the analyst, so it should be stated openly and justified.
+
+Here we use $\operatorname{Gamma}(6, 18)$ for a forward's scoring rate in goals
+per 90 minutes. This is equivalent to "6 goals in 18 matches". Its mean is $6/18
+= 1/3$ of a goal per 90 minutes, about what we would expect for a typical
+forward. Its strength is a judgement: strong enough that a one-match record does
+not dominate, weak enough that a full season of evidence still counts. It is an
+illustrative modelling choice, not an established fact.
+
+### Isn't that making up data?
+
+A fair worry. There are four answers.
+
+- **The prior is not data.** It is never added to the table. It is an assumption
+  about which values are plausible before looking, written as a distribution.
+- **Every analysis makes assumptions.** Sorting by raw goals per 90 assumes a
+  player's record, however short, is the best guide to their true rate. Stage 1
+  shows how well that works. A prior states what to do with short records
+  instead, and anyone can disagree with it and change it.
+- **The data can overrule the prior.** A short record is pulled strongly towards
+  the prior and a long one much less, and with enough data the prior stops
+  mattering. One season is not enough to ignore it, which is a reason to be open
+  about it.
+- **You can check.** Repeat the analysis with a different prior. If a conclusion
+  survives, it does not rest on the prior; if it changes, say so. In Stage 5,
+  try your shortlist with $\operatorname{Gamma}(0.6, 1.8)$ and
+  $\operatorname{Gamma}(60, 180)$, which have the same mean but are worth about
+  2 and 180 matches. Which conclusions change?
+
+Plot our choice of prior: $\operatorname{Gamma}(6, 18)$ . What does it say about
+a typical forward?
+
+> [!WARNING]
 > SciPy's `gamma` is parameterised by a `scale`, which is $1/\beta$, not the
-> rate $\beta$.
+> rate $\beta$!
 
 ## Stage 3: Updating the evidence
 
@@ -71,25 +126,18 @@ about a typical forward? Why use a distribution instead of one assumed rate?
 
 If a forward scores $g$ goals in $e$ units of 90 minutes (so 270 minutes is
 $e = 3$), and goals arrive at rate $\lambda$, then $g \mid \lambda \sim
-\operatorname{Poisson}(\lambda e)$. For a Gamma prior the update has a closed
-form:
+\operatorname{Poisson}(\lambda e)$. 
+
+We can update our prior with the observed data to get a *posterior*
+distribution. For a Gamma prior, this is simple to calculate
 
 $$\lambda \mid g \sim \operatorname{Gamma}(\alpha + g,\ \beta + e).$$
 
-Implement `update_gamma` in [scoring_rates.py](scoring_rates.py). It returns the
-two parameters of the posterior, and it should reject counts and exposures that
-cannot be real, and priors that are not valid.
+Implement `update_gamma` in [scoring_rates.py](scoring_rates.py) to return the
+two parameters of the posterior.
 
 <details>
-<summary>💡 Hint 1: what is uncertain?</summary>
-
-A rate of 1.00 goals per 90 is not the same evidence after one match as after
-thirty. What does the prior need to know about how long we watched?
-
-</details>
-
-<details>
-<summary>💡 Hint 2: updating a Gamma prior</summary>
+<summary>💡 Hint 1: updating a Gamma prior</summary>
 
 Goals increase the first Gamma parameter, and time increases the second. How
 much time has passed, in the units the rate is measured in?
@@ -104,30 +152,23 @@ much time has passed, in the units the rate is measured in?
 Implement `posterior_summary` in [scoring_rates.py](scoring_rates.py). It
 returns the posterior mean rate and the ends of the central 95% **credible
 interval**: a range that contains the rate with posterior probability 95%, given
-the model, prior and data. This differs from a frequentist confidence interval,
-which describes how often a *procedure* would capture the truth over repeated
-samples, not the probability for one interval.
-
-<details>
-<summary>💡 Hint 3: the posterior summary</summary>
+the model, prior and data.
 
 The mean of a Gamma($a$, $b$) distribution is $a/b$. For the interval, use
 `scipy.stats.gamma.ppf([0.025, 0.975], a, scale=1 / b)`.
 
-</details>
-
 Then, in [notebook section 3](investigate.ipynb#3.-Updating-the-evidence),
-compare two records: A. Mitrović (one goal in 90 minutes) and Mohamed Salah. Plot
-the prior and both posteriors with `plot_rate_distributions`. How does each
-record move the prior? Why is Salah's posterior so much narrower?
+compare two records: A. Mitrović (one goal in 90 minutes) and Mohamed Salah.
+Plot the prior and both posteriors. How does each record move the prior? Why is
+Salah's posterior so much narrower?
 
 ## Stage 5: The Golden Boot shortlist
 
 In [notebook section 4](investigate.ipynb#4.-The-Golden-Boot-shortlist), make a
 table for ten recognisable forwards, with the raw rate, the posterior mean and
 the 95% credible interval, ranked by posterior mean. Has the ranking changed?
-Which players have the most precise estimates? Does a wide interval mean a player
-is worse?
+Which players have the most precise estimates? Does a wide interval mean a
+player is worse?
 
 ## Stage 6: How confident are you?
 
@@ -137,97 +178,30 @@ is worse?
 In [notebook section 5](investigate.ipynb#5.-How-confident-are-you?), Salah has
 a higher posterior mean than Kane. Does that make him the better scorer? Answer
 it with a probability: how likely is it that Salah's *true rate* is higher than
-Kane's? Each rate is uncertain, and each has its own posterior, so we cannot read
-the answer from the two means.
+Kane's? Each rate is uncertain, and each has its own posterior, so we cannot
+read the answer from the two means.
 
-Implement `probability_greater` in [scoring_rates.py](scoring_rates.py). It takes
-two Gamma posteriors, as `(shape, rate)` pairs, and returns the estimated
+Implement `probability_greater` in [scoring_rates.py](scoring_rates.py). It
+takes two Gamma posteriors, as `(shape, rate)` pairs, and returns the estimated
 probability that the first rate exceeds the second.
 
 <details>
 <summary>💡 Hint 1: a probability about two uncertain numbers</summary>
 
-If you could draw a possible rate for each player from their posterior, you could
-ask which is larger. Do that many times. What fraction of draws favours the first
-player?
+If you could draw a possible rate for each player from their posterior, you
+could ask which is larger. Do that many times. What fraction of draws favours
+the first player?
 
 </details>
 
 <details>
 <summary>💡 Hint 2: drawing from a Gamma posterior</summary>
 
-`rng = np.random.default_rng(seed)` makes a repeatable generator, and
+`rng = np.random.default_rng()` makes a random generator, and
 `rng.gamma(shape, scale, size)` draws from a Gamma distribution with a *scale*
-of $1/\text{rate}$. The mean of a boolean comparison such as `a > b` is the
-fraction of `True` values.
+of $1/\text{rate}$.
 
 </details>
 
 Then compare Salah with Kane, Kane with Agüero, and Agüero with Vardy. How does
 the answer relate to the gap between the means and the width of the intervals?
-
-> [!NOTE]
-> The draws describe our uncertainty about the rates. They are not simulated
-> goals.
-
-## Stage 7: Does it work?
-
-In [notebook section 6](investigate.ipynb#6.-Does-it-work?), check the idea
-against what happened next. Split the season at match 19. Using each forward's
-first-half record only, take the 20 with the highest raw rate. How many goals
-would their raw rates predict for the second half? How many would their posterior
-means predict? How many did they actually score? Explain the gap.
-
-## What the analysis can and cannot say
-
-- **One season of one league.** The estimates describe 2017/18 and say nothing
-  about how a player will score next year.
-- **A constant rate.** We assume goals arrive at a steady rate per minute,
-  independent of opponent, tactics, injuries and teammates. A player's rate
-  changes through a season.
-- **A shared prior.** One prior is used for every forward. It is close to a Gamma
-  fitted to the forwards in this same season, so it is not independent of the
-  data. A stronger or weaker prior would change the estimates.
-- **Approximate minutes.** Stoppage time is ignored, and a player's role is one
-  fixed code from the source.
-- **Rankings versus rates.** For forwards, the Bayesian estimates predict the rest
-  of the season better than the raw rates, but a Bayesian top ten is not
-  noticeably a better list of future scorers than a raw one. The gain is in the
-  rates.
-- **Selection.** Players who play more minutes are chosen by managers. These
-  are descriptive estimates, not controlled comparisons, and not a verdict on any
-  player.
-
-## Optional extension 🚀: shots or finishing?
-
-A forward's goals are the product of two things: how many shots they take, and
-how often those shots go in. Use the `shots` column.
-
-1. Calculate each forward's conversion (non-penalty goals per shot) for forwards
-   with at least 20 shots, and compare Vardy with Kane.
-2. Implement `beta_posterior_summary` in [scoring_rates.py](scoring_rates.py)
-   (check: `uv run pytest exercises/golden_boot/test_scoring_rates.py -k
-   beta_posterior -q`), then use it to shrink conversion with a
-   $\operatorname{Beta}(15, 85)$ prior (a mean of 15%, worth 100 shots). A
-   $\operatorname{Beta}(\alpha, \beta)$ prior with $k$ goals from $n$ shots gives
-   a $\operatorname{Beta}(\alpha + k,\ \beta + n - k)$ posterior: the same idea as
-   before, for a probability and a count of shots. How far does Vardy's
-   conversion move?
-3. Split the season at match 19. For forwards with at least 15 shots in each half,
-   see how well each quantity in the first half predicts the second: goals per
-   90, shots per 90 and conversion.
-
-Which of the three is most repeatable? Is conversion a skill, or mostly luck?
-These data have no measure of shot quality, so what does "conversion" actually
-measure?
-
-## References
-
-- Pappalardo L, Cintia P, Rossi A, *et al.* (2019). A public data set of
-  spatio-temporal match events in soccer competitions. *Scientific Data* 6: 236.
-  <https://www.nature.com/articles/s41597-019-0247-7>
-
-The data are shared under the
-[CC BY 4.0 licence](https://creativecommons.org/licenses/by/4.0/); see the
-[source note](data/SOURCE.md). This exercise is an independent, simplified
-analysis of one season.
