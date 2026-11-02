@@ -37,10 +37,12 @@ Implement `trimmed_mean(values, proportion)` in [robust.py](robust.py). A
 proportion of 0 is the ordinary mean; as the proportion approaches 0.5 the
 result approaches the median.
 
-In [notebook section 1](investigate.ipynb#1.-One-bad-number), contaminate clean
-normal data by replacing an increasing fraction of the values with wild ones.
-Plot the error of the mean, two trimmed means and the median against the
-fraction contaminated. Predict the plot first. Roughly how much contamination
+In [notebook section 1](investigate.ipynb#1.-One-bad-number), glitch clean
+normal data by knocking an increasing fraction of the values far off course.
+The supplied `glitch` helper in [glitch.py](glitch.py) does this, and lets you
+choose how big the glitches are, which way they go and where they land. Plot the
+error of the mean, two trimmed means and the median against the fraction
+glitched. Predict the plot first. Roughly how much contamination
 can each estimator take before it is dragged away? Then, in [section
 2](investigate.ipynb#2.-The-price-of-protection), switch to *clean* data and
 compare how much each estimator varies from sample to sample. Who wins when
@@ -187,7 +189,8 @@ probability model. Theil–Sen resists them without a model at all.
   under glitches?
 - Compare your results with `scipy.stats.theilslopes` and with the Student-$t$
   fit from [A likely story](../a_likely_story/README.md).
-- Glitch the *x* values instead of the *y* values. Which method copes?
+- Glitch the *x* values instead of the *y* values (pass `x` to `glitch`). Which
+  method copes?
 - Implement Siegel's repeated medians, which has a breakdown point of about 50%.
 
 ## Further reading
