@@ -85,7 +85,7 @@ goal every three games, and nobody expects one to score five a game. When we kno
 little, we can choose a deliberately vague prior instead. Either way the prior is
 a choice made by the analyst, so it should be stated openly and justified.
 
-Here we use $\operatorname{Gamma}(6, 18)$ for a forward's scoring rate in goals
+Here we use $\mathrm{Gamma}(6, 18)$ for a forward's scoring rate in goals
 per 90 minutes. This is equivalent to "6 goals in 18 matches". Its mean is $6/18
 = 1/3$ of a goal per 90 minutes, about what we would expect for a typical
 forward. Its strength is a judgement: strong enough that a one-match record does
@@ -108,11 +108,11 @@ A fair worry. There are four answers.
   about it.
 - **You can check.** Repeat the analysis with a different prior. If a conclusion
   survives, it does not rest on the prior; if it changes, say so. In Stage 5,
-  try your shortlist with $\operatorname{Gamma}(0.6, 1.8)$ and
-  $\operatorname{Gamma}(60, 180)$, which have the same mean but are worth about
+  try your shortlist with $\mathrm{Gamma}(0.6, 1.8)$ and
+  $\mathrm{Gamma}(60, 180)$, which have the same mean but are worth about
   2 and 180 matches. Which conclusions change?
 
-Plot our choice of prior: $\operatorname{Gamma}(6, 18)$ . What does it say about
+Plot our choice of prior: $\mathrm{Gamma}(6, 18)$ . What does it say about
 a typical forward?
 
 > [!WARNING]
@@ -126,12 +126,12 @@ a typical forward?
 
 If a forward scores $g$ goals in $e$ units of 90 minutes (so 270 minutes is
 $e = 3$), and goals arrive at rate $\lambda$, then $g \mid \lambda \sim
-\operatorname{Poisson}(\lambda e)$. 
+\mathrm{Poisson}(\lambda e)$. 
 
 We can update our prior with the observed data to get a *posterior*
 distribution. For a Gamma prior, this is simple to calculate
 
-$$\lambda \mid g \sim \operatorname{Gamma}(\alpha + g,\ \beta + e).$$
+$$\lambda \mid g \sim \mathrm{Gamma}(\alpha + g,\ \beta + e).$$
 
 Implement `update_gamma` in [scoring_rates.py](scoring_rates.py) to return the
 two parameters of the posterior.
