@@ -56,6 +56,9 @@ take by modelling it with another distribution. A **Gamma** distribution is a
 good choice, and describes the possible values of $\lambda$ with two parameters:
 a shape $\alpha$ and a *rate* $\beta$.
 
+<details>
+<summary>📖 Background: Bayesian updating</summary>
+
 ### The idea: prior + data = posterior
 
 Bayesian inference is a way of updating what you believe when evidence arrives.
@@ -85,13 +88,6 @@ goal every three games, and nobody expects one to score five a game. When we kno
 little, we can choose a deliberately vague prior instead. Either way the prior is
 a choice made by the analyst, so it should be stated openly and justified.
 
-Here we use $\mathrm{Gamma}(6, 18)$ for a forward's scoring rate in goals
-per 90 minutes. This is equivalent to "6 goals in 18 matches". Its mean is $6/18
-= 1/3$ of a goal per 90 minutes, about what we would expect for a typical
-forward. Its strength is a judgement: strong enough that a one-match record does
-not dominate, weak enough that a full season of evidence still counts. It is an
-illustrative modelling choice, not an established fact.
-
 ### Isn't that making up data?
 
 A fair worry. There are four answers.
@@ -111,6 +107,15 @@ A fair worry. There are four answers.
   try your shortlist with $\mathrm{Gamma}(0.6, 1.8)$ and
   $\mathrm{Gamma}(60, 180)$, which have the same mean but are worth about
   2 and 180 matches. Which conclusions change?
+
+</details>
+
+Here we use $\mathrm{Gamma}(6, 18)$ for a forward's scoring rate in goals
+per 90 minutes. This is equivalent to "6 goals in 18 matches". Its mean is $6/18
+= 1/3$ of a goal per 90 minutes, about what we would expect for a typical
+forward. Its strength is a judgement: strong enough that a one-match record does
+not dominate, weak enough that a full season of evidence still counts. It is an
+illustrative modelling choice, not an established fact.
 
 Plot our choice of prior: $\mathrm{Gamma}(6, 18)$ . What does it say about
 a typical forward?
