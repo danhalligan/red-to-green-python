@@ -138,6 +138,10 @@ Basic NumPy, probability and statistics help.
 - [Known unknowns](exercises/known_unknowns/README.md)
   🌶️🌶️: estimate uncertainty with standard errors, the bootstrap and confidence
   intervals, then use simulation to test whether each method keeps its promise.
+- [No median feat](exercises/no_median_feat/README.md)
+  🌶️🌶️: see how one wild value can wreck a mean, then build from the median to
+  the MAD and Theil–Sen regression, and use simulation to measure what that
+  protection costs.
 
 ### Parameter Estimation
 
