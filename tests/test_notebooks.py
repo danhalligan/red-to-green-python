@@ -31,6 +31,7 @@ REQUIRED_NOTEBOOKS = [
     "a_likely_story",
     "noisy_animals",
     "known_unknowns",
+    "golden_boot",
 ]
 
 
@@ -166,3 +167,11 @@ def test_spinning_plates_setup_points_at_the_data_files(science_stack):
         "plate_run_record.json",
     ):
         assert data_dir.joinpath(name).is_file()
+
+
+def test_golden_boot_setup_loads_the_player_match_table(science_stack):
+    namespace = run_setup(EXERCISES_DIR / "golden_boot/investigate.ipynb")
+    matches = namespace["matches"]
+
+    assert matches.shape == (10350, 10)
+    assert matches["player_id"].nunique() == 512
