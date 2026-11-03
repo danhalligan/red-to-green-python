@@ -1,5 +1,11 @@
 # red-to-green-python 0.1.0
 
+* Add "No median feat", a robust-estimation exercise on simulated data. Build a
+  trimmed mean, the median absolute deviation and an outlier flag, and see why
+  the 3σ rule can miss outliers. Then fit Theil–Sen regression and use
+  simulation to measure its breakdown point and what robustness costs on clean
+  data. Includes starter code, tests and a notebook.
+
 * Add "Golden Boot", a Bayesian updating exercise on every player's minutes and
   goals in the 2017/18 Premier League (Wyscout open data, CC BY 4.0). Update a
   Gamma prior for a forward's scoring rate, compare the stars with

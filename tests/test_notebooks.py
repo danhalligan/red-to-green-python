@@ -32,6 +32,7 @@ REQUIRED_NOTEBOOKS = [
     "noisy_animals",
     "known_unknowns",
     "golden_boot",
+    "no_median_feat",
 ]
 
 

@@ -220,8 +220,10 @@ Student-$t$ errors is a standard robust method, described by Lange, Little and
 Taylor in 1989 and taught in Bayesian texts such as *Bayesian Data Analysis*. It
 is available in practice, for example as `family = student` in R's brms or as a
 Student-$t$ likelihood in PyMC and Stan. It belongs with other robust
-approaches such as Huber regression and Theil–Sen, which you can find in
-scikit-learn. There are caveats. The degrees of freedom are a modelling choice
+approaches such as Huber regression, which you can find in scikit-learn, and
+Theil–Sen, which you can build yourself in
+[No median feat](../no_median_feat/README.md) without any probability model.
+There are caveats. The degrees of freedom are a modelling choice
 (small values mean heavier tails; large values recover the normal model), and
 you can estimate them from the data.
 
