@@ -167,7 +167,9 @@ the few observations in the middle of the sample, and the bootstrap needs more
 data to describe its variability. It also has no formula to fall back on. For
 normal data the median is less precise than the mean (its SE is about
 $1.25\sigma/\sqrt{n}$), while for exponential data the two are about equally
-precise, so which one to prefer depends on the population.
+precise, so which one to prefer depends on the population. [No median
+feat](../no_median_feat/README.md) takes this trade-off further, with skewed,
+heavy-tailed and glitched data.
 
 There are caveats. The bootstrap assumes independent observations that represent
 the population, and it can perform poorly for very small samples or for extreme

@@ -153,7 +153,8 @@ exercises build on it, with covariance matrices needed for multivariate mixtures
 
 - [A likely story](exercises/a_likely_story/README.md)
   🌶️🌶️: write down the probability of one data point and fit any model with it,
-  from a coin to a regression that shrugs off outliers.
+  from a coin to a regression that shrugs off outliers. (For outlier-proof
+  estimates without a model, see [No median feat](exercises/no_median_feat/README.md).)
 - [Golden Boot](exercises/golden_boot/README.md) 🌶️: who is the best
   goalscorer in the Premier League? Use real 2017/18 data and Bayesian updating
   to see why a short record flatters a striker.

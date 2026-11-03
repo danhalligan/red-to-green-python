@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from exercises.no_median_feat.glitch import glitch, sample, simulate
+from exercises.no_median_feat.simulation import glitch, sample, simulate
 
 
 def test_glitch_adds_the_size_to_a_fraction_of_the_values():

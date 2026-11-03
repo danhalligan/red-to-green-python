@@ -39,14 +39,14 @@ result approaches the median.
 
 In [notebook section 1](investigate.ipynb#1.-One-bad-number), glitch clean
 normal data by knocking an increasing fraction of the values far off course.
-The supplied `glitch` helper in [glitch.py](glitch.py) does this, and lets you
+The supplied `glitch` helper in [simulation.py](simulation.py) does this, and lets you
 choose how big the glitches are, which way they go and where they land. Plot the
 error of the mean, two trimmed means and the median against the fraction
 glitched. Predict the plot first. Roughly how much contamination
 can each estimator take before it is dragged away? Then, in
 [section 2](investigate.ipynb#2.-The-price-of-protection), compare the
 estimators on samples from several kinds of data. The supplied `sample` helper
-in [glitch.py](glitch.py) yields normal, skewed (exponential) or heavy-tailed
+in [simulation.py](simulation.py) yields normal, skewed (exponential) or heavy-tailed
 (`t`) samples, with or without glitches, and `simulate` (used in Stage 3) shares
 its noise options. Start with *clean* normal data and compare how much each
 estimator varies from sample to sample. Who wins when nothing goes wrong? Then
@@ -150,7 +150,7 @@ probability model, just medians.
 In [notebook section 4](investigate.ipynb#4.-A-line-that-shrugs), simulate a
 noisy straight line, glitch a few points and fit it with least squares
 (`numpy.polyfit`) and with `theil_sen`. The supplied `simulate` helper in
-[glitch.py](glitch.py) yields as many noisy datasets as you ask for, with normal
+[simulation.py](simulation.py) yields as many noisy datasets as you ask for, with normal
 or skewed noise and optional glitches. Use repeated simulation to compare the
 *slope* estimates under three kinds of data: clean normal noise, normal noise
 with glitches, and skewed noise.
