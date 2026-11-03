@@ -68,7 +68,9 @@ as robust as an estimator can be.
 On clean normal data the ranking reverses. The mean has the smallest standard
 error, and the median's is about 25% larger: you would need roughly 57% more
 data (a factor of $\pi/2$) for the median to match the mean. A trimmed mean sits
-in between. Robustness is insurance, and insurance costs a premium.
+in between. Robustness is insurance, and insurance costs a premium. With
+heavy-tailed data, though, the premium disappears: the mean becomes the least
+precise estimator, and the robust ones win outright.
 
 </details>
 
@@ -161,14 +163,20 @@ $x$.
 With glitches, the least-squares slope is dragged around while the Theil–Sen
 slope barely moves: a glitch spoils only the pairs it belongs to, so the median
 of all the pairs is untouched until a large fraction are spoiled. The breakdown
-point is about 29% of the points, $1 - 1/\sqrt{2}$, because that is when
-roughly half of the *pairs* involve a glitch.
+point is about 29% of the points, $1 - 1/\sqrt{2}$, but that is a *worst case*:
+all the glitches at one end, all pushing the same way, so that every pair mixing
+a glitch with a good point is wrong in the same direction, and half the pairs
+are mixed when 29% are glitched. Glitches at random positions are far less
+harmful, because the wrong slopes fall on both sides of the true one and
+largely cancel in the median.
 
 On clean normal data Theil–Sen gives up a little: its slope varies somewhat
 more than least squares (about 5% more variance for large samples), a small
 premium compared with the median's.
 
-With skewed noise the slopes agree, but the Theil–Sen intercept does not. The
+With skewed noise both slopes are unbiased, and Theil–Sen is actually *more*
+precise, because the long tail of large errors hurts a method built on means
+more than one built on medians. The Theil–Sen intercept, however, is biased. The
 median of skewed errors is not their mean, so Theil–Sen estimates a line through
 the *typical* point, while least squares estimates one through the *average*
 point. Neither is wrong, but they answer different questions, and you should
