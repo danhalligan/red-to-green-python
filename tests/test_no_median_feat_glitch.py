@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from exercises.no_median_feat.glitch import glitch
+from exercises.no_median_feat.glitch import glitch, simulate
 
 
 def test_glitch_adds_the_size_to_a_fraction_of_the_values():
@@ -59,3 +59,74 @@ def test_glitch_rejects_unknown_options():
         glitch([1.0, 2.0], where="middle")
     with pytest.raises(ValueError, match="direction"):
         glitch([1.0, 2.0], direction="sideways")
+
+
+def test_simulate_yields_the_requested_number_of_datasets():
+    datasets = list(simulate(7, n=12, rng=np.random.default_rng(1)))
+
+    assert len(datasets) == 7
+    for x, y in datasets:
+        assert x.tolist() == list(range(12))
+        assert y.shape == (12,)
+
+
+def test_simulate_is_reproducible_with_a_seeded_generator():
+    first = list(simulate(3, glitches=0.2, rng=np.random.default_rng(4)))
+    second = list(simulate(3, glitches=0.2, rng=np.random.default_rng(4)))
+
+    for (_, y1), (_, y2) in zip(first, second, strict=True):
+        assert np.array_equal(y1, y2)
+    assert not np.array_equal(first[0][1], first[1][1])
+
+
+def test_simulate_normal_noise_has_mean_zero_and_the_requested_sd():
+    residuals = np.concatenate(
+        [y - (1 + 2 * x) for x, y in simulate(200, sd=3, rng=np.random.default_rng(1))]
+    )
+
+    assert residuals.mean() == pytest.approx(0, abs=0.2)
+    assert residuals.std() == pytest.approx(3, abs=0.15)
+
+
+def test_simulate_exponential_noise_is_skewed_with_mean_zero():
+    residuals = np.concatenate(
+        [
+            y - (1 + 2 * x)
+            for x, y in simulate(200, noise="exponential", rng=np.random.default_rng(1))
+        ]
+    )
+
+    assert residuals.mean() == pytest.approx(0, abs=0.2)
+    assert residuals.std() == pytest.approx(3, abs=0.2)
+    assert np.median(residuals) < -0.5
+
+
+def test_simulate_follows_the_requested_line():
+    x, y = next(simulate(sd=0, intercept=5, slope=-1.5, n=10))
+
+    assert np.allclose(y, 5 - 1.5 * x)
+
+
+def test_simulate_glitches_a_fraction_of_the_points():
+    x, y = next(simulate(sd=0, glitches=0.1, size=50, rng=np.random.default_rng(3)))
+
+    off_course = ~np.isclose(y, 1 + 2 * x)
+    assert off_course.sum() == 3
+    assert np.allclose((y - (1 + 2 * x))[off_course], 50)
+
+
+def test_simulate_passes_glitch_options_through():
+    x, y = next(simulate(sd=0, glitches=0.2, where="end", direction="down", size=10))
+
+    assert (y - (1 + 2 * x))[-6:].tolist() == [-10.0] * 6
+    assert np.allclose((y - (1 + 2 * x))[:-6], 0)
+
+
+def test_simulate_is_clean_by_default():
+    for x, y in simulate(5, sd=0):
+        assert np.allclose(y, 1 + 2 * x)
+
+
+def test_simulate_rejects_unknown_noise():
+    with pytest.raises(ValueError, match="noise"):
+        next(simulate(noise="uniform"))

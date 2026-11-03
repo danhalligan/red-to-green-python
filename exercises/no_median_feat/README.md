@@ -137,9 +137,11 @@ probability model, just medians.
 
 In [notebook section 4](investigate.ipynb#4.-A-line-that-shrugs), simulate a
 noisy straight line, glitch a few points and fit it with least squares
-(`numpy.polyfit`) and with `theil_sen`. Then use repeated simulation to compare
-the *slope* estimates under three kinds of data: clean normal noise, normal
-noise with glitches, and skewed noise.
+(`numpy.polyfit`) and with `theil_sen`. The supplied `simulate` helper in
+[glitch.py](glitch.py) yields as many noisy datasets as you ask for, with normal
+or skewed noise and optional glitches. Use repeated simulation to compare the
+*slope* estimates under three kinds of data: clean normal noise, normal noise
+with glitches, and skewed noise.
 
 In [section 5](investigate.ipynb#5.-Where-it-breaks), find out where Theil–Sen
 breaks. Glitch a growing fraction of the points and plot the slope error. How
@@ -197,7 +199,7 @@ probability model. Theil–Sen resists them without a model at all.
   under glitches?
 - Compare your results with `scipy.stats.theilslopes` and with the Student-$t$
   fit from [A likely story](../a_likely_story/README.md).
-- Glitch the *x* values instead of the *y* values (pass `x` to `glitch`). Which
+- Glitch the *x* values instead of the *y* values (apply `glitch` to `x`). Which
   method copes?
 - Implement Siegel's repeated medians, which has a breakdown point of about 50%.
 
