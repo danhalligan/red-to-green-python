@@ -43,10 +43,14 @@ The supplied `glitch` helper in [glitch.py](glitch.py) does this, and lets you
 choose how big the glitches are, which way they go and where they land. Plot the
 error of the mean, two trimmed means and the median against the fraction
 glitched. Predict the plot first. Roughly how much contamination
-can each estimator take before it is dragged away? Then, in [section
-2](investigate.ipynb#2.-The-price-of-protection), switch to *clean* data and
-compare how much each estimator varies from sample to sample. Who wins when
-nothing goes wrong?
+can each estimator take before it is dragged away? Then, in [section 2](investigate.ipynb#2.-The-price-of-protection), compare the
+estimators on samples from several kinds of data. The supplied `sample` helper
+in [glitch.py](glitch.py) yields normal, skewed (exponential) or heavy-tailed
+(`t`) samples, with or without glitches, and `simulate` (used in Stage 3) shares
+its noise options. Start with *clean* normal data and compare how much each
+estimator varies from sample to sample. Who wins when nothing goes wrong? Then
+change the data and see whether the answer, and the standard error alone, still
+tells you what you need to know.
 
 <details>
 <summary>💡 Hint: measuring “how much it varies”</summary>
@@ -68,9 +72,16 @@ as robust as an estimator can be.
 On clean normal data the ranking reverses. The mean has the smallest standard
 error, and the median's is about 25% larger: you would need roughly 57% more
 data (a factor of $\pi/2$) for the median to match the mean. A trimmed mean sits
-in between. Robustness is insurance, and insurance costs a premium. With
-heavy-tailed data, though, the premium disappears: the mean becomes the least
-precise estimator, and the robust ones win outright.
+in between. Robustness is insurance, and insurance costs a premium.
+
+Change the data and the picture changes with it. With heavy-tailed data the
+premium disappears: the mean becomes the least precise estimator, and the robust
+ones win outright. With skewed data the robust estimators are more precise but
+*biased*, because the median and trimmed means estimate the typical value, not
+the average. And with a few glitches pushing the same way, the standard errors
+barely change at all while the mean is shifted by the average size of the
+glitches. A standard error measures how much an estimate varies, not how far
+off it is, so look at the bias as well.
 
 </details>
 

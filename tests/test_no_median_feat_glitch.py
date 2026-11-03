@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from exercises.no_median_feat.glitch import glitch, simulate
+from exercises.no_median_feat.glitch import glitch, sample, simulate
 
 
 def test_glitch_adds_the_size_to_a_fraction_of_the_values():
@@ -130,3 +130,65 @@ def test_simulate_is_clean_by_default():
 def test_simulate_rejects_unknown_noise():
     with pytest.raises(ValueError, match="noise"):
         next(simulate(noise="uniform"))
+
+
+def test_sample_yields_the_requested_number_of_samples():
+    samples = list(sample(6, n=12, rng=np.random.default_rng(1)))
+
+    assert len(samples) == 6
+    assert all(values.shape == (12,) for values in samples)
+
+
+def test_sample_is_reproducible_with_a_seeded_generator():
+    first = list(sample(3, glitches=0.2, rng=np.random.default_rng(4)))
+    second = list(sample(3, glitches=0.2, rng=np.random.default_rng(4)))
+
+    for a, b in zip(first, second, strict=True):
+        assert np.array_equal(a, b)
+    assert not np.array_equal(first[0], first[1])
+
+
+@pytest.mark.parametrize("noise", ["normal", "exponential", "t"])
+def test_sample_noise_has_mean_zero_and_the_requested_sd(noise):
+    values = np.concatenate(
+        list(sample(400, noise=noise, sd=2, rng=np.random.default_rng(1)))
+    )
+
+    assert values.mean() == pytest.approx(0, abs=0.15)
+    assert values.std() == pytest.approx(2, rel=0.15)
+
+
+def test_sample_shapes_differ_between_distributions():
+    exponential = np.concatenate(
+        list(sample(200, noise="exponential", rng=np.random.default_rng(1)))
+    )
+    heavy = np.concatenate(list(sample(200, noise="t", rng=np.random.default_rng(1))))
+    normal = np.concatenate(list(sample(200, rng=np.random.default_rng(1))))
+
+    assert np.median(exponential) == pytest.approx(np.log(2) - 1, abs=0.05)
+    assert np.abs(heavy).max() > 2 * np.abs(normal).max()
+
+
+def test_sample_glitches_a_fraction_of_the_values():
+    values = next(
+        sample(sd=0, n=40, glitches=0.1, size=50, rng=np.random.default_rng(3))
+    )
+
+    assert (values != 0).sum() == 4
+    assert set(values[values != 0]) == {50.0}
+
+
+def test_sample_is_clean_by_default():
+    for values in sample(5, sd=0):
+        assert not values.any()
+
+
+def test_simulate_accepts_heavy_tailed_noise():
+    x, y = next(simulate(noise="t", rng=np.random.default_rng(2)))
+
+    assert x.shape == y.shape == (30,)
+
+
+def test_sample_rejects_unknown_noise():
+    with pytest.raises(ValueError, match="noise"):
+        next(sample(noise="uniform"))

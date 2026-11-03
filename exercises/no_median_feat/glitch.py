@@ -1,4 +1,4 @@
-"""Helpers for the investigation: knock values off course and simulate lines."""
+"""Helpers for the investigation: knock values off course and simulate data."""
 
 from collections.abc import Iterator
 
@@ -51,6 +51,53 @@ def glitch(
     return glitched
 
 
+def _noise(noise: str, n: int, sd: float, rng: np.random.Generator) -> NDArray:
+    """Draw ``n`` values with mean 0 and standard deviation ``sd``."""
+    if noise == "normal":
+        return rng.normal(0, sd, size=n)
+    if noise == "exponential":
+        return rng.exponential(sd, size=n) - sd
+    if noise == "t":
+        # A t distribution with 3 degrees of freedom has variance 3.
+        return rng.standard_t(3, size=n) * sd / np.sqrt(3)
+    raise ValueError(f"noise must be 'normal', 'exponential' or 't', not {noise!r}")
+
+
+def sample(
+    repetitions: int = 1000,
+    *,
+    n: int = 50,
+    noise: str = "normal",
+    glitches: float = 0.0,
+    sd: float = 1.0,
+    size: float = 100.0,
+    where: str = "random",
+    direction: str = "up",
+    rng: np.random.Generator | None = None,
+) -> Iterator[NDArray[np.float64]]:
+    """Yield ``repetitions`` samples of ``n`` values centred on 0.
+
+    ``noise`` is ``"normal"``, ``"exponential"`` (skewed, so its median is below
+    its mean) or ``"t"`` (Student t with 3 degrees of freedom, heavy-tailed).
+    All three have mean 0 and standard deviation ``sd``, so they are directly
+    comparable.
+
+    ``glitches``, ``size``, ``where`` and ``direction`` work as in :func:`glitch`,
+    and the default ``glitches=0`` gives clean data. Pass a seeded ``rng`` to
+    make the samples reproducible.
+
+    Use it as ``for values in sample(5000, noise="t", rng=rng): ...``.
+    """
+    rng = np.random.default_rng() if rng is None else rng
+    for _ in range(repetitions):
+        values = _noise(noise, n, sd, rng)
+        if glitches > 0:
+            values = glitch(
+                values, glitches, size=size, where=where, direction=direction, rng=rng
+            )
+        yield values
+
+
 def simulate(
     repetitions: int = 1000,
     *,
@@ -69,8 +116,7 @@ def simulate(
 
     Each dataset has ``n`` points with ``x`` running from 0 to ``n - 1`` and
     ``y = intercept + slope * x`` plus noise with mean 0 and standard deviation
-    ``sd``. ``noise`` is ``"normal"`` or ``"exponential"``, a skewed distribution
-    whose mean is still 0 so that its median is below its mean.
+    ``sd``. ``noise`` is as in :func:`sample`.
 
     ``glitches`` is the fraction of the ``y`` values to knock off course; the
     default of 0 gives clean data. ``size``, ``where`` and ``direction`` are
@@ -80,17 +126,10 @@ def simulate(
     Use it for one dataset with ``x, y = next(simulate(rng=rng))`` or for many
     with ``for x, y in simulate(2000, rng=rng): ...``.
     """
-    if noise not in {"normal", "exponential"}:
-        raise ValueError(f"noise must be 'normal' or 'exponential', not {noise!r}")
-
     rng = np.random.default_rng() if rng is None else rng
     for _ in range(repetitions):
         x = np.arange(n, dtype=float)
-        if noise == "normal":
-            errors = rng.normal(0, sd, size=n)
-        else:
-            errors = rng.exponential(sd, size=n) - sd
-        y = intercept + slope * x + errors
+        y = intercept + slope * x + _noise(noise, n, sd, rng)
         if glitches > 0:
             y = glitch(
                 y, glitches, size=size, where=where, direction=direction, rng=rng
