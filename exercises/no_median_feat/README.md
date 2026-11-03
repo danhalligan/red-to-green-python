@@ -103,6 +103,12 @@ function) and check it against the tests.
 Then implement `flag_outliers(values, threshold=3.5)`, which marks values more
 than `threshold` scaled MADs from the median.
 
+A caveat the tests do not cover: if more than half of the values are identical
+(a sensor stuck on one reading, or counts with many ties), the MAD is 0, and
+every value that differs from the median, however slightly, is more than
+`threshold` MADs away. Try it. What would you want `flag_outliers` to do in that
+case, and what would you report to the person who gave you the data?
+
 In [notebook section
 3](investigate.ipynb#3.-Can-the-three-sigma-rule-see-outliers?),
 take a sample of ten sensible measurements and then add a couple of absurd
