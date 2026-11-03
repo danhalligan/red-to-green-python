@@ -43,7 +43,8 @@ The supplied `glitch` helper in [glitch.py](glitch.py) does this, and lets you
 choose how big the glitches are, which way they go and where they land. Plot the
 error of the mean, two trimmed means and the median against the fraction
 glitched. Predict the plot first. Roughly how much contamination
-can each estimator take before it is dragged away? Then, in [section 2](investigate.ipynb#2.-The-price-of-protection), compare the
+can each estimator take before it is dragged away? Then, in
+[section 2](investigate.ipynb#2.-The-price-of-protection), compare the
 estimators on samples from several kinds of data. The supplied `sample` helper
 in [glitch.py](glitch.py) yields normal, skewed (exponential) or heavy-tailed
 (`t`) samples, with or without glitches, and `simulate` (used in Stage 3) shares
