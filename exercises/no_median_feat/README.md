@@ -160,13 +160,13 @@ noisy straight line, glitch a few points and fit it with least squares
 [simulation.py](simulation.py) yields as many noisy datasets as you ask for,
 with normal or skewed noise and optional glitches. Use repeated simulation to
 compare the *slope* estimates under three kinds of data: clean normal noise,
-normal noise with glitches, and skewed noise.
+normal noise with glitches, and skewed noise. Look at the *intercept* too when
+the noise is skewed (but has mean zero), and predict what each method will
+estimate before you check.
 
 In [section 5](investigate.ipynb#5.-Where-it-breaks), find out where Theil–Sen
 breaks. Glitch a growing fraction of the points and plot the slope error. How
-much contamination can it take, and does it matter where the glitches are? Also
-look at the *intercept* when the noise is skewed (but has mean zero). Predict
-what each method will estimate, then check.
+much contamination can it take, and does it matter where the glitches are?
 
 <details>
 <summary>💡 Hint: all the pairs</summary>
@@ -218,6 +218,8 @@ probability model. Theil–Sen resists them without a model at all.
   under glitches?
 - Compare your results with `scipy.stats.theilslopes` and with the Student-$t$
   fit from [A likely story](../a_likely_story/README.md).
+- Explore the other glitch settings in `simulate`: `where="end"` and
+  `direction="down"` or `"both"`. When are glitches least harmful, and why?
 - Glitch the *x* values instead of the *y* values (apply `glitch` to `x`). Which
   method copes?
 - Implement Siegel's repeated medians, which has a breakdown point of about 50%.
