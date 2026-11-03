@@ -38,20 +38,20 @@ proportion of 0 is the ordinary mean; as the proportion approaches 0.5 the
 result approaches the median.
 
 In [notebook section 1](investigate.ipynb#1.-One-bad-number), glitch clean
-normal data by knocking an increasing fraction of the values far off course.
-The supplied `glitch` helper in [simulation.py](simulation.py) does this, and lets you
-choose how big the glitches are, which way they go and where they land. Plot the
-error of the mean, two trimmed means and the median against the fraction
-glitched. Predict the plot first. Roughly how much contamination
-can each estimator take before it is dragged away? Then, in
-[section 2](investigate.ipynb#2.-The-price-of-protection), compare the
-estimators on samples from several kinds of data. The supplied `sample` helper
-in [simulation.py](simulation.py) yields normal, skewed (exponential) or heavy-tailed
-(`t`) samples, with or without glitches, and `simulate` (used in Stage 3) shares
-its noise options. Start with *clean* normal data and compare how much each
-estimator varies from sample to sample. Who wins when nothing goes wrong? Then
-change the data and see whether the answer, and the standard error alone, still
-tells you what you need to know.
+normal data by knocking an increasing fraction of the values far off course. The
+supplied `glitch` helper in [simulation.py](simulation.py) does this, and lets
+you choose how big the glitches are, which way they go and where they land. Plot
+the error of the mean, two trimmed means and the median against the fraction
+glitched. Predict the plot first. Roughly how much contamination can each
+estimator take before it is dragged away? Then, in [section
+2](investigate.ipynb#2.-The-price-of-protection), compare the estimators on
+samples from several kinds of data. The supplied `sample` helper in
+[simulation.py](simulation.py) yields normal, skewed (exponential) or
+heavy-tailed (`t`) samples, with or without glitches, and `simulate` (used in
+Stage 3) shares its noise options. Start with *clean* normal data and compare
+how much each estimator varies from sample to sample. Who wins when nothing goes
+wrong? Then change the data and see whether the answer, and the standard error
+alone, still tells you what you need to know.
 
 <details>
 <summary>💡 Hint: measuring “how much it varies”</summary>
@@ -130,13 +130,14 @@ you calculated it?
 The outliers **mask** themselves. They inflate the mean and, much more, the
 standard deviation, so the very values that should stand out sit comfortably
 inside "3σ". There is even a hard limit: in a sample of $n$ values, no value can
-lie more than $(n-1)/\sqrt{n}$ sample standard deviations from the mean, which is
-about 2.85 when $n = 10$. With ten values, the 3σ rule *cannot* flag anything.
+lie more than $(n-1)/\sqrt{n}$ sample standard deviations from the mean, which
+is about 2.85 when $n = 10$. With ten values, the 3σ rule *cannot* flag
+anything.
 
 The median and MAD barely notice the outliers, so the robust rule measures
 everyone against an honest yardstick. The threshold of 3.5 is the value
-suggested by Iglewicz and Hoaglin for their “modified z-score”, which is the same
-calculation written with a different constant.
+suggested by Iglewicz and Hoaglin for their “modified z-score”, which is the
+same calculation written with a different constant.
 
 </details>
 
@@ -156,10 +157,10 @@ probability model, just medians.
 In [notebook section 4](investigate.ipynb#4.-A-line-that-shrugs), simulate a
 noisy straight line, glitch a few points and fit it with least squares
 (`numpy.polyfit`) and with `theil_sen`. The supplied `simulate` helper in
-[simulation.py](simulation.py) yields as many noisy datasets as you ask for, with normal
-or skewed noise and optional glitches. Use repeated simulation to compare the
-*slope* estimates under three kinds of data: clean normal noise, normal noise
-with glitches, and skewed noise.
+[simulation.py](simulation.py) yields as many noisy datasets as you ask for,
+with normal or skewed noise and optional glitches. Use repeated simulation to
+compare the *slope* estimates under three kinds of data: clean normal noise,
+normal noise with glitches, and skewed noise.
 
 In [section 5](investigate.ipynb#5.-Where-it-breaks), find out where Theil–Sen
 breaks. Glitch a growing fraction of the points and plot the slope error. How
