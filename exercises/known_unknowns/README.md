@@ -152,8 +152,7 @@ of each and calculate the standard deviation of those medians. Then, for $n =
 10, 30$ and $100$ and for both normal and skewed (exponential) data, compare
 that truth with the bootstrap estimates from single samples. Is the bootstrap
 right on average? How much do the individual estimates scatter, compared with
-the bootstrap estimates for the mean? Which statistic is more precise for each
-population?
+the bootstrap estimates for the mean?
 
 <details>
 <summary>What did you discover?</summary>
@@ -164,12 +163,10 @@ exponential data at $n=10$). But a single estimate is much noisier than for the
 mean: at $n=100$ the estimates scatter by around 20–25% of their value, compared
 with about 7% (normal) or 15% (exponential) for the mean. The median depends on
 the few observations in the middle of the sample, and the bootstrap needs more
-data to describe its variability. It also has no formula to fall back on. For
-normal data the median is less precise than the mean (its SE is about
-$1.25\sigma/\sqrt{n}$), while for exponential data the two are about equally
-precise, so which one to prefer depends on the population. [No median
-feat](../no_median_feat/README.md) takes this trade-off further, with skewed,
-heavy-tailed and glitched data.
+data to describe its variability. It also has no formula to fall back on.
+Whether the median or the mean is the better statistic to report is a separate
+question. [No median feat](../no_median_feat/README.md) takes it up, with
+skewed, heavy-tailed and glitched data.
 
 There are caveats. The bootstrap assumes independent observations that represent
 the population, and it can perform poorly for very small samples or for extreme
