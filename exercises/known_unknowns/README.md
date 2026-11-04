@@ -19,7 +19,7 @@ data yourself, you know the truth and can test whether those estimates, and the
 claims built on them, are right.
 
 Work through the three stages below, using the [simulation
-notebook](investigate.ipynb) throughout. Use seeded random generators so your
+notebook](simulation.ipynb) throughout. Use seeded random generators so your
 results are reproducible.
 
 ## Stage 1: Standard error
@@ -43,7 +43,7 @@ in the denominator): $\widehat{\mathrm{SE}}(\bar{x}) = s / \sqrt{n}$.
 Implement `standard_error` using $s$ in [uncertainty.py](uncertainty.py).
 
 Is the formula honest? In the
-[notebook](investigate.ipynb#1.-Is-the-standard-error-right-on-average?), we'll
+[notebook](simulation.ipynb#1.-Is-the-standard-error-right-on-average?), we'll
 investigate how well it performs by simulating samples from a normal
 distribution. Simulate 500 independent samples of standard normal data
 ($\sigma=1$) for each $n$ from 2 through 100. The true SE is then $1/\sqrt{n}$.
@@ -101,7 +101,7 @@ keyword-only `numpy.random.Generator` so the experiment is reproducible.
 ### Does it agree with the formula?
 
 For the mean, the bootstrap and $s/\sqrt{n}$ claim to estimate the same
-quantity. In [notebook section 2](investigate.ipynb#2.-Does-the-bootstrap-agree-with-the-formula?),
+quantity. In [notebook section 2](simulation.ipynb#2.-Does-the-bootstrap-agree-with-the-formula?),
 extend your stage 1 simulation to $n = 10, 30$ and $100$ and add the bootstrap
 estimate. Do they agree? Compare each with the true SE $1/\sqrt{n}$, and then
 with each other. Change the number of resamples. What changes as you use more
@@ -146,7 +146,7 @@ $n=100$.
 For the mean we already have a formula, so the bootstrap is only a check. The
 median has no such formula, but `bootstrap_standard_error(values,
 statistic=np.median)` works the same way. Is it any good? In [notebook section
-3](investigate.ipynb#3.-When-there-is-no-formula:-the-median), use simulation to
+3](simulation.ipynb#3.-When-there-is-no-formula:-the-median), use simulation to
 find the *true* standard error of the median: draw many samples, take the median
 of each and calculate the standard deviation of those medians. Then, for $n =
 10, 30$ and $100$ and for both normal and skewed (exponential) data, compare
@@ -199,7 +199,7 @@ because there we know the truth.
 
 ### Coverage for the mean
 
-In [notebook section 4](investigate.ipynb#4.-Confidence-interval-coverage-for-the-mean),
+In [notebook section 4](simulation.ipynb#4.-Confidence-interval-coverage-for-the-mean),
 draw samples of size 5, 10, 30 and 100 from a normal population and from a
 skewed one (an exponential distribution), with the true mean known. For each
 sample calculate three intervals: the normal interval with the normal critical
@@ -231,7 +231,7 @@ itself skewed at small $n$, and no interval of this symmetric kind has exactly
 ### Intervals for the median
 
 The same tools work for a statistic with no standard-error formula. In
-[notebook section 5](investigate.ipynb#5.-Confidence-intervals-for-the-median),
+[notebook section 5](simulation.ipynb#5.-Confidence-intervals-for-the-median),
 repeat the study for the *median*, using the true median of each population. Use
 two intervals: the normal interval centred on the sample median with the
 *bootstrap* standard error, and the percentile bootstrap interval. How does

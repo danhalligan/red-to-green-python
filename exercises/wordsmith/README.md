@@ -114,7 +114,7 @@ begin with two start markers.
 
 ## Investigation: what does it invent?
 
-Use the [wordsmith notebook](investigate.ipynb) to train a model on
+Use the [wordsmith notebook](playground.ipynb) to train a model on
 the whole word list and generate 100 words with a fixed random seed. Which ones
 look convincing, and which are ridiculous? Are any of them real English words?
 Can you find ten plausible new words that weren't in your original dictionary?

@@ -44,9 +44,10 @@ exercises/<exercise>/
     test_<exercise>.py
 ```
 
-Add an `investigate.ipynb`, a `data/` directory (data, expected outputs or
-images) or a `loaders.py` only if the exercise needs them; do not generate
-boilerplate files that serve no purpose. Put the exercise under the matching
+Add a notebook (`investigate.ipynb` unless a more specific name fits), a
+`data/` directory (data, expected outputs or images) or a `loaders.py` only if
+the exercise needs them; do not generate boilerplate files that serve no
+purpose. Put the exercise under the matching
 heading of the root `README.md` index.
 Put code or data in `exercises/_shared/` only when several exercises genuinely
 share it.

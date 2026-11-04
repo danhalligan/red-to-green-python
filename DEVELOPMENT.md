@@ -37,7 +37,7 @@ exercises/<exercise>/
     README.md           the instructions (learner-facing)
     <module>.py         the starter code
     test_<module>.py    the tests, red until the exercise is solved
-    investigate.ipynb   the notebook, if there is one
+    investigate.ipynb   the notebook, if there is one (or a more specific name)
     data/               data and expected outputs, if needed
 exercises/_shared/      code and data used by several exercises
 exercises/conftest.py   fixtures shared by every exercise test
@@ -62,7 +62,7 @@ tests/                  repository checks that are expected to pass
   working directory or `sys.path`. Put a loader in the exercise's `loaders.py`
   when more than one file needs it, and add a `tests/test_<exercise>_data.py`
   integrity test for each dataset.
-- Keep analysis and plotting tasks in the exercise's `investigate.ipynb`. Commit
+- Keep analysis and plotting tasks in the exercise's notebook. Commit
   notebooks without execution outputs or completed answers.
 - Open an investigation with the question, not the answer. Give help as
   collapsible hints (`<details>` with a `<summary>`), in up to three levels:
@@ -145,8 +145,9 @@ To work through the scientific analysis prompts, launch JupyterLab:
 uv run jupyter lab
 ```
 
-The `investigate.ipynb` notebooks are output-free learner workspaces. Their setup
-cells import the relevant exercise code and data and the optional scientific
+The exercise notebooks (`investigate.ipynb`, `playground.ipynb`,
+`simulation.ipynb` and `old_faithful.ipynb`) are output-free learner
+workspaces. Their setup cells import the relevant exercise code and data and the optional scientific
 stack; analysis cells are left for you to complete.
 
 ## Continuous integration

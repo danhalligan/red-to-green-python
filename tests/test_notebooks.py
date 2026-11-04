@@ -36,6 +36,23 @@ REQUIRED_NOTEBOOKS = [
 ]
 
 
+# Notebooks are called investigate.ipynb unless they have a more specific name.
+NOTEBOOK_NAMES = {
+    "fitting_a_mixture": "old_faithful.ipynb",
+    "noisy_animals": "playground.ipynb",
+    "game_of_life": "playground.ipynb",
+    "wordsmith": "playground.ipynb",
+    "a_likely_story": "simulation.ipynb",
+    "known_unknowns": "simulation.ipynb",
+    "no_median_feat": "simulation.ipynb",
+}
+
+
+def notebook_path(exercise: str) -> Path:
+    name = NOTEBOOK_NAMES.get(exercise, "investigate.ipynb")
+    return EXERCISES_DIR / exercise / name
+
+
 def notebook_id(path: Path) -> str:
     return str(path.relative_to(ROOT))
 
@@ -77,13 +94,11 @@ def science_stack(monkeypatch):
 
 @pytest.mark.parametrize("exercise", REQUIRED_NOTEBOOKS)
 def test_exercise_notebook_is_present(exercise):
-    assert (EXERCISES_DIR / exercise / "investigate.ipynb").is_file()
+    assert notebook_path(exercise).is_file()
 
 
 def test_no_unexpected_notebooks():
-    expected = {
-        EXERCISES_DIR / name / "investigate.ipynb" for name in REQUIRED_NOTEBOOKS
-    }
+    expected = {notebook_path(name) for name in REQUIRED_NOTEBOOKS}
     assert set(NOTEBOOKS) == expected
 
 
@@ -132,7 +147,7 @@ def test_penguin_parade_setup_loads_both_tables(science_stack):
 
 
 def test_old_faithful_setup_loads_the_dataset_as_a_dataframe(science_stack):
-    namespace = run_setup(EXERCISES_DIR / "fitting_a_mixture/investigate.ipynb")
+    namespace = run_setup(notebook_path("fitting_a_mixture"))
     faithful = namespace["faithful"]
 
     assert faithful.shape == (272, 2)

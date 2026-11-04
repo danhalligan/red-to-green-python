@@ -20,7 +20,7 @@ wrote yourself, and see a case where it beats a method you probably already
 know.
 
 All the data here are simulated, so you know the true parameters and can check
-whether your estimates find them. Work through the [notebook](investigate.ipynb)
+whether your estimates find them. Work through the [notebook](simulation.ipynb)
 alongside the stages below, using seeded random generators.
 
 ## Stage 1: Is this coin fair?
@@ -56,7 +56,7 @@ whatever maximises $\ell$ also maximises $\mathcal{L}$.
 Implement `bernoulli_log_likelihood` in [likelihood.py](likelihood.py). Think
 about what should happen when $p$ is exactly 0 or 1.
 
-In [notebook section 1](investigate.ipynb#1.-Is-this-coin-fair?), plot
+In [notebook section 1](simulation.ipynb#1.-Is-this-coin-fair?), plot
 $\ell(p)$ for a sequence of 10 flips with 7 heads, and again for 100 flips
 with 70 heads. Where is the
 peak in each case, and how does its shape differ? How many times more likely is
@@ -119,14 +119,14 @@ transform the estimates back.
 
 </details>
 
-In [notebook section 2](investigate.ipynb#2.-A-likelihood-surface), simulate 20
+In [notebook section 2](simulation.ipynb#2.-A-likelihood-surface), simulate 20
 observations from a normal distribution with known parameters and draw the
 log-likelihood as a contour plot over a grid of $\mu$ and $\sigma$. Mark the
 true values and your fitted estimate. Repeat with 200 observations. Compare the
 estimates with the sample mean and the *population* standard deviation (divisor
 $n$).
 
-Then, in [notebook section 3](investigate.ipynb#3.-Is-the-MLE-right-on-average?),
+Then, in [notebook section 3](simulation.ipynb#3.-Is-the-MLE-right-on-average?),
 fit many repeated samples at several sample sizes, including small ones. Do the
 estimates recover the true parameters on average? Does that depend on $n$?
 
@@ -165,7 +165,7 @@ The parameters are now $(a, b, \sigma)$, but nothing else changes. Implement
 `x` and `y`, runs `fit_mle` and returns a `LineFit` of the intercept, slope,
 noise scale and log-likelihood. As in Stage 2, fit $\log\sigma$ so that
 $\sigma$ stays positive. Starting every parameter at 0 is good enough here. In
-[notebook section 4](investigate.ipynb#4.-Regression-is-a-likelihood-too), fit
+[notebook section 4](simulation.ipynb#4.-Regression-is-a-likelihood-too), fit
 the 30 simulated points and compare the result with least squares
 (`np.polyfit(x, y, 1)`). What do you notice, and can you explain it by looking
 at the normal log-density?
@@ -184,7 +184,7 @@ your `normal_log_likelihood`.
 
 Now corrupt your data: move three of the points well away from the line, as if a
 sensor glitched. In [notebook section
-5](investigate.ipynb#5.-When-the-data-misbehave), fit the line again, by least
+5](simulation.ipynb#5.-When-the-data-misbehave), fit the line again, by least
 squares and with `fit_line_mle`, and plot both against the true line.
 
 Then change *one thing*: instead of a normal distribution for the noise, use a

@@ -260,17 +260,18 @@ read the guide first.
 
 ### Working with notebooks 📓
 
-Each exercise's notebook is called `investigate.ipynb` and sits in its exercise
+Each exercise's notebook (usually `investigate.ipynb`) sits in its exercise
 folder next to the instructions. It is a workspace for your investigation,
 not a completed example. Open it in VS Code with Jupyter support, or run
 `uv run jupyter lab` from the repository root. Use the project's `.venv` as
 the kernel, with the notebook and science packages installed as described above.
 
-Several statistics notebooks use the Old Faithful geyser data (in
-`exercises/_shared/data/`) to explore uncertainty, prediction and model choice,
-and some also check statistical methods against simulated data with known
-answers. Each problem has its own notebook, so you only need the one in your
-exercise folder.
+A few notebooks have a more specific name: `old_faithful.ipynb` applies the
+mixture models to the Old Faithful geyser data (in `exercises/_shared/data/`),
+`simulation.ipynb` checks statistical methods against simulated data with known
+answers, and `playground.ipynb` is a place to play with your finished code. Each
+problem has its own notebook, so you only need the one in your exercise folder.
+
 The [Titanic notebook](exercises/titanic_disaster/investigate.ipynb)
 is a staged machine-learning
 investigation. Its setup reserves a test set: keep exploration and model

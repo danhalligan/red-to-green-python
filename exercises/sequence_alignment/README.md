@@ -64,9 +64,8 @@ How far does this get you? Unfortunately, the number of possible alignments
 grows **very** quickly: for two sequences of length $n = 3$ there are 63;
 for $n = 7$ this grows to 48,639 and there are over eight million at $n=10$!
 
-Time your function as the sequences get longer, then think about the 10 and 11
-base example above. How long do you think it would take for two 1,000 base
-sequences?
+Time your function as the sequences get longer, then compare with the counts
+above. How long do you think it would take for two 1,000 base sequences?
 
 ## Dynamic programming & Needleman-Wunsch
 

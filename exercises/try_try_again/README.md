@@ -5,7 +5,7 @@
 > **Before you start:** basic Python.
 >
 > **Recommended first:** [Fibonacci](../python_fundamentals/README.md#q6-fibonacci-sequence)
-> (Python Fundamentals Q4), which introduces recurrence relationships.
+> (Python Fundamentals Q6), which introduces recurrence relationships.
 >
 > **You’ll practise:** breaking a problem into smaller ones, spotting repeated
 > work, caching, and building an answer up from the bottom.

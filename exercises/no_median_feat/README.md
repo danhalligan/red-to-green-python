@@ -22,7 +22,7 @@ Because protection has a price. In this exercise you will find out how much one
 wild value can hurt, what each defence costs when the data are well behaved, and
 build up from the median to a regression line that is hard to fool. Use
 simulated data throughout, so that you always know the truth. Work through the
-[notebook](investigate.ipynb) alongside the stages below, using seeded random
+[notebook](simulation.ipynb) alongside the stages below, using seeded random
 generators so that your results are reproducible.
 
 ## Stage 1: From mean to median
@@ -37,14 +37,14 @@ Implement `trimmed_mean(values, proportion)` in [robust.py](robust.py). A
 proportion of 0 is the ordinary mean; as the proportion approaches 0.5 the
 result approaches the median.
 
-In [notebook section 1](investigate.ipynb#1.-One-bad-number), glitch clean
+In [notebook section 1](simulation.ipynb#1.-One-bad-number), glitch clean
 normal data by knocking an increasing fraction of the values far off course. The
 supplied `glitch` helper in [simulation.py](simulation.py) does this, and lets
 you choose how big the glitches are, which way they go and where they land. Plot
 the error of the mean, two trimmed means and the median against the fraction
 glitched. Predict the plot first. Roughly how much contamination can each
 estimator take before it is dragged away? Then, in [section
-2](investigate.ipynb#2.-The-price-of-protection), compare the estimators on
+2](simulation.ipynb#2.-The-price-of-protection), compare the estimators on
 samples from several kinds of data. The supplied `sample` helper in
 [simulation.py](simulation.py) yields normal, skewed (exponential) or
 heavy-tailed (`t`) samples, with or without glitches, and `simulate` (used in
@@ -110,7 +110,7 @@ every value that differs from the median, however slightly, is more than
 case, and what would you report to the person who gave you the data?
 
 In [notebook section
-3](investigate.ipynb#3.-Can-the-three-sigma-rule-see-outliers?),
+3](simulation.ipynb#3.-Can-the-three-sigma-rule-see-outliers?),
 take a sample of ten sensible measurements and then add a couple of absurd
 ones. The familiar rule says to distrust anything more than three standard
 deviations from the mean. Does it catch your absurd values? Try a few sample
@@ -154,7 +154,7 @@ A least-squares line is a kind of mean, so it inherits the mean's weakness. The
 Implement `theil_sen(x, y)`, returning a `LineFit`. It needs no optimiser and no
 probability model, just medians.
 
-In [notebook section 4](investigate.ipynb#4.-A-line-that-shrugs), simulate a
+In [notebook section 4](simulation.ipynb#4.-A-line-that-shrugs), simulate a
 noisy straight line, glitch a few points and fit it with least squares
 (`numpy.polyfit`) and with `theil_sen`. The supplied `simulate` helper in
 [simulation.py](simulation.py) yields as many noisy datasets as you ask for,
@@ -164,7 +164,7 @@ normal noise with glitches, and skewed noise. Look at the *intercept* too when
 the noise is skewed (but has mean zero), and predict what each method will
 estimate before you check.
 
-In [section 5](investigate.ipynb#5.-Where-it-breaks), find out where Theil–Sen
+In [section 5](simulation.ipynb#5.-Where-it-breaks), find out where Theil–Sen
 breaks. Glitch a growing fraction of the points and plot the slope error. How
 much contamination can it take, and does it matter where the glitches are?
 

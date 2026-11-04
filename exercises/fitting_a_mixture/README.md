@@ -161,7 +161,7 @@ The docstrings give the details.
 ## Multivariate Gaussian EM
 
 Start with a diagnostic in the
-[Old Faithful notebook](investigate.ipynb#Waiting-time-prediction).
+[Old Faithful notebook](old_faithful.ipynb#Waiting-time-prediction).
 Plot every eruption's duration against the waiting time that followed it.
 Fit a straight line with `numpy.polyfit` or `scipy.stats.linregress`, interpret
 its slope and intercept in minutes, and plot residuals against fitted values.
@@ -173,7 +173,7 @@ mixture of two bivariate normal distributions, where the variables are the
 eruption duration and the waiting time to the next eruption (both in minutes).
 `load_faithful_data()` in [loaders.py](../_shared/loaders.py) provides them as
 (duration, waiting) pairs, and the [Old Faithful
-notebook](investigate.ipynb#The-data) describes the data in more detail.
+notebook](old_faithful.ipynb#The-data) describes the data in more detail.
 
 Each standard deviation is now replaced by a covariance matrix, held in a
 `MultivariateGaussianMixtureParameters` object. In
@@ -188,7 +188,7 @@ Faithful data. The two components are interchangeable (swapping them gives the
 same likelihood), so a fit keeps the labels of your starting values.
 
 Compare your fitted log-likelihood with the reference value in the tests (about
--1130.27). The [Old Faithful notebook](investigate.ipynb#Gaussian-mixture) gives rough
+-1130.27). The [Old Faithful notebook](old_faithful.ipynb#Gaussian-mixture) gives rough
 starting values and asks you to plot the fit. EM is not guaranteed to find the
 global maximum from every starting point.
 

@@ -151,7 +151,7 @@ How many readings carry a flag? Which of them would you trust?
 [Tidy data](https://byuidatascience.github.io/python4ds/tidy-data.html) has
 **one observation per row and one variable per column**. The export might be
 readable by eye, being laid out in the plate arrangement, but for an analysis
-pipline you need one row per *well*, with both channels side by side and
+pipeline you need one row per *well*, with both channels side by side and
 everything known about the well alongside, so you can operate on all
 measurements of one type by applying a function to a column.
 

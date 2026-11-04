@@ -109,7 +109,7 @@ The complete expected song is in
 [animal_song_full.txt](data/animal_song_full.txt), one line of
 the file per item in your list.
 
-Open the [Animal playground notebook](investigate.ipynb) to
+Open the [Animal playground notebook](playground.ipynb) to
 meet the band by name and hear the song for yourself. Its later sections use the
 parrot and the robot, so come back to it as you finish each exercise.
 
@@ -235,7 +235,7 @@ uv run pytest exercises/noisy_animals/test_animals.py -k cover -q
 ```
 
 With everything finished, return to the
-[Animal playground notebook](investigate.ipynb) and work 
+[Animal playground notebook](playground.ipynb) and work 
 through the parrot and robot sections.
 
 ## Looking back

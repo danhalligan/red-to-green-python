@@ -201,7 +201,7 @@ The trick here though is that to get each new number you "say what you see"!
 - Starting with `1`. Read it aloud as "one 1", giving your next number `11`
 - `11` is read as "two 1s" giving `21`
 - Next is "one 2, one 1": `1211`
-- Then "one 1, one 2, two ones2", i.e. `111221`
+- Then "one 1, one 2, two 1s", i.e. `111221`
 
 Each term is a tiny description of the one before it. This is the 
 [look-and-say sequence](https://en.wikipedia.org/wiki/Look-and-say_sequence).

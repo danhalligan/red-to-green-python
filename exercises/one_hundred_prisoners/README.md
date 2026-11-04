@@ -70,7 +70,9 @@ uv run pytest exercises/one_hundred_prisoners/test_prisoners.py -k clever
 **Investigation 🚀: alone and together.** In the
 [notebook](investigate.ipynb), compare the average number of
 prisoners who find their number under each strategy. Then plot the distribution
-ofExtension 🚀: why does it work?** Draw an arrangement of eight drawers as
+of the number found per game under each strategy.
+
+**Extension 🚀: why does it work?** Draw an arrangement of eight drawers as
 arrows from each drawer to the drawer whose number it holds. Follow the arrows
 from any drawer: where do you end up? Implement `cycle_lengths(arrangement)` to
 split an arrangement into its closed loops and return their lengths. You will use

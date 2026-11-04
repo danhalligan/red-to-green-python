@@ -7,7 +7,7 @@
 > the science packages (`uv sync --all-groups --extra science`).
 >
 > **Recommended first:** [Fibonacci](../python_fundamentals/README.md#q6-fibonacci-sequence)
-> (Python Fundamentals Q4), for endless generators, and
+> (Python Fundamentals Q6), for endless generators, and
 > [Office party](../office_party/README.md) for random numbers and seeding.
 >
 > **You’ll practise:** endless generators, reading an iterator lazily, a
