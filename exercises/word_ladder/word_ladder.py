@@ -22,7 +22,5 @@ def longest_shortest_ladder(words: set[str], length: int = 4) -> list[str]:
     moves, and return one shortest route between them, including both
     endpoints. Words of other lengths are ignored. If there is only one word
     of that length, the route is just that word.
-
-    Raise ValueError if `words` contains no word of that length.
     """
     raise NotImplementedError

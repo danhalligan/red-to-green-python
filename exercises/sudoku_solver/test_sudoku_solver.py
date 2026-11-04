@@ -139,9 +139,3 @@ def test_solver_returns_none_for_an_inconsistent_grid():
     grid[0][0] = grid[0][1]
 
     assert sudoku_solver(grid) is None
-
-
-@pytest.mark.parametrize("grid", [[[None] * 9 for _ in range(8)]])
-def test_solver_rejects_malformed_grids(grid):
-    with pytest.raises(ValueError):
-        sudoku_solver(grid)

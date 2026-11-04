@@ -20,12 +20,6 @@ def test_standard_error_uses_sample_standard_deviation():
     assert standard_error([1, 2, 3]) == pytest.approx(1 / math.sqrt(3))
 
 
-@pytest.mark.parametrize("values", [[], [1]])
-def test_standard_error_requires_two_observations(values):
-    with pytest.raises(ValueError, match="at least 2"):
-        standard_error(values)
-
-
 def test_bootstrap_standard_error_is_reproducible_and_near_analytic_estimate():
     observations = np.arange(1.0, 31.0)
     first = bootstrap_standard_error(observations, rng=np.random.default_rng(42))
@@ -33,13 +27,6 @@ def test_bootstrap_standard_error_is_reproducible_and_near_analytic_estimate():
 
     assert first == second
     assert first == pytest.approx(standard_error(observations), rel=0.12)
-
-
-def test_bootstrap_standard_error_checks_rng_and_resample_count():
-    with pytest.raises(TypeError, match="Generator"):
-        bootstrap_standard_error([1, 2, 3], rng=42)
-    with pytest.raises(ValueError, match="at least two"):
-        bootstrap_standard_error([1, 2, 3], resamples=1)
 
 
 def test_bootstrap_standard_error_uses_the_supplied_statistic():
@@ -86,17 +73,6 @@ def test_normal_interval_respects_the_confidence_level(needs_scipy):
     assert (low, high) == pytest.approx((-1.644854, 1.644854), rel=1e-5)
 
 
-@pytest.mark.parametrize("level", [0, 1, -0.5, 1.5])
-def test_normal_interval_requires_a_level_between_zero_and_one(level):
-    with pytest.raises(ValueError, match="level"):
-        normal_interval(10, 2, level=level)
-
-
-def test_normal_interval_rejects_a_negative_se():
-    with pytest.raises(ValueError, match="se"):
-        normal_interval(10, -2)
-
-
 def test_bootstrap_interval_is_reproducible_and_brackets_the_estimate():
     observations = np.arange(1.0, 101.0)
     first = bootstrap_interval(observations, rng=np.random.default_rng(5))
@@ -130,12 +106,3 @@ def test_bootstrap_interval_uses_the_supplied_statistic():
     )
 
     assert 1 <= low <= high < 29
-
-
-def test_bootstrap_interval_checks_its_arguments():
-    with pytest.raises(TypeError, match="Generator"):
-        bootstrap_interval([1, 2, 3], rng=42)
-    with pytest.raises(ValueError, match="at least two"):
-        bootstrap_interval([1, 2, 3], resamples=1)
-    with pytest.raises(ValueError, match="level"):
-        bootstrap_interval([1, 2, 3], level=1.5)

@@ -206,7 +206,10 @@ sample calculate three intervals: the normal interval with the normal critical
 value, the same with the $t$ critical value (`df = n - 1`), and the percentile
 bootstrap interval. Predict which methods will keep their promise, then record
 the proportion of intervals that contain the truth (the *coverage*) and plot
-coverage against $n$ for each method, with its Monte Carlo uncertainty.
+coverage against $n$ for each method, with its Monte Carlo uncertainty. The
+helpers in [simulation.py](simulation.py), `coverage_study` and `plot_coverage`,
+draw the samples and do the tabulating and plotting. You write the function that
+returns the three intervals for one sample, and decide what the truth is.
 
 <details>
 <summary>💡 Hint: how precise is a coverage estimate?</summary>

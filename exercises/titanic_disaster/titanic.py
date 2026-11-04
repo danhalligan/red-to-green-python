@@ -75,7 +75,7 @@ def titanic_pipeline(model: str = "logistic", **kwargs: Any) -> Pipeline:
 
     The Pipeline has two steps, named "preprocess" and "classifier".
     `model` chooses the classifier: "logistic" for a logistic regression or
-    "forest" for a random forest. Raise ValueError for any other model.
+    "forest" for a random forest.
 
     Pass any extra keyword arguments on to the classifier, for example
     random_state=42 to make results reproducible.

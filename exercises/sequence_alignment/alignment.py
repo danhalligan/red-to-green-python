@@ -6,9 +6,8 @@ from collections.abc import Iterator
 def score_alignment(aligned_first: str, aligned_second: str) -> int:
     """Score an existing alignment: +1 per match, -1 per mismatch or gap.
 
-    The two strings must have equal length, with `-` marking gaps. Raise
-    ValueError if the lengths differ or if any column has a gap in both rows,
-    which is not a valid alignment column.
+    The two strings have equal length, with `-` marking gaps; no column is a gap
+    in both rows.
     """
     raise NotImplementedError
 

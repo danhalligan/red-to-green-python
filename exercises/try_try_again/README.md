@@ -55,8 +55,7 @@ then a try, a try then a penalty, or a try then a drop goal. A few more:
 ## Stage 1: Reconstruct the match
 
 Implement `count_scoring_sequences(points)` in
-[rugby.py](rugby.py); it should raise a `ValueError` for a
-negative score. Work out 10 points by hand before you write any code, then check
+[rugby.py](rugby.py). Work out 10 points by hand before you write any code, then check
 it against your function. How you do it is up to you: any approach that gets the
 right counts will do. Stuck? There are 💡 hints.
 

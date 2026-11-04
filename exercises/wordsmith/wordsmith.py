@@ -24,8 +24,7 @@ def train_model(
     Convert each word to lowercase and skip any that is empty or contains
     anything but the letters `a` to `z`. Count every entry of `words`
     separately, and iterate over `sorted(words)` so the result does not depend
-    on set order. Return an empty dictionary if no word is usable. Raise
-    ValueError if `context_size` is less than 1.
+    on set order. Return an empty dictionary if no word is usable.
     """
     raise NotImplementedError
 
@@ -46,7 +45,6 @@ def generate_word(
     that `random.seed` gives the same word whatever order the model's counts
     were added in. Return None for an unsuccessful attempt: if the word would
     have more than `max_length` letters, if a context has no recorded
-    continuation, or if the word would be empty. Raise ValueError if `model` is
-    empty or `max_length` is less than 1.
+    continuation, or if the word would be empty.
     """
     raise NotImplementedError

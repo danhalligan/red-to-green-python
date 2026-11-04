@@ -74,8 +74,3 @@ def test_longest_shortest_ladder_uses_only_words_of_the_requested_length():
 
 def test_longest_shortest_ladder_of_a_single_word_is_that_word():
     assert longest_shortest_ladder({"cat"}, length=3) == ["cat"]
-
-
-def test_longest_shortest_ladder_rejects_a_missing_word_length():
-    with pytest.raises(ValueError):
-        longest_shortest_ladder({"cat", "cot"}, length=4)

@@ -23,11 +23,6 @@ def test_fittest_returns_a_phrase_with_the_most_matches():
     assert fittest([WEASEL_TARGET, "A" * 28]) == WEASEL_TARGET
 
 
-def test_fittest_rejects_an_empty_collection():
-    with pytest.raises(ValueError):
-        fittest([], "AAAA")
-
-
 def test_tournament_returns_a_member_of_the_population():
     population = ["AAAA", "AAAB", "AABB", "BBBB"]
     rng = np.random.default_rng(0)
@@ -57,19 +52,6 @@ def test_tournament_favours_fitter_individuals_but_not_exclusively():
 
     assert wins["AAAA"] > wins["AAAB"] > wins["AABB"] > wins["BBBB"]
     assert wins["AAAB"] > 0
-
-
-@pytest.mark.parametrize("tournament_size", [0, 5])
-def test_tournament_rejects_impossible_sizes(tournament_size):
-    population = ["AAAA", "AAAB", "AABB", "BBBB"]
-
-    with pytest.raises(ValueError):
-        tournament_select(
-            population,
-            "AAAA",
-            tournament_size=tournament_size,
-            rng=np.random.default_rng(0),
-        )
 
 
 def test_mutation_only_ga_starts_from_identical_copies_of_one_phrase():

@@ -8,8 +8,6 @@ def count_scoring_sequences(points: int) -> int:
     conversion (2). A conversion can only happen immediately after a try.
     Order matters, and a penalty and a drop goal count as different events.
     Zero points has exactly one sequence: no events at all.
-
-    Raise ValueError if `points` is negative.
     """
     raise NotImplementedError
 
@@ -29,7 +27,5 @@ def count_scoring_combinations(points: int) -> int:
     A tally records how many penalties, drop goals, tries and conversions there
     were. Each conversion still needs its own try, so no tally has more
     conversions than tries. Penalties and drop goals are still counted separately.
-
-    Raise ValueError if `points` is negative.
     """
     raise NotImplementedError

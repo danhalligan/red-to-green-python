@@ -1,5 +1,3 @@
-import pytest
-
 from exercises.sudoku_solver.loaders import load_sudoku_data
 from exercises.sudoku_solver.sudoku import sudoku_checker
 
@@ -11,20 +9,6 @@ def test_sudoku_matches_all_packaged_puzzle_answers():
 
 def test_sudoku_accepts_an_empty_grid():
     assert sudoku_checker([[None] * 9 for _ in range(9)]) is True
-
-
-@pytest.mark.parametrize(
-    "grid",
-    [
-        [[None] * 9 for _ in range(8)],
-        [[None] * 8 for _ in range(9)],
-        [[0] + [None] * 8] + [[None] * 9 for _ in range(8)],
-        [[True] + [None] * 8] + [[None] * 9 for _ in range(8)],
-    ],
-)
-def test_sudoku_rejects_malformed_grids(grid):
-    with pytest.raises(ValueError):
-        sudoku_checker(grid)
 
 
 def test_sudoku_rejects_a_duplicate_in_each_constraint_group():

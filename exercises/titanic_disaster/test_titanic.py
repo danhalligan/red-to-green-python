@@ -202,8 +202,3 @@ def test_pipeline_fits_on_training_rows_only_and_ignores_leaky_columns(passenger
     extreme["Age"] = 1e9
     pipeline.predict_proba(extreme)
     np.testing.assert_allclose(preprocess.transform(probe), before)
-
-
-def test_invalid_model_is_rejected():
-    with pytest.raises(ValueError, match="model"):
-        titanic_pipeline("unsupported")
