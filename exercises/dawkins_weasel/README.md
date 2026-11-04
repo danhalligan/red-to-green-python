@@ -23,8 +23,9 @@ population of ten copies by independently leaving each character unchanged with
 probability 0.99, or mutating it with probability 0.01 to one of the *other*
 26 symbols. Score a phrase by the number of positions matching the target,
 and choose a highest-scoring copy as the parent of the next generation. Break
-ties at random. For reproducibility in this Python version, retain the best
-candidate seen so far and inject a NumPy random generator.
+ties at random. Generations are discrete: the parent always comes from the
+latest copies, so a generation can be worse than the one before it. For
+reproducibility in this Python version, inject a NumPy random generator.
 
 ![A least weasel standing on a weathered log](data/least-weasel.jpg)
 
@@ -35,8 +36,8 @@ Commons, resized.</sub>
 
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
 [weasel.py](weasel.py). Each generation creates a fixed
-number of mutated copies, keeps a highest-scoring candidate, and records the
-best score. Then watch it evolve.
+number of mutated copies, keeps a highest-scoring copy as the next parent, and
+records that parent's score. Then watch it evolve.
 
 Use the [weasel simulation notebook](investigate.ipynb) to
 investigate. How many generations does it take to reach the target? Compare
@@ -49,7 +50,9 @@ best, and why?
 If an evolving run scored `population_size * generations` phrases, generate that
 many completely independent random phrases and keep the best score so far. Predict
 the outcome first, then plot both best-score-so-far curves against the number of
-phrases scored. Which gets closer to the target, and by how much?
+phrases scored. (The weasel's `match_history` can fall, so take its running
+maximum, for example with `numpy.maximum.accumulate`.) Which gets closer to the
+target, and by how much?
 
 > [!NOTE]
 > The weasel is a deliberately simplified model. It has a fixed target that
@@ -120,9 +123,10 @@ waiting is geometric, with mean $1/q$.
 <details>
 <summary>💡 Hint 3: comparing with simulations, and tiny probabilities</summary>
 
-Your `match_history` shows how many generations a run spent with a best score of
-27 before reaching 28. Collect this over many seeds and compare the average with
-$1/q$. (State your assumptions: for instance, a run may skip 27 altogether.)
+Your `match_history` shows how many generations a run spent with a parent
+scoring 27 before reaching 28. Collect this over many seeds and compare the
+average with $1/q$. (State your assumptions: for instance, a run may skip 27
+altogether, and the parent can drop back to 26 and return.)
 
 Beware that `1 - (1 - p) ** n` rounds to zero when $p$ is tiny;
 `-np.expm1(n * np.log1p(-p))` keeps the small positive value.
@@ -134,7 +138,7 @@ Beware that `1 - (1 - p) ** n` rounds to zero when $p$ is tiny;
 Three evolutionary strategies are racing to produce the target phrase. Which
 will win?
 
-1. **Original weasel:** mutated copies of the single best candidate.
+1. **Original weasel:** mutated copies of the single winner of the last generation.
 2. **Mutation-only GA:** a population bred by tournament selection and mutation.
 3. **Recombination GA:** tournament selection, one-point crossover and mutation.
 

@@ -89,12 +89,6 @@ def test_train_model_with_no_usable_words_is_empty():
     assert train_model({"it's", ""}) == {}
 
 
-@pytest.mark.parametrize("context_size", [0, -1])
-def test_train_model_rejects_a_context_size_below_one(context_size):
-    with pytest.raises(ValueError):
-        train_model(TINY, context_size)
-
-
 def test_generate_word_follows_only_transitions_the_model_has_seen():
     words = {"cat", "car", "dog", "cargo", "tag"}
     model = train_model(words)
@@ -174,13 +168,6 @@ def test_generate_word_never_returns_an_empty_word():
     model = {START: Counter({END: 1})}
 
     assert generate_word(model) is None
-
-
-def test_generate_word_rejects_an_empty_model_and_a_bad_length():
-    with pytest.raises(ValueError):
-        generate_word({})
-    with pytest.raises(ValueError):
-        generate_word(train_model(TINY), max_length=0)
 
 
 def test_generation_is_reproducible_with_a_seed():

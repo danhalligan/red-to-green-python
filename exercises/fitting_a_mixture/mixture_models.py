@@ -92,9 +92,6 @@ def hard_maximization_step(
     the mean and *population* standard deviation (`ddof=0`) of its
     observations. `weight1` is the fraction of observations labelled as
     component one.
-
-    Raises ValueError, rather than returning invalid parameters, if a group is
-    empty or has zero variance.
     """
     raise NotImplementedError
 
@@ -124,8 +121,6 @@ def soft_maximization_step(
     *population* standard deviation (`ddof=0`) are weighted by these values,
     and `weight1` is the mean of `weights`. `numpy.average(..., weights=...)`
     gives the weighted mean, but the weighted standard deviation is up to you.
-
-    Raises ValueError if a component has no weight or zero variance.
     """
     raise NotImplementedError
 
@@ -262,8 +257,6 @@ def multivariate_soft_maximization_step(
     means and weighted *population* covariance matrices; `numpy.cov` accepts
     `aweights`, and `ddof=0` gives the population version. `weight1` is the
     mean of `weights`.
-
-    Raises ValueError if a covariance matrix is singular.
     """
     raise NotImplementedError
 

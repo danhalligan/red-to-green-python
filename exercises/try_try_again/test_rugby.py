@@ -91,11 +91,6 @@ def test_count_scoring_sequences_for_the_entire_season(time_limit):
     assert count % 10**12 == 886499301161
 
 
-def test_count_scoring_sequences_rejects_negative_scores():
-    with pytest.raises(ValueError):
-        count_scoring_sequences(-1)
-
-
 @pytest.mark.parametrize(
     ("count", "score"),
     [(0, 0), (1, 3), (4, 9), (10, 11), (100, 18), (1000, 25)],
@@ -134,8 +129,3 @@ def test_count_scoring_combinations_matches_a_direct_count_of_tallies(points):
 @pytest.mark.parametrize("points", range(41))
 def test_count_scoring_combinations_never_exceeds_the_sequences(points):
     assert count_scoring_combinations(points) <= count_scoring_sequences(points)
-
-
-def test_count_scoring_combinations_rejects_negative_scores():
-    with pytest.raises(ValueError):
-        count_scoring_combinations(-1)

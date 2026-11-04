@@ -23,7 +23,6 @@ def mutate_message(
 
     Each character is left unchanged with probability `1 - mutation_rate`;
     otherwise it becomes one of the *other* symbols in `WEASEL_ALPHABET`.
-    Raise ValueError if `mutation_rate` is outside 0 to 1.
     """
     raise NotImplementedError
 
@@ -41,24 +40,22 @@ def evolve_weasel(
     Start from a uniformly random phrase over `WEASEL_ALPHABET`. Each
     generation, make `population_size` mutated copies of the current parent,
     score them with `matching_characters`, and choose a highest-scoring copy as
-    the next parent, breaking ties at random. Retain the best candidate seen so
-    far, so the best score never decreases. Use only the injected `rng` so runs
-    are reproducible.
+    the next parent, breaking ties at random. The parent always comes from the
+    latest generation, even if it scores worse than the previous parent. Use
+    only the injected `rng` so runs are reproducible.
 
     Stop when the target is matched or after `max_generations`. Return a
-    dictionary with keys `candidate` (the best phrase, a str), `generations`
-    (the number of generations run, an int), and `match_history` (a tuple of
-    best scores, each an int). The history starts with the initial random
-    phrase's score, so it has `generations + 1` entries.
+    dictionary with keys `candidate` (the final parent, a str), `generations`
+    (the number of generations run, an int), and `match_history` (a tuple with
+    the score of each parent, each an int). The history starts with the initial
+    random phrase's score, so it has `generations + 1` entries. Scores can fall
+    as well as rise.
     """
     raise NotImplementedError
 
 
 def fittest(phrases: Sequence[str], target: str = WEASEL_TARGET) -> str:
-    """Return a phrase with the most `matching_characters`; ties may go either way.
-
-    Raise ValueError if `phrases` is empty.
-    """
+    """Return a phrase with the most `matching_characters`; ties may go either way."""
     raise NotImplementedError
 
 
@@ -71,8 +68,7 @@ def tournament_select(
 ) -> str:
     """Pick a parent: the `fittest` of `tournament_size` distinct random phrases.
 
-    Raise ValueError if `tournament_size` is below 1 or above the population
-    size. Use only the injected `rng`.
+    Use only the injected `rng`.
     """
     raise NotImplementedError
 
@@ -81,9 +77,8 @@ def one_point_crossover(parent_a: str, parent_b: str, *, rng: Generator) -> str:
     """Join a prefix of `parent_a` to the matching suffix of `parent_b`.
 
     The cut falls at a uniformly random position strictly inside the phrase, so
-    the child always inherits at least one character from each parent. Raise
-    ValueError if the parents differ in length or have fewer than two
-    characters. Use only the injected `rng`.
+    the child always inherits at least one character from each parent. Use only
+    the injected `rng`.
     """
     raise NotImplementedError
 

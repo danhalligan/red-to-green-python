@@ -50,33 +50,6 @@ def test_gaussian_mixture_log_likelihood_uses_log_sum_exp():
     assert actual == pytest.approx(expected)
 
 
-@pytest.mark.parametrize(
-    "parameters",
-    [
-        {"standard_deviation1": 0},
-        {"standard_deviation2": -1},
-        {"weight1": 0},
-        {"weight1": 1},
-        {"mean1": math.nan},
-    ],
-)
-def test_gaussian_mixture_log_likelihood_rejects_invalid_parameters(
-    parameters,
-):
-    arguments = {
-        "mean1": 0.0,
-        "standard_deviation1": 1.0,
-        "mean2": 5.0,
-        "standard_deviation2": 1.0,
-        "weight1": 0.5,
-        "observations": [0.0, 5.0],
-    }
-    arguments.update(parameters)
-
-    with pytest.raises(ValueError):
-        gaussian_mixture_log_likelihood(**arguments)
-
-
 def test_gaussian_mixture_log_likelihood_is_finite_far_in_the_tail():
     observations = np.array([-1000.0, 0.0, 1000.0])
     expected = np.sum(
@@ -384,31 +357,6 @@ def test_em_reports_an_exhausted_iteration_budget_as_unconverged():
     assert not fitted.converged
     assert fitted.iterations == 3
     assert fitted.log_likelihood == 3.0
-
-
-@pytest.mark.parametrize(
-    "labels",
-    [
-        [True, True, True, True],
-        [False, False, False, False],
-        [True, False, False, False],
-    ],
-)
-def test_hard_m_step_rejects_empty_or_zero_variance_components(labels):
-    with pytest.raises(ValueError):
-        hard_maximization_step([-2.0, -1.0, 1.0, 2.0], labels)
-
-
-def test_soft_m_step_rejects_components_without_weight():
-    with pytest.raises(ValueError):
-        soft_maximization_step([-2.0, -1.0, 1.0, 2.0], [0.0, 0.0, 0.0, 0.0])
-
-
-def test_multivariate_m_step_rejects_singular_covariance():
-    on_a_line = np.array([[0.0, 0.0], [1.0, 1.0], [2.0, 2.0], [3.0, 3.0]])
-
-    with pytest.raises(ValueError):
-        multivariate_soft_maximization_step(on_a_line, [1.0, 1.0, 0.0, 0.0])
 
 
 def test_multivariate_fit_keeps_the_labels_of_the_starting_values():

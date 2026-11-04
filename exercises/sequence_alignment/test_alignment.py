@@ -88,15 +88,6 @@ def test_score_alignment_scores_matches_mismatches_and_gaps(
 
 
 @pytest.mark.parametrize(
-    ("aligned_first", "aligned_second"),
-    [("AC", "A"), ("A-C", "A-C"), ("A-", "A-")],
-)
-def test_score_alignment_rejects_invalid_alignments(aligned_first, aligned_second):
-    with pytest.raises(ValueError):
-        score_alignment(aligned_first, aligned_second)
-
-
-@pytest.mark.parametrize(
     ("first", "second", "expected"),
     [
         ("", "", 1),

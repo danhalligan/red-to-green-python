@@ -8,8 +8,7 @@ def sudoku_checker(grid: Grid) -> bool:
 
     `grid` is a list of nine rows of nine entries, each an integer 1 to 9 or
     `None` for a blank. A grid is valid when no row, column or 3 by 3 box
-    contains the same digit twice; blanks never conflict. Raise ValueError for
-    a malformed grid.
+    contains the same digit twice; blanks never conflict.
     """
     raise NotImplementedError
 
@@ -32,7 +31,6 @@ def sudoku_solver(grid: Grid) -> Grid | None:
     first complete solution.
 
     Work on a copy so the input grid is unchanged. Return None if the clues
-    already conflict or no completion exists. Raise ValueError for a malformed
-    grid (not nine rows of nine entries, each an integer 1 to 9 or None).
+    already conflict or no completion exists.
     """
     raise NotImplementedError

@@ -39,14 +39,6 @@ def test_crossover_can_beat_both_parents():
     assert best == 8
 
 
-@pytest.mark.parametrize(
-    ("parent_a", "parent_b"), [("ABC", "AB"), ("A", "B"), ("", "")]
-)
-def test_crossover_rejects_unusable_parents(parent_a, parent_b):
-    with pytest.raises(ValueError):
-        one_point_crossover(parent_a, parent_b, rng=np.random.default_rng(0))
-
-
 def test_recombination_ga_starts_from_the_same_population_as_mutation_only():
     mutation_only = evolve_population(
         population_size=25,

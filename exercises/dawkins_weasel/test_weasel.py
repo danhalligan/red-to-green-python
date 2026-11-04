@@ -112,17 +112,27 @@ def test_simulation_is_reproducible_with_an_injected_generator():
     assert all(isinstance(score, int) for score in first["match_history"])
     assert first == second
     assert len(first["match_history"]) == first["generations"] + 1
-    assert all(
-        earlier <= later
-        for earlier, later in zip(
-            first["match_history"], first["match_history"][1:], strict=False
-        )
+
+
+def test_each_generation_breeds_from_the_latest_offspring():
+    start = evolve_weasel(
+        population_size=5,
+        mutation_rate=1,
+        rng=np.random.default_rng(6),
+        max_generations=0,
+    )
+    next_generation = evolve_weasel(
+        population_size=5,
+        mutation_rate=1,
+        rng=np.random.default_rng(6),
+        max_generations=1,
     )
 
-
-@pytest.mark.parametrize("mutation_rate", [-0.1, 1.1])
-def test_simulation_rejects_invalid_mutation_rates(mutation_rate):
-    with pytest.raises(ValueError):
-        mutate_message(
-            "HELLO", mutation_rate=mutation_rate, rng=np.random.default_rng(0)
+    # Every offspring differs from its parent everywhere, so a parent kept from
+    # before (even a better one) would show up as a repeated character.
+    assert all(
+        new != old
+        for new, old in zip(
+            next_generation["candidate"], start["candidate"], strict=True
         )
+    )
