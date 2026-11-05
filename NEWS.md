@@ -1,5 +1,10 @@
 # red-to-green-python 0.1.0
 
+* Add "Breed like rabbits", a gentle NumPy exercise on a breeding population.
+  Iterate the logistic map, vectorise it over thousands of breeding rates, then
+  investigate what happens as the rate grows and plot a bifurcation diagram.
+  Includes starter code, tests and a notebook.
+
 * Add "No median feat", a robust-estimation exercise on simulated data. Build a
   trimmed mean, the median absolute deviation and an outlier flag, and see why
   the 3σ rule can miss outliers. Then fit Theil–Sen regression and use

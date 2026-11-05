@@ -27,6 +27,7 @@ REQUIRED_NOTEBOOKS = [
     "wordsmith",
     "game_of_life",
     "dawkins_weasel",
+    "breed_like_rabbits",
     "fitting_a_mixture",
     "a_likely_story",
     "noisy_animals",

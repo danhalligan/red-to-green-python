@@ -177,9 +177,13 @@ use the science packages for plots.
 
 ### Models of Life
 
-Explore how simple rules produce complex behaviour: deterministic cellular
-automata and stochastic evolution. Both exercises use NumPy.
+Explore how simple rules produce complex behaviour: a breeding population,
+deterministic cellular automata and stochastic evolution. All three exercises
+use NumPy.
 
+- [Breed like rabbits](exercises/breed_like_rabbits/README.md) 🌶️:
+  simulate a population of rabbits as their breeding rate changes, and see what
+  a one-line rule can do.
 - [Game of Life](exercises/game_of_life/README.md) 🌶️🌶️:
   build a cellular automaton and watch patterns grow and move.
 - [Dawkins' weasel](exercises/dawkins_weasel/README.md) 🌶️🌶️:
@@ -341,6 +345,10 @@ the exercise first.
 - [Inventing Game of Life (John Conway)](https://www.youtube.com/watch?v=R9Plq-D1gEk)
   (Numberphile): Conway describes how he came to invent the automaton. For
   [Game of Life](exercises/game_of_life/README.md).
+- [The Feigenbaum Constant (4.669)](https://www.youtube.com/watch?v=ETrYE4MdoLQ)
+  (Numberphile): ⚠️ **spoiler**, it shows what the population does as the
+  breeding rate grows. For
+  [Breed like rabbits](exercises/breed_like_rabbits/README.md).
 - [Titanic: Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic)
   (Kaggle): the competition this exercise is modelled on. For
   [Titanic disaster](exercises/titanic_disaster/README.md).
