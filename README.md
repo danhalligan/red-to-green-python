@@ -331,3 +331,29 @@ required reading before you start.
 - [Expectation-maximisation](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
   gives the broader latent-variable interpretation of EM. Read it after the
   mixture exercise to connect its alternating steps to the general method.
+
+### Inspiration
+
+Videos and talks that inspired some of the exercises. They are good for
+motivation, but ⚠️ marks those that give away ideas or solutions, so attempt
+the exercise first.
+
+- [Inventing Game of Life (John Conway)](https://www.youtube.com/watch?v=R9Plq-D1gEk)
+  (Numberphile): Conway describes how he came to invent the automaton. For
+  [Game of Life](exercises/game_of_life/README.md).
+- [Titanic: Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic)
+  (Kaggle): the competition this exercise is modelled on. For
+  [Titanic disaster](exercises/titanic_disaster/README.md).
+- [Python Sudoku Solver](https://www.youtube.com/watch?v=G_UYXzGuqvM)
+  (Computerphile): ⚠️ **spoiler**, it walks through a backtracking solution in
+  Python. For [Sudoku solver](exercises/sudoku_solver/README.md).
+- [The unbelievable solution to the 100 prisoner puzzle](https://www.youtube.com/watch?v=a1DUUnhk3uE)
+  (Stand-up Maths): ⚠️ **spoiler**, it reveals the winning strategy. For
+  [The 100 prisoners](exercises/one_hundred_prisoners/README.md).
+- [Penney's Game](https://www.youtube.com/watch?v=Sa9jLWKrX0c)
+  (Numberphile): ⚠️ **spoiler**, it reveals which pattern to pick second. For
+  the Penney's game extension of
+  [Waiting for heads](exercises/waiting_for_heads/README.md).
+- [All the Little Things](https://www.youtube.com/watch?v=8bZh5LMaSmE)
+  (Sandi Metz, RailsConf 2014): ⚠️ **spoiler**, it shows how to refactor this
+  same kata. For [Gilded Rose](exercises/gilded_rose/README.md).
