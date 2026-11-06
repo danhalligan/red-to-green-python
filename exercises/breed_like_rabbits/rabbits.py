@@ -3,44 +3,38 @@
 from numpy.typing import ArrayLike, NDArray
 
 
-def next_population(population: ArrayLike, growth_rate: float) -> NDArray:
+def breed(population: ArrayLike, growth_rate: ArrayLike) -> NDArray:
     """Return the population after one breeding season.
 
     `population` is the fraction of the field's carrying capacity that is
-    occupied, between 0 (no rabbits) and 1 (the field is full). It may be a
-    single number or an array; return an array of the same shape. Rabbits breed
+    occupied, between 0 (no rabbits) and 1 (the field is full). Rabbits breed
     in proportion to how many there are, `growth_rate * population`, but
     overcrowding cuts the rate by the fraction of the field already used,
-    `1 - population`. Do not modify the input.
+    `1 - population`. Both arguments may be single numbers or arrays, which are
+    combined elementwise (broadcast against each other). Do not modify the
+    inputs.
     """
     raise NotImplementedError
 
 
-def simulate_population(
-    growth_rate: float, *, start: float = 0.5, seasons: int = 100
+def simulate_seasons(
+    growth_rate: ArrayLike,
+    *,
+    start: float = 0.5,
+    seasons: int = 100,
+    discard: int = 0,
 ) -> NDArray:
     """Return the population at the start and after each of `seasons` seasons.
 
-    The result has `seasons + 1` values, beginning with `start`, and each
-    value follows from the previous one by `next_population`.
-    """
-    raise NotImplementedError
+    The first row is `start` and each later row follows from the one before by
+    `breed`, so there are `seasons + 1` rows. For a single growth rate the
+    result has shape `(seasons + 1,)`. For an array of growth rates, simulate
+    every rate at once from the same `start`, rather than one at a time, and
+    return shape `(seasons + 1, *growth_rate.shape)`: one column per rate, so
+    that thousands of rates stay fast.
 
-
-def long_run_population(
-    growth_rates: ArrayLike,
-    *,
-    start: float = 0.5,
-    burn_in: int = 500,
-    keep: int = 100,
-) -> NDArray:
-    """Return the populations the rabbits settle into, for many growth rates.
-
-    Simulate every growth rate from the same `start`. Discard the first
-    `burn_in` seasons, after `start`, as a transient, then keep the next `keep`
-    populations. For a single growth rate return an array of shape `(keep,)`;
-    for an array of `n` growth rates return shape `(n, keep)`, one row per rate.
-    Aim to do all the growth rates together rather than one at a time, so that
-    thousands of rates stay fast.
+    First run `discard` seasons without recording them, so that the rabbits can
+    settle down. The first row is then the population after those `discard`
+    seasons (still `start` when `discard` is 0), and `seasons` more follow.
     """
     raise NotImplementedError

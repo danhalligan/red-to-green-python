@@ -22,28 +22,27 @@ carrying capacity that is filled, from 0 (no rabbits) to 1 (a full field), and
 x_next = r * x * (1 - x)
 ```
 
-In this model `r * x` gives us more rabbits in the next generation, and
-`(1 - x)` stops the field getting too crowded.
+In this model `r * x` gives us more rabbits in the next generation depending on
+the breeding rate (`r`), and `(1 - x)` stops the field getting too crowded.
 
 The rule is a single line, so you'll probably expect the population to behave
 simply. Your job is to simulate it, then find out.
 
 In [rabbits.py](rabbits.py), implement:
 
-1. `next_population` for one breeding season. It should also work on a whole
-   array of populations at once.
-2. `simulate_population` to follow the rabbits for many seasons.
-3. `long_run_population` to find where the rabbits end up for many breeding
-   rates at the same time.
+1. `breed` for one breeding season. It should also work on whole arrays of
+   populations and breeding rates at once.
+2. `simulate_seasons` to follow the rabbits for many seasons. Give it a single
+   breeding rate, or thousands of them at once. Its `discard` option runs some
+   seasons first without recording them, so the rabbits can settle down.
 
 The docstrings give the details, and the tests check known cases.
 
 <details>
 <summary>Hint 1: nudge</summary>
 
-`long_run_population` takes an array of breeding rates. If `next_population`
-works elementwise, one call can advance the population for every rate for one
-season.
+`simulate_seasons` can take an array of breeding rates. If `breed` works
+elementwise, one call can advance the population for every rate for one season.
 
 </details>
 
@@ -51,18 +50,18 @@ season.
 <summary>Hint 2: strategy</summary>
 
 Keep one array holding the current population for every breeding rate. Loop over
-seasons, not over rates. Update that array each season, throw away the burn-in,
-then store the next `keep` seasons.
+seasons, not over rates, updating that array each season. Run the discarded seasons
+first, without storing them, then start recording.
 
 </details>
 
 <details>
 <summary>Hint 3: implementation guidance</summary>
 
-Start with `np.full(rates.shape, start)`. For the seasons you keep, write each new
-population array into one column of a preallocated array of shape
-`(*rates.shape, keep)` using `kept[..., season] = population`. That also gives
-`(keep,)` for a single breeding rate.
+Make a preallocated array of shape `(seasons + 1, *rates.shape)` with
+`np.empty`, set its first row to `start`, then fill each later row from the one
+before: `population[season + 1] = breed(population[season], rates)`. A single
+breeding rate has shape `()`, so this also gives `(seasons + 1,)`.
 
 </details>
 
@@ -75,8 +74,9 @@ run it: predict, then experiment.
    do the rabbits settle into, and how does that depend on `r`?
 2. Start two fields with populations that differ by one part in a billion. How
    do they compare after a while? Does the answer depend on `r`?
-3. Plot the long-run population against the breeding rate for `r` between 2.5
-   and 4. Then zoom in on anything interesting.
+3. Simulate thousands of breeding rates between 2.5 and 4, discard the early
+   seasons while the population settles, and plot what is left against `r`.
+   Then zoom in on anything interesting.
 
 When you have an explanation, compare it with the one below.
 
