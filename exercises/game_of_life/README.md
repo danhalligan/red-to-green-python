@@ -40,9 +40,12 @@ readable patterns in
 one on a board, `render_board` to print it, and `animate_boards` to watch it
 move, so you can focus on the algorithm.
 
-When the tests pass, open the [Game of Life notebook](playground.ipynb).
-Start with the glider, then take on the final challenge: can you build a machine
-that makes more machines? Load the "Gosper Glider Gun", only 36 cells, and see
-whether it can repeatedly create something that travels across the grid. The last
-test, which counts how a 36-cell pattern grows over time, is the check that you
-have built it.
+When the tests pass, open the [Game of Life notebook](playground.ipynb). Start
+with the glider, add it to the grid using `place_shape` and use `animate_boards`
+to watch the results.
+
+Now try loading the "Gosper Glider Gun". It's only 36 cells, yet it generates
+new gliders repeatedly!
+
+At the end of the notebook, there's a chance to explore further patterns that
+are included in the shapes data file.
