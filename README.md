@@ -344,11 +344,11 @@ the exercise first.
 - [Inventing Game of Life (John Conway)](https://www.youtube.com/watch?v=R9Plq-D1gEk)
   (Numberphile): Conway describes how he came to invent the automaton. For
   [Game of Life](exercises/game_of_life/README.md).
-- ⚠️ [The Feigenbaum Constant (4.669)](https://www.youtube.com/watch?v=ETrYE4MdoLQ):
-  contains a spoiler for [Breed like rabbits](exercises/breed_like_rabbits/README.md).
 - [Titanic: Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic): 
   the Kaggle competition [Titanic disaster](exercises/titanic_disaster/README.md) 
   is modelled on.
+- ⚠️ [The Feigenbaum Constant (4.669)](https://www.youtube.com/watch?v=ETrYE4MdoLQ):
+  contains a spoiler for [Breed like rabbits](exercises/breed_like_rabbits/README.md).
 - ⚠️ [Python Sudoku Solver](https://www.youtube.com/watch?v=G_UYXzGuqvM): 
   contains a spolier for [Sudoku solver](exercises/sudoku_solver/README.md).
 - ⚠️ [The unbelievable solution to the 100 prisoner puzzle](https://www.youtube.com/watch?v=a1DUUnhk3uE) 
