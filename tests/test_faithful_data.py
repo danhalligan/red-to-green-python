@@ -1,6 +1,6 @@
 """Integrity checks for the Old Faithful data."""
 
-from exercises._shared.loaders import load_faithful_data
+from exercises.fitting_a_mixture.loaders import load_faithful_data
 
 
 def test_faithful_data_has_documented_columns_and_rows():

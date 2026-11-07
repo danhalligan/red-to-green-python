@@ -1,6 +1,6 @@
 # Spinning plates 🧪
 
-> **Difficulty:** 🌶️🌶️, with optional advanced investigations
+> **Difficulty:** 🌶️🌶️🌶️, with optional advanced investigations
 >
 > **Before you start:** basic Python and pandas, and the optional scientific
 > stack (`uv sync --all-groups --extra science`).

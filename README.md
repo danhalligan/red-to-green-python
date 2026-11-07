@@ -8,15 +8,14 @@
 ## Introduction
 
 Welcome! This is a collection of Python problems to solve. You solve them by
-writing functions that start as stubs and whose tests fail and are *red* 🔴.
-If you complete them correctly the tests will turn *green* 🟢!
+writing functions that start as stubs and whose tests fail and are **red**.
+If you complete them correctly the tests will turn **green**!
 
 Problems run from FizzBuzz-sized warm-ups to data analysis, simulation,
-algorithms and statistical modelling, and along the way you will meet list
-comprehensions, generators, recursion, object orientation, refactoring,
-graph search, maximum likelihood,
-expectation-maximisation, probabilities that defy intuition and even a cellular
-automaton.
+algorithms and statistical modelling. Along the way you will meet list
+comprehensions, generators, recursion, object orientation, refactoring, graph
+search, maximum likelihood, expectation-maximisation, probabilities that defy
+intuition and even a cellular automaton.
 
 ## Getting started 🚦
 
@@ -38,7 +37,7 @@ Then try a first exercise, for example the quick warm-up
 
 2. Implement `exponentiate` in
    `exercises/python_fundamentals/fundamentals.py`.
-3. Rerun the same command until it passes: that is red to green.
+3. Rerun the same command until it passes.
 4. Keep going with the Python language problems, or pick any other!
 
 New to VS Code, environments or reading test failures? Follow
@@ -53,9 +52,8 @@ For an overview of the repository layout and development setup, see
 Pick a topic that interests you. Each link opens an exercise folder under
 `exercises/` that holds everything for that problem: its instructions (the
 README), starter code, tests, and any notebook or data. The index groups
-exercises by topic, and each is marked with its difficulty (🌶️ gentle, 🌶️🌶️ takes some
-thought, 🌶️🌶️🌶️ challenging) so you can see at a glance which are easy and
-which are hard.
+exercises by topic, and each is marked with its difficulty (🌶️ gentle, 🌶️🌶️
+takes some thought, 🌶️🌶️🌶️ challenging).
 
 If you are new to Python, start with the fundamentals. Otherwise, dip in
 wherever you like; the notes below flag useful background, not a required order.
@@ -83,49 +81,53 @@ the fundamentals and builds on the one before:
 Practise writing clear Python, organising it with classes, and improving it
 through tests and refactoring.
 
-- [Python Fundamentals](exercises/python_fundamentals/README.md) 🌶️:
-  short language exercises covering exponentiation, adjacent products, FizzBuzz,
+- [Python Fundamentals](exercises/python_fundamentals/README.md) 🌶️: short
+  language exercises covering exponentiation, adjacent products, FizzBuzz,
   Fibonacci and look-and-say generators, the first non-repeating character, and
   Python gotchas.
-- [Noisy animals](exercises/noisy_animals/README.md) 🌶️🌶️:
-  build a cast of talking animals, from noisy animals and a silent fox to a
-  parrot that learns and a robot. Practise classes, inheritance and polymorphism.
-- [Gilded Rose](exercises/gilded_rose/README.md) 🌶️🌶️:
-  tame an inherited codebase without breaking its existing behaviour.
-  Familiarity with classes helps.
+- [Noisy animals](exercises/noisy_animals/README.md) 🌶️🌶️: build a cast of
+  talking animals, from noisy animals and a silent fox to a parrot that learns
+  and a robot. Practise classes, inheritance and polymorphism.
+- [Gilded Rose](exercises/gilded_rose/README.md) 🌶️🌶️: tame an inherited
+  codebase without breaking its existing behaviour. Familiarity with classes
+  helps.
 
 ### Algorithms and Search
 
-Four self-contained exercises, each with its own page, starter code and tests.
-You can start with any of them, but some build on earlier ideas, as shown below.
+Solve puzzles that reward clever strategies over brute force. Discover how to
+explore large spaces of possibilities, avoid repeating work, and keep your code
+fast enough as the problems grow.
 
-- [Word ladder](exercises/word_ladder/README.md) 🌶️🌶️:
-  turn `play` into `game` one letter at a time.
-- [Try, try again](exercises/try_try_again/README.md) 🌶️🌶️:
-  count the ways a rugby score could have happened, from recursion to dynamic
-  programming. The Fibonacci exercise is useful background.
-- [Sudoku solver](exercises/sudoku_solver/README.md) 🌶️🌶️🌶️:
-  warm up with a checker, then backtrack your way to a solution.
-- [Sequence alignment](exercises/sequence_alignment/README.md)
-  🌶️🌶️🌶️: align two DNA sequences and discover why brute force cannot scale.
-  The rugby problem introduces the dynamic programming ideas used here.
+- [Word ladder](exercises/word_ladder/README.md) 🌶️🌶️: turn `play` into `game`
+  one letter at a time.
+- [Try, try again](exercises/try_try_again/README.md) 🌶️🌶️: count the ways a
+  rugby score could have happened, from recursion to dynamic programming. The
+  Fibonacci exercise is useful background.
+- [Sudoku solver](exercises/sudoku_solver/README.md) 🌶️🌶️🌶️: warm up with a
+  checker, then backtrack your way to a solution.
+- [Sequence alignment](exercises/sequence_alignment/README.md) 🌶️🌶️🌶️: align
+  two DNA sequences and discover why brute force cannot scale. The rugby problem
+  introduces the dynamic programming ideas used here.
 
 ### Data Analysis
 
 Explore data, look for relationships, and evaluate predictions on unseen data.
+Learn to use pandas to hold, clean, join and summarise data in data frames.
 These notebook-based exercises use the optional scientific stack.
 
-- [Mysterious data](exercises/mysterious_data/README.md) 🌶️:
-  thirteen datasets with matching summaries. What do their plots reveal?
-- [Penguin parade](exercises/penguin_parade/README.md) 🌶️: a field team counted
-  344 penguins and your data join found rather more. Reconcile real biological
-  measurements, investigate missing lab results and see what blood isotopes
+- [Mysterious data](exercises/mysterious_data/README.md) 🌶️: thirteen datasets
+  with matching summaries. What do their plots reveal?
+- [Penguin parade](exercises/penguin_parade/README.md) 🌶️: Reconcile real
+  biological measurements in a dataset for penguins from the Palmer Archipelago
+  in Antarctica, investigate missing lab results and see what blood isotopes
   reveal.
-- [Steak, Tea, and Toast](exercises/steak_tea_toast/README.md) 🌶️🌶️:
-  clean messy survey responses and investigate associations between preferences.
-- [Titanic disaster](exercises/titanic_disaster/README.md) 🌶️🌶️🌶️:
-  build a prediction pipeline, beat a baseline, and test it on unseen passengers.
-- [Spinning plates](exercises/spinning_plates/README.md) 🌶️🌶️: rescue a
+- [Steak, Tea, and Toast](exercises/steak_tea_toast/README.md) 🌶️🌶️: clean
+  messy responses and investigate associations between preferences from a real
+  survey on facebook.
+- [Titanic disaster](exercises/titanic_disaster/README.md) 🌶️🌶️: build a
+  prediction pipeline, beat a baseline, and test it on unseen passengers from
+  the Titanic disaster.
+- [Spinning plates](exercises/spinning_plates/README.md) 🌶️🌶️🌶️: rescue a
   seemingly failed laboratory experiment performed on a 96 well plate: parse
   plate-reader files, reconstruct the sample mapping, build a tidy DataFrame
   pipeline and decide whether the results can be trusted.
@@ -135,45 +137,43 @@ These notebook-based exercises use the optional scientific stack.
 Use repeated experiments to find out how much you can trust an estimate.
 Basic NumPy, probability and statistics help.
 
-- [Known unknowns](exercises/known_unknowns/README.md)
-  🌶️🌶️: estimate uncertainty with standard errors, the bootstrap and confidence
-  intervals, then use simulation to test whether each method keeps its promise.
-- [No median feat](exercises/no_median_feat/README.md)
-  🌶️🌶️: see how one wild value can wreck a mean, then build from the median to
-  the MAD and Theil–Sen regression, and use simulation to measure what that
-  protection costs.
+- [Known unknowns](exercises/known_unknowns/README.md) 🌶️🌶️: estimate
+  uncertainty with standard errors, the bootstrap and confidence intervals, then
+  use simulation to test whether each method keeps its promise.
+- [No median feat](exercises/no_median_feat/README.md) 🌶️🌶️: see how one wild
+  value can wreck a mean, then build from the median to the MAD and Theil–Sen
+  regression, and use simulation to measure what that protection costs.
 
 ### Parameter Estimation
 
-Estimate model parameters using likelihood, numerical optimisation and
-mixture models fitted by expectation-maximisation, or weigh the evidence in real
-football data with Bayesian updating.
-Start with likelihood for coins, normals and straight lines; the mixture
-exercises build on it, with covariance matrices needed for multivariate mixtures.
+Estimate model parameters using likelihood, numerical optimisation and mixture
+models fitted by expectation-maximisation, or weigh evidence in real football
+data with Bayesian updating. Start with likelihood for coins, normals and
+straight lines; the mixture exercises build on it, with covariance matrices
+needed for multivariate mixtures.
 
-- [A likely story](exercises/a_likely_story/README.md)
-  🌶️🌶️: write down the probability of one data point and fit any model with it,
-  from a coin to a regression that shrugs off outliers. (For outlier-proof
-  estimates without a model, see [No median feat](exercises/no_median_feat/README.md).)
+- [A likely story](exercises/a_likely_story/README.md) 🌶️🌶️: write down the
+  probability of one data point and fit any model with it, from a coin to a
+  robust regression.
 - [Golden Boot](exercises/golden_boot/README.md) 🌶️: who is the best
   goalscorer in the Premier League? Use real 2017/18 data and Bayesian updating
   to see why a short record flatters a striker.
-- [Fitting a mixture](exercises/fitting_a_mixture/README.md)
-  🌶️🌶️🌶️: write the mixture likelihood, then use hidden labels to fit hard and
-  soft mixtures and a bivariate mixture to Old Faithful.
+- [Fitting a mixture](exercises/fitting_a_mixture/README.md) 🌶️🌶️🌶️: write
+  the mixture likelihood, then use hidden labels to fit hard and soft mixtures
+  and a bivariate mixture to Old Faithful.
 
 ### Against the Odds
 
 Probability puzzles where your gut is confidently wrong. Predict, simulate,
-calculate and explain, using only the Python standard library; the investigations
-use the science packages for plots.
+calculate and explain, using only the Python standard library; the
+investigations use the science packages for plots.
 
-- [Office party](exercises/office_party/README.md) 🌶️:
-  how many people are required before a shared birthday is more likely than not?
-- [Waiting for heads](exercises/waiting_for_heads/README.md) 🌶️🌶️:
-  why is waiting for `HH` different from waiting for `HT`?
-- [The 100 prisoners](exercises/one_hundred_prisoners/README.md) 🌶️🌶️🌶️:
-  find a strategy for a hopeless-looking last chance at freedom.
+- [Office party](exercises/office_party/README.md) 🌶️: how many people are
+  required before a shared birthday is more likely than not?
+- [Waiting for heads](exercises/waiting_for_heads/README.md) 🌶️🌶️: why is
+  waiting for `HH` different from waiting for `HT`?
+- [The 100 prisoners](exercises/one_hundred_prisoners/README.md) 🌶️🌶️🌶️: find
+  a strategy for a hopeless-looking last chance at freedom.
 
 ### Models of Life
 
@@ -181,21 +181,20 @@ Explore how simple rules produce complex behaviour: a breeding population,
 deterministic cellular automata and stochastic evolution. All three exercises
 use NumPy.
 
-- [Breed like rabbits](exercises/breed_like_rabbits/README.md) 🌶️:
-  simulate a population of rabbits as their breeding rate changes, and see what
-  a one-line rule can do.
-- [Game of Life](exercises/game_of_life/README.md) 🌶️🌶️:
-  build a cellular automaton and watch patterns grow and move.
-- [Dawkins' weasel](exercises/dawkins_weasel/README.md) 🌶️🌶️:
-  can a sentence evolve out of gibberish through mutation and selection? Optional
-  extensions add a tournament-selection genetic algorithm, then recombination.
+- [Breed like rabbits](exercises/breed_like_rabbits/README.md) 🌶️: simulate a
+  population of rabbits as their breeding rate changes, and see what a one-line
+  rule can do.
+- [Game of Life](exercises/game_of_life/README.md) 🌶️🌶️: build a cellular
+  automaton and watch patterns grow and move.
+- [Dawkins' weasel](exercises/dawkins_weasel/README.md) 🌶️🌶️: can a sentence
+  evolve out of gibberish through mutation and selection? Optional extensions
+  add a tournament-selection genetic algorithm, then recombination.
 
 ### Generative Models
 
-- [Wordsmith](exercises/wordsmith/README.md)
-  🌶️🌶️: train a tiny probabilistic language model on English words, invent new
-  ones, and investigate whether remembering more characters makes a better
-  wordsmith.
+- [Wordsmith](exercises/wordsmith/README.md) 🌶️🌶️: train a tiny probabilistic
+  language model on English words, invent new ones, and investigate whether
+  remembering more characters makes a better wordsmith.
 
 ## How to work through the problems 🧭
 
@@ -271,16 +270,16 @@ not a completed example. Open it in VS Code with Jupyter support, or run
 the kernel, with the notebook and science packages installed as described above.
 
 A few notebooks have a more specific name: `old_faithful.ipynb` applies the
-mixture models to the Old Faithful geyser data (in `exercises/_shared/data/`),
-`simulation.ipynb` checks statistical methods against simulated data with known
-answers, and `playground.ipynb` is a place to play with your finished code. Each
-problem has its own notebook, so you only need the one in your exercise folder.
+mixture models to the Old Faithful geyser data (in
+`exercises/fitting_a_mixture/data/`), `simulation.ipynb` checks statistical
+methods against simulated data with known answers, and `playground.ipynb` is a
+place to play with your finished code. Each problem has its own notebook, so you
+only need the one in your exercise folder.
 
-The [Titanic notebook](exercises/titanic_disaster/investigate.ipynb)
-is a staged machine-learning
-investigation. Its setup reserves a test set: keep exploration and model
-selection on the training rows, then open the test set only for the final
-evaluation.
+The [Titanic notebook](exercises/titanic_disaster/investigate.ipynb) is a staged
+machine-learning investigation. Its setup reserves a test set: keep exploration
+and model selection on the training rows, then open the test set only for the
+final evaluation.
 
 Run the setup cells first, then fill the `TODO` cells for your investigation,
 running any earlier cells that section depends on. Implement reusable functions
@@ -310,9 +309,9 @@ required reading before you start.
 
 ### Working with scientific data
 
-- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html) introduces
-  arrays, axes and broadcasting: useful foundations for the simulations,
-  cellular automaton and mixture models.
+- [NumPy quickstart](https://numpy.org/doc/stable/user/quickstart.html)
+  introduces arrays, axes and broadcasting: useful foundations for the
+  simulations, cellular automaton and mixture models.
 - [pandas getting started](https://pandas.pydata.org/docs/getting_started/)
   covers selecting, cleaning, grouping and plotting tabular data. These are the
   main tools used in the data-analysis notebooks.

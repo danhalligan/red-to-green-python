@@ -103,8 +103,8 @@ def exponentiate(values: Iterable[float]) -> list[float]:
     raise NotImplementedError
 ```
 
-Next to it, a test file (`test_fundamentals.py`) checks your function. The tests are
-**expected to fail** at first: that is the *red* in red to green. Run this
+Next to it, a test file (`test_fundamentals.py`) checks your function. The tests
+are **expected to fail** at first: that is the *red* in red to green. Run this
 exercise's test in the terminal:
 
 ```bash
@@ -185,9 +185,9 @@ When your code is right you see the *green* result:
 Running `uv run pytest` on its own runs **every** exercise in the repository.
 Because most are unfinished, that prints about twenty thousand lines of red
 failures (`634 failed, 167 passed`). That is normal, and it is not a sign that
-anything is broken, but it is not helpful either. Instead, run only the tests for
-the exercise you are working on, using the command at the end of its problem page.
-A few options make the output shorter:
+anything is broken, but it is not helpful either. Instead, run only the tests
+for the exercise you are working on, using the command at the end of its problem
+page. A few options make the output shorter:
 
 | Add this | What it does |
 | --- | --- |
@@ -221,8 +221,8 @@ terminal. This project is already set up for it.
 2. After a moment you see a tree of folders, files and tests. If it is empty,
    see [Troubleshooting](#troubleshooting).
 3. Hover over any item and click the **play button** to run it. You can run one
-   test, a whole file or everything, but beware that running everything makes lots
-   of red marks.
+   test, a whole file or everything, but beware that running everything makes
+   lots of red marks.
 4. A red cross means a failure, and a green tick means a pass.
 5. Click a failed test to see the message in the **Test Results** panel at the
    bottom. It is the same information as in the terminal, but only for that one

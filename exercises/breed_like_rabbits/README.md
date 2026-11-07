@@ -28,15 +28,28 @@ the breeding rate (`r`), and `(1 - x)` stops the field getting too crowded.
 The rule is a single line, so you'll probably expect the population to behave
 simply. Your job is to simulate it, then find out.
 
-In [rabbits.py](rabbits.py), implement:
+## Stage 1: One season at a time
 
-1. `breed` for one breeding season. It should also work on whole arrays of
-   populations and breeding rates at once.
-2. `simulate_seasons` to follow the rabbits for many seasons. Give it a single
-   breeding rate, or thousands of them at once. Its `discard` option runs some
-   seasons first without recording them, so the rabbits can settle down.
+> **Check:** `uv run pytest exercises/breed_like_rabbits/test_rabbits.py -k "test_breed or empty_and_full" -q`
 
-The docstrings give the details, and the tests check known cases.
+In [rabbits.py](rabbits.py), implement `breed` for one breeding season. It
+should also work on whole arrays of populations and breeding rates at once. The
+docstring gives the details, and the tests check known cases.
+
+Then open the [rabbit notebook](investigate.ipynb) and work through section 1.
+Don't just run it: predict, then experiment. Start from 0.5 and apply `breed`
+over and over for a few breeding rates. What do the rabbits settle into, and how
+does that depend on `r`?
+
+## Stage 2: Skipping to the long run
+
+> **Check:** `uv run pytest exercises/breed_like_rabbits/test_rabbits.py -k "not test_breed and not empty_and_full" -q`
+
+The early seasons are just the rabbits finding their feet. To compare breeding
+rates we want the settled population size, so implement `simulate_seasons` to
+follow the rabbits for many seasons. It should use NumPy to simulate many
+breeding rates at once. Its `discard` option runs some seasons first without
+recording them, so only the settled populations are returned.
 
 <details>
 <summary>Hint 1: nudge</summary>
@@ -50,8 +63,8 @@ elementwise, one call can advance the population for every rate for one season.
 <summary>Hint 2: strategy</summary>
 
 Keep one array holding the current population for every breeding rate. Loop over
-seasons, not over rates, updating that array each season. Run the discarded seasons
-first, without storing them, then start recording.
+seasons, updating that array each season. Run the discarded seasons first,
+without storing them, then start recording.
 
 </details>
 
@@ -65,18 +78,19 @@ breeding rate has shape `()`, so this also gives `(seasons + 1,)`.
 
 </details>
 
+Check your function against your plots in section 2 of the notebook.
+
 ## Investigate
 
-When the tests pass, open the [rabbit notebook](investigate.ipynb). Don't just
-run it: predict, then experiment.
+With both functions working, return to the notebook (sections 3 to 5). Predict,
+then experiment.
 
-1. Simulate a few breeding rates and plot the populations against season. What
-   do the rabbits settle into, and how does that depend on `r`?
+1. Simulate thousands of breeding rates between 2.5 and 4, discard the early
+   seasons while the population settles, and plot what is left against `r`. How
+   does the settled population change as the breeding rate changes?
 2. Start two fields with populations that differ by one part in a billion. How
    do they compare after a while? Does the answer depend on `r`?
-3. Simulate thousands of breeding rates between 2.5 and 4, discard the early
-   seasons while the population settles, and plot what is left against `r`.
-   Then zoom in on anything interesting.
+3. Zoom in on anything interesting in your plot from the first question.
 
 When you have an explanation, compare it with the one below.
 
@@ -84,19 +98,19 @@ When you have an explanation, compare it with the one below.
 <summary>What did you discover?</summary>
 
 For small `r` the rabbits die out. Above `r = 1` they settle at a steady
-population, which rises with `r`. Around `r = 3` the steady population splits into
-a two-year cycle, then a four-year cycle, then eight, with each doubling arriving
-sooner than the last. Past `r ≈ 3.57` the pattern never repeats and the population
-looks random, even though the rule is simple and has no randomness in it. This is
-deterministic chaos.
+population, which rises with `r`. Around `r = 3` the steady population splits
+into a two-year cycle, then a four-year cycle, then eight, with each doubling
+arriving sooner than the last. Past `r ≈ 3.57` the pattern never repeats and the
+population looks random, even though the rule is simple and has no randomness in
+it. This is deterministic chaos.
 
 In the chaotic regime, tiny differences in the starting population are amplified
-every season, so two nearly identical fields soon diverge completely. That is why
-forecasting such systems is hard beyond a few seasons. The plot is not merely
-noise, though: it has clear structure and repeats itself at smaller scales.
-Chaos is interrupted by "windows" of order, such as the period-three window near
-`r ≈ 3.83`, and each window contains its own period-doubling route back into
-chaos.
+every season, so two nearly identical fields soon diverge completely. That is
+why forecasting such systems is hard beyond a few seasons. The plot is not
+merely noise, though: it has clear structure and repeats itself at smaller
+scales. Chaos is interrupted by "windows" of order, such as the period-three
+window near `r ≈ 3.83`, and each window contains its own period-doubling route
+back into chaos.
 
 This plot is closely related to a one-dimensional slice of the Mandelbrot set.
 Replace `x` by a suitably scaled and shifted version and the rabbit rule becomes

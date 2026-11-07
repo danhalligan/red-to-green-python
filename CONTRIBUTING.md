@@ -17,8 +17,8 @@ require them. Reference solutions may include them as good practice.
 
 Do not make learners pass a random generator through their functions unless
 controlling reproducibility is the goal of the exercise. Simulation exercises
-should use the global `random` module: `exercises/conftest.py` seeds it before every
-test, and a test of reproducibility calls `random.seed` itself. Choose
+should use the global `random` module: `exercises/conftest.py` seeds it before
+every test, and a test of reproducibility calls `random.seed` itself. Choose
 tolerances of about five standard errors, so a correct implementation passes
 whatever sequence of numbers it happens to draw.
 
@@ -34,7 +34,8 @@ payoff.
 
 Each exercise is a self-contained directory, `exercises/<exercise>/`
 (`snake_case`, so it is importable, and unique across the repository: the topic
-groupings live only in the root `README.md`). A typical coding exercise needs only:
+groupings live only in the root `README.md`). A typical coding exercise needs
+only:
 
 ```text
 exercises/<exercise>/
@@ -44,13 +45,12 @@ exercises/<exercise>/
     test_<exercise>.py
 ```
 
-Add a notebook (`investigate.ipynb` unless a more specific name fits), a
-`data/` directory (data, expected outputs or images) or a `loaders.py` only if
-the exercise needs them; do not generate boilerplate files that serve no
-purpose. Put the exercise under the matching
-heading of the root `README.md` index.
-Put code or data in `exercises/_shared/` only when several exercises genuinely
-share it.
+Add a notebook (`investigate.ipynb` unless a more specific name fits), a `data/`
+directory (data, expected outputs or images) or a `loaders.py` only if the
+exercise needs them; do not generate boilerplate files that serve no purpose.
+Put the exercise under the matching heading of the root `README.md` index. Put
+code or data in `exercises/_shared/` only when several exercises genuinely share
+it.
 
 Every exercise README should have:
 

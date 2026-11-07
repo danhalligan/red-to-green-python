@@ -13,19 +13,18 @@
 **Start with 28 random characters. Copy them with the odd typo, keep the best
 copy, and repeat. Can a sentence evolve out of gibberish?**
 
-In *The Blind Watchmaker*,
-Richard Dawkins used a simple computer model like this to show how cumulative
-selection can build something that looks designed. The target here is the
-28-character
-phrase `METHINKS IT IS LIKE A WEASEL`; each position is chosen from the 26
-uppercase letters and a space. Start with a uniformly random phrase. Make a
-population of ten copies by independently leaving each character unchanged with
-probability 0.99, or mutating it with probability 0.01 to one of the *other*
-26 symbols. Score a phrase by the number of positions matching the target,
-and choose a highest-scoring copy as the parent of the next generation. Break
-ties at random. Generations are discrete: the parent always comes from the
-latest copies, so a generation can be worse than the one before it. For
-reproducibility in this Python version, inject a NumPy random generator.
+In *The Blind Watchmaker*, Richard Dawkins used a simple computer model like
+this to show how cumulative selection can build something that looks designed.
+The target here is the 28-character phrase `METHINKS IT IS LIKE A WEASEL`; each
+position is chosen from the 26 uppercase letters and a space. Start with a
+uniformly random phrase. Make a population of ten copies by independently
+leaving each character unchanged with probability 0.99, or mutating it with
+probability 0.01 to one of the *other* 26 symbols. Score a phrase by the number
+of positions matching the target, and choose a highest-scoring copy as the
+parent of the next generation. Break ties at random. Generations are discrete:
+the parent always comes from the latest copies, so a generation can be worse
+than the one before it. For reproducibility in this Python version, inject a
+NumPy random generator.
 
 ![A least weasel standing on a weathered log](data/least-weasel.jpg)
 
@@ -35,9 +34,9 @@ Law](https://commons.wikimedia.org/wiki/File:Mustela_nivalis_-British_Wildlife_C
 Commons, resized.</sub>
 
 Implement `matching_characters`, `mutate_message`, and `evolve_weasel` in
-[weasel.py](weasel.py). Each generation creates a fixed
-number of mutated copies, keeps a highest-scoring copy as the next parent, and
-records that parent's score. Then watch it evolve.
+[weasel.py](weasel.py). Each generation creates a fixed number of mutated
+copies, keeps a highest-scoring copy as the next parent, and records that
+parent's score. Then watch it evolve.
 
 Use the [weasel simulation notebook](investigate.ipynb) to
 investigate. How many generations does it take to reach the target? Compare
@@ -171,17 +170,17 @@ each generation's offspring one at a time.
 <details>
 <summary>💡 Hint 2: a strategy</summary>
 
-The loop looks like `evolve_weasel`, but the parent now varies per offspring
-and the population (not just a best score) carries from one generation to the next.
+The loop looks like `evolve_weasel`, but the parent now varies per offspring and
+the population (not just a best score) carries from one generation to the next.
 
 </details>
 
-Now let the weasels discover sex. **One-point crossover** gives each offspring two
-parents: pick a cut position strictly inside the phrase, then join the first part
-of one parent to the rest of the other. Implement `one_point_crossover` and switch
-it on with `crossover=True` in `evolve_population`. For each offspring, choose two
-parents independently by tournament selection, cross them over, and then mutate
-the child as before. Use crossover for every offspring.
+Now let the weasels discover sex. **One-point crossover** gives each offspring
+two parents: pick a cut position strictly inside the phrase, then join the first
+part of one parent to the rest of the other. Implement `one_point_crossover` and
+switch it on with `crossover=True` in `evolve_population`. For each offspring,
+choose two parents independently by tournament selection, cross them over, and
+then mutate the child as before. Use crossover for every offspring.
 
 > **Check:** `uv run pytest exercises/dawkins_weasel/test_weasel_crossover.py -m advanced -q`
 
@@ -194,11 +193,11 @@ Try crossing `"AAAABBBB"` with `"BBBBAAAA"` and scoring the children against
 </details>
 
 **The race.** Predict the winner before running anything. Then compare the three
-strategies across 20 to 30 seeds in the notebook. Does recombination really help?
-Does changing the mutation rate affect the winner?
+strategies across 20 to 30 seeds in the notebook. Does recombination really
+help? Does changing the mutation rate affect the winner?
 
 A fair race gives every strategy the same target, population size, mutation rate
-and budget of scored phrases (so not each method's defaults), counts generations to
-the target, and reports any runs that fail to get there within a generation limit.
-Report your results as experimental findings: they depend on the settings and need
-not favour any one strategy.
+and budget of scored phrases (so not each method's defaults), counts generations
+to the target, and reports any runs that fail to get there within a generation
+limit. Report your results as experimental findings: they depend on the settings
+and need not favour any one strategy.

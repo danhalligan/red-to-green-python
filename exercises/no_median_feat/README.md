@@ -141,7 +141,7 @@ same calculation written with a different constant.
 
 </details>
 
-## Stage 3: A line that shrugs
+## Stage 3: A robust line
 
 > **Check:** `uv run pytest exercises/no_median_feat/test_robust.py -k theil_sen -q`
 
@@ -154,7 +154,7 @@ A least-squares line is a kind of mean, so it inherits the mean's weakness. The
 Implement `theil_sen(x, y)`, returning a `LineFit`. It needs no optimiser and no
 probability model, just medians.
 
-In [notebook section 4](simulation.ipynb#4.-A-line-that-shrugs), simulate a
+In [notebook section 4](simulation.ipynb#4.-A-robust-line), simulate a
 noisy straight line, glitch a few points and fit it with least squares
 (`numpy.polyfit`) and with `theil_sen`. The supplied `simulate` helper in
 [simulation.py](simulation.py) yields as many noisy datasets as you ask for,

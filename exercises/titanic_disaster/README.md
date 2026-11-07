@@ -1,6 +1,6 @@
 # Titanic disaster 🚢
 
-> **Difficulty:** 🌶️🌶️🌶️
+> **Difficulty:** 🌶️🌶️
 >
 > **Before you start:** basic Python, pandas and plotting, and the optional
 > scientific stack (`uv sync --all-groups --extra science`).

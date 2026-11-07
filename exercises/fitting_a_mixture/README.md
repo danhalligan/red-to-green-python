@@ -8,7 +8,7 @@
 > **Recommended first:**
 > [A likely story](../a_likely_story/README.md)
 > (likelihood and maximum likelihood). The final part introduces Old Faithful
-> with a short regression diagnostic before fitting a mixture.
+> with a plot of the data before fitting a mixture.
 >
 > **You’ll practise:** the mixture likelihood, working in log space, hidden
 > labels, expectation-maximisation (EM), hard and soft assignment, weighted
@@ -16,7 +16,7 @@
 >
 > **Check:** `uv run pytest exercises/fitting_a_mixture/test_mixture_models.py -k gaussian_mixture_log_likelihood -q`
 > for the likelihood, then `uv run pytest exercises/fitting_a_mixture/test_mixture_models.py -m advanced -q`
-> for EM.
+> for EM. The bivariate part has its own check, given in its section below.
 
 Suppose observations come from one of two Gaussian distributed populations, but
 we do not know which population produced each observation. If the first
@@ -52,10 +52,7 @@ We could maximise this log-likelihood over all five parameters numerically
 (for example with the `fit_mle` you wrote in
 [A likely story](../a_likely_story/README.md)). That can work, but
 it is tricky: the parameters are constrained, there are local optima, and the
-likelihood is unbounded if a component collapses onto a single observation. To
-see the last point, evaluate your function with `mean1` equal to one of the
-observations and a shrinking `standard_deviation1`. The difficulties grow with
-every extra component.
+likelihood is unbounded if a component of the mixture collapses onto a *single* observation (with mean equal to the observation and a standard deviation of 0).
 
 There is a neat way round this. Imagine each observation came with a *hidden
 label* saying which population produced it. With the labels, estimation becomes
@@ -107,14 +104,16 @@ and so on, endlessly).
 Then write `expectation_maximization`, which takes values from `em_steps` until
 the log-likelihood stops changing, and `mixture_log_likelihood`, which
 calculates the sum of the log mixture densities across observations. Stop on the
-*absolute* change in log-likelihood.[^abs-change] The docstrings give the exact
-signatures, stopping rule and return values, and the tests check them. Neither
-function needs to know what the parameters are, so they should work for any
-model with an E-step and an M-step.
+*absolute* change in log-likelihood.[^abs-change] Neither function needs to know
+what the parameters are, so they should work for any model with an E-step and an
+M-step.
 
-[^abs-change]: Hard EM optimises a different objective, so its log-likelihood
-    can fall from one iteration to the next, whereas soft EM never decreases it
-    (apart from rounding). A large decrease is therefore not convergence.
+[^abs-change]: Soft EM never decreases its log-likelihood (apart from rounding),
+    it always increases up to a maximum. Hard EM optimises a different
+    objective, so its log-likelihood can fall from one iteration to the next. If
+    you stopped when `new - old` was below the tolerance, a large fall would
+    look like convergence, because the difference is negative. Using the
+    absolute change avoids this.
 
 Then write `fit_hard_gaussian_mixture`, which calls `expectation_maximization`
 using the hard steps. Check that it gives a reasonable fit to some sample data,
@@ -160,52 +159,46 @@ The docstrings give the details.
 
 ## Multivariate Gaussian EM
 
-Start with a diagnostic in the
-[Old Faithful notebook](old_faithful.ipynb#Waiting-time-prediction).
-Plot every eruption's duration against the waiting time that followed it.
-Fit a straight line with `numpy.polyfit` or `scipy.stats.linregress`, interpret
-its slope and intercept in minutes, and plot residuals against fitted values.
-Calculate $R^2$: does a respectable value mean the model captures the structure?
-This is a short model check, not an evaluation of out-of-sample prediction.
+> **Check:** `uv run pytest exercises/fitting_a_mixture/test_multivariate_mixture.py -q`
 
-Do the points look like one cloud, or something else? Suppose they come from a
-mixture of two bivariate normal distributions, where the variables are the
-eruption duration and the waiting time to the next eruption (both in minutes).
-`load_faithful_data()` in [loaders.py](../_shared/loaders.py) provides them as
-(duration, waiting) pairs, and the [Old Faithful
-notebook](old_faithful.ipynb#The-data) describes the data in more detail.
+Start by plotting the data in the [Old Faithful
+notebook](old_faithful.ipynb#Plot-the-data). [plotting.py](plotting.py) provides
+`plot_faithful_mixture()` which draws every eruption's duration against the
+waiting time that followed it. The points look like there are two underlying
+groups which can be distinguished by both eruption duration and the waiting
+time. This motivates a bivariate mixture modelling approach.
+
+`load_faithful_data()` in [loaders.py](loaders.py) provides them as (duration, waiting) pairs, and the [Old Faithful notebook](old_faithful.ipynb#The-data) 
+describes the data in more detail.
 
 Each standard deviation is now replaced by a covariance matrix, held in a
-`MultivariateGaussianMixtureParameters` object. In
-[mixture_models.py](mixture_models.py), write multivariate
-counterparts of the soft-EM functions:
-`multivariate_mixture_log_likelihood`,
-`multivariate_soft_expectation_step`, `multivariate_soft_maximization_step` and
-`fit_multivariate_gaussian_mixture`. Reuse your `expectation_maximization` for
-the last of these: the loop shouldn't need to change. Finally, write
-`fit_faithful_gaussian_mixture(initial_parameters)`, which fits the packaged Old
-Faithful data. The two components are interchangeable (swapping them gives the
-same likelihood), so a fit keeps the labels of your starting values.
+`MixtureParameters` object. In [multivariate_mixture.py](multivariate_mixture.py),
+write the multivariate counterparts of the soft-EM functions:
 
-Compare your fitted log-likelihood with the reference value in the tests (about
--1130.27). The [Old Faithful notebook](old_faithful.ipynb#Gaussian-mixture) gives rough
-starting values and asks you to plot the fit. EM is not guaranteed to find the
-global maximum from every starting point.
+- `log_likelihood`, like `mixture_log_likelihood`;
+- `expectation_step`, like `soft_expectation_step`;
+- `maximization_step`, like `soft_maximization_step`;
+- `fit`, like `fit_soft_gaussian_mixture`. 
 
-Because the fit is held in a `MultivariateGaussianMixtureParameters` object,
-[mixture_models.py](mixture_models.py) can supply plotting
-helpers that work with it. `plot_faithful_mixture(parameters)` draws the
-Old Faithful data with each component in its own colour (mean and ellipses one
-and two standard deviations out), and colours each eruption by the component
-that most likely produced it, using your `multivariate_soft_expectation_step`.
-Plot your starting values and your fitted result to check that the clusters look
-sensible.
+Reuse your `expectation_maximization`: the loop shouldn't need to change.
+
+The two components are interchangeable (swapping them gives the same
+likelihood), so a fit keeps the labels of your starting values.
+
+Now fit the Old Faithful data, loaded with `load_faithful_data()`, and compare
+your fitted log-likelihood with the reference value in the tests (about
+-1130.27). The [Old Faithful notebook](old_faithful.ipynb#Gaussian-mixture)
+gives rough starting values and asks you to plot the fit. EM is not guaranteed
+to find the global maximum from every starting point.
+
+The same plotting function as above (`plot_faithful_mixture`) can be used to
+plot the data and mixture components by supplying the parameters as an argument.
+Each component is plotted in a different colour (mean and ellipses one and two
+standard deviations out), and colours each eruption by the component that most
+likely produced it, using your `expectation_step`. Plot your starting values and
+your fitted result to check that the clusters look sensible.
 
 If you want to watch EM at work, `animate_faithful_mixtures(history)` animates a
 list of parameter objects. Your `em_steps` yields the parameters after each
 iteration, so `list(islice(em_steps(...), 40))` makes a ready-made history. Try
 different starting values and see how the animation changes.
-
-What do your fitted clusters say about the straight line, and about what it
-was missing? The notebook also suggests an extension that revisits the
-prediction using the clusters.

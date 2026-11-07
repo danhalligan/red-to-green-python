@@ -5,26 +5,17 @@ import numpy as np
 import pytest
 from scipy.stats import norm
 
-from exercises._shared.loaders import load_faithful_data
 from exercises.fitting_a_mixture.mixture_models import (
     EMResult,
     GaussianMixtureParameters,
-    MultivariateGaussianMixtureParameters,
-    animate_faithful_mixtures,
     em_steps,
     expectation_maximization,
-    fit_faithful_gaussian_mixture,
     fit_hard_gaussian_mixture,
-    fit_multivariate_gaussian_mixture,
     fit_soft_gaussian_mixture,
     gaussian_mixture_log_likelihood,
     hard_expectation_step,
     hard_maximization_step,
     mixture_log_likelihood,
-    multivariate_mixture_log_likelihood,
-    multivariate_soft_expectation_step,
-    multivariate_soft_maximization_step,
-    plot_faithful_mixture,
     soft_expectation_step,
     soft_maximization_step,
 )
@@ -150,54 +141,6 @@ def test_generic_em_accepts_step_and_likelihood_callables():
     assert np.isfinite(fitted.log_likelihood)
 
 
-def test_multivariate_likelihood_and_fit_accept_two_dimensional_data():
-    generator = np.random.default_rng(9)
-    observations = np.vstack(
-        (
-            generator.normal((-3, -2), 0.5, size=(80, 2)),
-            generator.normal((3, 2), 0.7, size=(100, 2)),
-        )
-    )
-    identity = np.eye(2)
-    initial = MultivariateGaussianMixtureParameters(
-        np.array([-2.5, -1.5]), identity, np.array([2.5, 1.5]), identity, 0.5
-    )
-
-    assert np.isfinite(multivariate_mixture_log_likelihood(observations, initial))
-    fitted = fit_multivariate_gaussian_mixture(observations, initial)
-    probabilities = multivariate_soft_expectation_step(observations, initial)
-    updated = multivariate_soft_maximization_step(observations, probabilities)
-    assert fitted.converged
-    assert updated.mean1.shape == (2,)
-    assert probabilities.shape == (len(observations),)
-    assert fitted.log_likelihood > multivariate_mixture_log_likelihood(
-        observations,
-        MultivariateGaussianMixtureParameters(
-            observations.mean(axis=0),
-            np.eye(2) * 20,
-            observations.mean(axis=0),
-            np.eye(2) * 20,
-            0.5,
-        ),
-    )
-
-
-def test_faithful_fit_uses_the_packaged_data():
-    initial = MultivariateGaussianMixtureParameters(
-        np.array([2.8, 75.0]),
-        np.array([[0.8, 7.0], [7.0, 70.0]]),
-        np.array([3.6, 58.0]),
-        np.array([[0.8, 7.0], [7.0, 70.0]]),
-        0.5,
-    )
-
-    assert len(load_faithful_data()) == 272
-    fitted = fit_faithful_gaussian_mixture(initial)
-
-    assert fitted.converged
-    assert fitted.log_likelihood == pytest.approx(-1130.272, abs=0.1)
-
-
 def test_hard_m_step_uses_population_moments_and_label_fractions():
     observations = np.array([-4.0, -2.0, -3.0, 2.0, 4.0])
     labels = np.array([True, True, True, False, False])
@@ -231,39 +174,10 @@ def test_soft_m_step_uses_weighted_population_moments():
     assert fitted.weight1 == pytest.approx(weights.mean())
 
 
-def test_multivariate_m_step_uses_weighted_population_covariance():
-    generator = np.random.default_rng(5)
-    observations = np.sort(generator.normal(size=(6, 2)), axis=0)
-    weights = np.array([0.95, 0.9, 0.8, 0.3, 0.1, 0.05])
-    other = 1 - weights
-
-    fitted = multivariate_soft_maximization_step(observations, weights)
-
-    for mean, covariance, w in (
-        (fitted.mean1, fitted.covariance1, weights),
-        (fitted.mean2, fitted.covariance2, other),
-    ):
-        expected_mean = w @ observations / w.sum()
-        centred = observations - expected_mean
-        assert mean == pytest.approx(expected_mean)
-        assert covariance == pytest.approx((w[:, None] * centred).T @ centred / w.sum())
-    assert fitted.weight1 == pytest.approx(weights.mean())
-
-
-def test_e_steps_stay_finite_far_from_both_components():
+def test_e_step_stays_finite_far_from_both_components():
     parameters = GaussianMixtureParameters(0, 1, 5, 1, 0.5)
     far = soft_expectation_step([-1000.0, 1000.0], parameters)
     assert far == pytest.approx([1.0, 0.0])
-
-    identity = np.eye(2)
-    multivariate = MultivariateGaussianMixtureParameters(
-        np.zeros(2), identity, np.full(2, 5.0), identity, 0.5
-    )
-    points = np.array([[-1000.0, -1000.0], [1000.0, 1000.0]])
-    assert multivariate_soft_expectation_step(points, multivariate) == pytest.approx(
-        [1.0, 0.0]
-    )
-    assert np.isfinite(multivariate_mixture_log_likelihood(points, multivariate))
     assert np.isfinite(mixture_log_likelihood([-1000.0, 1000.0], parameters))
 
 
@@ -359,34 +273,6 @@ def test_em_reports_an_exhausted_iteration_budget_as_unconverged():
     assert fitted.log_likelihood == 3.0
 
 
-def test_multivariate_fit_keeps_the_labels_of_the_starting_values():
-    generator = np.random.default_rng(9)
-    observations = np.vstack(
-        (
-            generator.normal((-3, 2), 0.5, size=(80, 2)),
-            generator.normal((3, -2), 0.7, size=(100, 2)),
-        )
-    )
-    identity = np.eye(2)
-    low = np.array([-2.5, 1.5])
-    high = np.array([2.5, -1.5])
-
-    forward = fit_multivariate_gaussian_mixture(
-        observations,
-        MultivariateGaussianMixtureParameters(low, identity, high, identity, 0.5),
-    )
-    swapped = fit_multivariate_gaussian_mixture(
-        observations,
-        MultivariateGaussianMixtureParameters(high, identity, low, identity, 0.5),
-    )
-
-    assert forward.parameters.mean1[0] < forward.parameters.mean2[0]
-    assert swapped.parameters.mean1 == pytest.approx(forward.parameters.mean2)
-    assert swapped.parameters.mean2 == pytest.approx(forward.parameters.mean1)
-    assert swapped.parameters.weight1 == pytest.approx(1 - forward.parameters.weight1)
-    assert swapped.log_likelihood == pytest.approx(forward.log_likelihood)
-
-
 def test_em_steps_yields_the_initial_parameters_then_one_iteration_at_a_time():
     steps = em_steps([0.0], 1, lambda data, p: p + 1, lambda data, latent: latent * 2)
 
@@ -441,55 +327,3 @@ def test_expectation_maximization_works_for_parameters_that_are_not_mixtures():
 
     assert fitted.converged
     assert fitted.parameters == pytest.approx(3.0, abs=1e-6)
-
-
-FAITHFUL_START = MultivariateGaussianMixtureParameters(
-    np.array([2.8, 75.0]),
-    np.array([[0.8, 7.0], [7.0, 70.0]]),
-    np.array([3.6, 58.0]),
-    np.array([[0.8, 7.0], [7.0, 70.0]]),
-    0.5,
-)
-
-
-@pytest.fixture
-def probabilities(monkeypatch):
-    """Stand in for the learner's E-step with fixed random probabilities."""
-    values = np.random.default_rng(1).uniform(size=272)
-    monkeypatch.setattr(
-        "exercises.fitting_a_mixture.mixture_models.multivariate_soft_expectation_step",
-        lambda observations, parameters: values,
-    )
-    return values
-
-
-def test_plot_faithful_mixture_colours_points_by_most_likely_component(
-    probabilities,
-):
-    matplotlib = pytest.importorskip("matplotlib")
-    matplotlib.use("Agg")
-
-    axes = plot_faithful_mixture(FAITHFUL_START, title="Fit")
-    colours = axes.collections[0].get_facecolor()[:, :3]
-
-    assert len(colours) == 272
-    expected = np.array(
-        [
-            matplotlib.colors.to_rgb("tab:blue" if p >= 0.5 else "tab:orange")
-            for p in probabilities
-        ]
-    )
-    assert colours == pytest.approx(expected)
-    assert len(axes.patches) == 4
-    assert axes.get_title() == "Fit"
-
-
-def test_animate_faithful_mixtures_makes_one_frame_per_parameter_set(
-    probabilities,
-):
-    matplotlib = pytest.importorskip("matplotlib")
-    matplotlib.use("Agg")
-
-    animation = animate_faithful_mixtures([FAITHFUL_START] * 3, interval=50)
-
-    assert animation.to_jshtml().count("data:image/png;base64") == 3

@@ -27,10 +27,13 @@ alongside the stages below, using seeded random generators.
 
 > **Check:** `uv run pytest exercises/a_likely_story/test_likelihood.py -k bernoulli -q`
 
-You flip a coin 10 times and see 7 heads. Each flip is heads with some unknown
-probability $p$, independently of the others, so the probability of one flip
-$x_i$ (1 for heads, 0 for tails) is $p$ if it is heads and $1-p$ if it is tails.
-The probability of the whole sequence is the product of these terms.
+You flip a coin 10 times and see the sequence H,H,T,H,H,T,H,H,T,H. 
+
+Our coin might be biased, and has some unknown probability $p$ of giving a head
+and each flip is independent. So the probability of one flip $x_i$ (1 for heads,
+0 for tails) is $p$ if it is heads and $1-p$ if it is tails. 
+
+The probability of the whole sequence is the **product** of these terms.
 
 > [!NOTE]
 > Here the data are one particular sequence of flips, such as `HHTHHTHHTH`, so we
@@ -44,8 +47,9 @@ The probability of the whole sequence is the product of these terms.
 The *likelihood* is that same quantity viewed the other way round. The data are
 now fixed, because we have observed them, and we ask how the probability changes
 as we vary the parameter: $\mathcal{L}(p\mid x)=\prod_i P(x_i\mid p)$.
+
 Parameter values under which the observed data are more probable have a higher
-likelihood, and are better supported by the data. *Maximum likelihood
+*likelihood*, and are better supported by the data. *Maximum likelihood
 estimation* (MLE) chooses the parameter values that maximise it.
 
 Products of many probabilities quickly underflow to zero, so we work with the
@@ -53,16 +57,14 @@ log-likelihood instead, which turns the product into a sum:
 $\ell(p\mid x)=\sum_i \log P(x_i\mid p)$. The logarithm is increasing, so
 whatever maximises $\ell$ also maximises $\mathcal{L}$.
 
-Implement `bernoulli_log_likelihood` in [likelihood.py](likelihood.py). Think
-about what should happen when $p$ is exactly 0 or 1.
+Implement `bernoulli_log_likelihood` in [likelihood.py](likelihood.py).
 
-In [notebook section 1](simulation.ipynb#1.-Is-this-coin-fair?), plot
-$\ell(p)$ for a sequence of 10 flips with 7 heads, and again for 100 flips
-with 70 heads. Where is the
-peak in each case, and how does its shape differ? How many times more likely is
-the data under the best $p$ than under a fair coin ($p=0.5$)? Which data set
-would make you more suspicious of the coin, and why, given that both show 70%
-heads?
+In [notebook section 1](simulation.ipynb#1.-Is-this-coin-fair?), plot $\ell(p)$
+for a sequence of 10 flips with 7 heads, and again for 100 flips with 70 heads.
+Where is the peak in each case, and how does the shape differ? How many times
+more likely is the data under the best $p$ than under a fair coin ($p=0.5$)?
+Which data set would make you more suspicious of the coin, and why, given that
+both show 70% heads?
 
 <details>
 <summary>What did you discover?</summary>
@@ -93,21 +95,21 @@ $\phi(x_i\mid\mu,\sigma)$, but the recipe is the same:
 $\ell(\mu,\sigma\mid x)=\sum_i \log \phi(x_i\mid\mu,\sigma)$. Implement
 `normal_log_likelihood`.
 
-With two parameters you could still search a grid, but that does not scale.
-Instead, implement `fit_mle`, a general-purpose fitter that takes *any*
-log-likelihood, written as a function of a parameter vector, and a starting
-point, and maximises it numerically (for example with
-`scipy.optimize.minimize`, which minimises, so give it the negative). Check the
-optimiser's `success` and raise a `RuntimeError` if it fails rather than
-returning a wrong answer.
+With two parameters you could search a grid of possible values, but that does
+not scale. Instead, implement `fit_mle`, a general-purpose fitter that takes
+*any* log-likelihood, written as a function of a parameter vector, and a
+starting point, and maximises it numerically. Use `fit_mle` to implement
+`fit_normal_mle`. It should work across many small samples, and on data far from
+zero or with a tiny or enormous spread.
 
-Optimisers search over all real numbers, but $\sigma$ must be positive and
-$p$ must lie between 0 and 1. The standard trick is to optimise a transformed
-parameter that can take any value: fit $\log\sigma$ and use
-$\sigma=e^{\theta}$, or fit the log-odds of $p$ and use
-$p=1/(1+e^{-\theta})$ (`scipy.special.expit`). Use `fit_mle` with the log trick
-to implement `fit_normal_mle`. It should work across many small samples, and on
-data far from zero or with a tiny or enormous spread.
+<details>
+<summary>💡 Hint: optimising bounded parameters</summary>
+
+Optimisers search over all real numbers, but $\sigma$ **must be positive**. The
+standard trick is to optimise a transformed parameter that can take any value:
+fit $\log\sigma$ and use $\sigma=e^{\theta}$ when calculating $\ell$. 
+
+</details>
 
 <details>
 <summary>💡 Hint: when the optimiser fails</summary>

@@ -39,7 +39,13 @@ class NormalFit:
 
 
 def bernoulli_log_likelihood(probability: float, flips: ArrayLike) -> float:
-    """Calculate the log-likelihood of 0/1 flips with head probability p."""
+    """Calculate the log-likelihood of 0/1 flips with head probability p.
+
+    Flips the coin was certain to give (heads when p is 1, tails when p is 0)
+    add nothing, so all-certain flips give 0.0. A flip it could never give
+    makes the result -math.inf. A term with no flips (such as no heads) always
+    contributes 0.0, even when its probability is 0.
+    """
     raise NotImplementedError
 
 
@@ -54,7 +60,9 @@ def fit_mle(log_likelihood: Callable[[np.ndarray], float], start: ArrayLike) -> 
     """Find the parameter vector that maximises ``log_likelihood``.
 
     ``log_likelihood`` takes a 1-D array of parameters and returns a number.
-    Raise ``RuntimeError`` mentioning "converge" if the optimiser fails.
+    Use ``scipy.optimize.minimize``, which minimises, so give it the negative.
+    Check the optimiser's ``success`` and raise ``RuntimeError`` mentioning
+    "converge" if it fails, rather than returning a wrong answer.
     """
     raise NotImplementedError
 
