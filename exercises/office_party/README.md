@@ -2,8 +2,8 @@
 
 > **Difficulty:** 🌶️
 >
-> **Before you start:** basic Python. The investigation uses the
-> [Against the Odds notebook](investigate.ipynb), which needs
+> **Before you start:** basic Python. The investigation uses a
+> [notebook](investigate.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
 >
 > **You’ll practise:** sets, seeding the `random` module for repeatable
@@ -61,7 +61,7 @@ uv run pytest exercises/office_party/test_birthday.py -k "exact or smallest"
 ## Over to the notebook 📓
 
 The functions are done, so now use them. From here the work happens in the
-[Against the Odds notebook](investigate.ipynb#The-office-party),
+[notebook](investigate.ipynb#The-office-party),
 not in `birthday.py`: open it, run the setup cell, and find the **The office
 party** section. The plotting code is provided; your job is to fill in the
 tables of results and explain what they show.

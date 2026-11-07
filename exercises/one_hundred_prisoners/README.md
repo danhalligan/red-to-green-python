@@ -2,8 +2,8 @@
 
 > **Difficulty:** 🌶️🌶️🌶️
 >
-> **Before you start:** basic Python. The investigation uses the
-> [Against the Odds notebook](investigate.ipynb), which needs
+> **Before you start:** basic Python. The investigation uses a
+> [notebook](investigate.ipynb), which needs
 > the science packages (`uv sync --all-groups --extra science`).
 >
 > **Recommended first:** [Office party](../office_party/README.md), for
@@ -85,7 +85,7 @@ uv run pytest exercises/one_hundred_prisoners/test_prisoners.py -k "cycle or loo
 ## Investigation: over to the notebook 📓
 
 The functions are done, so now use them. From here the work happens in the
-[Against the Odds notebook](investigate.ipynb#The-100-prisoners),
+[notebook](investigate.ipynb#The-100-prisoners),
 not in `prisoners.py`: open it, run the setup cell, and find the **The 100
 prisoners** section. The plotting code is provided; your job is to fill in the
 tables of results and explain what they show. There are no tests for this part,
