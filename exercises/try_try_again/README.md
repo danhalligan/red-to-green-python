@@ -22,6 +22,13 @@ the final score. The commentator insists there must be dozens of ways the points
 could have been scored. The referee isn't so sure. Your job is to reconstruct
 what might have happened.
 
+![The Scotland rugby team before the first international against England, 1871](data/scotland-england-1871.jpg)
+
+<sub>The Scotland team before the first rugby international, against England in
+Edinburgh, 1871. Photo: unknown author, [via Wikimedia
+Commons](https://commons.wikimedia.org/wiki/File:Scotland_rugby_team_v_england_1871.jpg)
+(public domain), resized.</sub>
+
 | Scotland | England |
 | ---: | ---: |
 | 8 | 0 |

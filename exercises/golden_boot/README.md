@@ -21,6 +21,14 @@ them all.
 
 Who is the best goalscorer in the league? And how sure are you?
 
+![A golden football boot trophy on a Barclays Golden Boot plinth](data/golden-boot.jpg)
+
+<sub>The Premier League Golden Boot (2008), on display at the CR7 Museum in
+Funchal, Madeira. Photo:
+[Tkotw12](https://commons.wikimedia.org/wiki/File:2008_Premier_League_GoldenBoot_CR7Museum.jpg)
+via Wikimedia Commons ([CC BY-SA
+4.0](https://creativecommons.org/licenses/by-sa/4.0)), resized.</sub>
+
 You have been given every player's minutes and goals from that season. Football
 is full of short records and lucky streaks, so the answer needs more care than
 sorting a column. Work through the [notebook](investigate.ipynb) alongside the

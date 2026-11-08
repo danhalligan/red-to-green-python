@@ -1,3 +1,5 @@
+"""Check the supplied Old Faithful plotting helpers, which need no learner code."""
+
 import numpy as np
 import pytest
 
@@ -6,8 +8,6 @@ from exercises.fitting_a_mixture.plotting import (
     animate_faithful_mixtures,
     plot_faithful_mixture,
 )
-
-pytestmark = pytest.mark.advanced
 
 FAITHFUL_START = MixtureParameters(
     np.array([2.8, 75.0]),

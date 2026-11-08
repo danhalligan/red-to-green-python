@@ -19,6 +19,13 @@
 This exercise is about object-orientation, an approach that structures code around
 *objects*: units that combine _data_ (attributes) and _functions_ (methods).
 
+![A red fox sitting on a rooftop, looking at the camera](data/red-fox.jpg)
+
+<sub>A red fox. Photo: [Tj
+Holowaychuk](https://unsplash.com/@tjholowaychuk?utm_source=unsplash&utm_medium=referral)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral)
+(Unsplash License), resized.</sub>
+
 Complete the `Animal` base class `__init__` method in [animals.py](animals.py). This initialiser
 should store an optional name on the instance, so that `animal.name` returns it
 (or `None` if none was given). Note you can leave the `speak()` method alone:

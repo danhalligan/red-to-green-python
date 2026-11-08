@@ -17,6 +17,13 @@ You are at a party full of strangers when someone offers a bet: two people in
 this room share a birthday. How many people must be in the room before that bet
 is better than even odds? Write your guess down now, with a sentence about why.
 
+![The Penn Paper building in Scranton, Pennsylvania](data/penn-paper-scranton.jpg)
+
+<sub>The Penn Paper building in Scranton, Pennsylvania. Photo: [Ajay
+Suresh](https://commons.wikimedia.org/wiki/File:The_Office_-_Penn_Paper_-_Landscape_(48472737706).jpg)
+via Wikimedia Commons ([CC BY 2.0](https://creativecommons.org/licenses/by/2.0)),
+resized.</sub>
+
 This is the famous [birthday problem](https://en.wikipedia.org/wiki/Birthday_problem).
 Resist looking up the answer: make Python tell you, then work out why. Assume
 365 equally likely days (number them 0 to 364, and ignore leap years) and
